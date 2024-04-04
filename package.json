@@ -1,6 +1,5 @@
 {
   "name": "template-vite-react",
-  "homepage": "https://gannakov.github.io/template-react-vite-modcss/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
