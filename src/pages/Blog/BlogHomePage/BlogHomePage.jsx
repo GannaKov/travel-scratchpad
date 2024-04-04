@@ -1,11 +1,11 @@
-import styles from "./BlogMainPage.module.css";
+import styles from "./BlogHomePage.module.css";
 
-const BlogMainPage = () => {
+const BlogHomePage = () => {
   return (
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <p>FotoMain</p>
+          <p>MapHome</p>
         </div>
       </div>
       <div className={styles.sectionBlog}>
@@ -15,16 +15,11 @@ const BlogMainPage = () => {
       </div>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <p>FiltrMain</p>
-        </div>
-      </div>
-      <div className={styles.sectionBlog}>
-        <div className={styles.containerBlog}>
-          <p>ListMain</p>
+          <p>ShotListHome</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default BlogMainPage;
+export default BlogHomePage;

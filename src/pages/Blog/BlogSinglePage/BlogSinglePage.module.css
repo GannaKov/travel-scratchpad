@@ -1,0 +1,13 @@
+.pageWrpapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sectionBlog {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.containerBlog {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
