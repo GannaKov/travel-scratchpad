@@ -6,8 +6,7 @@ import BlogHomePage from "./pages/Blog/BlogHomePage/BlogHomePage";
 import BlogMainPage from "./pages/Blog/BlogMainPage/BlogMainPage";
 import BlogSinglePage from "./pages/Blog/BlogSinglePage/BlogSinglePage";
 import NotFound from "./pages/NotFound/NotFound";
-
-
+import { getAllTripsLoader } from "./services/requests";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +32,7 @@ const router = createBrowserRouter([
               {
                 index: true,
                 element: <BlogMainPage />,
-                // loader: getLimitedAnimalsLoader,
+                loader: getAllTripsLoader,
               },
               {
                 path: "/blog-main/:travel_id",
