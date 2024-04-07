@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const Stars = ({ rating }) => {
+const StarsShow = ({ rating }) => {
   return (
     <>
       {[1, 2, 3, 4, 5].map((star) => (
@@ -20,4 +20,4 @@ const Stars = ({ rating }) => {
   );
 };
 
-export default Stars;
+export default StarsShow;

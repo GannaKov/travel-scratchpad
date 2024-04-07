@@ -23,7 +23,6 @@ const BlogMainPage = () => {
       </div>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <p>ListMain</p>
           {AllTripsList && <BlogMainList tripsArr={AllTripsList} />}
         </div>
       </div>
