@@ -6,7 +6,7 @@ import BlogHomePage from "./pages/Blog/BlogHomePage/BlogHomePage";
 import BlogMainPage from "./pages/Blog/BlogMainPage/BlogMainPage";
 import BlogSinglePage from "./pages/Blog/BlogSinglePage/BlogSinglePage";
 import NotFound from "./pages/NotFound/NotFound";
-import { getAllTripsLoader } from "./services/requests";
+import { getAllTripsLoader, getTripByIdLoader } from "./services/requests";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
               {
                 path: "/blog-main/:travel_id",
                 element: <BlogSinglePage />,
-                // loader: getByTypeLoader,
+                loader: getTripByIdLoader,
               },
             ],
           },

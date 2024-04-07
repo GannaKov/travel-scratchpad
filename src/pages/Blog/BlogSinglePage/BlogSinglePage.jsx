@@ -1,6 +1,9 @@
+import { useNavigate, useLoaderData } from "react-router-dom";
+import BlogSingleTrip from "../../../components/BlogComponents/BlogSingleTrip/BlogSingleTrip";
 import styles from "./BlogSinglePage.module.css";
 
 const BlogSinglePage = () => {
+  const singleTrip = useLoaderData();
   return (
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
@@ -21,6 +24,7 @@ const BlogSinglePage = () => {
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
           <p>single Info</p>
+          <BlogSingleTrip singleTrip={singleTrip} />
         </div>
       </div>
       <div className={styles.sectionBlog}>

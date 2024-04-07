@@ -3,7 +3,7 @@ import { useNavigate, useLoaderData } from "react-router-dom";
 import BlogMainList from "../../../components/BlogComponents/BlogMainList/BlogMainList";
 
 const BlogMainPage = () => {
-  const AllTripsList = useLoaderData();
+  const allTripsList = useLoaderData();
   return (
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
@@ -23,7 +23,7 @@ const BlogMainPage = () => {
       </div>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          {AllTripsList && <BlogMainList tripsArr={AllTripsList} />}
+          {allTripsList && <BlogMainList tripsArr={allTripsList} />}
         </div>
       </div>
     </div>
