@@ -1,0 +1,13 @@
+.formWrp {
+  display: flex;
+  flex-direction: column;
+}
+.inputLabelColumnWrp {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.fildsInRowWrp {
+  display: flex;
+  gap: 2rem;
+}
