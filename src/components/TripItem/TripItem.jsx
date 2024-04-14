@@ -9,7 +9,7 @@ const TripItem = ({ trip }) => {
     <div>
       <h2>{trip.title}</h2>
 
-      <StarsShow rating={trip.travel_rating} />
+      <StarsShow rating={trip.travel_rating} isReadOnly={true} />
 
       <p>
         {moment(trip.date_start).format("DD.MM.YYYY")}

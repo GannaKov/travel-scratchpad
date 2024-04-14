@@ -30,7 +30,7 @@ const BlogSingleTrip = ({ singleTrip }) => {
 
       {singleTrip.accommodation.map((accomodation) => (
         <div key={accomodation._id}>
-          <StarsShow rating={accomodation.rating} />
+          <StarsShow rating={accomodation.rating} isReadOnly={true} />
           <span>{accomodation.type}:</span>
           <a href={accomodation.link}>{truncateUrl(accomodation.link)}</a>
           <p>Price: {accomodation.price}</p>

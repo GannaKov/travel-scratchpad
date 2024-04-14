@@ -2,6 +2,7 @@ import styles from "./Forms.module.css";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useId } from "react";
+import StarsShow from "../Stars/StarsShow";
 
 const FormFirst = () => {
   const initialValues = {
@@ -63,6 +64,7 @@ const FormFirst = () => {
         </div>
         <div className={styles.inputLabelColumnWrp}>
           <label htmlFor="rating">Rating</label>
+          <StarsShow isReadOnly={false} />
           <Field
             name="rating"
             type="number"
