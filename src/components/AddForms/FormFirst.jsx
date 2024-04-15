@@ -1,10 +1,14 @@
+import { useState } from "react";
 import styles from "./Forms.module.css";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useId } from "react";
+import Box from "@mui/material/Box";
+import Rating from "@mui/material/Rating";
 import StarsShow from "../Stars/StarsShow";
 
 const FormFirst = () => {
+  const [valueRating, setValueRating] = useState(null);
   const initialValues = {
     title: "",
     dateBeginn: "",
@@ -46,7 +50,6 @@ const FormFirst = () => {
     >
       <Form className={styles.formWrp}>
         <div className={styles.inputLabelColumnWrp}>
-          {" "}
           <label htmlFor="title">Title</label>
           <Field name="title" type="text" />
         </div>
@@ -64,15 +67,27 @@ const FormFirst = () => {
         </div>
         <div className={styles.inputLabelColumnWrp}>
           <label htmlFor="rating">Rating</label>
-          <StarsShow isReadOnly={false} />
-          <Field
+          {/* <StarsShow
+            isReadOnly={false}
+            handleRatingChange={handleRatingChange}
+            rating={valueRating}
+          /> */}
+          <Rating
+            precision={0.5}
+            name="simple-controlled"
+            value={valueRating}
+            onChange={(event, newValue) => {
+              setValueRating(newValue);
+            }}
+          />
+          {/* <Field
             name="rating"
             type="number"
             placeholder="Rate your trip from 0 to 5"
             min="0"
             max="5"
             step="1"
-          />
+          /> */}
         </div>
       </Form>
     </Formik>

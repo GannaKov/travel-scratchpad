@@ -24,7 +24,7 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 
 import { useState, useEffect } from "react";
-const StarsShow = ({ rating, isReadOnly }) => {
+const StarsShow = ({ rating, isReadOnly, handleRatingChange }) => {
   const [value, setValue] = useState(rating);
 
   return (
@@ -44,7 +44,16 @@ const StarsShow = ({ rating, isReadOnly }) => {
       {isReadOnly ? (
         <Rating precision={0.5} value={value} readOnly />
       ) : (
-        <Rating name="no-value" value={null} precision={0.5} />
+        <Rating
+          name="no-value"
+          value={null}
+          precision={0.5}
+          onChange={(event, newValue) => {
+            console.log("newValue", newValue);
+            //setValue(newValue);
+            handleRatingChange(newValue);
+          }}
+        />
       )}
 
       {/* <Typography component="legend">No rating given</Typography>
