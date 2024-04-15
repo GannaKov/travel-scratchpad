@@ -5,7 +5,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useId } from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
-import StarsShow from "../Stars/StarsShow";
+// import StarsShow from "../Stars/StarsShow";
 
 const FormFirst = () => {
   const [valueRating, setValueRating] = useState(null);

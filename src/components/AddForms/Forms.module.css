@@ -11,3 +11,7 @@
   display: flex;
   gap: 2rem;
 }
+.inputlabelForm {
+  background-color: white;
+  /* padding: 0 0.5rem; */
+}
