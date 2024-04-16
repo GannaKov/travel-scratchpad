@@ -4,6 +4,12 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useEffect, useState } from "react";
 import { getTripsPurposes } from "../../services/requests";
 import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
+import Autocomplete from "@mui/material/Autocomplete";
+import { createFilterOptions } from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 
 import {
   FormControl,
@@ -14,13 +20,20 @@ import {
   ListItemText,
   Button,
   TextField,
+  Input,
 } from "@mui/material";
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const FormSecond = () => {
   const [purposeOptions, setPurposeOptions] = useState([]);
   const [purposes, setPurposes] = useState([]);
   const [countryOptions, setCountryOptions] = useState([]);
   const [countryInput, setCountryInput] = useState("");
+  //--auto
+  const [options, setOptions] = useState([]);
+  const [loading, setLoading] = useState(false);
+  //end auto
 
   useEffect(() => {
     getTripsPurposes()
@@ -28,6 +41,21 @@ const FormSecond = () => {
         setPurposeOptions(res);
       })
       .catch((error) => console.log(error.status, error.message));
+    //-- auto
+    setLoading(true);
+    axios
+      .get(
+        `https://restcountries.com/v3/all`
+        //`https://restcountries.com/v3/name/${value}?match=${value}&fields=name`
+      )
+      .then((res) => {
+        const countryNames = res.data.map((country) => country.name.common);
+
+        setOptions(countryNames);
+      })
+      .catch((error) => console.log(error.status, error.message))
+      .finally(() => setLoading(false));
+    //end auto
   }, []);
 
   const handleCountrySearch = async (value) => {
@@ -69,6 +97,11 @@ const FormSecond = () => {
   //     .max(50, "Must be 15 characters or less")
   //     .required("Required"),
   // });
+  const filterOptions = createFilterOptions({
+    matchFrom: "start",
+    // limit: 10,
+    trim: true,
+  });
 
   const handleChange = (event) => {
     console.log("in change");
@@ -109,7 +142,7 @@ const FormSecond = () => {
           </Select>
         </FormControl>
 
-        <FormControl fullWidth>
+        {/* <FormControl fullWidth>
           <label htmlFor="country" id="country-label">
             Select Country
           </label>
@@ -128,14 +161,68 @@ const FormSecond = () => {
               </option>
             ))}
           </datalist>
-          {/* <TextField
-            name="country"
-            label="Country"
-            variant="outlined"
-            value={countryInput}
-            onChange={(e) => handleCountrySearch(e.target.value)}
-          /> */}
-        </FormControl>
+        </FormControl> */}
+        <Autocomplete
+          filterOptions={filterOptions}
+          multiple
+          autoHighlight
+          disableCloseOnSelect
+          // value={inputValue}
+          // onChange={(event, newValue) => setInputValue(newValue)}
+          // inputValue={inputValue}
+          // onInputChange={handleInputChange}
+          options={options}
+          getOptionLabel={(option) => option}
+          //loading={loading}
+          renderOption={(props, option, { selected }) => (
+            <Box component="li" {...props}>
+              <Checkbox
+                icon={icon}
+                checkedIcon={checkedIcon}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+              {option}
+            </Box>
+          )}
+          style={{ width: 500 }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Choose a country"
+              placeholder="Countries"
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <>
+                    {loading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null}
+                    {params.InputProps.endAdornment}
+                  </>
+                ),
+              }}
+            />
+          )}
+          // renderInput={(params) => (
+          //   <TextField
+          //     {...params}
+          //     label="Country"
+          //     variant="outlined"
+          //     InputProps={{
+          //       ...params.InputProps,
+          //       endAdornment: (
+          //         <>
+          //           {loading ? (
+          //             <CircularProgress color="inherit" size={20} />
+          //           ) : null}
+          //           {params.InputProps.endAdornment}
+          //         </>
+          //       ),
+          //     }}
+          //   />
+          // )}
+        />
         {/* <Button type="submit">Submit</Button> */}
       </Form>
       {/* )} */}

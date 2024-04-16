@@ -73,69 +73,67 @@ const FormThird = () => {
   //   debouncedFetch(newInputValue);
   // };
   return (
-    <>
-      <Autocomplete
-        filterOptions={filterOptions}
-        multiple
-        autoHighlight
-        disableCloseOnSelect
-        // value={inputValue}
-        // onChange={(event, newValue) => setInputValue(newValue)}
-        // inputValue={inputValue}
-        // onInputChange={handleInputChange}
-        options={options}
-        getOptionLabel={(option) => option}
-        //loading={loading}
-        renderOption={(props, option, { selected }) => (
-          <Box component="li" {...props}>
-            <Checkbox
-              icon={icon}
-              checkedIcon={checkedIcon}
-              style={{ marginRight: 8 }}
-              checked={selected}
-            />
-            {option}
-          </Box>
-        )}
-        style={{ width: 500 }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Choose a country"
-            placeholder="Countries"
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <>
-                  {loading ? (
-                    <CircularProgress color="inherit" size={20} />
-                  ) : null}
-                  {params.InputProps.endAdornment}
-                </>
-              ),
-            }}
+    <Autocomplete
+      filterOptions={filterOptions}
+      multiple
+      autoHighlight
+      disableCloseOnSelect
+      // value={inputValue}
+      // onChange={(event, newValue) => setInputValue(newValue)}
+      // inputValue={inputValue}
+      // onInputChange={handleInputChange}
+      options={options}
+      getOptionLabel={(option) => option}
+      //loading={loading}
+      renderOption={(props, option, { selected }) => (
+        <Box component="li" {...props}>
+          <Checkbox
+            icon={icon}
+            checkedIcon={checkedIcon}
+            style={{ marginRight: 8 }}
+            checked={selected}
           />
-        )}
-        // renderInput={(params) => (
-        //   <TextField
-        //     {...params}
-        //     label="Country"
-        //     variant="outlined"
-        //     InputProps={{
-        //       ...params.InputProps,
-        //       endAdornment: (
-        //         <>
-        //           {loading ? (
-        //             <CircularProgress color="inherit" size={20} />
-        //           ) : null}
-        //           {params.InputProps.endAdornment}
-        //         </>
-        //       ),
-        //     }}
-        //   />
-        // )}
-      />
-    </>
+          {option}
+        </Box>
+      )}
+      style={{ width: 500 }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Choose a country"
+          placeholder="Countries"
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <>
+                {loading ? (
+                  <CircularProgress color="inherit" size={20} />
+                ) : null}
+                {params.InputProps.endAdornment}
+              </>
+            ),
+          }}
+        />
+      )}
+      // renderInput={(params) => (
+      //   <TextField
+      //     {...params}
+      //     label="Country"
+      //     variant="outlined"
+      //     InputProps={{
+      //       ...params.InputProps,
+      //       endAdornment: (
+      //         <>
+      //           {loading ? (
+      //             <CircularProgress color="inherit" size={20} />
+      //           ) : null}
+      //           {params.InputProps.endAdornment}
+      //         </>
+      //       ),
+      //     }}
+      //   />
+      // )}
+    />
   );
 };
 
