@@ -113,8 +113,7 @@ const FormSecond = () => {
           <label htmlFor="country" id="country-label">
             Select Country
           </label>
-          <TextField
-            multiple
+          <Field
             list="countries"
             name="country"
             type="text"
