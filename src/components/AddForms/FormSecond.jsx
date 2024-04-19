@@ -1,6 +1,6 @@
 import styles from "./Forms.module.css";
-import * as Yup from "yup";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+//import * as Yup from "yup";
+//import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { getTripsPurposes } from "../../services/requests";
@@ -28,11 +28,11 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const FormSecond = () => {
   const [purposeOptions, setPurposeOptions] = useState([]);
-  const [purposes, setPurposes] = useState([]);
-  const [countryOptions, setCountryOptions] = useState([]);
-  const [countryInput, setCountryInput] = useState("");
+  // const [purposes, setPurposes] = useState([]);
+  // const [countryOptions, setCountryOptions] = useState([]);
+  // const [countryInput, setCountryInput] = useState("");
   //--auto
-  const [options, setOptions] = useState([]);
+  const [countriesOptions, setCountriesOptions] = useState([]);
   const [loading, setLoading] = useState(false);
   //end auto
 
@@ -52,7 +52,7 @@ const FormSecond = () => {
       .then((res) => {
         const countryNames = res.data.map((country) => country.name.common);
 
-        setOptions(countryNames);
+        setCountriesOptions(countryNames);
       })
       .catch((error) => console.log(error.status, error.message))
       .finally(() => setLoading(false));
@@ -144,7 +144,7 @@ const FormSecond = () => {
         // inputValue={inputValue}
         // onInputChange={handleInputChange}
         onChange={handleCountriesAutocompleteChange}
-        options={options}
+        options={countriesOptions}
         getOptionLabel={(option) => option}
         //loading={loading}
         renderOption={(props, option, { selected }) => (
