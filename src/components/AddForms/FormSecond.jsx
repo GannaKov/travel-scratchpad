@@ -1,6 +1,7 @@
 import styles from "./Forms.module.css";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { getTripsPurposes } from "../../services/requests";
 import axios from "axios";
@@ -58,175 +59,141 @@ const FormSecond = () => {
     //end auto
   }, []);
 
-  const handleCountrySearch = async (value) => {
-    setCountryInput(value);
-    try {
-      if (value != "") {
-        const response = await axios.get(
-          // `https://restcountries.com/v3/name/${value}`
-          `https://restcountries.com/v3/name/${value}?match=${value}&fields=name`
-        );
-
-        const countries = response.data.map((country) => ({
-          label: country.name.common,
-          value: country.name.common,
-        }));
-        setCountryOptions(countries);
-      }
-    } catch (error) {
-      console.error("Error fetching countries:", error);
-    }
-  };
-  // const initialValues = {
-  //   purpose: "",
-  //   country: "",
-  //   city: "",
-  // };
   const initialValues = {
     purposes: [],
-    country: "",
+    countries: [],
+    cities: [],
   };
-  // const SecondFormSchema = Yup.object({
-  //   purpose: Yup.string()
-  //     .max(50, "Must be 15 characters or less")
-  //     .required("Required"),
-  //   country: Yup.string()
-  //     .max(50, "Must be 15 characters or less")
-  //     .required("Required"),
-  //   city: Yup.string()
-  //     .max(50, "Must be 15 characters or less")
-  //     .required("Required"),
-  // });
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values) => {
+      console.log("Submitted values:", values);
+    },
+  });
+
   const filterOptions = createFilterOptions({
     matchFrom: "start",
     // limit: 10,
     trim: true,
   });
 
-  const handleChange = (event) => {
-    console.log("in change");
-    setPurposes(event.target.value);
+  // const handlePurposeChange = (event) => {
+  //   console.log("in change");
+  //   setPurposes(event.target.value);
+  // };
+  //----- Purposes
+  const handlePurposeChange = (event) => {
+    formik.setFieldValue("purposes", event.target.value);
+  };
+  //----- Country
+  const handleCountriesAutocompleteChange = (event, value) => {
+    formik.setFieldValue("countries", value);
+  };
+  //----- City
+  const handleCitiesChange = (event) => {
+    const separator = ",";
+    const value = event.target.value;
+    const citiesArray = value.split(separator).map((city) => city.trim());
+    formik.setFieldValue("cities", citiesArray);
   };
 
-  const handleSubmit = () => {
-    console.log("in Submit 2");
-  };
+  //====================================
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      {/* {({ values, handleChange }) => ( */}
-      <Form>
-        <FormControl fullWidth>
-          <InputLabel
-            id="purpose-label"
-            style={{ padding: "0 0.5rem" }}
-            className={styles.inputlabelForm}
-          >
-            Select Purposes
-          </InputLabel>
+    <form onSubmit={formik.handleSubmit}>
+      {/* =============== Purposes ========================================== */}
+      <FormControl fullWidth>
+        <InputLabel
+          id="purpose-label"
+          style={{ padding: "0 0.5rem" }}
+          className={styles.inputlabelForm}
+        >
+          Select Purposes
+        </InputLabel>
 
-          <Select
-            labelId="purpose-label"
-            id="purpose"
-            name="purposes"
-            multiple
-            value={purposes}
-            onChange={handleChange}
-            renderValue={(selected) => selected.join(", ")}
-          >
-            {purposeOptions.map((purpose) => (
-              <MenuItem key={purpose} value={purpose}>
-                <Checkbox checked={purposes.indexOf(purpose) > -1} />
-                <ListItemText primary={purpose} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        {/* <FormControl fullWidth>
-          <label htmlFor="country" id="country-label">
-            Select Country
-          </label>
-          <Field
-            list="countries"
-            name="country"
-            type="text"
-            value={countryInput}
-            onChange={(e) => handleCountrySearch(e.target.value)}
-          />
-
-          <datalist id="countries">
-            {countryOptions.map((country) => (
-              <option key={country.value} value={country.value}>
-                {country.label}
-              </option>
-            ))}
-          </datalist>
-        </FormControl> */}
-        <Autocomplete
-          filterOptions={filterOptions}
+        <Select
+          labelId="purpose-label"
+          id="purpose"
+          name="purposes"
           multiple
-          autoHighlight
-          disableCloseOnSelect
-          // value={inputValue}
-          // onChange={(event, newValue) => setInputValue(newValue)}
-          // inputValue={inputValue}
-          // onInputChange={handleInputChange}
-          options={options}
-          getOptionLabel={(option) => option}
-          //loading={loading}
-          renderOption={(props, option, { selected }) => (
-            <Box component="li" {...props}>
+          // value={purposes}
+          // onChange={handlePurposeChange}
+          value={formik.values.purposes}
+          onChange={handlePurposeChange}
+          renderValue={(selected) => selected.join(", ")}
+        >
+          {purposeOptions.map((purpose) => (
+            <MenuItem key={purpose} value={purpose}>
               <Checkbox
-                icon={icon}
-                checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
-                checked={selected}
+                checked={formik.values.purposes.indexOf(purpose) > -1}
               />
-              {option}
-            </Box>
-          )}
-          style={{ width: 500 }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Choose a country"
-              placeholder="Countries"
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
+              <ListItemText primary={purpose} />
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      {/* ================================================================ */}
+
+      {/* ===============Country========================================== */}
+      <Autocomplete
+        filterOptions={filterOptions}
+        multiple
+        autoHighlight
+        disableCloseOnSelect
+        // value={inputValue}
+        // onChange={(event, newValue) => setInputValue(newValue)}
+        // inputValue={inputValue}
+        // onInputChange={handleInputChange}
+        onChange={handleCountriesAutocompleteChange}
+        options={options}
+        getOptionLabel={(option) => option}
+        //loading={loading}
+        renderOption={(props, option, { selected }) => (
+          <Box component="li" {...props}>
+            <Checkbox
+              icon={icon}
+              checkedIcon={checkedIcon}
+              style={{ marginRight: 8 }}
+              checked={selected}
             />
-          )}
-          // renderInput={(params) => (
-          //   <TextField
-          //     {...params}
-          //     label="Country"
-          //     variant="outlined"
-          //     InputProps={{
-          //       ...params.InputProps,
-          //       endAdornment: (
-          //         <>
-          //           {loading ? (
-          //             <CircularProgress color="inherit" size={20} />
-          //           ) : null}
-          //           {params.InputProps.endAdornment}
-          //         </>
-          //       ),
-          //     }}
-          //   />
-          // )}
-        />
-        {/* <Button type="submit">Submit</Button> */}
-      </Form>
-      {/* )} */}
-    </Formik>
+            {option}
+          </Box>
+        )}
+        style={{ width: 500 }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            id="countries"
+            label="Choose a country"
+            placeholder="Countries"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <>
+                  {loading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </>
+              ),
+            }}
+          />
+        )}
+      />
+      {/* ======================= Cities =============================== */}
+      <TextField
+        id="cities"
+        name="cities"
+        label="Города"
+        multiline
+        rows={3}
+        value={formik.values.cities.join(", ")}
+        onChange={handleCitiesChange}
+        variant="outlined"
+        fullWidth
+        helperText="Введите названия городов, разделяя их запятыми или другим разделителем"
+      />
+      <Button type="submit">Submit</Button>
+    </form>
   );
 };
 
