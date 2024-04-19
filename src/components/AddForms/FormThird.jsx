@@ -1,32 +1,19 @@
 import { useState, useEffect } from "react";
-import Autocomplete from "@mui/material/Autocomplete";
-import { createFilterOptions } from "@mui/material/Autocomplete";
 
-import CircularProgress from "@mui/material/CircularProgress";
 import { useFormik } from "formik";
 import {
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  Checkbox,
-  ListItemText,
   Button,
   TextField,
-  Input,
 } from "@mui/material";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import { getAccommodationType } from "../../services/requests";
-//--------------
-import axios from "axios";
-import Box from "@mui/material/Box";
 
-import { number } from "yup";
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
-//-----------------
-//-----------------
+import { getAccommodationType } from "../../services/requests";
+import Rating from "@mui/material/Rating";
+//--------------
+
 const FormThird = () => {
   const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
 
@@ -37,11 +24,11 @@ const FormThird = () => {
   }, []);
 
   const initialValues = {
-    type: "Apartment",
+    type: "",
     link: "",
     price: null,
     rating: null,
-    review: "",
+    review: 0,
   };
   const formik = useFormik({
     initialValues,
@@ -49,6 +36,9 @@ const FormThird = () => {
       console.log("Submitted values:", values);
     },
   });
+  const handleRatingChange = (event, value) => {
+    formik.setFieldValue("rating", value);
+  };
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormControl fullWidth>
@@ -60,6 +50,7 @@ const FormThird = () => {
           value={formik.values.type}
           label="Accommodation"
           onChange={formik.handleChange}
+          defaultValue={accommodTypeOptions[6]}
         >
           {accommodTypeOptions &&
             accommodTypeOptions.map((type) => (
@@ -68,7 +59,33 @@ const FormThird = () => {
               </MenuItem>
             ))}
         </Select>
+        <TextField
+          id="link"
+          label="Link"
+          variant="outlined"
+          onChange={formik.handleChange}
+        />
+        <TextField
+          id="price"
+          label="Price"
+          variant="outlined"
+          onChange={formik.handleChange}
+        />
+        <Rating
+          precision={0.5}
+          name="rating"
+          value={formik.values.rating}
+          onChange={handleRatingChange}
+        />
+        <TextField
+          id="review"
+          label="Review"
+          multiline
+          maxRows={4}
+          onChange={formik.handleChange}
+        />
       </FormControl>
+      <Button type="submit">Submit</Button>
     </form>
   );
 };

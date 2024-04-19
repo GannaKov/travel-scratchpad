@@ -7,15 +7,36 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 // import StarsShow from "../Stars/StarsShow";
 
+import { useFormik } from "formik";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+  TextField,
+} from "@mui/material";
+
+//--------------------------------------------------------------------
 const FormFirst = () => {
   const [valueRating, setValueRating] = useState(null);
+
   const initialValues = {
     title: "",
     dateBeginn: "",
     dateEnd: "",
     rating: "",
   };
-
+  //validationSchema={FirstFormSchema}
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values) => {
+      console.log("Submitted values:", values);
+    },
+  });
+  const handleRatingChange = (event, value) => {
+    formik.setFieldValue("rating", value);
+  };
   const FirstFormSchema = Yup.object({
     title: Yup.string()
       .max(50, "Must be 15 characters or less")
@@ -39,58 +60,65 @@ const FormFirst = () => {
       .required("Required"),
   });
 
-  const handleSubmit = () => {
-    console.log("in Submit 1");
-  };
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validationSchema={FirstFormSchema}
-    >
-      <Form className={styles.formWrp}>
-        <div className={styles.inputLabelColumnWrp}>
-          <label htmlFor="title">Title</label>
-          <Field name="title" type="text" />
-        </div>
+    <form onSubmit={formik.handleSubmit}>
+      <FormControl fullWidth>
+        <TextField
+          id="title"
+          label="Title"
+          variant="outlined"
+          onChange={formik.handleChange}
+        />
+        <TextField
+          id="dateBeginn"
+          label="Start Date"
+          variant="outlined"
+          onChange={formik.handleChange}
+          placeholder="DD.MM.YYYY"
+        />
+        <TextField
+          id="dateEnd"
+          label="End Date"
+          variant="outlined"
+          onChange={formik.handleChange}
+          placeholder="DD.MM.YYYY"
+        />
+        <Rating
+          precision={0.5}
+          name="rating"
+          value={formik.values.rating}
+          onChange={handleRatingChange}
+        />
+      </FormControl>
+      <Button type="submit">Submit</Button>
+    </form>
 
-        <div className={styles.fildsInRowWrp}>
-          <div className={styles.inputLabelColumnWrp}>
-            <label htmlFor="dateBeginn">Start Date</label>
-            <Field name="dateBeginn" type="text" placeholder="DD.MM.YYYY" />
-          </div>
+    // <div className={styles.fildsInRowWrp}>
+    //   <div className={styles.inputLabelColumnWrp}>
+    //     <label htmlFor="dateBeginn">Start Date</label>
+    //     <Field name="dateBeginn" type="text" placeholder="DD.MM.YYYY" />
+    //   </div>
 
-          <div className={styles.inputLabelColumnWrp}>
-            <label htmlFor="dateEnd">End Date</label>
-            <Field name="dateEnd" type="text" placeholder="DD.MM.YYYY" />
-          </div>
-        </div>
-        <div className={styles.inputLabelColumnWrp}>
-          <label htmlFor="rating">Rating</label>
-          {/* <StarsShow
-            isReadOnly={false}
-            handleRatingChange={handleRatingChange}
-            rating={valueRating}
-          /> */}
-          <Rating
-            precision={0.5}
-            name="simple-controlled"
-            value={valueRating}
-            onChange={(event, newValue) => {
-              setValueRating(newValue);
-            }}
-          />
-          {/* <Field
-            name="rating"
-            type="number"
-            placeholder="Rate your trip from 0 to 5"
-            min="0"
-            max="5"
-            step="1"
-          /> */}
-        </div>
-      </Form>
-    </Formik>
+    // <div className={styles.inputLabelColumnWrp}>
+    //   <label htmlFor="dateEnd">End Date</label>
+    //   <Field name="dateEnd" type="text" placeholder="DD.MM.YYYY" />
+    // </div>
+    // </div>
+    // <div className={styles.inputLabelColumnWrp}>
+    //   <label htmlFor="rating">Rating</label>
+    //   {/* <StarsShow
+    //     isReadOnly={false}
+    //     handleRatingChange={handleRatingChange}
+    //     rating={valueRating}
+    //   /> */}
+    //   <Rating
+    //     precision={0.5}
+    //     name="simple-controlled"
+    //     value={valueRating}
+    //     onChange={(event, newValue) => {
+    //       setValueRating(newValue);
+    //     }}
+    //   />
   );
 };
 

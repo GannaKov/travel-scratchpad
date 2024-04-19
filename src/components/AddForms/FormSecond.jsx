@@ -68,6 +68,7 @@ const FormSecond = () => {
     initialValues,
     onSubmit: (values) => {
       console.log("Submitted values:", values);
+      //city.trim().charAt(0).toUpperCase() + city.slice(1);
     },
   });
 
@@ -94,9 +95,10 @@ const FormSecond = () => {
     const separator = ",";
     const value = event.target.value;
     const citiesArray = value.split(separator).map((city) => city.trim());
+
     formik.setFieldValue("cities", citiesArray);
   };
-
+  //const capitalizedStr = str.charAt(0).toUpperCase() + str.slice(1);
   //====================================
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -135,14 +137,12 @@ const FormSecond = () => {
 
         {/* ===============Country========================================== */}
         <Autocomplete
+          id="countries"
+          name="countries"
           filterOptions={filterOptions}
           multiple
           autoHighlight
           disableCloseOnSelect
-          // value={inputValue}
-          // onChange={(event, newValue) => setInputValue(newValue)}
-          // inputValue={inputValue}
-          // onInputChange={handleInputChange}
           onChange={handleCountriesAutocompleteChange}
           options={countriesOptions}
           getOptionLabel={(option) => option}
@@ -163,6 +163,7 @@ const FormSecond = () => {
             <TextField
               {...params}
               id="countries"
+              name="countries"
               label="Choose a country"
               placeholder="Countries"
               InputProps={{
@@ -185,12 +186,12 @@ const FormSecond = () => {
           name="cities"
           label="Cities"
           multiline
-          rows={3}
+          rows={2}
           value={formik.values.cities.join(", ")}
           onChange={handleCitiesChange}
           variant="outlined"
           fullWidth
-          helperText="Введите названия городов, разделяя их запятыми или другим разделителем"
+          helperText="Enter city names, separating them by commas"
         />
         <Button type="submit">Submit</Button>
       </FormControl>
