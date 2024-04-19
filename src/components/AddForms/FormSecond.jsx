@@ -130,69 +130,70 @@ const FormSecond = () => {
             </MenuItem>
           ))}
         </Select>
-      </FormControl>
-      {/* ================================================================ */}
 
-      {/* ===============Country========================================== */}
-      <Autocomplete
-        filterOptions={filterOptions}
-        multiple
-        autoHighlight
-        disableCloseOnSelect
-        // value={inputValue}
-        // onChange={(event, newValue) => setInputValue(newValue)}
-        // inputValue={inputValue}
-        // onInputChange={handleInputChange}
-        onChange={handleCountriesAutocompleteChange}
-        options={countriesOptions}
-        getOptionLabel={(option) => option}
-        //loading={loading}
-        renderOption={(props, option, { selected }) => (
-          <Box component="li" {...props}>
-            <Checkbox
-              icon={icon}
-              checkedIcon={checkedIcon}
-              style={{ marginRight: 8 }}
-              checked={selected}
+        {/* ================================================================ */}
+
+        {/* ===============Country========================================== */}
+        <Autocomplete
+          filterOptions={filterOptions}
+          multiple
+          autoHighlight
+          disableCloseOnSelect
+          // value={inputValue}
+          // onChange={(event, newValue) => setInputValue(newValue)}
+          // inputValue={inputValue}
+          // onInputChange={handleInputChange}
+          onChange={handleCountriesAutocompleteChange}
+          options={countriesOptions}
+          getOptionLabel={(option) => option}
+          //loading={loading}
+          renderOption={(props, option, { selected }) => (
+            <Box component="li" {...props}>
+              <Checkbox
+                icon={icon}
+                checkedIcon={checkedIcon}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+              {option}
+            </Box>
+          )}
+          style={{ width: 500 }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              id="countries"
+              label="Choose a country"
+              placeholder="Countries"
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <>
+                    {loading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null}
+                    {params.InputProps.endAdornment}
+                  </>
+                ),
+              }}
             />
-            {option}
-          </Box>
-        )}
-        style={{ width: 500 }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            id="countries"
-            label="Choose a country"
-            placeholder="Countries"
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <>
-                  {loading ? (
-                    <CircularProgress color="inherit" size={20} />
-                  ) : null}
-                  {params.InputProps.endAdornment}
-                </>
-              ),
-            }}
-          />
-        )}
-      />
-      {/* ======================= Cities =============================== */}
-      <TextField
-        id="cities"
-        name="cities"
-        label="Города"
-        multiline
-        rows={3}
-        value={formik.values.cities.join(", ")}
-        onChange={handleCitiesChange}
-        variant="outlined"
-        fullWidth
-        helperText="Введите названия городов, разделяя их запятыми или другим разделителем"
-      />
-      <Button type="submit">Submit</Button>
+          )}
+        />
+        {/* ======================= Cities =============================== */}
+        <TextField
+          id="cities"
+          name="cities"
+          label="Cities"
+          multiline
+          rows={3}
+          value={formik.values.cities.join(", ")}
+          onChange={handleCitiesChange}
+          variant="outlined"
+          fullWidth
+          helperText="Введите названия городов, разделяя их запятыми или другим разделителем"
+        />
+        <Button type="submit">Submit</Button>
+      </FormControl>
     </form>
   );
 };

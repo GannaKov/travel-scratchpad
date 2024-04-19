@@ -24,3 +24,10 @@ export const getTripsPurposes = async () => {
   // console.log("data", data.data);
   return data.data;
 };
+
+// get accommodation's type
+export const getAccommodationType = async () => {
+  const { data } = await instance.get(`/accommodation`);
+  console.log("data", data.data);
+  return data.data;
+};
