@@ -11,6 +11,7 @@ import FormThird from "../../../components/AddForms/FormThird";
 import FormFourth from "../../../components/AddForms/FormFourth";
 import FormFifth from "../../../components/AddForms/FormFifth";
 import FormSixth from "../../../components/AddForms/FormSixth";
+import FormStepper from "../../../components/AddForms/FormStepper/FormStepper";
 
 const BlogAddForms = () => {
   const theme = useTheme();
@@ -27,7 +28,8 @@ const BlogAddForms = () => {
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <MobileStepper
+          <FormStepper />
+          {/* <MobileStepper
             variant="dots"
             steps={6}
             position="static"
@@ -67,12 +69,7 @@ const BlogAddForms = () => {
           {activeStep === 2 && <FormThird />}
           {activeStep === 3 && <FormFourth />}
           {activeStep === 4 && <FormFifth />}
-          {activeStep === 5 && <FormSixth />}
-
-          {/* <div className={styles.btnWrp}>
-            <button type="button">Prev</button>
-            <button type="button">Next</button>
-          </div> */}
+          {activeStep === 5 && <FormSixth />} */}
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@ const FormFirst = () => {
     title: "",
     dateBeginn: "",
     dateEnd: "",
-    rating: 0,
+    ratingTrip: 0,
   };
   //validationSchema={FirstFormSchema}
   const formik = useFormik({
@@ -35,7 +35,7 @@ const FormFirst = () => {
     },
   });
   const handleRatingChange = (event, value) => {
-    formik.setFieldValue("rating", value);
+    formik.setFieldValue("ratingTrip", value);
   };
   const FirstFormSchema = Yup.object({
     title: Yup.string()
@@ -53,7 +53,7 @@ const FormFirst = () => {
         "Invalid date format (DD.MM.YYYY)"
       )
       .required("Required"),
-    rating: Yup.number()
+    ratingTrip: Yup.number()
       .integer("Rating must be an integer")
       .min(0, "Rating must be between 0 and 5")
       .max(5, "Rating must be between 0 and 5")
@@ -85,8 +85,8 @@ const FormFirst = () => {
         />
         <Rating
           precision={0.5}
-          name="rating"
-          value={formik.values.rating}
+          name="ratingTrip"
+          value={formik.values.ratingTrip}
           onChange={handleRatingChange}
         />
       </FormControl>

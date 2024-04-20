@@ -27,7 +27,7 @@ const FormThird = () => {
     type: "",
     link: "",
     price: null,
-    rating: null,
+    ratingAccommodation: null,
     review: "",
   };
   const formik = useFormik({
@@ -37,7 +37,7 @@ const FormThird = () => {
     },
   });
   const handleRatingChange = (event, value) => {
-    formik.setFieldValue("rating", value);
+    formik.setFieldValue("ratingAccommodation", value);
   };
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -73,8 +73,8 @@ const FormThird = () => {
         />
         <Rating
           precision={0.5}
-          name="rating"
-          value={formik.values.rating}
+          name="ratingAccommodation"
+          value={formik.values.ratingAccommodation}
           onChange={handleRatingChange}
         />
         <TextField
