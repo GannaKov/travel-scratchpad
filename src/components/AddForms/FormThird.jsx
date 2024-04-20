@@ -28,7 +28,7 @@ const FormThird = () => {
     link: "",
     price: null,
     rating: null,
-    review: 0,
+    review: "",
   };
   const formik = useFormik({
     initialValues,

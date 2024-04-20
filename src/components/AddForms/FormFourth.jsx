@@ -1,89 +1,111 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
   TextField,
+  Button,
+  Typography,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const FormFourth = () => {
   const [expenses, setExpenses] = useState([]);
   const initialValues = {
-    topik: "",
-    link: "",
-    advice: "",
-    expenses: [{ item: "", amount: "" }],
+    item: "",
+    amount: null,
+    advices: "",
   };
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      console.log("Submitted values:", values);
+      //console.log("Submitted values:", values);
+      console.log("Submitted values:", { expenses, advices: values.advices });
     },
   });
-
-  const handleAddExpense = () => {
-    const item = formik.values.expenses[formik.values.expenses.length - 1].item;
-    const amount =
-      formik.values.expenses[formik.values.expenses.length - 1].amount;
-
-    console.log("item", item);
-    if (item.trim() !== "" && amount.trim() !== "") {
-      formik.setValues({
-        ...formik.values,
-        expenses: [...formik.values.expenses, { item: "", amount: "" }],
-      });
+  const onExpenseAddBtnClick = () => {
+    console.log(formik.values);
+    const { item, amount } = formik.values;
+    if (item.trim() !== "" && amount.trim() !== null && amount !== "") {
+      setExpenses((prevExpenses) => [...prevExpenses, { item, amount }]);
+      formik.setValues({ ...formik.values, item: "", amount: null });
     } else {
       alert("Empty Fields");
     }
   };
-  const handleRemoveExpense = (index) => {
-    const updatedExpenses = [...formik.values.expenses];
-    updatedExpenses.splice(index, 1);
-    formik.setValues({ ...formik.values, expenses: updatedExpenses });
+  const handleRemove = (index) => {
+    setExpenses((prevExpenses) => prevExpenses.filter((_, i) => i !== index));
   };
-  // const onSubmit = (values, { resetForm }) => {
-  //   if (values.item.trim() !== "" && values.amount.trim() !== "") {
-  //     setExpenses((prevExpenses) => [...prevExpenses, values]);
-  //     resetForm();
-  //   }
-  // };
+
   return (
-    <form onSubmit={formik.handleSubmit}>
-      {formik.values.expenses.map((expense, index) => (
-        <div key={index} style={{ marginBottom: "1rem" }}>
+    <div>
+      <form onSubmit={formik.handleSubmit}>
+        <TextField
+          id="item"
+          name="item"
+          label="Expense Item"
+          value={formik.values.item}
+          onChange={formik.handleChange}
+          variant="outlined"
+          fullWidth
+        />
+        <TextField
+          id="amount"
+          name="amount"
+          label="Amount"
+          value={formik.values.amount !== null ? formik.values.amount : ""}
+          onChange={formik.handleChange}
+          variant="outlined"
+          fullWidth
+        />
+        <Button
+          type="button"
+          variant="contained"
+          sx={{ mt: 2 }}
+          onClick={onExpenseAddBtnClick}
+        >
+          Add
+        </Button>
+        <div>
           <TextField
-            name={`expenses[${index}].item`}
-            label="Expense Item"
-            value={formik.values.expenses[index].item}
+            id="advices"
+            label="Advices"
+            multiline
+            maxRows={4}
             onChange={formik.handleChange}
             fullWidth
           />
-          <TextField
-            name={`expenses[${index}].amount`}
-            label="Amount"
-            value={formik.values.expenses[index].amount}
-            onChange={formik.handleChange}
-            fullWidth
-          />
-          {index > 0 && (
-            <Button
-              type="button"
-              onClick={() => handleRemoveExpense(index)}
-              style={{ marginTop: "0.5rem" }}
-            >
-              Remove
-            </Button>
-          )}
         </div>
-      ))}
-      <Button type="button" onClick={handleAddExpense}>
-        Add Expense
-      </Button>
-      <Button type="submit">Submit</Button>
-    </form>
+
+        <Button type="submit">Submit</Button>
+      </form>
+
+      {expenses.length > 0 && (
+        <Box mt={4}>
+          <Typography variant="h6">Добавленные расходы:</Typography>
+          <List>
+            {expenses.map((expense, index) => (
+              <ListItem key={index}>
+                <ListItemText
+                  primary={expense.item}
+                  secondary={`Amount: ${expense.amount}`}
+                />
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => handleRemove(index)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      )}
+    </div>
   );
 };
 
