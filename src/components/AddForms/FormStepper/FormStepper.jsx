@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 import { Button, MobileStepper } from "@mui/material";
 
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -13,7 +16,7 @@ import FormSixth from "../FormSixth";
 
 const FormStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
-  console.log("active", activeStep);
+
   const [formData, setFormData] = useState({
     data1: { title: "", dateBeginn: "", dateEnd: "", ratingTrip: 0 },
 
@@ -33,7 +36,33 @@ const FormStepper = () => {
       advices: "",
     },
   });
+  // ---- Formik -----
+  const formik = useFormik({
+    initialValues: formData,
+    validationSchema: Yup.object({
+      // Здесь можно добавить валидацию по необходимости
+      data1: Yup.object({
+        title: Yup.string().required("Required"),
+        dateBeginn: Yup.string().required("Required"),
+        dateEnd: Yup.string().required("Required"),
+        ratingTrip: Yup.number()
+          .min(0, "Min rating is 0")
+          .max(5, "Max rating is 5"),
+      }),
+      // Добавить валидацию для остальных полей по аналогии
+    }),
+    onSubmit: (values) => {
+      console.log("Submitted values:", values);
+      //setFormData(values); //????
+      //handleNext(); //?????
+    },
+  });
 
+  //   const handleChange = (event) => {
+  //     const { name, value } = event.target;
+  //     formik.setFieldValue(name, value);
+  //   };
+  // ---- end  Formik -----
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -41,17 +70,28 @@ const FormStepper = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
-  const handleSubmit = () => {
-    // Отправить formData на бэкенд
-    console.log("Submitted data:", formData);
+  const saveStepData = (step) => {
+    return (values) => {
+      formik.setFieldValue(`data${step}`, values);
+      handleNext();
+    };
   };
+  const steps = [
+    <FormFirst key="step1" formik={formik} saveData={saveStepData(1)} />,
+    <FormSecond key="step2" formik={formik} saveData={saveStepData(2)} />,
+    <FormThird key="step3" formik={formik} saveData={saveStepData(3)} />,
+    <FormFourth key="step4" formik={formik} saveData={saveStepData(4)} />,
+  ];
+  //   const handleSubmit = () => {
+  //     // Отправить formData на бэкенд
+  //     console.log("Submitted data:", formData);
+  //   };
 
   return (
     <div>
       <MobileStepper
         variant="dots"
-        steps={6}
+        steps={5}
         position="static"
         activeStep={activeStep}
         sx={{ maxWidth: 400, flexGrow: 1 }}
@@ -59,7 +99,7 @@ const FormStepper = () => {
           <Button
             size="small"
             onClick={handleNext}
-            disabled={activeStep === 5}
+            disabled={activeStep === steps.length - 1}
             // disabled={activeStep === 2} ???
           >
             Next
@@ -73,15 +113,10 @@ const FormStepper = () => {
           </Button>
         }
       />
-      {activeStep === 0 && <FormFirst />}
-      {activeStep === 1 && <FormSecond />}
-      {activeStep === 2 && <FormThird />}
-      {activeStep === 3 && <FormFourth />}
-      {activeStep === 4 && <FormFifth />}
-      {activeStep === 5 && <FormSixth />}
-      {activeStep === 4 && (
+      {steps[activeStep]}
+      {activeStep === 0 && (
         <div>
-          <Button onClick={handleSubmit}>Finish</Button>
+          <Button onClick={formik.handleSubmit}>Finish</Button>
         </div>
       )}
     </div>
