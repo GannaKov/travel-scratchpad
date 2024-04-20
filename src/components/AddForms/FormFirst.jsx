@@ -25,7 +25,7 @@ const FormFirst = () => {
     title: "",
     dateBeginn: "",
     dateEnd: "",
-    rating: "",
+    rating: 0,
   };
   //validationSchema={FirstFormSchema}
   const formik = useFormik({
