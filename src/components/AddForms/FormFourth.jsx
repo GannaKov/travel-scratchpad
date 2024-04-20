@@ -38,7 +38,9 @@ const FormFourth = () => {
     if (item.trim() !== "" && amount.trim() !== null && amount !== "") {
       setExpenses((prevExpenses) => [...prevExpenses, { item, amount }]);
 
-      formik.setValues({ ...formik.values, item: "", amount: null });
+      //formik.setValues({ ...formik.values, item: "", amount: null });
+      formik.setFieldValue("item", "");
+      formik.setFieldValue("amount", "");
     } else {
       alert("Please enter a valid item and amount");
     }
@@ -48,7 +50,9 @@ const FormFourth = () => {
     const { topic, link } = formik.values;
     if (topic.trim() !== "" && link.trim() !== "") {
       setUsefulLinks((prevLinks) => [...prevLinks, { topic, link }]);
-      formik.setValues({ ...formik.values, topic: "", link: "" });
+      //formik.setValues({ ...formik.values, topic: "", link: "" });
+      formik.setFieldValue("topic", "");
+      formik.setFieldValue("link", "");
     } else {
       alert("Please enter a valid topic and link");
     }
