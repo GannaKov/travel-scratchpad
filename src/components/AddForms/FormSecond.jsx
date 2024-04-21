@@ -35,7 +35,7 @@ const FormSecond = ({ formik, saveData }) => {
   const [countriesOptions, setCountriesOptions] = useState([]);
   const [loading, setLoading] = useState(false);
   //end auto
-  console.log("formik.values.data2", formik.values.data2);
+  //console.log("formik.values.data2", formik.values.data2);
 
   useEffect(() => {
     getTripsPurposes()
@@ -94,9 +94,17 @@ const FormSecond = ({ formik, saveData }) => {
   const handleCitiesChange = (event) => {
     const separator = ",";
     const value = event.target.value;
-    const citiesArray = value.split(separator).map((city) => city.trim());
 
-    formik.setFieldValue("cities", citiesArray);
+    const citiesArray = value.split(separator).map(
+      (city) => city.trim()
+      //   city
+      //     .split(", ")
+      //     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      //     .join(" ")
+      //     .trim()
+    );
+
+    formik.setFieldValue("data2.cities", citiesArray);
   };
   //const capitalizedStr = str.charAt(0).toUpperCase() + str.slice(1);
   //====================================
@@ -183,18 +191,18 @@ const FormSecond = ({ formik, saveData }) => {
           )}
         />
         {/* ======================= Cities =============================== */}
-        {/* <TextField
-          id="cities"
-          name="cities"
+        <TextField
+          id="data2.cities"
+          name="data2.cities"
           label="Cities"
           multiline
           rows={2}
-          value={formik.values.cities.join(", ")}
+          value={formik.values.data2.cities.join(", ")}
           onChange={handleCitiesChange}
           variant="outlined"
           fullWidth
           helperText="Enter city names, separating them by commas"
-        /> */}
+        />
       </FormControl>
       <Button type="submit" onClick={() => saveData(formik.values.data2)}>
         Next
