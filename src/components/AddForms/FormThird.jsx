@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 
 import { useFormik } from "formik";
@@ -14,28 +15,28 @@ import { getAccommodationType } from "../../services/requests";
 import Rating from "@mui/material/Rating";
 //--------------
 
-const FormThird = () => {
+const FormThird = ({ formik, saveData }) => {
   const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
-
+  console.log("formik.values.data3", formik.values.data3);
   useEffect(() => {
     getAccommodationType()
       .then((res) => setAccommodTypeOptions(res))
       .catch((error) => console.log(error.status, error.message));
   }, []);
 
-  const initialValues = {
-    type: "",
-    link: "",
-    price: null,
-    ratingAccommodation: null,
-    review: "",
-  };
-  const formik = useFormik({
-    initialValues,
-    onSubmit: (values) => {
-      console.log("Submitted values:", values);
-    },
-  });
+  // const initialValues = {
+  //   type: "",
+  //   link: "",
+  //   price: null,
+  //   ratingAccommodation: null,
+  //   review: "",
+  // };
+  // const formik = useFormik({
+  //   initialValues,
+  //   onSubmit: (values) => {
+  //     console.log("Submitted values:", values);
+  //   },
+  // });
   const handleRatingChange = (event, value) => {
     formik.setFieldValue("ratingAccommodation", value);
   };
@@ -45,12 +46,12 @@ const FormThird = () => {
         <InputLabel id="accommodation-type">Accommodation</InputLabel>
         <Select
           labelId="accommodation-type"
-          id="type"
-          name="type"
-          value={formik.values.type}
+          id="data3.type"
+          name="data3.type"
+          value={formik.values.data3.type}
           label="Accommodation"
           onChange={formik.handleChange}
-          defaultValue={accommodTypeOptions[6]}
+          // defaultValue={accommodTypeOptions[6]}
         >
           {accommodTypeOptions &&
             accommodTypeOptions.map((type) => (
@@ -60,32 +61,41 @@ const FormThird = () => {
             ))}
         </Select>
         <TextField
-          id="link"
+          id="data3.link"
+          value={formik.values.data3.link}
           label="Link"
           variant="outlined"
           onChange={formik.handleChange}
         />
         <TextField
-          id="price"
+          id="data3.price"
           label="Price"
           variant="outlined"
+          value={
+            formik.values.data3.price !== null ? formik.values.data3.price : ""
+          }
           onChange={formik.handleChange}
         />
         <Rating
           precision={0.5}
-          name="ratingAccommodation"
-          value={formik.values.ratingAccommodation}
-          onChange={handleRatingChange}
+          name="data3.ratingAccommodation"
+          value={formik.values.data3.ratingAccommodation}
+          onChange={(event, value) =>
+            formik.setFieldValue("data3.ratingAccommodation", value)
+          }
         />
         <TextField
-          id="review"
+          id="data3.review"
           label="Review"
+          value={formik.values.data3.review}
           multiline
           maxRows={4}
           onChange={formik.handleChange}
         />
       </FormControl>
-      <Button type="submit">Submit</Button>
+      <Button type="submit" onClick={() => saveData(formik.values.data3)}>
+        Next
+      </Button>
     </form>
   );
 };

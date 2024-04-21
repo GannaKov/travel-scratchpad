@@ -25,7 +25,7 @@ const FormStepper = () => {
       type: "",
       link: "",
       price: null,
-      rating: null,
+      ratingAccommodation: null,
       review: "",
     },
     data4: {
@@ -116,7 +116,7 @@ const FormStepper = () => {
         }
       />
       {steps[activeStep]}
-      {activeStep === 1 && (
+      {activeStep === 2 && (
         <div>
           <Button onClick={formik.handleSubmit}>Finish</Button>
         </div>
