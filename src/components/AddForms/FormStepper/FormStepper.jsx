@@ -60,19 +60,21 @@ const FormStepper = () => {
       }),
       // Добавить валидацию для остальных полей по аналогии
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log("cities1:", formik.values.data2.cities);
       const newCitiesArr = formik.values.data2.cities
         .filter((city) => city.length > 0)
         .map((city) => city.charAt(0).toUpperCase() + city.slice(1));
       console.log("cities2:", newCitiesArr);
-      formik.setFieldValue(`data2.cities`, newCitiesArr);
-      saveStepData(formik.values.data2);
-      saveStepData(formik.values.data1);
+      const updatedValues = {
+        ...values,
+        data2: { ...values.data2, cities: newCitiesArr },
+      };
+      console.log("upd", updatedValues);
+      await formik.setFieldValue(`data2.cities`, newCitiesArr);
+      await formik.setValues(updatedValues);
 
-      saveStepData(formik.values.data3);
-      saveStepData(formik.values.data4);
-      setFormData(values);
+      setFormData(updatedValues);
       console.log("FormData", formData);
       console.log("Submitted values:", values);
       //handleNext(); //?????
