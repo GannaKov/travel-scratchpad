@@ -88,7 +88,7 @@ const FormSecond = ({ formik, saveData }) => {
   };
   //----- Country
   const handleCountriesAutocompleteChange = (event, value) => {
-    formik.setFieldValue("countries", value);
+    formik.setFieldValue("data2.countries", value);
   };
   //----- City
   const handleCitiesChange = (event) => {
@@ -141,9 +141,9 @@ const FormSecond = ({ formik, saveData }) => {
           multiple
           autoHighlight
           disableCloseOnSelect
-          //onChange={handleCountriesAutocompleteChange}
+          onChange={handleCountriesAutocompleteChange}
           value={formik.values.data2.countries}
-          onChange={formik.handleChange}
+          // onChange={formik.handleChange}
           options={countriesOptions}
           getOptionLabel={(option) => option}
           //loading={loading}
@@ -164,8 +164,8 @@ const FormSecond = ({ formik, saveData }) => {
           renderInput={(params) => (
             <TextField
               {...params}
-              // id="data2.countries"
-              // name="data2.countries"
+              id="data2.countries"
+              name="data2.countries"
               label="Choose a country"
               placeholder="Countries"
               InputProps={{
