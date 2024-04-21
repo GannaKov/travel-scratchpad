@@ -17,8 +17,8 @@ import Rating from "@mui/material/Rating";
 
 const FormThird = ({ formik, saveData, accommodTypeOptions }) => {
   // const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
-  console.log("formik.values.data3", formik.values.data3.type);
-  console.log("aaaa", accommodTypeOptions);
+  // console.log("formik.values.data3", formik.values.data3);
+
   // useEffect(() => {
   //   getAccommodationType()
   //     .then((res) => setAccommodTypeOptions(res))
@@ -104,8 +104,11 @@ const FormThird = ({ formik, saveData, accommodTypeOptions }) => {
           onChange={formik.handleChange}
         />
       </FormControl>
+      <div>
+        <Button type="submit">Finish now?</Button>
+      </div>
       <Button type="submit" onClick={() => saveData(formik.values.data3)}>
-        Next
+        Continue
       </Button>
     </form>
   );

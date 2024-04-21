@@ -204,8 +204,11 @@ const FormSecond = ({ formik, saveData }) => {
           helperText="Enter city names, separating them by commas"
         />
       </FormControl>
+      <div>
+        <Button type="submit">Finish now?</Button>
+      </div>
       <Button type="submit" onClick={() => saveData(formik.values.data2)}>
-        Next
+        Continue
       </Button>
     </form>
   );

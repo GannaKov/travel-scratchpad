@@ -17,7 +17,8 @@ import { getAccommodationType } from "../../../services/requests";
 
 const FormStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
-
+  const [expenses, setExpenses] = useState([]);
+  const [usefulLinks, setUsefulLinks] = useState([]);
   const [formData, setFormData] = useState({
     data1: { title: "", dateBeginn: "", dateEnd: "", ratingTrip: 0 },
 
@@ -37,6 +38,7 @@ const FormStepper = () => {
       advices: "",
     },
   });
+
   const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
   useEffect(() => {
     getAccommodationType()
@@ -59,11 +61,33 @@ const FormStepper = () => {
       // Добавить валидацию для остальных полей по аналогии
     }),
     onSubmit: (values) => {
+      console.log("cities1:", formik.values.data2.cities);
+      const newCitiesArr = formik.values.data2.cities
+        .filter((city) => city.length > 0)
+        .map((city) => city.charAt(0).toUpperCase() + city.slice(1));
+      console.log("cities2:", newCitiesArr);
+      formik.setFieldValue(`data2.cities`, newCitiesArr);
+      saveStepData(formik.values.data2);
+      saveStepData(formik.values.data1);
+
+      saveStepData(formik.values.data3);
+      saveStepData(formik.values.data4);
+      setFormData(values);
+      console.log("FormData", formData);
       console.log("Submitted values:", values);
-      //setFormData(values); //????
       //handleNext(); //?????
     },
   });
+  // onSubmit: (values) => {
+  //   console.log("Submitted values:", values);
+  //   const dataFields = ["data1", "data2", "data3", "data4"];
+  //   dataFields.forEach((field) => {
+  //     saveStepData(field)(formik.values[field]);
+  //   });
+  //   setFormData(values);
+  //   console.log("FormData", formData);
+
+  // },
 
   //   const handleChange = (event) => {
   //     const { name, value } = event.target;
@@ -93,7 +117,15 @@ const FormStepper = () => {
       saveData={saveStepData(3)}
       accommodTypeOptions={accommodTypeOptions}
     />,
-    <FormFourth key="step4" formik={formik} saveData={saveStepData(4)} />,
+    <FormFourth
+      key="step4"
+      formik={formik}
+      saveData={saveStepData(4)}
+      setExpenses={setExpenses}
+      expenses={expenses}
+      setUsefulLinks={setUsefulLinks}
+      usefulLinks={usefulLinks}
+    />,
   ];
 
   //   const handleSubmit = () => {
@@ -113,7 +145,7 @@ const FormStepper = () => {
           <Button
             size="small"
             onClick={handleNext}
-            disabled={activeStep === steps.length - 1}
+            disabled={activeStep === steps.length}
             // disabled={activeStep === 2} ???
           >
             Next
@@ -128,11 +160,11 @@ const FormStepper = () => {
         }
       />
       {steps[activeStep]}
-      {activeStep === 2 && (
+      {/* {activeStep === 0 && (
         <div>
-          <Button onClick={formik.handleSubmit}>Finish</Button>
+          <Button type="submit">Finish</Button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

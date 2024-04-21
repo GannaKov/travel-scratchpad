@@ -116,8 +116,12 @@ const FormFirst = ({ formik, saveData }) => {
           }
         />
       </FormControl>
+
+      <div>
+        <Button type="submit">Finish now?</Button>
+      </div>
       <Button type="submit" onClick={() => saveData(formik.values.data1)}>
-        Next
+        Continue
       </Button>
     </form>
 

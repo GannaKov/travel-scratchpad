@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useFormik } from "formik";
 import { useState } from "react";
 import {
@@ -12,47 +13,51 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const FormFourth = () => {
-  const [expenses, setExpenses] = useState([]);
-  const [usefulLinks, setUsefulLinks] = useState([]);
-  const initialValues = {
-    topic: "",
-    link: "",
-    item: "",
-    amount: null,
-    advices: "",
-  };
-  const formik = useFormik({
-    initialValues,
-    onSubmit: (values) => {
-      //console.log("Submitted values:", values);
-      console.log("Submitted values:", {
-        expenses,
-        advices: values.advices,
-        useful_links: usefulLinks,
-      });
-    },
-  });
+const FormFourth = ({
+  formik,
+  saveData,
+  setExpenses,
+  expenses,
+  usefulLinks,
+  setUsefulLinks,
+}) => {
+  //const [expenses, setExpenses] = useState([]);
+  //const [usefulLinks, setUsefulLinks] = useState([]);
+  // console.log("formik.values.data4", formik.values.data4);
+  // const initialValues = {
+  //   topic: "",
+  //   link: "",
+  //   item: "",
+  //   amount: null,
+  //   advices: "",
+  // };
+  // const formik = useFormik({
+  //   initialValues,
+  //   onSubmit: (values) => {
+  //     console.log("Submitted values:", {
+  //       expenses,
+  //       advices: values.advices,
+  //       useful_links: usefulLinks,
+  //     });
+  //   },
+  // });
   const onExpenseAddBtnClick = () => {
-    const { item, amount } = formik.values;
+    const { item, amount } = formik.values.data4;
     if (item.trim() !== "" && amount.trim() !== null && amount !== "") {
       setExpenses((prevExpenses) => [...prevExpenses, { item, amount }]);
-
-      //formik.setValues({ ...formik.values, item: "", amount: null });
-      formik.setFieldValue("item", "");
-      formik.setFieldValue("amount", "");
+      formik.setFieldValue("data4.item", "");
+      formik.setFieldValue("data4.amount", "");
     } else {
       alert("Please enter a valid item and amount");
     }
   };
   const onLinkAddBtnClick = () => {
     console.log(formik.values);
-    const { topic, link } = formik.values;
+    const { topic, link } = formik.values.data4;
     if (topic.trim() !== "" && link.trim() !== "") {
       setUsefulLinks((prevLinks) => [...prevLinks, { topic, link }]);
-      //formik.setValues({ ...formik.values, topic: "", link: "" });
-      formik.setFieldValue("topic", "");
-      formik.setFieldValue("link", "");
+      formik.setFieldValue("data4.topic", "");
+      formik.setFieldValue("data4.link", "");
     } else {
       alert("Please enter a valid topic and link");
     }
@@ -70,19 +75,23 @@ const FormFourth = () => {
     <div>
       <form onSubmit={formik.handleSubmit}>
         <TextField
-          id="item"
-          name="item"
+          id="data4.item"
+          name="data4.item"
           label="Expense Item"
-          value={formik.values.item}
+          value={formik.values.data4.item}
           onChange={formik.handleChange}
           variant="outlined"
           fullWidth
         />
         <TextField
-          id="amount"
-          name="amount"
+          id="data4.amount"
+          name="data4.amount"
           label="Amount"
-          value={formik.values.amount !== null ? formik.values.amount : ""}
+          value={
+            formik.values.data4.amount !== null
+              ? formik.values.data4.amount
+              : ""
+          }
           onChange={formik.handleChange}
           variant="outlined"
           fullWidth
@@ -119,8 +128,9 @@ const FormFourth = () => {
         )}
         <div>
           <TextField
-            id="advices"
+            id="data4.advices"
             label="Advices"
+            value={formik.values.data4.advices}
             multiline
             minRows={3}
             maxRows={6}
@@ -130,19 +140,19 @@ const FormFourth = () => {
         </div>
         {/* ------ Links ------- */}
         <TextField
-          id="topic"
-          name="topic"
+          id="data4.topic"
+          name="data4.topic"
           label="Topic"
-          value={formik.values.topic}
+          value={formik.values.data4.topic}
           onChange={formik.handleChange}
           variant="outlined"
           fullWidth
         />
         <TextField
-          id="link"
-          name="link"
+          id="data4.link"
+          name="data4.link"
           label="Link"
-          value={formik.values.link}
+          value={formik.values.data4.link}
           onChange={formik.handleChange}
           variant="outlined"
           fullWidth
@@ -178,7 +188,12 @@ const FormFourth = () => {
           </Box>
         )}
         {/* ------ end Links ------- */}
-        <Button type="submit">Submit</Button>
+        <div>
+          <Button type="submit">Finish now?</Button>
+        </div>
+        <Button type="submit" onClick={() => saveData(formik.values.data4)}>
+          Continue
+        </Button>
       </form>
     </div>
   );
