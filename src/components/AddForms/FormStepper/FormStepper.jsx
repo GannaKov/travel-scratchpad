@@ -70,6 +70,7 @@ const FormStepper = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
   const saveStepData = (step) => {
     return (values) => {
       formik.setFieldValue(`data${step}`, values);
@@ -82,6 +83,7 @@ const FormStepper = () => {
     <FormThird key="step3" formik={formik} saveData={saveStepData(3)} />,
     <FormFourth key="step4" formik={formik} saveData={saveStepData(4)} />,
   ];
+
   //   const handleSubmit = () => {
   //     // Отправить formData на бэкенд
   //     console.log("Submitted data:", formData);
@@ -114,7 +116,7 @@ const FormStepper = () => {
         }
       />
       {steps[activeStep]}
-      {activeStep === 0 && (
+      {activeStep === 1 && (
         <div>
           <Button onClick={formik.handleSubmit}>Finish</Button>
         </div>

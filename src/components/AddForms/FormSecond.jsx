@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styles from "./Forms.module.css";
 //import * as Yup from "yup";
 //import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -25,7 +26,7 @@ import {
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-const FormSecond = () => {
+const FormSecond = ({ formik, saveData }) => {
   const [purposeOptions, setPurposeOptions] = useState([]);
   // const [purposes, setPurposes] = useState([]);
   // const [countryOptions, setCountryOptions] = useState([]);
@@ -34,6 +35,7 @@ const FormSecond = () => {
   const [countriesOptions, setCountriesOptions] = useState([]);
   const [loading, setLoading] = useState(false);
   //end auto
+  console.log("formik.values.data2", formik.values.data2);
 
   useEffect(() => {
     getTripsPurposes()
@@ -55,21 +57,20 @@ const FormSecond = () => {
       })
       .catch((error) => console.log(error.status, error.message))
       .finally(() => setLoading(false));
-    //end auto
   }, []);
 
-  const initialValues = {
-    purposes: [],
-    countries: [],
-    cities: [],
-  };
-  const formik = useFormik({
-    initialValues,
-    onSubmit: (values) => {
-      console.log("Submitted values:", values);
-      //city.trim().charAt(0).toUpperCase() + city.slice(1);
-    },
-  });
+  // const initialValues = {
+  //   purposes: [],
+  //   countries: [],
+  //   cities: [],
+  // };
+  // const formik = useFormik({
+  //   initialValues,
+  //   onSubmit: (values) => {
+  //     console.log("Submitted values:", values);
+  //     //city.trim().charAt(0).toUpperCase() + city.slice(1);
+  //   },
+  // });
 
   const filterOptions = createFilterOptions({
     matchFrom: "start",
@@ -113,19 +114,17 @@ const FormSecond = () => {
 
         <Select
           labelId="purpose-label"
-          id="purpose"
-          name="purposes"
+          id="data2.purpose"
+          name="data2.purposes"
           multiple
-          // value={purposes}
-          // onChange={handlePurposeChange}
-          value={formik.values.purposes}
-          onChange={handlePurposeChange}
+          value={formik.values.data2.purposes}
+          onChange={formik.handleChange}
           renderValue={(selected) => selected.join(", ")}
         >
           {purposeOptions.map((purpose) => (
             <MenuItem key={purpose} value={purpose}>
               <Checkbox
-                checked={formik.values.purposes.indexOf(purpose) > -1}
+                checked={formik.values.data2.purposes.indexOf(purpose) > -1}
               />
               <ListItemText primary={purpose} />
             </MenuItem>
@@ -136,19 +135,23 @@ const FormSecond = () => {
 
         {/* ===============Country========================================== */}
         <Autocomplete
-          id="countries"
-          name="countries"
+          id="data2.countries"
+          name="data2.countries"
           filterOptions={filterOptions}
           multiple
           autoHighlight
           disableCloseOnSelect
-          onChange={handleCountriesAutocompleteChange}
+          //onChange={handleCountriesAutocompleteChange}
+          value={formik.values.data2.countries}
+          onChange={formik.handleChange}
           options={countriesOptions}
           getOptionLabel={(option) => option}
           //loading={loading}
           renderOption={(props, option, { selected }) => (
             <Box component="li" {...props}>
               <Checkbox
+                // id="data2.countries"
+                //  name="data2.countries"
                 icon={icon}
                 checkedIcon={checkedIcon}
                 style={{ marginRight: 8 }}
@@ -161,8 +164,8 @@ const FormSecond = () => {
           renderInput={(params) => (
             <TextField
               {...params}
-              id="countries"
-              name="countries"
+              // id="data2.countries"
+              // name="data2.countries"
               label="Choose a country"
               placeholder="Countries"
               InputProps={{
@@ -180,7 +183,7 @@ const FormSecond = () => {
           )}
         />
         {/* ======================= Cities =============================== */}
-        <TextField
+        {/* <TextField
           id="cities"
           name="cities"
           label="Cities"
@@ -191,9 +194,11 @@ const FormSecond = () => {
           variant="outlined"
           fullWidth
           helperText="Enter city names, separating them by commas"
-        />
-        <Button type="submit">Submit</Button>
+        /> */}
       </FormControl>
+      <Button type="submit" onClick={() => saveData(formik.values.data2)}>
+        Next
+      </Button>
     </form>
   );
 };
