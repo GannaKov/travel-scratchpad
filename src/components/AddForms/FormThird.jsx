@@ -15,15 +15,26 @@ import { getAccommodationType } from "../../services/requests";
 import Rating from "@mui/material/Rating";
 //--------------
 
-const FormThird = ({ formik, saveData }) => {
-  const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
-  console.log("formik.values.data3", formik.values.data3);
-  useEffect(() => {
-    getAccommodationType()
-      .then((res) => setAccommodTypeOptions(res))
-      .catch((error) => console.log(error.status, error.message));
-  }, []);
+const FormThird = ({ formik, saveData, accommodTypeOptions }) => {
+  // const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
+  console.log("formik.values.data3", formik.values.data3.type);
+  console.log("aaaa", accommodTypeOptions);
+  // useEffect(() => {
+  //   getAccommodationType()
+  //     .then((res) => setAccommodTypeOptions(res))
+  //     .catch((error) => console.log(error.status, error.message));
+  // }, []);
 
+  // useEffect(() => {
+  //   // При монтировании компонента FormThird, устанавливаем значение Select
+  //   if (!formik.values.data3.type && accommodTypeOptions.length > 0) {
+  //     // Если значение не установлено и есть доступные опции
+  //     const defaultType = accommodTypeOptions.includes("Hotel")
+  //       ? "Hotel"
+  //       : accommodTypeOptions[0];
+  //     formik.setFieldValue("data3.type", defaultType); // Устанавливаем значение по умолчанию
+  //   }
+  // }, [formik.values.data3.type, accommodTypeOptions, formik]);
   // const initialValues = {
   //   type: "",
   //   link: "",
@@ -51,7 +62,7 @@ const FormThird = ({ formik, saveData }) => {
           value={formik.values.data3.type}
           label="Accommodation"
           onChange={formik.handleChange}
-          // defaultValue={accommodTypeOptions[6]}
+          defaultValue={accommodTypeOptions[6]}
         >
           {accommodTypeOptions &&
             accommodTypeOptions.map((type) => (

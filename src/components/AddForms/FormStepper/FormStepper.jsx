@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -13,6 +13,7 @@ import FormThird from "../FormThird";
 import FormFourth from "../FormFourth";
 import FormFifth from "../FormFifth";
 import FormSixth from "../FormSixth";
+import { getAccommodationType } from "../../../services/requests";
 
 const FormStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -36,6 +37,12 @@ const FormStepper = () => {
       advices: "",
     },
   });
+  const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
+  useEffect(() => {
+    getAccommodationType()
+      .then((res) => setAccommodTypeOptions(res))
+      .catch((error) => console.log(error.status, error.message));
+  }, []);
   // ---- Formik -----
   const formik = useFormik({
     initialValues: formData,
@@ -80,7 +87,12 @@ const FormStepper = () => {
   const steps = [
     <FormFirst key="step1" formik={formik} saveData={saveStepData(1)} />,
     <FormSecond key="step2" formik={formik} saveData={saveStepData(2)} />,
-    <FormThird key="step3" formik={formik} saveData={saveStepData(3)} />,
+    <FormThird
+      key="step3"
+      formik={formik}
+      saveData={saveStepData(3)}
+      accommodTypeOptions={accommodTypeOptions}
+    />,
     <FormFourth key="step4" formik={formik} saveData={saveStepData(4)} />,
   ];
 
