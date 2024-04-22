@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-
+import StarsShow from "../Stars/StarsShow";
 import { useFormik } from "formik";
 import {
   FormControl,
@@ -9,13 +9,25 @@ import {
   MenuItem,
   Button,
   TextField,
+  Typography,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
 } from "@mui/material";
-
+import DeleteIcon from "@mui/icons-material/Delete";
 import { getAccommodationType } from "../../services/requests";
 import Rating from "@mui/material/Rating";
 //--------------
 
-const FormThird = ({ formik, saveData, accommodTypeOptions }) => {
+const FormThird = ({
+  formik,
+  saveData,
+  accommodTypeOptions,
+  setAccommodationArr,
+  accommodationArr,
+}) => {
   // const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
   // console.log("formik.values.data3", formik.values.data3);
 
@@ -48,8 +60,24 @@ const FormThird = ({ formik, saveData, accommodTypeOptions }) => {
   //     console.log("Submitted values:", values);
   //   },
   // });
-  const handleRatingChange = (event, value) => {
-    formik.setFieldValue("ratingAccommodation", value);
+  // const handleRatingChange = (event, value) => {
+  //   formik.setFieldValue("ratingAccommodation", value);
+  // };
+
+  const onAddAccommodationClick = () => {
+    const { type, link, price, rating, review } = formik.values.data3;
+    setAccommodationArr((prev) => [
+      ...prev,
+      { type, link, price, rating, review },
+    ]);
+    formik.setFieldValue("data3.type", "");
+    formik.setFieldValue("data3.link", "");
+    formik.setFieldValue("data3.price", "");
+    formik.setFieldValue("data3.rating", null);
+    formik.setFieldValue("data3.review", "");
+  };
+  const handleRemove = (index) => {
+    setAccommodationArr((prev) => prev.filter((_, i) => i !== index));
   };
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -89,10 +117,10 @@ const FormThird = ({ formik, saveData, accommodTypeOptions }) => {
         />
         <Rating
           precision={0.5}
-          name="data3.ratingAccommodation"
-          value={formik.values.data3.ratingAccommodation}
+          name="data3.rating"
+          value={formik.values.data3.rating}
           onChange={(event, value) =>
-            formik.setFieldValue("data3.ratingAccommodation", value)
+            formik.setFieldValue("data3.rating", value)
           }
         />
         <TextField
@@ -104,6 +132,48 @@ const FormThird = ({ formik, saveData, accommodTypeOptions }) => {
           onChange={formik.handleChange}
         />
       </FormControl>
+      <Button
+        type="button"
+        variant="contained"
+        sx={{ mt: 2 }}
+        onClick={onAddAccommodationClick}
+      >
+        Add
+      </Button>
+      {accommodationArr.length > 0 && (
+        <Box mt={4}>
+          <Typography variant="h6">Added Accommodation</Typography>
+          <List>
+            {accommodationArr.map((accommodation, index) => (
+              <ListItem key={index}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <ListItemText
+                    sx={{ display: "flex", gap: "1rem" }}
+                    primary={`${accommodation.type} :  ${accommodation.link}`}
+                  />
+                  <StarsShow rating={accommodation.rating} isReadOnly={true} />
+                  <ListItemText
+                    sx={{ display: "flex", gap: "1rem" }}
+                    primary={`Price :  ${accommodation.price}`}
+                  />
+                  <ListItemText
+                    sx={{ display: "flex", gap: "1rem" }}
+                    primary={accommodation.review}
+                  />
+                </div>
+
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => handleRemove(index)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      )}
       <div>
         <Button type="submit">Finish now?</Button>
       </div>

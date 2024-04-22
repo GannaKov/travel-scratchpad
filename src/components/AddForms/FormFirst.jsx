@@ -109,6 +109,7 @@ const FormFirst = ({ formik, saveData }) => {
           placeholder="DD.MM.YYYY"
         />
         <Rating
+          precision={0.5}
           name="data1.ratingTrip"
           value={formik.values.data1.ratingTrip}
           onChange={(event, value) =>

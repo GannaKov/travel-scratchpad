@@ -17,6 +17,7 @@ import { getAccommodationType } from "../../../services/requests";
 
 const FormStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [accommodationArr, setAccommodationArr] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [usefulLinks, setUsefulLinks] = useState([]);
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ const FormStepper = () => {
       type: "",
       link: "",
       price: null,
-      ratingAccommodation: null,
+      rating: null,
       review: "",
     },
     data4: {
@@ -66,11 +67,25 @@ const FormStepper = () => {
         .filter((city) => city.length > 0)
         .map((city) => city.charAt(0).toUpperCase() + city.slice(1));
       console.log("cities2:", newCitiesArr);
+
       const updatedValues = {
         ...values,
         data2: { ...values.data2, cities: newCitiesArr },
       };
+      //=============
+      const updatedForBackend = {
+        title: formik.values.data1.title,
+        travel_rating: formik.values.data1.ratingTrip,
+        purpose: formik.values.data2.purposes,
+        countries: formik.values.data2.countries,
+        destination: formik.values.data2.cities,
+        accommodation: accommodationArr,
+        expenses: expenses,
+        useful_links: usefulLinks,
+        advice: formik.values.data4.advices,
+      };
       console.log("upd", updatedValues);
+      console.log("updatedForBackend", updatedForBackend);
       await formik.setFieldValue(`data2.cities`, newCitiesArr);
       await formik.setValues(updatedValues);
 
@@ -118,6 +133,8 @@ const FormStepper = () => {
       formik={formik}
       saveData={saveStepData(3)}
       accommodTypeOptions={accommodTypeOptions}
+      setAccommodationArr={setAccommodationArr}
+      accommodationArr={accommodationArr}
     />,
     <FormFourth
       key="step4"
