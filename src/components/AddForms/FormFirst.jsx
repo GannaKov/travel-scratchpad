@@ -61,6 +61,8 @@ const FormFirst = ({ formik, saveData }) => {
   //     .required("Required"),
   // });
   const handleDateChange = (event) => {
+    let targetId = event.target.id;
+
     let value = event.target.value.replace(/\D/g, ""); // Удалить все не-цифры
     if (value.length > 2) {
       value = `${value.slice(0, 2)}.${value.slice(2)}`;
@@ -68,8 +70,13 @@ const FormFirst = ({ formik, saveData }) => {
     if (value.length > 5) {
       value = `${value.slice(0, 5)}.${value.slice(5, 9)}`;
     }
-    console.log("value", value);
-    formik.setFieldValue("data1.dateEnd", value);
+    //console.log("value", value);
+    if (targetId === "data1.dateEnd") {
+      formik.setFieldValue("data1.dateEnd", value);
+    }
+    if (targetId === "data1.dateBeginn") {
+      formik.setFieldValue("data1.dateBeginn", value);
+    }
   };
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -92,7 +99,8 @@ const FormFirst = ({ formik, saveData }) => {
           label="Start Date"
           variant="outlined"
           value={formik.values.data1.dateBeginn}
-          onChange={formik.handleChange}
+          //onChange={formik.handleChange}
+          onChange={handleDateChange}
           placeholder="DD.MM.YYYY"
           error={
             formik.touched.data1?.dateBeginn &&
