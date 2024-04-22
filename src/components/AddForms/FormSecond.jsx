@@ -5,6 +5,7 @@ import styles from "./Forms.module.css";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { getTripsPurposes } from "../../services/requests";
+import { getCountriesOptions } from "../../services/requests";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -26,34 +27,22 @@ import {
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-const FormSecond = ({ formik, saveData }) => {
+const FormSecond = ({ formik, saveData, countriesOptions }) => {
   const [purposeOptions, setPurposeOptions] = useState([]);
   // const [purposes, setPurposes] = useState([]);
   // const [countryOptions, setCountryOptions] = useState([]);
   // const [countryInput, setCountryInput] = useState("");
   //--auto
-  const [countriesOptions, setCountriesOptions] = useState([]);
+  // const [countriesOptions, setCountriesOptions] = useState([]);
   const [loading, setLoading] = useState(false);
   //end auto
   //console.log("formik.values.data2", formik.values.data2);
 
   useEffect(() => {
+    setLoading(true);
     getTripsPurposes()
       .then((res) => {
         setPurposeOptions(res);
-      })
-      .catch((error) => console.log(error.status, error.message));
-    //-- auto
-    setLoading(true);
-    axios
-      .get(
-        `https://restcountries.com/v3/all`
-        //`https://restcountries.com/v3/name/${value}?match=${value}&fields=name`
-      )
-      .then((res) => {
-        const countryNames = res.data.map((country) => country.name.common);
-
-        setCountriesOptions(countryNames);
       })
       .catch((error) => console.log(error.status, error.message))
       .finally(() => setLoading(false));

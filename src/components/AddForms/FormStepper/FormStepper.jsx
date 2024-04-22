@@ -13,7 +13,10 @@ import FormThird from "../FormThird";
 import FormFourth from "../FormFourth";
 import FormFifth from "../FormFifth";
 import FormSixth from "../FormSixth";
-import { getAccommodationType } from "../../../services/requests";
+import {
+  getAccommodationType,
+  getCountriesOptions,
+} from "../../../services/requests";
 
 const FormStepper = () => {
   const monthsOption = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -49,9 +52,16 @@ const FormStepper = () => {
   });
 
   const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
+  const [countriesOptions, setCountriesOptions] = useState([]);
   useEffect(() => {
     getAccommodationType()
       .then((res) => setAccommodTypeOptions(res))
+      .catch((error) => console.log(error.status, error.message));
+    getCountriesOptions()
+      .then((result) => {
+        const countryNames = result.data.map((country) => country.name.common);
+        setCountriesOptions(countryNames);
+      })
       .catch((error) => console.log(error.status, error.message));
   }, []);
   // ---- Formik -----
@@ -200,7 +210,12 @@ const FormStepper = () => {
   };
   const steps = [
     <FormFirst key="step1" formik={formik} saveData={saveStepData(1)} />,
-    <FormSecond key="step2" formik={formik} saveData={saveStepData(2)} />,
+    <FormSecond
+      key="step2"
+      formik={formik}
+      saveData={saveStepData(2)}
+      countriesOptions={countriesOptions}
+    />,
     <FormThird
       key="step3"
       formik={formik}

@@ -31,3 +31,13 @@ export const getAccommodationType = async () => {
   //console.log("data", data.data);
   return data.data;
 };
+
+// get accommodation's type
+export const getCountriesOptions = async () => {
+  const result = axios.get(
+    `https://restcountries.com/v3/all`
+    //`https://restcountries.com/v3/name/${value}?match=${value}&fields=name`
+  );
+
+  return result;
+};
