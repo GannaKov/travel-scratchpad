@@ -25,7 +25,7 @@ const BlogSingleTrip = ({ singleTrip }) => {
           <span key={city}>{city}</span>
         ))}
       </div>
-      <p>{singleTrip.amount}</p>
+      <p>{singleTrip.total_amount}</p>
       <p>Accomodation:</p>
 
       {singleTrip.accommodation.map((accomodation) => (

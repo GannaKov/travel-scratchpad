@@ -126,18 +126,7 @@ const FormFourth = ({
             </List>
           </Box>
         )}
-        <div>
-          <TextField
-            id="data4.advices"
-            label="Advices"
-            value={formik.values.data4.advices}
-            multiline
-            minRows={3}
-            maxRows={6}
-            onChange={formik.handleChange}
-            fullWidth
-          />
-        </div>
+
         {/* ------ Links ------- */}
         <TextField
           id="data4.topic"
@@ -188,6 +177,18 @@ const FormFourth = ({
           </Box>
         )}
         {/* ------ end Links ------- */}
+        <div>
+          <TextField
+            id="data4.advices"
+            label="Advices"
+            value={formik.values.data4.advices}
+            multiline
+            minRows={3}
+            maxRows={6}
+            onChange={formik.handleChange}
+            fullWidth
+          />
+        </div>
         <div>
           <Button type="submit">Finish now?</Button>
         </div>

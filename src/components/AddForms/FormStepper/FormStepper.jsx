@@ -21,7 +21,13 @@ const FormStepper = () => {
   const [expenses, setExpenses] = useState([]);
   const [usefulLinks, setUsefulLinks] = useState([]);
   const [formData, setFormData] = useState({
-    data1: { title: "", dateBeginn: "", dateEnd: "", ratingTrip: 0 },
+    data1: {
+      title: "",
+      dateBeginn: "",
+      dateEnd: "",
+      ratingTrip: 0,
+      totalAmount: "",
+    },
 
     data2: { purposes: [], countries: [], cities: [] },
     data3: {
@@ -75,10 +81,13 @@ const FormStepper = () => {
       //=============
       const updatedForBackend = {
         title: formik.values.data1.title,
+        date_start: formik.values.data1.dateBeginn,
+        date_end: formik.values.data1.dateEnd,
         travel_rating: formik.values.data1.ratingTrip,
+        total_amount: formik.values.data1.totalAmount,
         purpose: formik.values.data2.purposes,
         countries: formik.values.data2.countries,
-        destination: formik.values.data2.cities,
+        destination: newCitiesArr,
         accommodation: accommodationArr,
         expenses: expenses,
         useful_links: usefulLinks,

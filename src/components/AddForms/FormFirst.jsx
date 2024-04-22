@@ -60,7 +60,17 @@ const FormFirst = ({ formik, saveData }) => {
   //     .max(5, "Rating must be between 0 and 5")
   //     .required("Required"),
   // });
-
+  const handleDateChange = (event) => {
+    let value = event.target.value.replace(/\D/g, ""); // Удалить все не-цифры
+    if (value.length > 2) {
+      value = `${value.slice(0, 2)}.${value.slice(2)}`;
+    }
+    if (value.length > 5) {
+      value = `${value.slice(0, 5)}.${value.slice(5, 9)}`;
+    }
+    console.log("value", value);
+    formik.setFieldValue("data1.dateEnd", value);
+  };
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormControl fullWidth>
@@ -98,7 +108,8 @@ const FormFirst = ({ formik, saveData }) => {
           label="End Date"
           variant="outlined"
           value={formik.values.data1.dateEnd}
-          onChange={formik.handleChange}
+          // onChange={formik.handleChange}
+          onChange={handleDateChange}
           error={
             formik.touched.data1?.dateEnd &&
             Boolean(formik.errors.data1?.dateEnd)
@@ -114,6 +125,22 @@ const FormFirst = ({ formik, saveData }) => {
           value={formik.values.data1.ratingTrip}
           onChange={(event, value) =>
             formik.setFieldValue("data1.ratingTrip", value)
+          }
+        />
+        <TextField
+          id="data1.totalAmount"
+          name="data1.totalAmount"
+          label="Total Amount"
+          variant="outlined"
+          value={formik.values.data1.totalAmount}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.data1?.totalAmount &&
+            Boolean(formik.errors.data1?.totalAmount)
+          }
+          helperText={
+            formik.touched.data1?.totalAmount &&
+            formik.errors.data1?.totalAmount
           }
         />
       </FormControl>

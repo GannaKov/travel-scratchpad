@@ -34,7 +34,7 @@ const TripItem = ({ trip }) => {
         ))}
       </div>
 
-      <p>Amount: {trip.amount}</p>
+      <p>Amount: {trip.total_amount}</p>
       <Link to={`${trip._id}`}>
         <button type="button">See more</button>
       </Link>
