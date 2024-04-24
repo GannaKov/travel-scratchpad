@@ -17,7 +17,12 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 //--------------------------------------------------------------------
 const FormFirst = ({ formik, saveData }) => {
   //const [valueRating, setValueRating] = useState(null);
@@ -127,6 +132,17 @@ const FormFirst = ({ formik, saveData }) => {
           }
           placeholder="DD.MM.YYYY"
         />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={["DatePicker"]}>
+            {" "}
+            <DemoItem label="Mobile variant">
+              <DatePicker label="Basic date picker" />
+            </DemoItem>
+            <DemoItem label="Desktop variant">
+              <DesktopDatePicker />
+            </DemoItem>
+          </DemoContainer>
+        </LocalizationProvider>
         <Rating
           precision={0.5}
           name="data1.ratingTrip"
