@@ -16,15 +16,20 @@ import FormSixth from "../FormSixth";
 import {
   getAccommodationType,
   getCountriesOptions,
+  postFormData,
 } from "../../../services/requests";
+import {
+  handleMonth,
+  handleYear,
+  handleSeasons,
+} from "../../../services/handleDate";
 
 const FormStepper = () => {
-  const monthsOption = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const seasonsOption = ["winter", "spring", "summer", "autumn"];
   const [activeStep, setActiveStep] = useState(0);
   const [accommodationArr, setAccommodationArr] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [usefulLinks, setUsefulLinks] = useState([]);
+  const [fileMain, setFileMain] = useState(null);
   const [formData, setFormData] = useState({
     data1: {
       title: "",
@@ -49,6 +54,7 @@ const FormStepper = () => {
       amount: null,
       advices: "",
     },
+    data5: { mainImage: "" },
   });
 
   const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
@@ -90,66 +96,21 @@ const FormStepper = () => {
       };
       //=============
       //---- month
-      const monthBeginn = parseInt(formik.values.data1.dateBeginn.slice(3, 5));
-      const monthEnd = parseInt(formik.values.data1.dateEnd.slice(3, 5));
+      const monthArr = handleMonth(
+        formik.values.data1.dateBeginn,
+        formik.values.data1.dateEnd
+      );
 
-      const monthArr = [];
-      if (monthBeginn === monthEnd) {
-        monthArr.push(monthBeginn);
-      }
-      if (monthBeginn < monthEnd) {
-        const indBeginn = monthsOption.findIndex((num) => num === monthBeginn); //indexOf(monthBeginn);
-        const indEnd = monthsOption.findIndex((num) => num === monthEnd);
-        const months = monthsOption.slice(indBeginn, indEnd + 1);
-        monthArr.push(...months);
-      }
-      if (monthBeginn > monthEnd) {
-        const indBeginn = monthsOption.findIndex((num) => num === monthBeginn); //indexOf(monthBeginn);
-        const indEnd = monthsOption.findIndex((num) => num === monthEnd);
-        const months1 = monthsOption.slice(indBeginn);
-        const months2 = monthsOption.slice(0, indEnd + 1);
-        monthArr.push(...months2, ...months1);
-      }
       //---- year
-      const yearsArr = [];
-      const yearBeginn = formik.values.data1.dateBeginn.slice(6);
-      const yearEnd = formik.values.data1.dateEnd.slice(6);
-      if (yearBeginn != yearEnd) {
-        yearsArr.push(yearBeginn, yearEnd);
-      } else {
-        yearsArr.push(yearBeginn);
-      }
+      const yearsArr = handleYear(
+        formik.values.data1.dateBeginn,
+        formik.values.data1.dateEnd
+      );
+
       //---- seasons
-      console.log("months", monthArr);
-      const seasonsArr = [];
-      if (
-        monthArr.includes(1) ||
-        monthArr.includes(2) ||
-        monthArr.includes(12)
-      ) {
-        seasonsArr.push(seasonsOption[0]);
-      }
-      if (
-        monthArr.includes(3) ||
-        monthArr.includes(4) ||
-        monthArr.includes(5)
-      ) {
-        seasonsArr.push(seasonsOption[1]);
-      }
-      if (
-        monthArr.includes(6) ||
-        monthArr.includes(7) ||
-        monthArr.includes(8)
-      ) {
-        seasonsArr.push(seasonsOption[2]);
-      }
-      if (
-        monthArr.includes(9) ||
-        monthArr.includes(10) ||
-        monthArr.includes(11)
-      ) {
-        seasonsArr.push(seasonsOption[3]);
-      }
+
+      const seasonsArr = handleSeasons(monthArr);
+
       //----
       const updatedForBackend = {
         years: yearsArr,
@@ -168,31 +129,22 @@ const FormStepper = () => {
         useful_links: usefulLinks,
         advice: formik.values.data4.advices,
       };
-      console.log("upd", updatedValues);
+
       console.log("updatedForBackend", updatedForBackend);
       await formik.setFieldValue(`data2.cities`, newCitiesArr);
       await formik.setValues(updatedValues);
 
       setFormData(updatedValues);
-      console.log("Submitted values:", values);
-      //handleNext(); //?????
+      const data = new FormData();
+      data.append("data", JSON.stringify(updatedForBackend));
+      const mainFile = formik.values.data5.mainImage;
+      data.append("main_file", mainFile);
+      console.log("FD", formik.values.data5.mainImage, formik.values.data1);
+      console.log("updatedValues", updatedValues);
+      postFormData(data);
     },
   });
-  // onSubmit: (values) => {
-  //   console.log("Submitted values:", values);
-  //   const dataFields = ["data1", "data2", "data3", "data4"];
-  //   dataFields.forEach((field) => {
-  //     saveStepData(field)(formik.values[field]);
-  //   });
-  //   setFormData(values);
-  //   console.log("FormData", formData);
 
-  // },
-
-  //   const handleChange = (event) => {
-  //     const { name, value } = event.target;
-  //     formik.setFieldValue(name, value);
-  //   };
   // ---- end  Formik -----
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -233,6 +185,13 @@ const FormStepper = () => {
       setUsefulLinks={setUsefulLinks}
       usefulLinks={usefulLinks}
     />,
+    <FormFifth
+      key="step5"
+      formik={formik}
+      setFile={setFileMain}
+      file={fileMain}
+      saveData={saveStepData(5)}
+    />,
   ];
 
   //   const handleSubmit = () => {
@@ -267,7 +226,7 @@ const FormStepper = () => {
         }
       />
       {steps[activeStep]}
-      <FormFifth />
+
       {/* {activeStep === 0 && (
         <div>
           <Button type="submit">Finish</Button>

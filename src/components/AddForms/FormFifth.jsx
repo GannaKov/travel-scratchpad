@@ -1,17 +1,45 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import axios from "axios";
 import CancelIcon from "@mui/icons-material/Cancel";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+  TextField,
+} from "@mui/material";
 
-const FormFifth = () => {
-  const [file, setFile] = useState(null);
+const FormFifth = ({ formik, file, setFile, saveData }) => {
+  const [img, setImg] = useState(null);
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState({});
-  const handleSelectFile = (e) => setFile(e.target.files[0]);
+
+  // const handleSelectFile = (e) => {
+  //   setImg(e.target.files[0]);
+  //   console.log("img", e.target.files[0]);
+  // };
+  const handleUploadClick = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    console.log("file", file);
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = function (event) {
+        setImg(reader.result);
+        setFile(file);
+
+        formik.setFieldValue("data5.mainImage", file);
+        //onChange({ img: event.target.files[0] });
+      };
+    }
+  };
   const handleUpload = async () => {
     try {
       //   setLoading(true);
       //   const data = new FormData();
-      //   data.append("my_file", file);
+      //   data.append("main_file", file);
       //   const res = await axios.post("http://localhost:6000/upload", data);
       //   setRes(res.data);
     } catch (error) {
@@ -22,43 +50,40 @@ const FormFifth = () => {
   };
   return (
     <div className="App">
-      {file && (
+      {img && (
         <div className="shareImgContainer">
-          <img src={URL.createObjectURL(file)} alt="" className="shareImg" />
+          {/* <img src={URL.createObjectURL(img)} alt="" className="shareImg" /> */}
+          <img src={img} alt="" className="shareImg" />
           <CancelIcon
             className="shareCancelImg "
-            onClick={() => setFile(null)}
+            onClick={() => setImg(null)}
           />
         </div>
       )}
-      <label
-        htmlFor="main_file"
-        className="btn-grey"
-        style={{ cursor: "pointer" }}
-      >
-        Select file
-      </label>
-      {/* {file && <center> {file.name}</center>} */}
-      <input
-        style={{ display: "none" }}
-        id="main_file"
-        type="file"
-        onChange={handleSelectFile}
-        multiple={false}
-        name="main_file"
-      />
-      {/* <code>
-        {Object.keys(res).length > 0
-          ? Object.keys(res).map((key) => (
-              <p className="output-item" key={key}>
-                <span>{key}:</span>
-                <span>
-                  {typeof res[key] === "object" ? "object" : res[key]}
-                </span>
-              </p>
-            ))
-          : null}
-      </code> */}
+      <form onSubmit={formik.handleSubmit}>
+        <label
+          htmlFor="main_file"
+          className="btn-grey"
+          style={{ cursor: "pointer" }}
+        >
+          Select file
+        </label>
+        <input
+          // style={{ display: "none" }}
+          id="main_file"
+          type="file"
+          // onChange={handleSelectFile}
+          onChange={handleUploadClick}
+          // value={formik.values.data5.mainImage}
+          multiple={false}
+          name="main_file"
+          accept="image/*"
+        />
+        <div>
+          <Button type="submit">Finish now?</Button>
+        </div>
+      </form>
+
       {file && (
         <>
           <button onClick={handleUpload} className="btn-green">

@@ -132,9 +132,8 @@ const FormFirst = ({ formik, saveData }) => {
           }
           placeholder="DD.MM.YYYY"
         />
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["DatePicker"]}>
-            {" "}
             <DemoItem label="Mobile variant">
               <DatePicker label="Basic date picker" />
             </DemoItem>
@@ -142,7 +141,7 @@ const FormFirst = ({ formik, saveData }) => {
               <DesktopDatePicker />
             </DemoItem>
           </DemoContainer>
-        </LocalizationProvider>
+        </LocalizationProvider> */}
         <Rating
           precision={0.5}
           name="data1.ratingTrip"
