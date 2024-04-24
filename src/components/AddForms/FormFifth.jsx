@@ -11,7 +11,7 @@ import {
   TextField,
 } from "@mui/material";
 
-const FormFifth = ({ formik, file, setFile, saveData }) => {
+const FormFifth = ({ formik, saveData }) => {
   const [img, setImg] = useState(null);
   const [loading, setLoading] = useState(false);
   const [res, setRes] = useState({});
@@ -20,15 +20,16 @@ const FormFifth = ({ formik, file, setFile, saveData }) => {
   //   setImg(e.target.files[0]);
   //   console.log("img", e.target.files[0]);
   // };
+
   const handleUploadClick = (event) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
     console.log("file", file);
+    const reader = new FileReader();
+
     if (file) {
       reader.readAsDataURL(file);
       reader.onloadend = function (event) {
         setImg(reader.result);
-        setFile(file);
 
         formik.setFieldValue("data5.mainImage", file);
         //onChange({ img: event.target.files[0] });
@@ -56,7 +57,10 @@ const FormFifth = ({ formik, file, setFile, saveData }) => {
           <img src={img} alt="" className="shareImg" />
           <CancelIcon
             className="shareCancelImg "
-            onClick={() => setImg(null)}
+            onClick={() => {
+              setImg(null);
+              formik.setFieldValue("data5.mainImage", "");
+            }}
           />
         </div>
       )}
@@ -84,7 +88,7 @@ const FormFifth = ({ formik, file, setFile, saveData }) => {
         </div>
       </form>
 
-      {file && (
+      {img && (
         <>
           <button onClick={handleUpload} className="btn-green">
             {loading ? "uploading..." : "upload to cloudinary"}

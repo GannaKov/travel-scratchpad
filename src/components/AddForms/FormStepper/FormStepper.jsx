@@ -133,14 +133,14 @@ const FormStepper = () => {
       console.log("updatedForBackend", updatedForBackend);
       await formik.setFieldValue(`data2.cities`, newCitiesArr);
       await formik.setValues(updatedValues);
-
       setFormData(updatedValues);
+      //img + backend
+
       const data = new FormData();
       data.append("data", JSON.stringify(updatedForBackend));
       const mainFile = formik.values.data5.mainImage;
       data.append("main_file", mainFile);
-      console.log("FD", formik.values.data5.mainImage, formik.values.data1);
-      console.log("updatedValues", updatedValues);
+
       postFormData(data);
     },
   });
@@ -188,8 +188,8 @@ const FormStepper = () => {
     <FormFifth
       key="step5"
       formik={formik}
-      setFile={setFileMain}
-      file={fileMain}
+      setFileMain={setFileMain}
+      fileMain={fileMain}
       saveData={saveStepData(5)}
     />,
   ];
