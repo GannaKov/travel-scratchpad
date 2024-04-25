@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import StarsShow from "../Stars/StarsShow";
 import { useFormik } from "formik";
+import truncateUrl from "../../services/truncateUrl";
 import {
   FormControl,
   InputLabel,
@@ -149,8 +150,9 @@ const FormThird = ({
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <ListItemText
                     sx={{ display: "flex", gap: "1rem" }}
-                    primary={`${accommodation.type} :  ${accommodation.link}`}
+                    primary={`${accommodation.type} :`}
                   />
+                  <span>{truncateUrl(accommodation.link)}</span>
                   <StarsShow rating={accommodation.rating} isReadOnly={true} />
                   <ListItemText
                     sx={{ display: "flex", gap: "1rem" }}

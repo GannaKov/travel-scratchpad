@@ -1,14 +1,18 @@
-import { useNavigate, useLoaderData } from "react-router-dom";
+import { useNavigate, useLoaderData, useLocation } from "react-router-dom";
 import BlogSingleTrip from "../../../components/BlogComponents/BlogSingleTrip/BlogSingleTrip";
+import GoBack from "../../../components/GoBack/GoBack";
 import styles from "./BlogSinglePage.module.css";
 
 const BlogSinglePage = () => {
   const singleTrip = useLoaderData();
+  const location = useLocation();
+  const backLinkHref = location.state ?? "/blog-main";
+
   return (
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <p>Go Back</p>
+          <GoBack state={backLinkHref} />
         </div>
       </div>
       <div className={styles.sectionBlog}>

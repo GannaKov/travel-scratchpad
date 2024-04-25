@@ -67,10 +67,7 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
     trim: true,
   });
 
-  // const handlePurposeChange = (event) => {
-  //   console.log("in change");
-  //   setPurposes(event.target.value);
-  // };
+  
   //----- Purposes
   const handlePurposeChange = (event) => {
     formik.setFieldValue("purposes", event.target.value);
@@ -95,7 +92,7 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
 
     formik.setFieldValue("data2.cities", citiesArray);
   };
-  //const capitalizedStr = str.charAt(0).toUpperCase() + str.slice(1);
+ 
   //====================================
   return (
     <form onSubmit={formik.handleSubmit}>

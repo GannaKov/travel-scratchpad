@@ -23,8 +23,10 @@ import {
   handleYear,
   handleSeasons,
 } from "../../../services/handleDate";
+import { useNavigate } from "react-router-dom";
 
 const FormStepper = () => {
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [accommodationArr, setAccommodationArr] = useState([]);
   const [expenses, setExpenses] = useState([]);
@@ -142,6 +144,7 @@ const FormStepper = () => {
       data.append("main_file", mainFile);
 
       postFormData(data);
+      navigate("/blog-main");
     },
   });
 

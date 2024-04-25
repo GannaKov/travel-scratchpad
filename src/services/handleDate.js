@@ -1,5 +1,5 @@
 const monthsOption = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-const seasonsOption = ["winter", "spring", "summer", "autumn"];
+const seasonsOption = ["Winter", "Spring", "Summer", "Autumn"];
 
 export const handleMonth = (dateBeginn, dateEnd) => {
   const monthBeginn = parseInt(dateBeginn.slice(3, 5));

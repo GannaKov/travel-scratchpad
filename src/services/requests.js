@@ -8,7 +8,7 @@ const instance = axios.create({ baseURL: BASEURL });
 // get all trips
 export const getAllTripsLoader = async () => {
   const { data } = await instance.get("/trips");
-
+  console.log("data", data.data);
   return data.data;
 };
 // get trip by Id

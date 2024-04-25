@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useFormik } from "formik";
 import { useState } from "react";
+import truncateUrl from "../../services/truncateUrl";
 import {
   TextField,
   Button,
@@ -162,8 +163,9 @@ const FormFourth = ({
                 <ListItem key={index}>
                   <ListItemText
                     sx={{ display: "flex", gap: "1rem" }}
-                    primary={`${link.topic} :  ${link.link}`}
+                    primary={`${link.topic} :`}
                   />
+                  <span>{truncateUrl(link.link)}</span>
                   <IconButton
                     edge="end"
                     aria-label="delete"

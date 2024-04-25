@@ -5,7 +5,7 @@ import StarsShow from "../Stars/StarsShow";
 import styles from "./TripItem.module.css";
 
 const TripItem = ({ trip }) => {
-  console.log("trip", trip);
+  // console.log("trip", trip);
   return (
     <div>
       <h2>{trip.title}</h2>
@@ -18,8 +18,9 @@ const TripItem = ({ trip }) => {
         {moment(trip.date_end).format("DD.MM.YYYY")}
       </p>
       <img src={trip.main_img} className={styles.tripItemImg} />
+      <p>Purpose: </p>
       {trip.purpose.map((item) => (
-        <p key={item._id}>Purpose: {item.purpose}</p>
+        <span key={item}>{item},&nbsp;</span>
       ))}
       <div>
         <span>Countries:</span>
@@ -35,7 +36,7 @@ const TripItem = ({ trip }) => {
       </div>
 
       <p>Amount: {trip.total_amount}</p>
-      <Link to={`${trip._id}`}>
+      <Link to={`${trip._id}`} state="/blog-main/">
         <button type="button">See more</button>
       </Link>
     </div>
