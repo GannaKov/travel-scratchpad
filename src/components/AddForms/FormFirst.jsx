@@ -78,9 +78,11 @@ const FormFirst = ({ formik, saveData }) => {
     //console.log("value", value);
     if (targetId === "data1.dateEnd") {
       formik.setFieldValue("data1.dateEnd", value);
+      console.log("in F1 end", value);
     }
     if (targetId === "data1.dateBeginn") {
       formik.setFieldValue("data1.dateBeginn", value);
+      console.log("in F1 start", value);
     }
   };
   return (

@@ -12,7 +12,7 @@ import FormSecond from "../FormSecond";
 import FormThird from "../FormThird";
 import FormFourth from "../FormFourth";
 import FormFifth from "../FormFifth";
-import FormSixth from "../FormSixth";
+
 import {
   getAccommodationType,
   getCountriesOptions,
@@ -31,7 +31,7 @@ const FormStepper = () => {
   const [accommodationArr, setAccommodationArr] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [usefulLinks, setUsefulLinks] = useState([]);
-  const [fileMain, setFileMain] = useState(null);
+  //const [fileMain, setFileMain] = useState(null);
   const [formData, setFormData] = useState({
     data1: {
       title: "",
@@ -112,8 +112,10 @@ const FormStepper = () => {
       //---- seasons
 
       const seasonsArr = handleSeasons(monthArr);
+      // const startDate = new Date(formik.values.data1.dateBeginn);
+      // const endDate = new Date(formik.values.data1.dateEnd);
 
-      //----
+      //---- new Date(formik.values.data1.dateBeginn)
       const updatedForBackend = {
         years: yearsArr,
         seasons: seasonsArr,
@@ -191,8 +193,8 @@ const FormStepper = () => {
     <FormFifth
       key="step5"
       formik={formik}
-      setFileMain={setFileMain}
-      fileMain={fileMain}
+      //setFileMain={setFileMain}
+      //fileMain={fileMain}
       saveData={saveStepData(5)}
     />,
   ];

@@ -8,7 +8,7 @@ const instance = axios.create({ baseURL: BASEURL });
 // get all trips
 export const getAllTripsLoader = async () => {
   const { data } = await instance.get("/trips");
-  console.log("data", data.data);
+  // console.log("data", data.data);
   return data.data;
 };
 // get trip by Id
@@ -45,12 +45,12 @@ export const getCountriesOptions = async () => {
 // post form
 export const postFormData = async (dataForm) => {
   try {
-    const { data } = await instance.post("/add-trip", dataForm, {
+    const { data } = await instance.put("/add-trip", dataForm, {
       headers: {
         "Content-type": "multipart/form-data",
       },
     });
-    console.log("res", data);
+    // console.log("res", data);
     return data;
   } catch (err) {
     console.log(err);

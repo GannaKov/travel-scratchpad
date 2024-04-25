@@ -22,26 +22,7 @@ const FormFourth = ({
   usefulLinks,
   setUsefulLinks,
 }) => {
-  //const [expenses, setExpenses] = useState([]);
-  //const [usefulLinks, setUsefulLinks] = useState([]);
-  // console.log("formik.values.data4", formik.values.data4);
-  // const initialValues = {
-  //   topic: "",
-  //   link: "",
-  //   item: "",
-  //   amount: null,
-  //   advices: "",
-  // };
-  // const formik = useFormik({
-  //   initialValues,
-  //   onSubmit: (values) => {
-  //     console.log("Submitted values:", {
-  //       expenses,
-  //       advices: values.advices,
-  //       useful_links: usefulLinks,
-  //     });
-  //   },
-  // });
+
   const onExpenseAddBtnClick = () => {
     const { item, amount } = formik.values.data4;
     if (item.trim() !== "" && amount.trim() !== null && amount !== "") {

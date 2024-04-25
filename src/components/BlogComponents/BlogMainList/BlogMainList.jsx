@@ -6,7 +6,7 @@ import styles from "./BlogMainList.module.css";
 
 const BlogMainList = ({ tripsArr }) => {
   //const formattedDate = moment(mongoDate).format('DD.MM.YY');
-  console.log(" tripsArr", tripsArr);
+
   return (
     <ul>
       {tripsArr.map((trip) => (
