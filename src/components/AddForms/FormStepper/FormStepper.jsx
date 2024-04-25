@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -16,6 +18,7 @@ import FormFifth from "../FormFifth";
 import {
   getAccommodationType,
   getCountriesOptions,
+  getTripById,
   postFormData,
 } from "../../../services/requests";
 import {
@@ -27,6 +30,12 @@ import { useNavigate } from "react-router-dom";
 
 const FormStepper = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const initialMode = searchParams.get("mode") === "true";
+  const tripId = searchParams.get("id");
+  const [editMode, setEditMode] = useState(initialMode);
+  //------
   const [activeStep, setActiveStep] = useState(0);
   const [accommodationArr, setAccommodationArr] = useState([]);
   const [expenses, setExpenses] = useState([]);
@@ -61,6 +70,7 @@ const FormStepper = () => {
 
   const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
   const [countriesOptions, setCountriesOptions] = useState([]);
+  //-----
   useEffect(() => {
     getAccommodationType()
       .then((res) => setAccommodTypeOptions(res))
@@ -72,6 +82,21 @@ const FormStepper = () => {
       })
       .catch((error) => console.log(error.status, error.message));
   }, []);
+  //-------
+  useEffect(() => {
+    const fetchDataForEdit = async () => {
+      try {
+        const response = await getTripById(tripId);
+        setAccommodationArr(response.accommodationArr);
+        setExpenses(response.expenses);
+        setUsefulLinks(response.usefulLinks);
+      } catch (error) {
+        console.error("Error fetching data for edit:", error);
+      }
+    };
+    fetchDataForEdit();
+  }, [editMode, tripId]);
+
   // ---- Formik -----
   const formik = useFormik({
     initialValues: formData,

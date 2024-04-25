@@ -17,6 +17,11 @@ export const getTripByIdLoader = async ({ params }) => {
   // console.log("data", data.data);
   return data.data;
 };
+export const getTripById = async (tripId) => {
+  const { data } = await instance.get(`/trips/${tripId}`);
+  console.log("data", data.data);
+  return data.data;
+};
 
 // get trip's Purpose
 export const getTripsPurposes = async () => {
