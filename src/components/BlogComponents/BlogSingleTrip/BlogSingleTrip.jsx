@@ -6,9 +6,12 @@ import truncateUrl from "../../../services/truncateUrl";
 import styles from "./BlogSingleTrip.module.css";
 
 import { Link, useNavigate } from "react-router-dom";
+import { deleteOneTrip } from "../../../services/requests";
 
 const BlogSingleTrip = ({ singleTrip }) => {
   const navigate = useNavigate();
+
+  // const handleDeleteClick = () => {};
   return (
     <div>
       <div>
@@ -81,13 +84,15 @@ const BlogSingleTrip = ({ singleTrip }) => {
         <p className={styles.subTitle}>Advice:</p>
         <p>{singleTrip.advice}</p>
       </div>
-      <Link
+      {/* <Link
         to={`/add-form?mode=true&id=${singleTrip._id}`}
         state={`/blog-main/${singleTrip._id}`}
       >
         <button type="button">Edit</button>
       </Link>
-      <button type="button">Delete</button>
+      <button type="button" onClick={handleDeleteClick}>
+        Delete
+      </button> */}
     </div>
   );
 };

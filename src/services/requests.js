@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASEURL = "http://localhost:3000";
 //const BASEURL = import.meta.env.VITE_BASE_URL;
-console.log(BASEURL);
+
 const instance = axios.create({ baseURL: BASEURL });
 
 // get all trips
@@ -14,12 +14,12 @@ export const getAllTripsLoader = async () => {
 // get trip by Id
 export const getTripByIdLoader = async ({ params }) => {
   const { data } = await instance.get(`/trips/${params.travel_id}`);
-  console.log("data in get by Id", data.data);
+  // console.log("data in get by Id", data.data);
   return data.data;
 };
 export const getTripById = async (tripId) => {
   const { data } = await instance.get(`/trips/${tripId}`);
-  console.log("data in by Id", data.data);
+  // console.log("data in by Id", data.data);
   return data.data;
 };
 
@@ -70,6 +70,17 @@ export const putFormData = async (tripId, dataForm) => {
         "Content-type": "multipart/form-data",
       },
     });
+    // console.log("res in put", data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// delete form
+export const deleteOneTrip = async (tripId) => {
+  try {
+    const { data } = await instance.delete(`/trips/${tripId}`);
     console.log("res in put", data);
     return data;
   } catch (err) {

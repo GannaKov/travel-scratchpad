@@ -9,14 +9,20 @@ import BlogSingleTrip from "../../../components/BlogComponents/BlogSingleTrip/Bl
 import GoBack from "../../../components/GoBack/GoBack";
 import styles from "./BlogSinglePage.module.css";
 import { useEffect, useState } from "react";
-import { getTripById } from "../../../services/requests";
+import { deleteOneTrip, getTripById } from "../../../services/requests";
 
 const BlogSinglePage = () => {
   const singleTrip = useLoaderData();
   const location = useLocation();
   const backLinkHref = location.state ?? "/blog-main";
+  const navigate = useNavigate();
   //-----
   // const { travel_id } = useParams();
+
+  const handleDeleteClick = async () => {
+    await deleteOneTrip(singleTrip._id);
+    navigate("/blog-main");
+  };
   // const [error, setError] = useState();
   // const [singleTrip, setSingleTrip] = useState(null);
   // useEffect(() => {
@@ -58,6 +64,15 @@ const BlogSinglePage = () => {
           <p>single Photos</p>
         </div>
       </div>
+      <Link
+        to={`/add-form?mode=true&id=${singleTrip._id}`}
+        state={`/blog-main/${singleTrip._id}`}
+      >
+        <button type="button">Edit</button>
+      </Link>
+      <button type="button" onClick={handleDeleteClick}>
+        Delete
+      </button>
     </div>
   );
 };
