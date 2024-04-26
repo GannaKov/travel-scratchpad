@@ -83,25 +83,30 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
           />
         </div>
       )}
+
       <form onSubmit={formik.handleSubmit}>
-        <label
-          htmlFor="main_file"
-          className="btn-grey"
-          style={{ cursor: "pointer" }}
-        >
-          Select file
-        </label>
-        <input
-          style={{ display: "none" }}
-          id="main_file"
-          type="file"
-          // onChange={handleSelectFile}
-          onChange={handleUploadClick}
-          // value={formik.values.data5.mainImage}
-          multiple={false}
-          name="main_file"
-          accept="image/*"
-        />
+        {!img && !mainPhoto && (
+          <>
+            <label
+              htmlFor="main_file"
+              className="btn-grey"
+              style={{ cursor: "pointer" }}
+            >
+              Select file
+            </label>
+            <input
+              style={{ display: "none" }}
+              id="main_file"
+              type="file"
+              // onChange={handleSelectFile}
+              onChange={handleUploadClick}
+              // value={formik.values.data5.mainImage}
+              multiple={false}
+              name="main_file"
+              accept="image/*"
+            />
+          </>
+        )}
         <div>
           <Button type="submit">Finish now?</Button>
         </div>
