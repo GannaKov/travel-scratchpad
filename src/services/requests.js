@@ -14,12 +14,12 @@ export const getAllTripsLoader = async () => {
 // get trip by Id
 export const getTripByIdLoader = async ({ params }) => {
   const { data } = await instance.get(`/trips/${params.travel_id}`);
-  // console.log("data", data.data);
+  console.log("data in get by Id", data.data);
   return data.data;
 };
 export const getTripById = async (tripId) => {
   const { data } = await instance.get(`/trips/${tripId}`);
-  console.log("data", data.data);
+  console.log("data in by Id", data.data);
   return data.data;
 };
 
@@ -50,12 +50,27 @@ export const getCountriesOptions = async () => {
 // post form
 export const postFormData = async (dataForm) => {
   try {
-    const { data } = await instance.put("/add-trip", dataForm, {
+    const { data } = await instance.post("/add-trip", dataForm, {
       headers: {
         "Content-type": "multipart/form-data",
       },
     });
     // console.log("res", data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// put form
+export const putFormData = async (tripId, dataForm) => {
+  try {
+    const { data } = await instance.put(`/add-trip/${tripId}`, dataForm, {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    });
+    console.log("res in put", data);
     return data;
   } catch (err) {
     console.log(err);

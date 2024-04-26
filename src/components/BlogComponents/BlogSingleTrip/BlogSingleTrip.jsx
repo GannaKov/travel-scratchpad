@@ -3,7 +3,7 @@ import moment from "moment";
 import StarsShow from "../../Stars/StarsShow";
 import truncateUrl from "../../../services/truncateUrl";
 import styles from "./BlogSingleTrip.module.css";
-import GoBack from "../../GoBack/GoBack";
+
 import { Link, useNavigate } from "react-router-dom";
 
 const BlogSingleTrip = ({ singleTrip }) => {
@@ -76,7 +76,10 @@ const BlogSingleTrip = ({ singleTrip }) => {
         <p className={styles.subTitle}>Advice:</p>
         <p>{singleTrip.advice}</p>
       </div>
-      <Link to={`/add-form?mode=true&id=${singleTrip._id}`}>
+      <Link
+        to={`/add-form?mode=true&id=${singleTrip._id}`}
+        state={`/blog-main/${singleTrip._id}`}
+      >
         <button type="button">Edit</button>
       </Link>
       <button type="button">Delete</button>

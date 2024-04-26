@@ -25,46 +25,6 @@ import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 //--------------------------------------------------------------------
 const FormFirst = ({ formik, saveData }) => {
-  //const [valueRating, setValueRating] = useState(null);
-
-  // const initialValues = {
-  //   title: "",
-  //   dateBeginn: "",
-  //   dateEnd: "",
-  //   ratingTrip: 0,
-  // };
-  //validationSchema={FirstFormSchema}
-  // const formik = useFormik({
-  //   initialValues,
-  //   onSubmit: (values) => {
-  //     console.log("Submitted values:", values);
-  //   },
-  // });
-  // const handleRatingChange = (event, value) => {
-  //   formik.setFieldValue("data1.ratingTrip", value);
-  // };
-  // const FirstFormSchema = Yup.object({
-  //   title: Yup.string()
-  //     .max(50, "Must be 15 characters or less")
-  //     .required("Required"),
-  //   dateBeginn: Yup.string()
-  //     .matches(
-  //       /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/,
-  //       "Invalid date format (DD.MM.YYYY)"
-  //     )
-  //     .required("Required"),
-  //   dateEnd: Yup.string()
-  //     .matches(
-  //       /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/,
-  //       "Invalid date format (DD.MM.YYYY)"
-  //     )
-  //     .required("Required"),
-  //   ratingTrip: Yup.number()
-  //     .integer("Rating must be an integer")
-  //     .min(0, "Rating must be between 0 and 5")
-  //     .max(5, "Rating must be between 0 and 5")
-  //     .required("Required"),
-  // });
   const handleDateChange = (event) => {
     let targetId = event.target.id;
 
@@ -78,11 +38,9 @@ const FormFirst = ({ formik, saveData }) => {
     //console.log("value", value);
     if (targetId === "data1.dateEnd") {
       formik.setFieldValue("data1.dateEnd", value);
-      console.log("in F1 end", value);
     }
     if (targetId === "data1.dateBeginn") {
       formik.setFieldValue("data1.dateBeginn", value);
-      console.log("in F1 start", value);
     }
   };
   return (

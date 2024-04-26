@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import dayjs from "dayjs";
+import styles from "./FormStepper.module.css";
 
 import { Button, MobileStepper } from "@mui/material";
 
@@ -20,6 +22,7 @@ import {
   getCountriesOptions,
   getTripById,
   postFormData,
+  putFormData,
 } from "../../../services/requests";
 import {
   handleMonth,
@@ -27,9 +30,12 @@ import {
   handleSeasons,
 } from "../../../services/handleDate";
 import { useNavigate } from "react-router-dom";
+import GoBack from "../../GoBack/GoBack";
 
 const FormStepper = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const backLinkHref = location.state ?? "/blog-main";
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialMode = searchParams.get("mode") === "true";
@@ -37,9 +43,11 @@ const FormStepper = () => {
   const [editMode, setEditMode] = useState(initialMode);
   //------
   const [activeStep, setActiveStep] = useState(0);
+  //-----
   const [accommodationArr, setAccommodationArr] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [usefulLinks, setUsefulLinks] = useState([]);
+
   //const [fileMain, setFileMain] = useState(null);
   const [formData, setFormData] = useState({
     data1: {
@@ -70,33 +78,6 @@ const FormStepper = () => {
 
   const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
   const [countriesOptions, setCountriesOptions] = useState([]);
-  //-----
-  useEffect(() => {
-    getAccommodationType()
-      .then((res) => setAccommodTypeOptions(res))
-      .catch((error) => console.log(error.status, error.message));
-    getCountriesOptions()
-      .then((result) => {
-        const countryNames = result.data.map((country) => country.name.common);
-        setCountriesOptions(countryNames);
-      })
-      .catch((error) => console.log(error.status, error.message));
-  }, []);
-  //-------
-  useEffect(() => {
-    const fetchDataForEdit = async () => {
-      try {
-        const response = await getTripById(tripId);
-        setAccommodationArr(response.accommodationArr);
-        setExpenses(response.expenses);
-        setUsefulLinks(response.usefulLinks);
-      } catch (error) {
-        console.error("Error fetching data for edit:", error);
-      }
-    };
-    fetchDataForEdit();
-  }, [editMode, tripId]);
-
   // ---- Formik -----
   const formik = useFormik({
     initialValues: formData,
@@ -162,6 +143,7 @@ const FormStepper = () => {
       console.log("updatedForBackend", updatedForBackend);
       await formik.setFieldValue(`data2.cities`, newCitiesArr);
       await formik.setValues(updatedValues);
+
       setFormData(updatedValues);
       //img + backend
 
@@ -169,13 +151,78 @@ const FormStepper = () => {
       data.append("data", JSON.stringify(updatedForBackend));
       const mainFile = formik.values.data5.mainImage;
       data.append("main_file", mainFile);
-
-      postFormData(data);
-      navigate("/blog-main");
+      if (editMode) {
+        await putFormData(tripId, data);
+        navigate(`/blog-main/${tripId}`);
+      } else {
+        await postFormData(data);
+        navigate("/blog-main");
+      }
     },
   });
 
   // ---- end  Formik -----
+  //-----
+  useEffect(() => {
+    getAccommodationType()
+      .then((res) => setAccommodTypeOptions(res))
+      .catch((error) => console.log(error.status, error.message));
+    getCountriesOptions()
+      .then((result) => {
+        const countryNames = result.data.map((country) => country.name.common);
+        setCountriesOptions(countryNames);
+      })
+      .catch((error) => console.log(error.status, error.message));
+  }, []);
+  //-------
+
+  useEffect(() => {
+    const fetchDataForEdit = async () => {
+      try {
+        const response = await getTripById(tripId);
+
+        setAccommodationArr(response.accommodation);
+        setExpenses(response.expenses);
+        setUsefulLinks(response.useful_links);
+        formik.setValues({
+          data1: {
+            title: response.title,
+            //const formattedDate = dayjs('2024-01-14T00:00:00.000Z').format('DD.MM.YYYY');
+            dateBeginn: dayjs(response.date_start).format("DD.MM.YYYY"),
+            dateEnd: dayjs(response.date_end).format("DD.MM.YYYY"),
+            ratingTrip: response.travel_rating,
+            totalAmount: response.total_amount,
+          },
+          data2: {
+            purposes: response.purpose,
+            countries: response.countries,
+            cities: response.destination,
+          },
+          data3: {
+            type: "",
+            link: "",
+            price: null,
+            rating: null,
+            review: "",
+          },
+          data4: {
+            topic: "",
+            link: "",
+            item: "",
+            amount: null,
+            advices: response.advice,
+          },
+          data5: { mainImage: response.main_img },
+        });
+      } catch (error) {
+        console.error("Error fetching data for edit:", error);
+      }
+    };
+    if (editMode) {
+      fetchDataForEdit();
+    }
+  }, [editMode, tripId]);
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -231,6 +278,9 @@ const FormStepper = () => {
 
   return (
     <div>
+      <div className={styles.containerBlog}>
+        <GoBack state={backLinkHref} />
+      </div>
       <MobileStepper
         variant="dots"
         steps={5}
