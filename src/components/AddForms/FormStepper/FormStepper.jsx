@@ -174,7 +174,7 @@ const FormStepper = () => {
       })
       .catch((error) => console.log(error.status, error.message));
   }, []);
-  //-------
+  //------- for trip edit
 
   useEffect(() => {
     const fetchDataForEdit = async () => {
@@ -187,7 +187,6 @@ const FormStepper = () => {
         formik.setValues({
           data1: {
             title: response.title,
-            //const formattedDate = dayjs('2024-01-14T00:00:00.000Z').format('DD.MM.YYYY');
             dateBeginn: dayjs(response.date_start).format("DD.MM.YYYY"),
             dateEnd: dayjs(response.date_end).format("DD.MM.YYYY"),
             ratingTrip: response.travel_rating,
@@ -268,6 +267,8 @@ const FormStepper = () => {
       //setFileMain={setFileMain}
       //fileMain={fileMain}
       saveData={saveStepData(5)}
+      editMode={editMode}
+      mainImg={formik.values.data5.mainImage}
     />,
   ];
 

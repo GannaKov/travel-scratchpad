@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import moment from "moment";
+import dayjs from "dayjs";
 import StarsShow from "../Stars/StarsShow";
 import styles from "./TripItem.module.css";
 
@@ -13,9 +14,9 @@ const TripItem = ({ trip }) => {
       <StarsShow rating={trip.travel_rating} isReadOnly={true} />
 
       <p>
-        {moment(trip.date_start).format("DD.MM.YYYY")}
+        {dayjs(trip.date_start).format("DD.MM.YYYY")}
         &nbsp;&nbsp;-&nbsp;&nbsp;
-        {moment(trip.date_end).format("DD.MM.YYYY")}
+        {dayjs(trip.date_end).format("DD.MM.YYYY")}
       </p>
       <img src={trip.main_img} className={styles.tripItemImg} />
       <p>Purpose: </p>

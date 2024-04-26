@@ -11,10 +11,10 @@ import {
   TextField,
 } from "@mui/material";
 
-const FormFifth = ({ formik, saveData }) => {
+const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
   const [img, setImg] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [res, setRes] = useState({});
+  const [mainPhoto, setMainPhoto] = useState(mainImg);
 
   // const handleSelectFile = (e) => {
   //   setImg(e.target.files[0]);
@@ -23,12 +23,13 @@ const FormFifth = ({ formik, saveData }) => {
 
   const handleUploadClick = (event) => {
     const file = event.target.files[0];
-    console.log("file", file);
+    // console.log("file", file);
     const reader = new FileReader();
 
     if (file) {
       reader.readAsDataURL(file);
       reader.onloadend = function (event) {
+        console.log("rres", reader.result);
         setImg(reader.result);
 
         formik.setFieldValue("data5.mainImage", file);
@@ -54,12 +55,30 @@ const FormFifth = ({ formik, saveData }) => {
       {img && (
         <div className="shareImgContainer">
           {/* <img src={URL.createObjectURL(img)} alt="" className="shareImg" /> */}
-          <img src={img} alt="" className="shareImg" />
+          <img src={img} style={{ width: 300 }} alt="" className="shareImg" />
           <CancelIcon
             className="shareCancelImg "
             onClick={() => {
               setImg(null);
               formik.setFieldValue("data5.mainImage", "");
+            }}
+          />
+        </div>
+      )}
+      {editMode && mainPhoto && (
+        <div className="shareImgContainer">
+          <img
+            src={mainImg}
+            style={{ width: 300 }}
+            alt=""
+            className="shareImg"
+          />
+          <CancelIcon
+            className="shareCancelImg "
+            onClick={() => {
+              setImg(null);
+              formik.setFieldValue("data5.mainImage", "");
+              setMainPhoto(null);
             }}
           />
         </div>
@@ -73,7 +92,7 @@ const FormFifth = ({ formik, saveData }) => {
           Select file
         </label>
         <input
-          // style={{ display: "none" }}
+          style={{ display: "none" }}
           id="main_file"
           type="file"
           // onChange={handleSelectFile}
@@ -88,13 +107,13 @@ const FormFifth = ({ formik, saveData }) => {
         </div>
       </form>
 
-      {img && (
+      {/* {img && (
         <>
           <button onClick={handleUpload} className="btn-green">
             {loading ? "uploading..." : "upload to cloudinary"}
           </button>
         </>
-      )}
+      )} */}
     </div>
   );
 };

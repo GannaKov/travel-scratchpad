@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import moment from "moment";
+import dayjs from "dayjs";
 import StarsShow from "../../Stars/StarsShow";
 import truncateUrl from "../../../services/truncateUrl";
 import styles from "./BlogSingleTrip.module.css";
@@ -11,14 +12,14 @@ const BlogSingleTrip = ({ singleTrip }) => {
   return (
     <div>
       <div>
-        {" "}
         <h1>{singleTrip.title}</h1>
         <StarsShow rating={singleTrip.travel_rating} isReadOnly={true} />
         <p>
-          {moment(singleTrip.date_start).format("DD.MM.YYYY")}
+          {dayjs(singleTrip.date_start).format("DD.MM.YYYY")}
           &nbsp;&nbsp;-&nbsp;&nbsp;
-          {moment(singleTrip.date_end).format("DD.MM.YYYY")}
+          {dayjs(singleTrip.date_end).format("DD.MM.YYYY")}
         </p>
+        <img src={singleTrip.main_img} className={styles.tripItemImg} />
         <div>
           <span className={styles.subTitle}>Countries:</span>
           {singleTrip.countries.map((country) => (
@@ -46,7 +47,9 @@ const BlogSingleTrip = ({ singleTrip }) => {
           <div key={accomodation._id}>
             <StarsShow rating={accomodation.rating} isReadOnly={true} />
             <span>{accomodation.type}:&nbsp;</span>
-            <a href={accomodation.link}>{truncateUrl(accomodation.link)}</a>
+            <a href={accomodation.link} target="_blank" rel="noreferrer">
+              {truncateUrl(accomodation.link)}
+            </a>
             <p>Price: {accomodation.price}</p>
             <p>{accomodation.review}</p>
           </div>
@@ -69,7 +72,9 @@ const BlogSingleTrip = ({ singleTrip }) => {
           {singleTrip.useful_links.map((item) => (
             <li key={item._id}>
               <span>{item.topic}:&nbsp;</span>
-              <a href={item.link}>{truncateUrl(item.link)}</a>
+              <a href={item.link} target="_blank" rel="noreferrer">
+                {truncateUrl(item.link)}
+              </a>
             </li>
           ))}
         </ul>
