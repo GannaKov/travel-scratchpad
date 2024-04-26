@@ -152,7 +152,15 @@ const FormThird = ({
                     sx={{ display: "flex", gap: "1rem" }}
                     primary={`${accommodation.type} :`}
                   />
-                  <span>{truncateUrl(accommodation.link)}</span>
+                  <span>
+                    <a
+                      href={accommodation.link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {truncateUrl(accommodation.link)}
+                    </a>
+                  </span>
                   <StarsShow rating={accommodation.rating} isReadOnly={true} />
                   <ListItemText
                     sx={{ display: "flex", gap: "1rem" }}

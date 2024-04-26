@@ -22,7 +22,6 @@ const FormFourth = ({
   usefulLinks,
   setUsefulLinks,
 }) => {
-
   const onExpenseAddBtnClick = () => {
     const { item, amount } = formik.values.data4;
     if (item.trim() !== "" && amount.trim() !== null && amount !== "") {
@@ -146,7 +145,11 @@ const FormFourth = ({
                     sx={{ display: "flex", gap: "1rem" }}
                     primary={`${link.topic} :`}
                   />
-                  <span>{truncateUrl(link.link)}</span>
+                  <span>
+                    <a href={link.link} target="_blank" rel="noreferrer">
+                      {truncateUrl(link.link)}
+                    </a>
+                  </span>
                   <IconButton
                     edge="end"
                     aria-label="delete"

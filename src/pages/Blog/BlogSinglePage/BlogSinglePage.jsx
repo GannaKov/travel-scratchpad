@@ -44,14 +44,11 @@ const BlogSinglePage = () => {
         </div>
       </div>
       <div className={styles.sectionBlog}>
-        <div className={styles.containerBlog}>
-          <p>single Edit</p>
-        </div>
+        <div className={styles.containerBlog}></div>
       </div>
       <div className={styles.sectionBlog}>
         {singleTrip && (
           <div className={styles.containerBlog}>
-            <p>single Info</p>
             <BlogSingleTrip singleTrip={singleTrip} />
           </div>
         )}
