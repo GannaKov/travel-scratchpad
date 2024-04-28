@@ -42,31 +42,20 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
       let imgArr = [];
       if (files && files.length > 4) {
         alert(`Only 4 images will be upladed`);
-        return;
       }
       if (files) {
         imgArr = Array.from(files);
-        console.log("files", imgArr);
-        Array.from(files).forEach((file) => {
+        console.log("filesArr", imgArr);
+        Array.from(files).forEach((file, ind) => {
+          console.log("ind", ind);
           const reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onloadend = function () {
             setImagesArr((prev) => [...prev, reader.result]);
           };
         });
-        //  formik.setFieldValue("data5.images", imgArr);
+        formik.setFieldValue("data5.images", imgArr);
       }
-
-      // formik.setFieldValue("data5.mainImage", file);
-      //     };
-      //   });
-      // }
-
-      //   setLoading(true);
-      //   const data = new FormData();
-      //   data.append("main_file", file);
-      //   const res = await axios.post("http://localhost:6000/upload", data);
-      //   setRes(res.data);
     } catch (error) {
       alert(error.message);
     } finally {
@@ -75,26 +64,26 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
   };
   return (
     <div className="App">
-      {img && (
-        <div className="shareImgContainer">
-          {/* <img src={URL.createObjectURL(img)} alt="" className="shareImg" /> */}
-          <img src={img} style={{ width: 300 }} alt="" className="shareImg" />
-          <CancelIcon
-            className="shareCancelImg "
-            onClick={() => {
-              setImg(null);
-              formik.setFieldValue("data5.mainImage", "");
-            }}
-          />
-        </div>
-      )}
-      {imagesArr.length > 0 &&
-        imagesArr.map((image, ind) => (
-          <div key={ind} className="shareImgContainer">
-            <p>{ind} </p>
+      <form onSubmit={formik.handleSubmit}>
+        {/* One File Show */}
+        {img && (
+          <div className="shareImgContainer">
             {/* <img src={URL.createObjectURL(img)} alt="" className="shareImg" /> */}
+            <img src={img} style={{ width: 300 }} alt="" className="shareImg" />
+            <CancelIcon
+              className="shareCancelImg "
+              onClick={() => {
+                setImg(null);
+                formik.setFieldValue("data5.mainImage", "");
+              }}
+            />
+          </div>
+        )}{" "}
+        {/* One File Show by Edit*/}
+        {editMode && mainPhoto && (
+          <div className="shareImgContainer">
             <img
-              src={image}
+              src={mainImg}
               style={{ width: 300 }}
               alt=""
               className="shareImg"
@@ -102,33 +91,14 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
             <CancelIcon
               className="shareCancelImg "
               onClick={() => {
-                setImagesArr((prev) => prev.filter((t) => t != image));
-                // formik.setFieldValue("data5.mainImage", "");
+                setImg(null);
+                formik.setFieldValue("data5.mainImage", "");
+                setMainPhoto(null);
               }}
             />
           </div>
-        ))}
-      {editMode && mainPhoto && (
-        <div className="shareImgContainer">
-          <img
-            src={mainImg}
-            style={{ width: 300 }}
-            alt=""
-            className="shareImg"
-          />
-          <CancelIcon
-            className="shareCancelImg "
-            onClick={() => {
-              setImg(null);
-              formik.setFieldValue("data5.mainImage", "");
-              setMainPhoto(null);
-            }}
-          />
-        </div>
-      )}
-      {/* One File Input */}
-
-      <form onSubmit={formik.handleSubmit}>
+        )}
+        {/* One File Input */}
         {!img && !mainPhoto && (
           <>
             <div>
@@ -154,6 +124,26 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
             </div>
           </>
         )}
+        {/* Multi Files Show*/}
+        {imagesArr.length > 0 &&
+          imagesArr.map((image, ind) => (
+            <div key={ind} className="shareImgContainer">
+              <p>{ind + 1} </p>
+              <img
+                src={image}
+                style={{ width: 300 }}
+                alt=""
+                className="shareImg"
+              />
+              <CancelIcon
+                className="shareCancelImg "
+                onClick={() => {
+                  setImagesArr((prev) => prev.filter((t) => t != image));
+                  // formik.setFieldValue("data5.mainImage", "");
+                }}
+              />{" "}
+            </div>
+          ))}
         {/* Multi Files Input */}
         {imagesArr.length <= 3 && (
           <div>
@@ -181,14 +171,6 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
           </div>
         )}
       </form>
-
-      {/* {img && (
-        <>
-          <button onClick={handleUpload} className="btn-green">
-            {loading ? "uploading..." : "upload to cloudinary"}
-          </button>
-        </>
-      )} */}
     </div>
   );
 };
