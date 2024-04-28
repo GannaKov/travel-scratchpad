@@ -26,7 +26,6 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
     const file = event.target.files[0];
     console.log("file", file);
     const reader = new FileReader();
-
     if (file) {
       reader.readAsDataURL(file);
       reader.onloadend = function () {
@@ -40,8 +39,14 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
     try {
       const files = event.target.files;
       console.log("files", typeof files);
-
+      let imgArr = [];
+      if (files && files.length > 4) {
+        alert(`Only 4 images will be upladed`);
+        return;
+      }
       if (files) {
+        imgArr = Array.from(files);
+        console.log("files", imgArr);
         Array.from(files).forEach((file) => {
           const reader = new FileReader();
           reader.readAsDataURL(file);
@@ -49,6 +54,7 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
             setImagesArr((prev) => [...prev, reader.result]);
           };
         });
+        //  formik.setFieldValue("data5.images", imgArr);
       }
 
       // formik.setFieldValue("data5.mainImage", file);
@@ -85,6 +91,7 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
       {imagesArr.length > 0 &&
         imagesArr.map((image, ind) => (
           <div key={ind} className="shareImgContainer">
+            <p>{ind} </p>
             {/* <img src={URL.createObjectURL(img)} alt="" className="shareImg" /> */}
             <img
               src={image}
@@ -95,7 +102,7 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
             <CancelIcon
               className="shareCancelImg "
               onClick={() => {
-                // setImg(null);
+                setImagesArr((prev) => prev.filter((t) => t != image));
                 // formik.setFieldValue("data5.mainImage", "");
               }}
             />
@@ -119,6 +126,7 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
           />
         </div>
       )}
+      {/* One File Input */}
 
       <form onSubmit={formik.handleSubmit}>
         {!img && !mainPhoto && (
@@ -141,35 +149,37 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
                 // value={formik.values.data5.mainImage}
                 multiple={false}
                 name="main_file"
-                accept="image/*"
+                accept="image/png, image/jpeg, image/jpg"
               />
             </div>
           </>
         )}
-        <div>
+        {/* Multi Files Input */}
+        {imagesArr.length <= 3 && (
           <div>
-            {" "}
-            <label
-              htmlFor="image_files"
-              className="btn-grey"
-              style={{ cursor: "pointer" }}
-            >
-              Select files
-            </label>
-            <input
-              style={{ display: "none" }}
-              id="image_files"
-              type="file"
-              // onChange={handleSelectFile}
-              onChange={handleMultiUploadClick}
-              // value={formik.values.data5.mainImage}
-              multiple
-              name="image_files"
-              accept="image/*"
-            />
+            <div>
+              <label
+                htmlFor="image_files"
+                className="btn-grey"
+                style={{ cursor: "pointer" }}
+              >
+                {imagesArr.length === 0 ? "Select files" : "Add files"}
+              </label>
+              <input
+                style={{ display: "none" }}
+                id="image_files"
+                type="file"
+                // onChange={handleSelectFile}
+                onChange={handleMultiUploadClick}
+                // value={formik.values.data5.mainImage}
+                multiple
+                name="image_files"
+                accept="image/png, image/jpeg, image/jpg"
+              />
+            </div>
+            <Button type="submit">Finish now?</Button>
           </div>
-          <Button type="submit">Finish now?</Button>
-        </div>
+        )}
       </form>
 
       {/* {img && (

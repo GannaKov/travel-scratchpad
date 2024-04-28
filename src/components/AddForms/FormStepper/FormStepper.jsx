@@ -73,7 +73,7 @@ const FormStepper = () => {
       amount: null,
       advices: "",
     },
-    data5: { mainImage: "" },
+    data5: { mainImage: "", images: [] },
   });
 
   const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
