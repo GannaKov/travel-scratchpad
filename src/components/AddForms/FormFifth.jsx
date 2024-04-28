@@ -13,6 +13,7 @@ import {
 
 const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
   const [img, setImg] = useState(null);
+  const [imagesArr, setImagesArr] = useState([]);
   const [loading, setLoading] = useState(false);
   const [mainPhoto, setMainPhoto] = useState(mainImg);
 
@@ -23,22 +24,38 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
 
   const handleUploadClick = (event) => {
     const file = event.target.files[0];
-    // console.log("file", file);
+    console.log("file", file);
     const reader = new FileReader();
 
     if (file) {
       reader.readAsDataURL(file);
-      reader.onloadend = function (event) {
-        console.log("rres", reader.result);
+      reader.onloadend = function () {
         setImg(reader.result);
 
         formik.setFieldValue("data5.mainImage", file);
-        //onChange({ img: event.target.files[0] });
       };
     }
   };
-  const handleUpload = async () => {
+  const handleMultiUploadClick = async (event) => {
     try {
+      const files = event.target.files;
+      console.log("files", typeof files);
+
+      if (files) {
+        Array.from(files).forEach((file) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onloadend = function () {
+            setImagesArr((prev) => [...prev, reader.result]);
+          };
+        });
+      }
+
+      // formik.setFieldValue("data5.mainImage", file);
+      //     };
+      //   });
+      // }
+
       //   setLoading(true);
       //   const data = new FormData();
       //   data.append("main_file", file);
@@ -65,6 +82,25 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
           />
         </div>
       )}
+      {imagesArr.length > 0 &&
+        imagesArr.map((image, ind) => (
+          <div key={ind} className="shareImgContainer">
+            {/* <img src={URL.createObjectURL(img)} alt="" className="shareImg" /> */}
+            <img
+              src={image}
+              style={{ width: 300 }}
+              alt=""
+              className="shareImg"
+            />
+            <CancelIcon
+              className="shareCancelImg "
+              onClick={() => {
+                // setImg(null);
+                // formik.setFieldValue("data5.mainImage", "");
+              }}
+            />
+          </div>
+        ))}
       {editMode && mainPhoto && (
         <div className="shareImgContainer">
           <img
@@ -87,27 +123,51 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
       <form onSubmit={formik.handleSubmit}>
         {!img && !mainPhoto && (
           <>
-            <label
-              htmlFor="main_file"
-              className="btn-grey"
-              style={{ cursor: "pointer" }}
-            >
-              Select file
-            </label>
-            <input
-              style={{ display: "none" }}
-              id="main_file"
-              type="file"
-              // onChange={handleSelectFile}
-              onChange={handleUploadClick}
-              // value={formik.values.data5.mainImage}
-              multiple={false}
-              name="main_file"
-              accept="image/*"
-            />
+            <div>
+              {" "}
+              <label
+                htmlFor="main_file"
+                className="btn-grey"
+                style={{ cursor: "pointer" }}
+              >
+                Select main file
+              </label>
+              <input
+                style={{ display: "none" }}
+                id="main_file"
+                type="file"
+                // onChange={handleSelectFile}
+                onChange={handleUploadClick}
+                // value={formik.values.data5.mainImage}
+                multiple={false}
+                name="main_file"
+                accept="image/*"
+              />
+            </div>
           </>
         )}
         <div>
+          <div>
+            {" "}
+            <label
+              htmlFor="image_files"
+              className="btn-grey"
+              style={{ cursor: "pointer" }}
+            >
+              Select files
+            </label>
+            <input
+              style={{ display: "none" }}
+              id="image_files"
+              type="file"
+              // onChange={handleSelectFile}
+              onChange={handleMultiUploadClick}
+              // value={formik.values.data5.mainImage}
+              multiple
+              name="image_files"
+              accept="image/*"
+            />
+          </div>
           <Button type="submit">Finish now?</Button>
         </div>
       </form>

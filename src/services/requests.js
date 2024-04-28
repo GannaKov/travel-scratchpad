@@ -14,12 +14,12 @@ export const getAllTripsLoader = async () => {
 // get trip by Id
 export const getTripByIdLoader = async ({ params }) => {
   const { data } = await instance.get(`/trips/${params.travel_id}`);
-  // console.log("data in get by Id", data.data);
+  console.log("data in get by Id", data.data);
   return data.data;
 };
 export const getTripById = async (tripId) => {
   const { data } = await instance.get(`/trips/${tripId}`);
-  // console.log("data in by Id", data.data);
+  console.log("data in by Id", data.data);
   return data.data;
 };
 
