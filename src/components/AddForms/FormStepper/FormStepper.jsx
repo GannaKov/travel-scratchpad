@@ -47,8 +47,9 @@ const FormStepper = () => {
   const [accommodationArr, setAccommodationArr] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [usefulLinks, setUsefulLinks] = useState([]);
-
+  //-----
   //const [fileMain, setFileMain] = useState(null);
+  const [imgArrForSubmit, setImgArrForSubmit] = useState([]);
   const [formData, setFormData] = useState({
     data1: {
       title: "",
@@ -151,15 +152,21 @@ const FormStepper = () => {
       const data = new FormData();
       data.append("data", JSON.stringify(updatedForBackend));
       //const mainFile = formik.values.data5.mainImage;
-      const imagesArr = [
-        formik.values.data5.mainImage,
-        ...formik.values.data5.images,
-      ];
+      console.log("before slice", imgArrForSubmit);
+      const sliced = imgArrForSubmit.slice(0, 4);
+
+      const imagesArr = [formik.values.data5.mainImage, ...sliced];
+      console.log(
+        "formik.values.data5.mainImage,",
+        formik.values.data5.mainImage
+      );
+      console.log("imgArrForSubmit", imgArrForSubmit);
       console.log("imagesArr in stepper", imagesArr);
       // data.append("main_file", mainFile);
 
       for (let i = 0; i < imagesArr.length; i++) {
         data.append("image_files", imagesArr[i]);
+        console.log("in append", imagesArr[i]);
       }
       if (editMode) {
         await putFormData(tripId, data);
@@ -279,6 +286,7 @@ const FormStepper = () => {
       saveData={saveStepData(5)}
       editMode={editMode}
       mainImg={formik.values.data5.mainImage}
+      setImgArrForSubmit={setImgArrForSubmit}
     />,
   ];
 

@@ -11,10 +11,20 @@ import {
   TextField,
 } from "@mui/material";
 
-const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
+const FormFifth = ({
+  formik,
+  saveData,
+  editMode,
+  mainImg,
+  setImgArrForSubmit,
+}) => {
+  //main Img
   const [img, setImg] = useState(null);
+  // a lot of images
   const [imagesArr, setImagesArr] = useState([]);
+
   const [loading, setLoading] = useState(false);
+  //main img by Edit
   const [mainPhoto, setMainPhoto] = useState(mainImg);
 
   // const handleSelectFile = (e) => {
@@ -44,16 +54,14 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
         alert(`Only 4 images will be upladed`);
       }
       if (files) {
-        imgArr = Array.from(files);
-        console.log("filesArr", imgArr);
-        Array.from(files).forEach((file, ind) => {
+        Array.from(files).forEach((file) => {
           const reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onloadend = function () {
             setImagesArr((prev) => [...prev, reader.result]);
           };
         });
-        formik.setFieldValue("data5.images", imgArr);
+        setImgArrForSubmit((prev) => [...prev, ...Array.from(files)]);
       }
     } catch (error) {
       alert(error.message);
@@ -166,9 +174,9 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
                 accept="image/png, image/jpeg, image/jpg"
               />
             </div>
-            <Button type="submit">Finish now?</Button>
           </div>
         )}
+        <Button type="submit">Finish now?</Button>
       </form>
     </div>
   );
