@@ -50,6 +50,7 @@ export const getCountriesOptions = async () => {
 // post form
 export const postFormData = async (dataForm) => {
   try {
+    console.log("dataForm", dataForm);
     const { data } = await instance.post("/add-trip", dataForm, {
       headers: {
         "Content-type": "multipart/form-data",

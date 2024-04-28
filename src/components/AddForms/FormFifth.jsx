@@ -38,7 +38,7 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
   const handleMultiUploadClick = async (event) => {
     try {
       const files = event.target.files;
-      console.log("files", typeof files);
+
       let imgArr = [];
       if (files && files.length > 4) {
         alert(`Only 4 images will be upladed`);
@@ -47,7 +47,6 @@ const FormFifth = ({ formik, saveData, editMode, mainImg }) => {
         imgArr = Array.from(files);
         console.log("filesArr", imgArr);
         Array.from(files).forEach((file, ind) => {
-          console.log("ind", ind);
           const reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onloadend = function () {

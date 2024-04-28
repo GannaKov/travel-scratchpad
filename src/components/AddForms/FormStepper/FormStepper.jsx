@@ -145,12 +145,22 @@ const FormStepper = () => {
       await formik.setValues(updatedValues);
 
       setFormData(updatedValues);
+
       //img + backend
 
       const data = new FormData();
       data.append("data", JSON.stringify(updatedForBackend));
-      const mainFile = formik.values.data5.mainImage;
-      data.append("main_file", mainFile);
+      //const mainFile = formik.values.data5.mainImage;
+      const imagesArr = [
+        formik.values.data5.mainImage,
+        ...formik.values.data5.images,
+      ];
+      console.log("imagesArr in stepper", imagesArr);
+      // data.append("main_file", mainFile);
+
+      for (let i = 0; i < imagesArr.length; i++) {
+        data.append("image_files", imagesArr[i]);
+      }
       if (editMode) {
         await putFormData(tripId, data);
         navigate(`/blog-main/${tripId}`);
