@@ -66,6 +66,7 @@ export const postFormData = async (dataForm) => {
 // put form
 export const putFormData = async (tripId, dataForm) => {
   try {
+    console.log("data in ax", dataForm);
     const { data } = await instance.put(`/add-trip/${tripId}`, dataForm, {
       headers: {
         "Content-type": "multipart/form-data",

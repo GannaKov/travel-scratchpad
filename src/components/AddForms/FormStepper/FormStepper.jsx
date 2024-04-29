@@ -44,11 +44,12 @@ const FormStepper = () => {
   //------
   const [activeStep, setActiveStep] = useState(0);
   //-----
-  const [accommodationArr, setAccommodationArr] = useState([]);
-  const [expenses, setExpenses] = useState([]);
-  const [usefulLinks, setUsefulLinks] = useState([]);
+  const [accommodationArr, setAccommodationArr] = useState([]); //use also for edit
+  const [expenses, setExpenses] = useState([]); //use also for edit
+  const [usefulLinks, setUsefulLinks] = useState([]); //use also for edit
+  const [allImages, setAllImages] = useState([]); ////use also for edit??????????
   //-----
-  //const [fileMain, setFileMain] = useState(null);
+
   const [imgArrForSubmit, setImgArrForSubmit] = useState([]);
   const [formData, setFormData] = useState({
     data1: {
@@ -148,20 +149,20 @@ const FormStepper = () => {
       setFormData(updatedValues);
 
       //img + backend
-
+      // if (formik.values.data5.mainImage || imgArrForSubmit.length > 0) {
+      //   const sliced = imgArrForSubmit.slice(0, 4);
+      //   const imagesArr = [formik.values.data5.mainImage, ...sliced];
+      //   await formik.setFieldValue(`data5.images`, imagesArr);
+      // }
+      const sliced = imgArrForSubmit.slice(0, 4);
+      const imagesArr = [formik.values.data5.mainImage, ...sliced];
+      await formik.setFieldValue(`data5.images`, imagesArr);
       const data = new FormData();
       data.append("data", JSON.stringify(updatedForBackend));
       //const mainFile = formik.values.data5.mainImage;
-      console.log("before slice", imgArrForSubmit);
-      const sliced = imgArrForSubmit.slice(0, 4);
 
-      const imagesArr = [formik.values.data5.mainImage, ...sliced];
-      console.log(
-        "formik.values.data5.mainImage,",
-        formik.values.data5.mainImage
-      );
       console.log("imgArrForSubmit", imgArrForSubmit);
-      console.log("imagesArr in stepper", imagesArr);
+      console.log("imagesArr in stepper", formik.values.data5.images);
       // data.append("main_file", mainFile);
 
       for (let i = 0; i < imagesArr.length; i++) {
@@ -201,6 +202,7 @@ const FormStepper = () => {
         setAccommodationArr(response.accommodation);
         setExpenses(response.expenses);
         setUsefulLinks(response.useful_links);
+        setAllImages(response.images.slice(1));
         formik.setValues({
           data1: {
             title: response.title,
@@ -228,7 +230,7 @@ const FormStepper = () => {
             amount: null,
             advices: response.advice,
           },
-          data5: { mainImage: response.main_img },
+          data5: { mainImage: response.main_img, images: [] },
         });
       } catch (error) {
         console.error("Error fetching data for edit:", error);
@@ -286,6 +288,8 @@ const FormStepper = () => {
       saveData={saveStepData(5)}
       editMode={editMode}
       mainImg={formik.values.data5.mainImage}
+      setAllImages={setAllImages} // that for view I will try to change in Form 5
+      allImages={allImages} // that for view I  will try to change in Form 5
       setImgArrForSubmit={setImgArrForSubmit}
     />,
   ];
