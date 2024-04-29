@@ -162,10 +162,17 @@ const FormStepper = () => {
       if (!editMode) {
         // const sliced = imgArrForSubmit.slice(0, 4);
         // const imagesArr = [formik.values.data5.mainImage, ...sliced];
-        const imagesArr = [
-          formik.values.data5.mainImage,
-          ...imgArrForSubmit,
-        ].slice(0, 5);
+
+        let imagesArr = [];
+        if (formik.values.data5.mainImage) {
+          imagesArr = [formik.values.data5.mainImage, ...imgArrForSubmit].slice(
+            0,
+            5
+          );
+        } else {
+          imagesArr = [...imgArrForSubmit].slice(0, 5);
+        }
+
         console.log(
           "formik.values.data5.images before",
           formik.values.data5.images
