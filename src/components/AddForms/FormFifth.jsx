@@ -17,42 +17,35 @@ const FormFifth = ({
   editMode,
   mainImg,
   setImgArrForSubmit,
-  setAllImages,
-  allImages,
+  // setAllImages,
+  // allImages,
 }) => {
   //main Img for view
-  const [img, setImg] = useState(null);
+  const [mainPhoto, setMainPhoto] = useState(formik.values.data5.mainImage);
+  ///////////const [img, setImg] = useState(null);
   // a lot of images for view
-  // const [imagesArr, setImagesArr] = useState([]);
+  const [imagesArr, setImagesArr] = useState(formik.values.data5.images);
 
   const [loading, setLoading] = useState(false);
-  //main img by Edit
-  const [mainPhoto, setMainPhoto] = useState(mainImg);
-  // a lot of images by edit
-  const [allPhotos, setAllPhotos] = useState(mainImg);
-
-  // const handleSelectFile = (e) => {
-  //   setImg(e.target.files[0]);
-  //   console.log("img", e.target.files[0]);
-  // };
 
   const handleUploadClick = (event) => {
     const file = event.target.files[0];
-    console.log("file", file);
+
     const reader = new FileReader();
     if (file) {
       reader.readAsDataURL(file);
       reader.onloadend = function () {
-        setImg(reader.result);
+        //setImg(reader.result);
+        setMainPhoto(reader.result); //view
 
-        formik.setFieldValue("data5.mainImage", file);
+        formik.setFieldValue("data5.mainImage", file); //file
       };
     }
   };
   const handleMultiUploadClick = async (event) => {
     try {
       const files = event.target.files;
-      console.log("files ind multy handler", files);
+      //console.log("files ind multy handler", files);
       if (files && files.length > 4) {
         alert(`Only 4 images will be upladed`);
       }
@@ -61,11 +54,11 @@ const FormFifth = ({
           const reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onloadend = function () {
-            // setImagesArr((prev) => [...prev, reader.result]);
-            setAllImages((prev) => [...prev, reader.result]);
+            setImagesArr((prev) => [...prev, reader.result]); //view
+            // setAllImages((prev) => [...prev, reader.result]);
           };
         });
-        setImgArrForSubmit((prev) => [...prev, ...Array.from(files)]);
+        setImgArrForSubmit((prev) => [...prev, ...Array.from(files)]); //files or formik.images?
       }
     } catch (error) {
       alert(error.message);
@@ -77,9 +70,8 @@ const FormFifth = ({
     <div className="App">
       <form onSubmit={formik.handleSubmit}>
         {/* One File Show */}
-        {img && (
+        {/* {img && (
           <div className="shareImgContainer">
-            {/* <img src={URL.createObjectURL(img)} alt="" className="shareImg" /> */}
             <img src={img} style={{ width: 300 }} alt="" className="shareImg" />
             <CancelIcon
               className="shareCancelImg "
@@ -89,12 +81,14 @@ const FormFifth = ({
               }}
             />
           </div>
-        )}{" "}
+        )} */}
         {/* One File Show by Edit*/}
-        {editMode && mainPhoto && (
+        {/* {editMode && mainPhoto && ( */}
+        {mainPhoto && (
           <div className="shareImgContainer">
             <img
-              src={mainImg}
+              // src={mainImg}
+              src={mainPhoto}
               style={{ width: 300 }}
               alt=""
               className="shareImg"
@@ -102,15 +96,16 @@ const FormFifth = ({
             <CancelIcon
               className="shareCancelImg "
               onClick={() => {
-                setImg(null);
-                formik.setFieldValue("data5.mainImage", "");
+                //setImg(null);
                 setMainPhoto(null);
+                formik.setFieldValue("data5.mainImage", "");
               }}
             />
           </div>
         )}
         {/* One File Input */}
-        {!img && !mainPhoto && (
+        {/* {!img && !mainPhoto && ( */}
+        {!mainPhoto && (
           <>
             <div>
               {" "}
@@ -136,10 +131,10 @@ const FormFifth = ({
           </>
         )}
         {/* Multi Files Show*/}
-        {/* {imagesArr.length > 0 &&
-          imagesArr.map((image, ind) => ( */}
-        {allImages.length > 0 &&
-          allImages.map((image, ind) => (
+        {imagesArr.length > 0 &&
+          imagesArr.map((image, ind) => (
+            // {allImages.length > 0 &&
+            //   allImages.map((image, ind) => (
             <div key={ind} className="shareImgContainer">
               <p>{ind + 1} </p>
               <img
@@ -151,16 +146,19 @@ const FormFifth = ({
               <CancelIcon
                 className="shareCancelImg "
                 onClick={() => {
-                  // setImagesArr((prev) => prev.filter((t) => t != image));
-                  setAllImages((prev) => prev.filter((t) => t != image));
-                  // formik.setFieldValue("data5.mainImage", "");
+                  setImagesArr((prev) => prev.filter((t) => t != image));
+                  //setAllImages((prev) => prev.filter((t) => t != image));
+                  formik.setFieldValue(
+                    "data5.images",
+                    formik.values.data5.images.filter((t) => t !== image)
+                  );
                 }}
               />{" "}
             </div>
           ))}
         {/* Multi Files Input */}
-        {/* {imagesArr.length <= 3 && ( */}
-        {allImages.length <= 3 && (
+        {imagesArr.length <= 3 && (
+          // {allImages.length <= 3 && (
           <div>
             <div>
               <label
@@ -168,8 +166,8 @@ const FormFifth = ({
                 className="btn-grey"
                 style={{ cursor: "pointer" }}
               >
-                {/* {imagesArr.length === 0 ? "Select files" : "Add files"} */}
-                {allImages.length === 0 ? "Select files" : "Add files"}
+                {imagesArr.length === 0 ? "Select files" : "Add files"}
+                {/* {allImages.length === 0 ? "Select files" : "Add files"} */}
               </label>
               <input
                 style={{ display: "none" }}
