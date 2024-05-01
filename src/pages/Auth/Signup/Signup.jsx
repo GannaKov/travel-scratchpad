@@ -1,9 +1,16 @@
+import {
+  Navigate,
+  useNavigate,
+  useOutletContext,
+  Outlet,
+} from "react-router-dom";
 import { useFormik } from "formik";
 import { TextField, Button } from "@mui/material";
 import * as Yup from "yup";
 import { signupUser } from "../../../services/requests";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const validationSchema = Yup.object({
     username: Yup.string("Enter your username")
       .max(50, "Too Long!")
@@ -34,6 +41,8 @@ const Signup = () => {
         if (res.code === 201) {
           console.log("Hurra in Regisre");
         }
+        // return <Navigate to="/login" replace />;
+        navigate("/login", { replace: true });
       } catch (error) {
         console.log("err in Register", error.response.data.message);
         // console.log("in register", values);
