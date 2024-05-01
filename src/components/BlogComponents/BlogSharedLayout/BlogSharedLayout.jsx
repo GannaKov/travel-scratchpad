@@ -1,8 +1,9 @@
-import { NavLink, Outlet } from "react-router-dom";
-
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 import styles from "./BlogSharedLayout.module.css";
 
 const BlogSharedLayout = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles.wrapper}>
       <header className={styles.headerWrp}>
@@ -48,6 +49,16 @@ const BlogSharedLayout = () => {
             </li>
           </ul>
         </nav>
+        <Button
+          // color="red[500]"
+          variant="contained"
+          type="submit"
+          sx={{ marginRight: "2rem", backgroundColor: "#e89701" }}
+          size="small"
+          onClick={() => navigate("/logout")}
+        >
+          Log Out
+        </Button>
       </header>
 
       <Outlet />

@@ -1,5 +1,5 @@
 import styles from "./AuthNav.module.css";
-import { useNavigate } from "react-router-dom/dist";
+import { useNavigate } from "react-router-dom";
 import { NavLink, Outlet } from "react-router-dom";
 import Button from "@mui/material/Button";
 

@@ -1,6 +1,6 @@
-import styles from "./BlogHomePage.module.css";
+import styles from "./HomePage.module.css";
 
-const BlogHomePage = () => {
+const HomePage = () => {
   return (
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
@@ -22,4 +22,4 @@ const BlogHomePage = () => {
   );
 };
 
-export default BlogHomePage;
+export default HomePage;

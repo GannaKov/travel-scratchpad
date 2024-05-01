@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import moment from "moment";
 import dayjs from "dayjs";
-import StarsShow from "../Stars/StarsShow";
+import StarsShow from "../Shared/Stars/StarsShow";
 import styles from "./TripItem.module.css";
 
 const TripItem = ({ trip }) => {

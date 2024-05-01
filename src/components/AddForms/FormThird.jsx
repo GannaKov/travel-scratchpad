@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import StarsShow from "../Stars/StarsShow";
+import StarsShow from "../Shared/Stars/StarsShow";
 import { useFormik } from "formik";
 import truncateUrl from "../../services/truncateUrl";
 import {

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import moment from "moment";
 import dayjs from "dayjs";
-import StarsShow from "../../Stars/StarsShow";
+import StarsShow from "../../Shared/Stars/StarsShow";
 import truncateUrl from "../../../services/truncateUrl";
 import styles from "./BlogSingleTrip.module.css";
 

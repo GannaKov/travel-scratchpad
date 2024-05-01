@@ -2,31 +2,40 @@ import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import BlogSharedLayout from "./components/BlogComponents/BlogSharedLayout/BlogSharedLayout";
 import BlogAddForms from "./pages/Blog/BlogAddForms/BlogAddForms";
-import BlogHomePage from "./pages/Blog/BlogHomePage/BlogHomePage";
+import HomePage from "./pages/HomePage/HomePage";
 import BlogMainPage from "./pages/Blog/BlogMainPage/BlogMainPage";
 import BlogSinglePage from "./pages/Blog/BlogSinglePage/BlogSinglePage";
 import NotFound from "./pages/NotFound/NotFound";
 import { getAllTripsLoader, getTripByIdLoader } from "./services/requests";
+import AppBar from "./components/Shared/AppBar/AppBar";
+import Root from "./components/Shared/Root/Root";
+import Profile from "./pages/Blog/Profile/Profile";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
 
 const router = createBrowserRouter([
   {
+    id: "root",
     path: "/",
-    element: <BlogSharedLayout />,
+    // loader() {
+    //   // Our root route always provides the user, if logged in
+    //   return { user: fakeAuthProvider.username };
+    // },
+    //element: <AppBar isLoggedIn={false} />, //true for logged User
+    element: <Root />,
     errorElement: <NotFound />,
-
     children: [
+      //----
+
       {
-        errorElement: <NotFound />,
+        index: true,
+        element: <HomePage />,
+        // loader: getCategoriesLoder,
+      },
+      {
+        element: <ProtectedRoutes />,
         children: [
           {
-            index: true,
-            Component: BlogHomePage,
-            // loader: getCategoriesLoder,
-          },
-          {
             path: "/blog-main",
-
-            // Component: UsersPage,
 
             children: [
               {
@@ -42,6 +51,10 @@ const router = createBrowserRouter([
             ],
           },
           { path: "/add-form", element: <BlogAddForms /> },
+          {
+            path: "/profile",
+            element: <Profile />,
+          },
         ],
       },
     ],
