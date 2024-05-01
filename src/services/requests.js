@@ -89,3 +89,13 @@ export const deleteOneTrip = async (tripId) => {
     console.log(err);
   }
 };
+//===========================
+export const signupUser = async (values) => {
+  try {
+    const { data } = await instance.post(`/api/users/register`, values);
+    console.log("res Register User", data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};

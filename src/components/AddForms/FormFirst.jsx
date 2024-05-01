@@ -17,12 +17,7 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+
 //--------------------------------------------------------------------
 const FormFirst = ({ formik, saveData }) => {
   const handleDateChange = (event) => {
@@ -135,33 +130,6 @@ const FormFirst = ({ formik, saveData }) => {
         Continue
       </Button>
     </form>
-
-    // <div className={styles.fildsInRowWrp}>
-    //   <div className={styles.inputLabelColumnWrp}>
-    //     <label htmlFor="dateBeginn">Start Date</label>
-    //     <Field name="dateBeginn" type="text" placeholder="DD.MM.YYYY" />
-    //   </div>
-
-    // <div className={styles.inputLabelColumnWrp}>
-    //   <label htmlFor="dateEnd">End Date</label>
-    //   <Field name="dateEnd" type="text" placeholder="DD.MM.YYYY" />
-    // </div>
-    // </div>
-    // <div className={styles.inputLabelColumnWrp}>
-    //   <label htmlFor="rating">Rating</label>
-    //   {/* <StarsShow
-    //     isReadOnly={false}
-    //     handleRatingChange={handleRatingChange}
-    //     rating={valueRating}
-    //   /> */}
-    //   <Rating
-    //     precision={0.5}
-    //     name="simple-controlled"
-    //     value={valueRating}
-    //     onChange={(event, newValue) => {
-    //       setValueRating(newValue);
-    //     }}
-    //   />
   );
 };
 

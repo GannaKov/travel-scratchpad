@@ -11,6 +11,8 @@ import AppBar from "./components/Shared/AppBar/AppBar";
 import Root from "./components/Shared/Root/Root";
 import Profile from "./pages/Blog/Profile/Profile";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
+import Login from "./pages/Auth/Login/Login";
+import Signup from "./pages/Auth/Signup/Signup";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +27,8 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       //----
-
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Signup /> },
       {
         index: true,
         element: <HomePage />,

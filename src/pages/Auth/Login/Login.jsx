@@ -1,6 +1,6 @@
 import { TextField, Button } from "@mui/material";
 
-export const Login = () => {
+const Login = () => {
   return (
     <>
       <h1>Sign in</h1>
@@ -28,3 +28,4 @@ export const Login = () => {
     </>
   );
 };
+export default Login;
