@@ -1,29 +1,88 @@
+// import { useState, useContext } from "react";
 import { TextField, Button } from "@mui/material";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { loginUser } from "../../../services/requests";
+import { useAuth } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { setToken } = useAuth();
+  const navigate = useNavigate();
+
+  const validationSchema = Yup.object({
+    email: Yup.string("Enter your email")
+      .email("Enter a valid email")
+      .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Must be a valid email!")
+      .matches(
+        /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i,
+        "Must be a valid email!"
+      )
+      .required("Email is required"),
+    password: Yup.string("Enter your password")
+      .min(6, "Password should be of minimum 8 characters length")
+      .required("Password is required"),
+  });
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      console.log("in submit");
+      try {
+        ///// //then back!!!!!!!!
+        // const res = await loginUser(values);
+        // if (res.code === 201) {
+        //   console.log("Hurra in LogIn");
+        // }
+        // setToken(res.token);
+        // console.log("token", res.token);
+      } catch (error) {
+        console.log("err in LogIn", error.response.data.message);
+      }
+    },
+  });
+
+  //////just for test
+  // setTimeout(() => {
+  //   formik.handleSubmit();
+  // }, 10 * 1000);
   return (
     <>
       <h1>Sign in</h1>
-      <form method="post">
+      <form onSubmit={formik.handleSubmit}>
         <TextField
-          type="email"
           id="email"
+          name="email"
           label="Email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
+          fullWidth
           variant="outlined"
           margin="dense"
-          fullWidth
         />
 
         <TextField
-          type="password"
           id="password"
+          name="password"
           label="Password"
+          type="password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
+          fullWidth
           variant="outlined"
           margin="dense"
-          fullWidth
         />
 
-        <Button variant="contained">Sign in</Button>
+        <Button variant="contained">Log in</Button>
       </form>
     </>
   );

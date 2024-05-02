@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, Outlet, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Root.module.css";
+import { useAuth } from "../../../context/AuthContext";
 
 import Button from "@mui/material/Button";
 
 const Root = () => {
+  const { token, setToken } = useAuth();
+  console.log("token", token);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
@@ -12,9 +15,16 @@ const Root = () => {
 
   const loginUser = () => {
     setUser({ id: 1, username: "Anna" });
+    /////just for test!!!!!
+    setToken("this is a test token");
+    navigate("/", { replace: true });
   };
-  const logoutUser = () => {
-    setUser(null);
+  // const logoutUser = () => {
+  //   setUser(null);
+  // };
+  const handleLogout = () => {
+    setToken(null);
+    navigate("/", { replace: true });
   };
   return (
     <div className={styles.wrapper}>
@@ -34,7 +44,7 @@ const Root = () => {
                 Home
               </NavLink>
             </li>
-            {user && (
+            {token && (
               <li className={styles.navItem}>
                 <NavLink
                   end
@@ -49,7 +59,7 @@ const Root = () => {
                 </NavLink>
               </li>
             )}
-            {user && (
+            {token && (
               <li className={styles.navItem}>
                 <NavLink
                   to="/add-form"
@@ -63,7 +73,7 @@ const Root = () => {
                 </NavLink>
               </li>
             )}
-            {!user ? (
+            {!token ? (
               <div>
                 <Button
                   // color="red[500]"
@@ -95,12 +105,12 @@ const Root = () => {
                 sx={{ marginRight: "2rem", backgroundColor: "#e89701" }}
                 size="small"
                 // onClick={() => navigate("/logout")}
-                onClick={logoutUser}
+                onClick={handleLogout}
               >
                 Log Out
               </Button>
             )}
-            {user && (
+            {token && (
               <span>
                 <NavLink
                   to="/profile"
@@ -118,7 +128,8 @@ const Root = () => {
         </nav>
       </header>
 
-      <Outlet context={{ user, setUser, loginUser, logoutUser }} />
+      {/* <Outlet context={{ user, setUser, loginUser, logoutUser }} /> */}
+      <Outlet />
     </div>
   );
 };

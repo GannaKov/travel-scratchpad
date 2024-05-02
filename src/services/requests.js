@@ -90,6 +90,8 @@ export const deleteOneTrip = async (tripId) => {
   }
 };
 //===========================
+
+//signup
 export const signupUser = async (values) => {
   try {
     const { data } = await instance.post(`/api/users/register`, values);
@@ -97,5 +99,38 @@ export const signupUser = async (values) => {
     return data;
   } catch (err) {
     console.log(err);
+  }
+};
+
+//login
+export const loginUser = async (values) => {
+  try {
+    const { data } = await instance.post("/api/users/login", values);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+//------
+export const setAuthHeader = (token) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+// Utility to remove JWT
+export const clearAuthHeader = () => {
+  axios.defaults.headers.common.Authorization = "";
+};
+//-----
+// logout
+export const logoutUser = async () => {
+  try {
+    const { data } = await instance.post(
+      "/api/users/logout",
+      {},
+      { withCredentials: true }
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
   }
 };
