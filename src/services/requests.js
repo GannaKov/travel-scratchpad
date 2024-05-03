@@ -94,7 +94,7 @@ export const deleteOneTrip = async (tripId) => {
 //signup
 export const signupUser = async (values) => {
   try {
-    const { data } = await instance.post(`/api/users/register`, values);
+    const { data } = await instance.post(`/api/auth/register`, values);
     console.log("res Register User", data);
     return data;
   } catch (err) {
@@ -105,7 +105,8 @@ export const signupUser = async (values) => {
 //login
 export const loginUser = async (values) => {
   try {
-    const { data } = await instance.post("/api/users/login", values);
+    const { data } = await instance.post("/api/auth/login", values);
+    console.log("res login User", data);
     return data;
   } catch (error) {
     console.log(error);
@@ -125,7 +126,7 @@ export const clearAuthHeader = () => {
 export const logoutUser = async () => {
   try {
     const { data } = await instance.post(
-      "/api/users/logout",
+      "/api/auth/logout",
       {},
       { withCredentials: true }
     );
@@ -134,3 +135,57 @@ export const logoutUser = async () => {
     console.log(error);
   }
 };
+//=======
+export const getUserById = async (id) => {
+  const { data } = await instance.get(`/api/users/${id}`);
+  console.log("data in by Id", data.data);
+  return data.data;
+};
+// Function to refresh tokens
+// async function refreshToken() {
+//   try {
+//     const response = await fetch("/refresh_token", {
+//       method: "GET",
+//       credentials: "include", // Include cookies in the request
+//     });
+//     if (!response.ok) {
+//       throw new Error("Failed to refresh token");
+//     }
+//     const tokens = await response.json();
+//     // Update stored tokens with the new ones
+//     // For example, update localStorage or cookies
+//     localStorage.setItem("accessToken", tokens.accessToken);
+//     localStorage.setItem("refreshToken", tokens.refreshToken);
+//     return tokens.accessToken;
+//   } catch (error) {
+//     console.error("Error refreshing token:", error);
+//     // Handle error, e.g., redirect to login page
+//   }
+// }
+
+// // Example of using the access token to make a request
+// async function fetchData() {
+//   const accessToken = localStorage.getItem("accessToken");
+//   try {
+//     const response = await fetch("/protected_endpoint", {
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//     });
+//     if (response.status === 401) {
+//       // Access token expired, attempt to refresh it
+//       const newAccessToken = await refreshToken();
+//       // Retry request with the new access token
+//       return fetchData();
+//     }
+//     // Process response data
+//     const data = await response.json();
+//     console.log("Data:", data);
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//   }
+// }
+
+// // Example usage
+// fetchData();

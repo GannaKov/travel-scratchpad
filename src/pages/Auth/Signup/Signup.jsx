@@ -17,7 +17,7 @@ const Signup = () => {
       .required("Username is required"),
     email: Yup.string("Enter your email")
       .email("Enter a valid email")
-      .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Must be a valid email!")
+      //.matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Must be a valid email!")
       .matches(
         /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i,
         "Must be a valid email!"

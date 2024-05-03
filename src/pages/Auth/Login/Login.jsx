@@ -2,18 +2,18 @@
 import { TextField, Button } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { loginUser } from "../../../services/requests";
+import { getUserById, loginUser } from "../../../services/requests";
 import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { setToken } = useAuth();
+  const { token, setToken } = useAuth();
+  const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
     email: Yup.string("Enter your email")
       .email("Enter a valid email")
-      .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Must be a valid email!")
       .matches(
         /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i,
         "Must be a valid email!"
@@ -30,17 +30,25 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      console.log("in submit");
       try {
         ///// //then back!!!!!!!!
-        // const res = await loginUser(values);
-        // if (res.code === 201) {
-        //   console.log("Hurra in LogIn");
-        // }
-        // setToken(res.token);
-        // console.log("token", res.token);
+        const res = await loginUser(values);
+        if (res.code === 200) {
+          const resUser = await getUserById(res.data.user.id);
+
+          setToken(res.data.tokens.accessToken);
+          const userObj = {
+            username: resUser.username,
+            email: res.data.user.email,
+            id: res.data.user.id,
+          };
+          setUser({ user: userObj, isAuthenticated: true });
+        }
+
+        navigate("/", { replace: true });
       } catch (error) {
-        console.log("err in LogIn", error.response.data.message);
+        // console.log("err in LogIn", error.response.data.message);
+        console.log("err in LogIn", error);
       }
     },
   });
@@ -82,7 +90,9 @@ const Login = () => {
           margin="dense"
         />
 
-        <Button variant="contained">Log in</Button>
+        <Button variant="contained" type="submit">
+          Log in
+        </Button>
       </form>
     </>
   );

@@ -7,23 +7,24 @@ import Button from "@mui/material/Button";
 
 const Root = () => {
   const { token, setToken } = useAuth();
-  console.log("token", token);
-  const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const { user, setUser } = useAuth();
 
-  //console.log("user", user);
+  const navigate = useNavigate();
+
+  console.log("user", user.user);
 
   const loginUser = () => {
-    setUser({ id: 1, username: "Anna" });
-    /////just for test!!!!!
-    setToken("this is a test token");
-    navigate("/", { replace: true });
+    // setUser({ id: 1, username: "Anna" });
+    // /////just for test!!!!!
+    // setToken("this is a test token");
+    // navigate("/", { replace: true });
   };
   // const logoutUser = () => {
   //   setUser(null);
   // };
   const handleLogout = () => {
     setToken(null);
+    setUser(null);
     navigate("/", { replace: true });
   };
   return (
@@ -81,8 +82,8 @@ const Root = () => {
                   type="submit"
                   sx={{ marginRight: "2rem", backgroundColor: "#e89701" }}
                   size="small"
-                  // onClick={() => navigate("/login")}
-                  onClick={loginUser}
+                  onClick={() => navigate("/login")}
+                  // onClick={loginUser}
                 >
                   Log In
                 </Button>
@@ -104,7 +105,7 @@ const Root = () => {
                 type="submit"
                 sx={{ marginRight: "2rem", backgroundColor: "#e89701" }}
                 size="small"
-                // onClick={() => navigate("/logout")}
+                //onClick={() => navigate("/logout")}
                 onClick={handleLogout}
               >
                 Log Out
@@ -120,7 +121,7 @@ const Root = () => {
                       : `${styles.headerNavLink}`
                   }
                 >
-                  {user.username}
+                  {user?.user.username}
                 </NavLink>
               </span>
             )}
