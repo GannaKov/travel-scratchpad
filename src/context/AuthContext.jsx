@@ -1,20 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import axios from "axios";
+
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import Cookies from "universal-cookie";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken_] = useState(localStorage.getItem("token"));
+  const cookies = new Cookies();
+  const currentCookies = cookies.get("jwt_authorization")
+    ? cookies.get("jwt_authorization")
+    : null;
+
+  const [token, setToken_] = useState(currentCookies);
+
   const [user, setUser_] = useState({
     user: {},
-    // token: localStorage.getItem("token"),
-    // expiresAt: null,
     isAuthenticated: false,
   });
   console.log("user", user);
   console.log("token", token);
+
   const [loading, setLoading] = useState(true);
 
   const setToken = (newToken) => {
@@ -23,14 +32,22 @@ export const AuthProvider = ({ children }) => {
   const setUser = (newUser) => {
     setUser_(newUser);
   };
-  // const setUser=(newToken)=({...,})
+
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-      localStorage.setItem("token", token);
+      const decoded = jwtDecode(token);
+
+      setUser({ user: decoded, isAuthenticated: true });
     } else {
       delete axios.defaults.headers.common["Authorization"];
-      localStorage.removeItem("token");
+
+      cookies.remove("jwt_authorization");
+      setUser({
+        user: {},
+
+        isAuthenticated: false,
+      });
     }
   }, [token]);
   const contextValue = useMemo(

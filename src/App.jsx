@@ -72,7 +72,33 @@ import "./App.css";
 ///////////var 2
 import AuthProvider from "./context/AuthContext";
 import Routes from "./Routes";
+import Cookies from "universal-cookie";
+import { jwtDecode } from "jwt-decode";
+import { useEffect } from "react";
+import { useAuth } from "./context/AuthContext";
+
 function App() {
+  // const { token, setToken } = useAuth();
+  // const { user, setUser } = useAuth();
+  // useEffect(() => {
+  //   const cookies = new Cookies();
+  //   const currentCookies = cookies.get("jwt_authorization")
+  //     ? cookies.get("jwt_authorization")
+  //     : null;
+  //   setToken(currentCookies);
+  // }, [setToken]);
+
+  // useEffect(() => {
+  //   if (token) {
+  //     const decoded = jwtDecode(token);
+  //     setUser({ user: decoded, isAuthenticated: true });
+  //   } else {
+  //     setUser({
+  //       user: {},
+  //       isAuthenticated: false,
+  //     });
+  //   }
+  // }, [token]);
   return (
     <AuthProvider>
       <Routes />

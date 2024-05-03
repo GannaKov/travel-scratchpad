@@ -2,13 +2,15 @@
 import { TextField, Button } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { getUserById, loginUser } from "../../../services/requests";
+import { loginUser } from "../../../services/requests";
 import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 const Login = () => {
+  const cookies = new Cookies();
   const { token, setToken } = useAuth();
-  const { user, setUser } = useAuth();
+  //const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
@@ -31,18 +33,10 @@ const Login = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        ///// //then back!!!!!!!!
         const res = await loginUser(values);
         if (res.code === 200) {
-          const resUser = await getUserById(res.data.user.id);
-
           setToken(res.data.tokens.accessToken);
-          const userObj = {
-            username: resUser.username,
-            email: res.data.user.email,
-            id: res.data.user.id,
-          };
-          setUser({ user: userObj, isAuthenticated: true });
+          cookies.set("jwt_authorization", res.data.tokens.accessToken);
         }
 
         navigate("/", { replace: true });

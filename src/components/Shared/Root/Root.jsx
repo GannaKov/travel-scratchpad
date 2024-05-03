@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link, Outlet, NavLink, useNavigate } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Root.module.css";
 import { useAuth } from "../../../context/AuthContext";
 
@@ -11,20 +10,9 @@ const Root = () => {
 
   const navigate = useNavigate();
 
-  console.log("user", user.user);
-
-  const loginUser = () => {
-    // setUser({ id: 1, username: "Anna" });
-    // /////just for test!!!!!
-    // setToken("this is a test token");
-    // navigate("/", { replace: true });
-  };
-  // const logoutUser = () => {
-  //   setUser(null);
-  // };
   const handleLogout = () => {
     setToken(null);
-    setUser(null);
+
     navigate("/", { replace: true });
   };
   return (
@@ -45,7 +33,7 @@ const Root = () => {
                 Home
               </NavLink>
             </li>
-            {token && (
+            {user.isAuthenticated && (
               <li className={styles.navItem}>
                 <NavLink
                   end
@@ -60,7 +48,7 @@ const Root = () => {
                 </NavLink>
               </li>
             )}
-            {token && (
+            {user.isAuthenticated && (
               <li className={styles.navItem}>
                 <NavLink
                   to="/add-form"
@@ -74,7 +62,7 @@ const Root = () => {
                 </NavLink>
               </li>
             )}
-            {!token ? (
+            {!user.isAuthenticated ? (
               <div>
                 <Button
                   // color="red[500]"
@@ -111,7 +99,7 @@ const Root = () => {
                 Log Out
               </Button>
             )}
-            {token && (
+            {user.isAuthenticated && (
               <span>
                 <NavLink
                   to="/profile"
@@ -121,7 +109,7 @@ const Root = () => {
                       : `${styles.headerNavLink}`
                   }
                 >
-                  {user?.user.username}
+                  {user.isAuthenticated && user.user.username}
                 </NavLink>
               </span>
             )}

@@ -64,7 +64,6 @@ const router = createBrowserRouter([
   },
 ]);
 const Routes = () => {
-  const { token } = useAuth();
   console.log("in Routes");
   //Route configurations go here
 
