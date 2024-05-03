@@ -37,7 +37,7 @@ const Login = () => {
         if (res.code === 200) {
           setToken(res.data.tokens.accessToken);
           cookies.set("jwt_authorization", res.data.tokens.accessToken);
-          cookies.set("refresh_token", res.data.tokens.refreshToken);
+          cookies.set("refresh_token", res.data.tokens.refreshToken); //?????????
         }
 
         navigate("/", { replace: true });

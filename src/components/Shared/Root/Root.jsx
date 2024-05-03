@@ -17,14 +17,20 @@ const Root = () => {
   useEffect(() => {
     refreshToken()
       .then((res) => {
-        console.log("in effect1", res);
+        if (res.status === 204) {
+          console.log("204");
+          setToken(null);
+
+          navigate("/");
+        }
         setToken(res.accessToken);
         cookies.set("jwt_authorization", res.accessToken);
         //cookies.set("refresh_token", res.refreshToken);
       })
       .catch((err) => {
         console.log(err);
-        navigate("/login");
+        setToken(null);
+        navigate("/");
       });
   }, []);
 
@@ -34,13 +40,18 @@ const Root = () => {
     if (user.isAuthenticated) {
       const tokenExpirationTime = Date.now() + user.user.expiresAt;
       const refreshTime = tokenExpirationTime - Date.now() - 10 * 1000;
-      console.log("exp", user.user.expiresAt);
-      console.log("tokenExpirationTime", tokenExpirationTime);
+
       console.log("refreshTime", refreshTime);
 
       refreshAccessTokenTimerId = setTimeout(() => {
         refreshToken()
           .then((res) => {
+            if (res.status === 204) {
+              console.log("204");
+              setToken(null);
+
+              navigate("/");
+            }
             console.log("in effect2", res);
             setToken(res.accessToken);
             cookies.set("jwt_authorization", res.accessToken);
@@ -48,6 +59,7 @@ const Root = () => {
           })
           .catch((err) => {
             console.log(err);
+            setToken(null);
             navigate("/login");
           });
       }, refreshTime);
