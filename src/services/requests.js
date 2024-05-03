@@ -125,8 +125,8 @@ export const clearAuthHeader = () => {
 // logout
 export const logoutUser = async () => {
   try {
-    const { data } = await instance.post(
-      "/api/auth/logout",
+    const { data } = await instance.delete(
+      "/api/auth/refresh_token",
       {},
       { withCredentials: true }
     );

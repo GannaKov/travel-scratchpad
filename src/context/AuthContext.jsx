@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }) => {
       delete axios.defaults.headers.common["Authorization"];
 
       cookies.remove("jwt_authorization");
+      cookies.remove("refresh_token");
       setUser({
         user: {},
 

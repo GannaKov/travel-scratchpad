@@ -5,7 +5,7 @@ import { useAuth } from "../../../context/AuthContext";
 import Cookies from "universal-cookie";
 import Button from "@mui/material/Button";
 import { useEffect } from "react";
-import { refreshToken } from "../../../services/requests";
+import { logoutUser, refreshToken } from "../../../services/requests";
 
 const Root = () => {
   const { token, setToken } = useAuth();
@@ -73,6 +73,7 @@ const Root = () => {
   }, [user]);
 
   const handleLogout = () => {
+    logoutUser();
     setToken(null);
 
     navigate("/", { replace: true });
