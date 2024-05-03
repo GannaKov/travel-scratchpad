@@ -142,6 +142,13 @@ export const getUserById = async (id) => {
   return data.data;
 };
 // Function to refresh tokens
+export const refreshToken = async () => {
+  try {
+    const response = await instance.get(`/api/auth/refresh_token`, {
+      credentials: "include", // Include cookies in the request
+    });
+  } catch {}
+};
 // async function refreshToken() {
 //   try {
 //     const response = await fetch("/refresh_token", {
