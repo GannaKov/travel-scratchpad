@@ -6,23 +6,22 @@ import axios from "axios";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import Cookies from "universal-cookie";
 import { jwtDecode } from "jwt-decode";
+import { refreshToken } from "../services/requests";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const cookies = new Cookies();
-  const currentCookies = cookies.get("jwt_authorization")
+  const currentAccessTokenCookies = cookies.get("jwt_authorization")
     ? cookies.get("jwt_authorization")
     : null;
 
-  const [token, setToken_] = useState(currentCookies);
+  const [token, setToken_] = useState(currentAccessTokenCookies);
 
   const [user, setUser_] = useState({
     user: {},
     isAuthenticated: false,
   });
-  console.log("user", user);
-  console.log("token", token);
 
   const [loading, setLoading] = useState(true);
 

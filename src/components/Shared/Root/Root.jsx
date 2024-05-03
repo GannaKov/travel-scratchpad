@@ -1,14 +1,64 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Root.module.css";
 import { useAuth } from "../../../context/AuthContext";
-
+import Cookies from "universal-cookie";
 import Button from "@mui/material/Button";
+import { useEffect } from "react";
+import { refreshToken } from "../../../services/requests";
 
 const Root = () => {
   const { token, setToken } = useAuth();
   const { user, setUser } = useAuth();
 
+  const cookies = new Cookies();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    refreshToken()
+      .then((res) => {
+        console.log("in effect1", res);
+        setToken(res.accessToken);
+        cookies.set("jwt_authorization", res.accessToken);
+        //cookies.set("refresh_token", res.refreshToken);
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/login");
+      });
+  }, []);
+
+  useEffect(() => {
+    let refreshAccessTokenTimerId;
+
+    if (user.isAuthenticated) {
+      const tokenExpirationTime = Date.now() + user.user.expiresAt;
+      const refreshTime = tokenExpirationTime - Date.now() - 10 * 1000;
+      console.log("exp", user.user.expiresAt);
+      console.log("tokenExpirationTime", tokenExpirationTime);
+      console.log("refreshTime", refreshTime);
+
+      refreshAccessTokenTimerId = setTimeout(() => {
+        refreshToken()
+          .then((res) => {
+            console.log("in effect2", res);
+            setToken(res.accessToken);
+            cookies.set("jwt_authorization", res.accessToken);
+            //cookies.set("refresh_token", res.refreshToken);
+          })
+          .catch((err) => {
+            console.log(err);
+            navigate("/login");
+          });
+      }, refreshTime);
+    }
+
+    return () => {
+      if (user.isAuthenticated && refreshAccessTokenTimerId) {
+        clearTimeout(refreshAccessTokenTimerId);
+      }
+    };
+  }, [user]);
 
   const handleLogout = () => {
     setToken(null);
