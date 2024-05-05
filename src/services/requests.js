@@ -20,15 +20,27 @@ export const getAllTripsLoader = async () => {
 };
 
 // get all trip of Owner
-export const getAllOwnerTripsLoader = async (accessToken) => {
-  const { data } = await instance.get("/own_trips", {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  // console.log("data", data.data);
-  return data.data;
+export const getAllOwnerTripsLoader = async (accessToken, query) => {
+  try {
+    let urlBackend = "/own_trips";
+    if (query && query.country) {
+      urlBackend += `?country=${query.country}`;
+    }
+    const { data } = await instance.get(urlBackend, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return data.data;
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
+      return [];
+    }
+    throw error;
+  }
 };
+
 // get trip by Id
 export const getTripByIdLoader = async ({ params }) => {
   const { data } = await instance.get(`/trips/${params.travel_id}`);

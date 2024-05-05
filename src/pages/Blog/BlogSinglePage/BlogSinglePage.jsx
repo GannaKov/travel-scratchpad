@@ -10,7 +10,7 @@ import GoBack from "../../../components/GoBack/GoBack";
 import styles from "./BlogSinglePage.module.css";
 import { useEffect, useState } from "react";
 import { deleteOneTrip, getTripById } from "../../../services/requests";
-import { useAuth } from "../../../context/AuthContext";
+import useAuth from "../../../context/useAuthHook";
 
 const BlogSinglePage = () => {
   const { token, setToken } = useAuth();

@@ -3,9 +3,10 @@ import { TextField, Button } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { loginUser } from "../../../services/requests";
-import { useAuth } from "../../../context/AuthContext";
+
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import useAuth from "../../../context/useAuthHook";
 
 const Login = () => {
   const cookies = new Cookies();

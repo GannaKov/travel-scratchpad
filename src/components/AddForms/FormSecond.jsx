@@ -29,14 +29,8 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const FormSecond = ({ formik, saveData, countriesOptions }) => {
   const [purposeOptions, setPurposeOptions] = useState([]);
-  // const [purposes, setPurposes] = useState([]);
-  // const [countryOptions, setCountryOptions] = useState([]);
-  // const [countryInput, setCountryInput] = useState("");
-  //--auto
-  // const [countriesOptions, setCountriesOptions] = useState([]);
+
   const [loading, setLoading] = useState(false);
-  //end auto
-  //console.log("formik.values.data2", formik.values.data2);
 
   useEffect(() => {
     setLoading(true);
@@ -67,7 +61,6 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
     trim: true,
   });
 
-  
   //----- Purposes
   const handlePurposeChange = (event) => {
     formik.setFieldValue("purposes", event.target.value);
@@ -81,18 +74,11 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
     const separator = ",";
     const value = event.target.value;
 
-    const citiesArray = value.split(separator).map(
-      (city) => city.trim()
-      //   city
-      //     .split(", ")
-      //     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      //     .join(" ")
-      //     .trim()
-    );
+    const citiesArray = value.split(separator).map((city) => city.trim());
 
     formik.setFieldValue("data2.cities", citiesArray);
   };
- 
+
   //====================================
   return (
     <form onSubmit={formik.handleSubmit}>

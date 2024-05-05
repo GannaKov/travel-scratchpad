@@ -1,20 +1,10 @@
 import styles from "./BlogAddForms.module.css";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import FormFirst from "../../../components/AddForms/FormFirst";
-import MobileStepper from "@mui/material/MobileStepper";
-import Button from "@mui/material/Button";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import FormSecond from "../../../components/AddForms/FormSecond";
-import FormThird from "../../../components/AddForms/FormThird";
-import FormFourth from "../../../components/AddForms/FormFourth";
-import FormFifth from "../../../components/AddForms/FormFifth";
-import FormSixth from "../../../components/AddForms/FormSixth";
+
 import FormStepper from "../../../components/AddForms/FormStepper/FormStepper";
 
 const BlogAddForms = () => {
-  const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {

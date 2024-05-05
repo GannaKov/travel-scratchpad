@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { useAuth } from "./context/AuthContext";
+
 import BlogSharedLayout from "./components/BlogComponents/BlogSharedLayout/BlogSharedLayout";
 import BlogAddForms from "./pages/Blog/BlogAddForms/BlogAddForms";
 import HomePage from "./pages/HomePage/HomePage";
@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import {
   getAllOwnerTripsLoader,
   getAllTripsLoader,
+  getCountriesOptions,
   getTripByIdLoader,
 } from "./services/requests";
 import AppBar from "./components/Shared/AppBar/AppBar";
@@ -17,10 +18,28 @@ import Profile from "./pages/Blog/Profile/Profile";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Login from "./pages/Auth/Login/Login";
 import Signup from "./pages/Auth/Signup/Signup";
+import { useEffect, useState } from "react";
+import useAuth from "./context/useAuthHook";
 
 const Routes = () => {
   console.log("in Routes");
   const { token } = useAuth();
+  const [countriesOptions, setCountriesOptions] = useState();
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const query = {};
+  if (selectedCountry) {
+    query.country = selectedCountry;
+  }
+
+  useEffect(() => {
+    getCountriesOptions()
+      .then((result) => {
+        const countryNames = result.data.map((country) => country.name.common);
+        setCountriesOptions(countryNames);
+      })
+      .catch((error) => console.log(error.status, error.message));
+  }, [setCountriesOptions]);
+  console.log("query", query);
   //Route configurations go here
   const router = createBrowserRouter([
     {
@@ -47,8 +66,15 @@ const Routes = () => {
               children: [
                 {
                   index: true,
-                  element: <BlogMainPage />,
-                  loader: () => getAllOwnerTripsLoader(token),
+                  element: (
+                    <BlogMainPage
+                      selectedCountry={selectedCountry}
+                      setSelectedCountry={setSelectedCountry}
+                      countriesOptions={countriesOptions}
+                      setCountriesOptions={setCountriesOptions}
+                    />
+                  ),
+                  loader: () => getAllOwnerTripsLoader(token, query),
                 },
                 {
                   path: "/blog-main/:travel_id",

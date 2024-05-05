@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Root.module.css";
-import { useAuth } from "../../../context/AuthContext";
+
 import Cookies from "universal-cookie";
 import Button from "@mui/material/Button";
 import { useEffect } from "react";
 import { logoutUser, refreshToken } from "../../../services/requests";
+import useAuth from "../../../context/useAuthHook";
 
 const Root = () => {
   const { token, setToken } = useAuth();
