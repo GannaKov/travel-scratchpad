@@ -76,12 +76,13 @@ export const postFormData = async (dataForm, accessToken) => {
 };
 
 // put form
-export const putFormData = async (tripId, dataForm) => {
+export const putFormData = async (tripId, dataForm, accessToken) => {
   try {
     console.log("data in ax", dataForm);
     const { data } = await instance.put(`/add-trip/${tripId}`, dataForm, {
       headers: {
         "Content-type": "multipart/form-data",
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     // console.log("res in put", data);

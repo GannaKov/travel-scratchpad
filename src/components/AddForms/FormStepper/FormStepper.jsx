@@ -245,7 +245,7 @@ const FormStepper = () => {
       }
 
       if (editMode) {
-        await putFormData(tripId, data);
+        await putFormData(tripId, data, token);
         navigate(`/blog-main/${tripId}`);
       } else {
         await postFormData(data, token);
