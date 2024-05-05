@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASEURL = "http://localhost:3000";
+const BASEURL = "http://localhost:3000/api";
 //const BASEURL = import.meta.env.VITE_BASE_URL;
 // const token = {
 //   set(token) {
@@ -18,6 +18,17 @@ export const getAllTripsLoader = async () => {
   // console.log("data", data.data);
   return data.data;
 };
+
+// get all trip of Owner
+export const getAllOwnerTripsLoader = async (accessToken) => {
+  const { data } = await instance.get("/own_trips", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  // console.log("data", data.data);
+  return data.data;
+};
 // get trip by Id
 export const getTripByIdLoader = async ({ params }) => {
   const { data } = await instance.get(`/trips/${params.travel_id}`);
@@ -32,7 +43,7 @@ export const getTripById = async (tripId) => {
 
 // get trip's Purpose
 export const getTripsPurposes = async () => {
-  const { data } = await instance.get(`trip-purpose`);
+  const { data } = await instance.get(`/trip-purpose`);
   // console.log("data", data.data);
   return data.data;
 };
@@ -120,7 +131,7 @@ export const deleteOneTrip = async (tripId, accessToken) => {
 //signup
 export const signupUser = async (values) => {
   try {
-    const { data } = await instance.post(`/api/auth/register`, values);
+    const { data } = await instance.post(`/auth/register`, values);
     console.log("res Register User", data);
     return data;
   } catch (err) {
@@ -131,7 +142,7 @@ export const signupUser = async (values) => {
 //login
 export const loginUser = async (values) => {
   try {
-    const { data } = await instance.post("/api/auth/login", values);
+    const { data } = await instance.post("/auth/login", values);
     console.log("res login User", data);
     return data;
   } catch (error) {
@@ -152,7 +163,7 @@ export const clearAuthHeader = () => {
 export const logoutUser = async () => {
   try {
     const { data } = await instance.delete(
-      "/api/auth/refresh_token",
+      "/auth/refresh_token",
       {},
       { withCredentials: true }
     );
@@ -163,13 +174,13 @@ export const logoutUser = async () => {
 };
 //=======
 export const getUserById = async (id) => {
-  const { data } = await instance.get(`/api/users/${id}`);
+  const { data } = await instance.get(`/users/${id}`);
   console.log("data in by Id", data.data);
   return data.data;
 };
 // Function to refresh tokens
 export const refreshToken = async () => {
-  const { data } = await instance.get(`/api/auth/refresh_token`, {
+  const { data } = await instance.get(`/auth/refresh_token`, {
     withCredentials: true,
   });
 

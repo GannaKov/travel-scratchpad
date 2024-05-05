@@ -1,6 +1,9 @@
+import BlogMainList from "../../components/BlogComponents/BlogMainList/BlogMainList";
 import styles from "./HomePage.module.css";
+import { useNavigate, useLoaderData } from "react-router-dom";
 
 const HomePage = () => {
+  const allTripsList = useLoaderData();
   return (
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
@@ -15,7 +18,7 @@ const HomePage = () => {
       </div>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <p>ShotListHome</p>
+          {allTripsList && <BlogMainList tripsArr={allTripsList} />}
         </div>
       </div>
     </div>
