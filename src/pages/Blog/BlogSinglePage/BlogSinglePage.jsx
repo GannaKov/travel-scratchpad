@@ -10,8 +10,10 @@ import GoBack from "../../../components/GoBack/GoBack";
 import styles from "./BlogSinglePage.module.css";
 import { useEffect, useState } from "react";
 import { deleteOneTrip, getTripById } from "../../../services/requests";
+import { useAuth } from "../../../context/AuthContext";
 
 const BlogSinglePage = () => {
+  const { token, setToken } = useAuth();
   const singleTrip = useLoaderData();
   const location = useLocation();
   const backLinkHref = location.state ?? "/blog-main";
@@ -20,7 +22,7 @@ const BlogSinglePage = () => {
   // const { travel_id } = useParams();
 
   const handleDeleteClick = async () => {
-    await deleteOneTrip(singleTrip._id);
+    await deleteOneTrip(singleTrip._id, token); //
     navigate("/blog-main");
   };
   // const [error, setError] = useState();

@@ -31,8 +31,10 @@ import {
 } from "../../../services/handleDate";
 import { useNavigate } from "react-router-dom";
 import GoBack from "../../GoBack/GoBack";
+import { useAuth } from "../../../context/AuthContext";
 
 const FormStepper = () => {
+  const { token, setToken } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const backLinkHref = location.state ?? "/blog-main";
@@ -246,7 +248,7 @@ const FormStepper = () => {
         await putFormData(tripId, data);
         navigate(`/blog-main/${tripId}`);
       } else {
-        await postFormData(data);
+        await postFormData(data, token);
         navigate("/blog-main");
       }
     },

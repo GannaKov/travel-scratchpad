@@ -2,7 +2,14 @@ import axios from "axios";
 
 const BASEURL = "http://localhost:3000";
 //const BASEURL = import.meta.env.VITE_BASE_URL;
-
+// const token = {
+//   set(token) {
+//     instanceBacEnd.defaults.headers.Authorization = `Bearer ${token}`;
+//   },
+//   unset() {
+//     instanceBacEnd.defaults.headers.Authorization = "";
+//   },
+// };
 const instance = axios.create({ baseURL: BASEURL });
 
 // get all trips
@@ -48,15 +55,20 @@ export const getCountriesOptions = async () => {
 };
 
 // post form
-export const postFormData = async (dataForm) => {
+export const postFormData = async (dataForm, accessToken) => {
   try {
     console.log("dataForm", dataForm);
+
     const { data } = await instance.post("/add-trip", dataForm, {
       headers: {
         "Content-type": "multipart/form-data",
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     // console.log("res", data);
+    //       headers: {
+    //         Authorization: `Bearer ${accessToken}`,
+    //       }
     return data;
   } catch (err) {
     console.log(err);
@@ -80,9 +92,22 @@ export const putFormData = async (tripId, dataForm) => {
 };
 
 // delete form
-export const deleteOneTrip = async (tripId) => {
+// export const deleteOneTrip = async (tripId) => {
+//   try {
+//     const { data } = await instance.delete(`/trips/${tripId}`);
+//     console.log("res in put", data);
+//     return data;
+//   } catch (err) {
+//     console.log(err);
+//   }
+//};
+export const deleteOneTrip = async (tripId, accessToken) => {
   try {
-    const { data } = await instance.delete(`/trips/${tripId}`);
+    const { data } = await instance.delete(`/trips/${tripId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     console.log("res in put", data);
     return data;
   } catch (err) {

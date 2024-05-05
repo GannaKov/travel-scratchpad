@@ -34,12 +34,12 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+      //axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       const decoded = jwtDecode(token);
 
       setUser({ user: decoded, isAuthenticated: true });
     } else {
-      delete axios.defaults.headers.common["Authorization"];
+      //delete axios.defaults.headers.common["Authorization"];
 
       cookies.remove("jwt_authorization");
       cookies.remove("refresh_token");
