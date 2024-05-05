@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
 import moment from "moment";
 import dayjs from "dayjs";
-import StarsShow from "../../Shared/Stars/StarsShow";
+import StarsShow from "../Stars/StarsShow";
 import truncateUrl from "../../../services/truncateUrl";
-import styles from "./BlogSingleTrip.module.css";
+import styles from "./SingleTripCard.module.css";
 
 import { Link, useNavigate } from "react-router-dom";
 import { deleteOneTrip } from "../../../services/requests";
 
-const BlogSingleTrip = ({ singleTrip }) => {
+const SingleTripCard = ({ singleTrip }) => {
   const navigate = useNavigate();
 
   // const handleDeleteClick = () => {};
@@ -97,4 +97,4 @@ const BlogSingleTrip = ({ singleTrip }) => {
   );
 };
 
-export default BlogSingleTrip;
+export default SingleTripCard;

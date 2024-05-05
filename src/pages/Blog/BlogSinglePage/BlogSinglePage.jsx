@@ -5,7 +5,7 @@ import {
   useParams,
   Link,
 } from "react-router-dom";
-import BlogSingleTrip from "../../../components/BlogComponents/BlogSingleTrip/BlogSingleTrip";
+import SingleTripCard from "../../../components/Shared/SingleTripCard/SingleTripCard";
 import GoBack from "../../../components/GoBack/GoBack";
 import styles from "./BlogSinglePage.module.css";
 import { useEffect, useState } from "react";
@@ -57,7 +57,7 @@ const BlogSinglePage = () => {
       <div className={styles.sectionBlog}>
         {singleTrip && (
           <div className={styles.containerBlog}>
-            <BlogSingleTrip singleTrip={singleTrip} />
+            <SingleTripCard singleTrip={singleTrip} />
           </div>
         )}
       </div>
