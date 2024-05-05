@@ -9,8 +9,8 @@ import { logoutUser, refreshToken } from "../../../services/requests";
 import useAuth from "../../../context/useAuthHook";
 
 const Root = () => {
-  const { token, setToken } = useAuth();
-  const { user, setUser } = useAuth();
+  const { setToken } = useAuth();
+  const { user } = useAuth();
 
   const cookies = new Cookies();
   const navigate = useNavigate();
@@ -181,7 +181,6 @@ const Root = () => {
         </nav>
       </header>
 
-      {/* <Outlet context={{ user, setUser, loginUser, logoutUser }} /> */}
       <Outlet />
     </div>
   );

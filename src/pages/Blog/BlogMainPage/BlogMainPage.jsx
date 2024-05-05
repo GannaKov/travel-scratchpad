@@ -7,6 +7,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 import { Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
+import Select from "../../../components/Shared/Select/Select";
 
 const BlogMainPage = ({
   selectedCountry,
@@ -41,7 +42,7 @@ const BlogMainPage = ({
         <div className={styles.containerBlog} style={{ display: "flex" }}>
           {/* ===============Country========================================== */}
 
-          <Autocomplete
+          {/* <Autocomplete
             id="country"
             autoHighlight
             value={selectedCountry}
@@ -53,6 +54,11 @@ const BlogMainPage = ({
             renderInput={(params) => (
               <TextField {...params} label="Choose a country" />
             )}
+          /> */}
+          <Select
+            selectedCountry={selectedCountry}
+            handleChangeCountry={handleChangeCountry}
+            countriesOptions={countriesOptions}
           />
           {/* <Button variant="contained" color="primary">
             Search

@@ -54,8 +54,15 @@ const Routes = () => {
         { path: "/register", element: <Signup /> },
         {
           index: true,
-          element: <HomePage />,
-          loader: getAllTripsLoader,
+          element: (
+            <HomePage
+              selectedCountry={selectedCountry}
+              setSelectedCountry={setSelectedCountry}
+              countriesOptions={countriesOptions}
+            />
+          ),
+          // loader: getAllTripsLoader,
+          loader: () => getAllTripsLoader(query),
         },
         {
           element: <ProtectedRoutes />,
@@ -71,7 +78,6 @@ const Routes = () => {
                       selectedCountry={selectedCountry}
                       setSelectedCountry={setSelectedCountry}
                       countriesOptions={countriesOptions}
-                      setCountriesOptions={setCountriesOptions}
                     />
                   ),
                   loader: () => getAllOwnerTripsLoader(token, query),

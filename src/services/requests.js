@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const BASEURL = "http://localhost:3000/api";
+
 //const BASEURL = import.meta.env.VITE_BASE_URL;
 // const token = {
 //   set(token) {
@@ -13,10 +14,21 @@ const BASEURL = "http://localhost:3000/api";
 const instance = axios.create({ baseURL: BASEURL });
 
 // get all trips
-export const getAllTripsLoader = async () => {
-  const { data } = await instance.get("/trips");
-  // console.log("data", data.data);
-  return data.data;
+export const getAllTripsLoader = async (query) => {
+  try {
+    let urlBackend = "/trips";
+    if (query && query.country) {
+      urlBackend += `?country=${query.country}`;
+    }
+    const { data } = await instance.get(urlBackend);
+    // console.log("data", data.data);
+    return data.data;
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
+      return [];
+    }
+    throw error;
+  }
 };
 
 // get all trip of Owner
@@ -44,7 +56,7 @@ export const getAllOwnerTripsLoader = async (accessToken, query) => {
 // get trip by Id
 export const getTripByIdLoader = async ({ params }) => {
   const { data } = await instance.get(`/trips/${params.travel_id}`);
-  console.log("data in get by Id", data.data);
+  // console.log("data in get by Id", data.data);
   return data.data;
 };
 export const getTripById = async (tripId) => {
@@ -80,8 +92,6 @@ export const getCountriesOptions = async () => {
 // post form
 export const postFormData = async (dataForm, accessToken) => {
   try {
-    console.log("dataForm", dataForm);
-
     const { data } = await instance.post("/own_trips", dataForm, {
       headers: {
         "Content-type": "multipart/form-data",
@@ -101,7 +111,6 @@ export const postFormData = async (dataForm, accessToken) => {
 // put form
 export const putFormData = async (tripId, dataForm, accessToken) => {
   try {
-    console.log("data in ax", dataForm);
     const { data } = await instance.put(`/own_trips/${tripId}`, dataForm, {
       headers: {
         "Content-type": "multipart/form-data",
@@ -132,7 +141,7 @@ export const deleteOneTrip = async (tripId, accessToken) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log("res in put", data);
+    // console.log("res in put", data);
     return data;
   } catch (err) {
     console.log(err);
@@ -155,7 +164,7 @@ export const signupUser = async (values) => {
 export const loginUser = async (values) => {
   try {
     const { data } = await instance.post("/auth/login", values);
-    console.log("res login User", data);
+    // console.log("res login User", data);
     return data;
   } catch (error) {
     console.log(error);
@@ -187,7 +196,7 @@ export const logoutUser = async () => {
 //=======
 export const getUserById = async (id) => {
   const { data } = await instance.get(`/users/${id}`);
-  console.log("data in by Id", data.data);
+  //console.log("data in by Id", data.data);
   return data.data;
 };
 // Function to refresh tokens
@@ -198,26 +207,6 @@ export const refreshToken = async () => {
 
   return data;
 };
-// async function refreshToken() {
-//   try {
-//     const response = await fetch("/refresh_token", {
-//       method: "GET",
-//       credentials: "include", // Include cookies in the request
-//     });
-//     if (!response.ok) {
-//       throw new Error("Failed to refresh token");
-//     }
-//     const tokens = await response.json();
-//     // Update stored tokens with the new ones
-//     // For example, update localStorage or cookies
-//     localStorage.setItem("accessToken", tokens.accessToken);
-//     localStorage.setItem("refreshToken", tokens.refreshToken);
-//     return tokens.accessToken;
-//   } catch (error) {
-//     console.error("Error refreshing token:", error);
-//     // Handle error, e.g., redirect to login page
-//   }
-// }
 
 // // Example of using the access token to make a request
 // async function fetchData() {
