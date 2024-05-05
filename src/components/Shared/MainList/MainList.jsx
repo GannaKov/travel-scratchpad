@@ -2,9 +2,9 @@
 
 import TripItem from "../../TripItem/TripItem";
 
-import styles from "./BlogMainList.module.css";
+import styles from "./MainList.module.css";
 
-const BlogMainList = ({ tripsArr }) => {
+const MainList = ({ tripsArr }) => {
   //const formattedDate = moment(mongoDate).format('DD.MM.YY');
 
   return (
@@ -18,4 +18,4 @@ const BlogMainList = ({ tripsArr }) => {
   );
 };
 
-export default BlogMainList;
+export default MainList;

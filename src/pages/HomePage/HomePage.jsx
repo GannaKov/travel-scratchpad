@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import BlogMainList from "../../components/BlogComponents/BlogMainList/BlogMainList";
+import MainList from "../../components/Shared/MainList/MainList";
 import Select from "../../components/Shared/Select/Select";
 import styles from "./HomePage.module.css";
 import { useNavigate, useLoaderData } from "react-router-dom";
@@ -36,7 +36,7 @@ const HomePage = ({
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
           {allTripsList && allTripsList.length > 0 ? (
-            <BlogMainList tripsArr={allTripsList} />
+            <MainList tripsArr={allTripsList} />
           ) : (
             <p>No Travels</p>
           )}

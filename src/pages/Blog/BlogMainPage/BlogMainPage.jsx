@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import styles from "./BlogMainPage.module.css";
 import { useNavigate, useLoaderData } from "react-router-dom";
-import BlogMainList from "../../../components/BlogComponents/BlogMainList/BlogMainList";
+import MainList from "../../../components/Shared/MainList/MainList";
 
 import Autocomplete from "@mui/material/Autocomplete";
 
@@ -68,7 +68,7 @@ const BlogMainPage = ({
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
           {allOwnTripsList && allOwnTripsList.length > 0 ? (
-            <BlogMainList tripsArr={allOwnTripsList} />
+            <MainList tripsArr={allOwnTripsList} />
           ) : (
             <p>No Travels</p>
           )}
