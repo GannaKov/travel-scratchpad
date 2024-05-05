@@ -12,7 +12,6 @@ const HomePage = ({
   const allTripsList = useLoaderData();
 
   const handleChangeCountry = (event, value) => {
-    console.log("in handleChangeCountry ", value);
     setSelectedCountry(value);
   };
   return (
@@ -36,7 +35,11 @@ const HomePage = ({
       </div>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          {allTripsList && <BlogMainList tripsArr={allTripsList} />}
+          {allTripsList && allTripsList.length > 0 ? (
+            <BlogMainList tripsArr={allTripsList} />
+          ) : (
+            <p>No Travels</p>
+          )}
         </div>
       </div>
     </div>

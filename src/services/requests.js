@@ -20,6 +20,7 @@ export const getAllTripsLoader = async (query) => {
     if (query && query.country) {
       urlBackend += `?country=${query.country}`;
     }
+
     const { data } = await instance.get(urlBackend);
     // console.log("data", data.data);
     return data.data;
@@ -61,7 +62,7 @@ export const getTripByIdLoader = async ({ params }) => {
 };
 export const getTripById = async (tripId) => {
   const { data } = await instance.get(`/trips/${tripId}`);
-  console.log("data in by Id", data.data);
+  // console.log("data in by Id", data.data);
   return data.data;
 };
 

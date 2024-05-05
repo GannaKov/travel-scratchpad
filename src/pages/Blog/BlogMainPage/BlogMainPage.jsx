@@ -19,10 +19,9 @@ const BlogMainPage = ({
   // useEffect(() => {
   //   // После загрузки данных сбрасываем selectedCountry на null
   //   setSelectedCountry(null);
-  // }, [allOwnTripsList]);
+  // }, [allOwnTripsList, setSelectedCountry]);
 
   const handleChangeCountry = (event, value) => {
-    console.log("in handleChangeCountry ", value);
     setSelectedCountry(value);
   };
 

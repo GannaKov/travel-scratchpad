@@ -24,11 +24,12 @@ import useAuth from "./context/useAuthHook";
 const Routes = () => {
   const { token } = useAuth();
   const [countriesOptions, setCountriesOptions] = useState();
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const query = {};
-  if (selectedCountry) {
-    query.country = selectedCountry;
-  }
+  const [selectedCountryHome, setSelectedCountryHome] = useState(null);
+  const [selectedCountryBlog, setSelectedCountryBlog] = useState(null);
+  // const query = {};
+  // if (selectedCountry) {
+  //   query.country = selectedCountry;
+  // }
 
   useEffect(() => {
     getCountriesOptions()
@@ -39,7 +40,6 @@ const Routes = () => {
       .catch((error) => console.log(error.status, error.message));
   }, [setCountriesOptions]);
 
-  console.log("query", query);
   //Route configurations go here
   const router = createBrowserRouter([
     {
@@ -56,13 +56,24 @@ const Routes = () => {
           index: true,
           element: (
             <HomePage
-              selectedCountry={selectedCountry}
-              setSelectedCountry={setSelectedCountry}
+              selectedCountry={selectedCountryHome}
+              setSelectedCountry={setSelectedCountryHome}
               countriesOptions={countriesOptions}
             />
           ),
-          // loader: getAllTripsLoader,
-          loader: () => getAllTripsLoader(query),
+          loader: async () => {
+            const query = {};
+            if (selectedCountryHome) {
+              query.country = selectedCountryHome;
+            }
+            return await getAllTripsLoader(query);
+          },
+          // loader: () => getAllTripsLoader(query),
+        },
+        {
+          path: "/:travel_id",
+          element: <BlogSinglePage />,
+          loader: getTripByIdLoader,
         },
         {
           element: <ProtectedRoutes />,
@@ -75,12 +86,19 @@ const Routes = () => {
                   index: true,
                   element: (
                     <BlogMainPage
-                      selectedCountry={selectedCountry}
-                      setSelectedCountry={setSelectedCountry}
+                      selectedCountry={selectedCountryBlog}
+                      setSelectedCountry={setSelectedCountryBlog}
                       countriesOptions={countriesOptions}
                     />
                   ),
-                  loader: () => getAllOwnerTripsLoader(token, query),
+                  //loader: () => getAllOwnerTripsLoader(token, query),
+                  loader: async () => {
+                    const query = {};
+                    if (selectedCountryBlog) {
+                      query.country = selectedCountryBlog;
+                    }
+                    return await getAllOwnerTripsLoader(token, query);
+                  },
                 },
                 {
                   path: "/blog-main/:travel_id",
