@@ -22,7 +22,6 @@ import { useEffect, useState } from "react";
 import useAuth from "./context/useAuthHook";
 
 const Routes = () => {
-  console.log("in Routes");
   const { token } = useAuth();
   const [countriesOptions, setCountriesOptions] = useState();
   const [selectedCountry, setSelectedCountry] = useState(null);
@@ -39,6 +38,7 @@ const Routes = () => {
       })
       .catch((error) => console.log(error.status, error.message));
   }, [setCountriesOptions]);
+
   console.log("query", query);
   //Route configurations go here
   const router = createBrowserRouter([

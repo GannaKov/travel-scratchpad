@@ -3,15 +3,16 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 import { TextField } from "@mui/material";
 
-const Select = ({ selectedCountry, handleChangeCountry, countriesOptions }) => {
+const Select = ({ selectedValue, handleChange, valueOptions }) => {
+  //  const Select = ({ selectedCountry, handleChangeCountry, countriesOptions }) => {
   return (
     <Autocomplete
       id="country"
       autoHighlight
-      value={selectedCountry}
-      onChange={handleChangeCountry}
+      value={selectedValue}
+      onChange={handleChange}
       disableCloseOnSelect
-      options={countriesOptions}
+      options={valueOptions}
       getOptionLabel={(option) => option}
       style={{ width: 500 }}
       renderInput={(params) => (

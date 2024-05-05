@@ -10,9 +10,9 @@ import { useEffect, useState } from "react";
 import Select from "../../../components/Shared/Select/Select";
 
 const BlogMainPage = ({
+  countriesOptions,
   selectedCountry,
   setSelectedCountry,
-  countriesOptions,
 }) => {
   const allOwnTripsList = useLoaderData();
 
@@ -56,9 +56,10 @@ const BlogMainPage = ({
             )}
           /> */}
           <Select
-            selectedCountry={selectedCountry}
-            handleChangeCountry={handleChangeCountry}
-            countriesOptions={countriesOptions}
+            //selectedValue, handleChange, valueOptions
+            selectedValue={selectedCountry}
+            handleChange={handleChangeCountry}
+            valueOptions={countriesOptions}
           />
           {/* <Button variant="contained" color="primary">
             Search

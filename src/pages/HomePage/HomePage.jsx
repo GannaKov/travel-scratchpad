@@ -5,9 +5,9 @@ import styles from "./HomePage.module.css";
 import { useNavigate, useLoaderData } from "react-router-dom";
 
 const HomePage = ({
+  countriesOptions,
   selectedCountry,
   setSelectedCountry,
-  countriesOptions,
 }) => {
   const allTripsList = useLoaderData();
 
@@ -28,9 +28,9 @@ const HomePage = ({
         </div>
         <div className={styles.containerBlog}>
           <Select
-            selectedCountry={selectedCountry}
-            handleChangeCountry={handleChangeCountry}
-            countriesOptions={countriesOptions}
+            selectedValue={selectedCountry}
+            handleChange={handleChangeCountry}
+            valueOptions={countriesOptions}
           />
         </div>
       </div>
