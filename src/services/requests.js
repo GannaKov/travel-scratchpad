@@ -70,7 +70,7 @@ export const postFormData = async (dataForm, accessToken) => {
   try {
     console.log("dataForm", dataForm);
 
-    const { data } = await instance.post("/add-trip", dataForm, {
+    const { data } = await instance.post("/own_trips", dataForm, {
       headers: {
         "Content-type": "multipart/form-data",
         Authorization: `Bearer ${accessToken}`,
@@ -90,7 +90,7 @@ export const postFormData = async (dataForm, accessToken) => {
 export const putFormData = async (tripId, dataForm, accessToken) => {
   try {
     console.log("data in ax", dataForm);
-    const { data } = await instance.put(`/add-trip/${tripId}`, dataForm, {
+    const { data } = await instance.put(`/own_trips/${tripId}`, dataForm, {
       headers: {
         "Content-type": "multipart/form-data",
         Authorization: `Bearer ${accessToken}`,
@@ -115,7 +115,7 @@ export const putFormData = async (tripId, dataForm, accessToken) => {
 //};
 export const deleteOneTrip = async (tripId, accessToken) => {
   try {
-    const { data } = await instance.delete(`/trips/${tripId}`, {
+    const { data } = await instance.delete(`/own_trips/${tripId}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
