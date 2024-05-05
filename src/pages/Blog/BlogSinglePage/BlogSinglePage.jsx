@@ -16,7 +16,7 @@ const BlogSinglePage = () => {
   const { token, setToken } = useAuth();
   const singleTrip = useLoaderData();
   const location = useLocation();
-  const backLinkHref = location.state ?? "/blog-main";
+  const backLinkHref = location.state?.from ?? "/blog-main";
   const navigate = useNavigate();
   //-----
   // const { travel_id } = useParams();

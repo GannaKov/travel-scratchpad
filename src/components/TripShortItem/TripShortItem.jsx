@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import dayjs from "dayjs";
 import StarsShow from "../Shared/Stars/StarsShow";
-import styles from "./TripItem.module.css";
+import styles from "./TripShortItem.module.css";
 
-const TripItem = ({ trip }) => {
+const TripShortItem = ({ trip }) => {
   // console.log("trip", trip);
   return (
     <div>
@@ -37,11 +37,8 @@ const TripItem = ({ trip }) => {
       </div>
 
       <p>Amount: {trip.total_amount}</p>
-      <Link to={`${trip._id}`} state="/blog-main/">
-        <button type="button">See more</button>
-      </Link>
     </div>
   );
 };
 
-export default TripItem;
+export default TripShortItem;
