@@ -37,7 +37,10 @@ const FormStepper = () => {
   const { token, setToken } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const backLinkHref = location.state ?? "/blog-main";
+  //const backLinkHref = location.state ?? "/blog-main";
+  const backLinkHref = location.state?.from ?? "/blog-main";
+  // console.log("backLinkHref", backLinkHref);
+  // console.log("location.state", location.state);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialMode = searchParams.get("mode") === "true";

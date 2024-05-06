@@ -1,3 +1,30 @@
+.tripItemTitle {
+  margin-bottom: 0.5rem;
+}
+
+.tripItemRating {
+  margin-bottom: 0.5rem;
+}
+
+.tripItemDate {
+  margin-bottom: 1rem;
+}
+.tripImageWrp {
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
 .tripItemImg {
   width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+.tripItemImg:is(:hover, :focus) {
+  transform: scale(1.5);
+}
+.tripBoldText {
+  font-weight: 600;
+}
+.tripChunk {
+  margin-bottom: 0.5rem;
 }

@@ -2,7 +2,13 @@
 import MainList from "../../components/Shared/MainList/MainList";
 import Select from "../../components/Shared/Select/Select";
 import styles from "./HomePage.module.css";
-import { useNavigate, useLoaderData } from "react-router-dom";
+import {
+  useNavigate,
+  useLoaderData,
+  useLocation,
+  Link,
+} from "react-router-dom";
+import useAuth from "../../context/useAuthHook";
 
 const HomePage = ({
   countriesOptions,
@@ -10,10 +16,25 @@ const HomePage = ({
   setSelectedCountry,
 }) => {
   const allTripsList = useLoaderData();
+  const { token } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleChangeCountry = (event, value) => {
     setSelectedCountry(value);
   };
+
+  const handleAddBtnClick = () => {
+    const from = location.pathname;
+
+    if (token) {
+      //navigate("/add-form");
+      navigate("/add-form", { state: { from } });
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
@@ -23,8 +44,23 @@ const HomePage = ({
       </div>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <p>Add Travel</p>
+          <h3 className={styles.subTitle}>Add Your Travel</h3>
+          {/* <Link
+            to={`${trip._id}`}
+            state={{ from: location }}
+            className={styles.mainItemLink}
+          > */}
+          <button
+            className={styles.addBtn}
+            type="button"
+            onClick={handleAddBtnClick}
+          >
+            Add
+          </button>
+          {/* </Link> */}
         </div>
+      </div>
+      <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
           <Select
             selectedValue={selectedCountry}

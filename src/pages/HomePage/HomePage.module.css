@@ -10,4 +10,12 @@
 .containerBlog {
   padding-left: 1rem;
   padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.subTitle {
+  margin-bottom: 1.5rem;
+}
+.addBtn {
+  margin: 0 auto;
 }
