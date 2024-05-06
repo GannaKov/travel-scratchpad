@@ -15,6 +15,7 @@ const BlogMainPage = ({
   setSelectedCountry,
 }) => {
   const allOwnTripsList = useLoaderData();
+  console.log("allOwnTripsList", allOwnTripsList);
 
   // useEffect(() => {
   //   // После загрузки данных сбрасываем selectedCountry на null

@@ -1,4 +1,10 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  isRouteErrorResponse,
+  useNavigate,
+  useRouteError,
+} from "react-router-dom";
 
 import BlogSharedLayout from "./components/BlogComponents/BlogSharedLayout/BlogSharedLayout";
 import BlogAddForms from "./pages/Blog/BlogAddForms/BlogAddForms";
@@ -11,8 +17,10 @@ import {
   getAllTripsLoader,
   getCountriesOptions,
   getTripByIdLoader,
+  refreshToken,
 } from "./services/requests";
 import AppBar from "./components/Shared/AppBar/AppBar";
+
 import Root from "./components/Shared/Root/Root";
 import Profile from "./pages/Blog/Profile/Profile";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
@@ -20,9 +28,11 @@ import Login from "./pages/Auth/Login/Login";
 import Signup from "./pages/Auth/Signup/Signup";
 import { useEffect, useState } from "react";
 import useAuth from "./context/useAuthHook";
+import ErrorProtectedBoundary from "./components/ErrorProtectedBoundary/ErrorProtectedBoundary";
 
 const Routes = () => {
   const { token } = useAuth();
+
   const [countriesOptions, setCountriesOptions] = useState();
   const [selectedCountryHome, setSelectedCountryHome] = useState(null);
   const [selectedCountryBlog, setSelectedCountryBlog] = useState(null);
@@ -47,7 +57,10 @@ const Routes = () => {
       path: "/",
 
       element: <Root />,
+
+      //errorElement: <RootBoundary />,
       errorElement: <NotFound />,
+
       children: [
         //----
         { path: "/login", element: <Login /> },
@@ -61,6 +74,7 @@ const Routes = () => {
               countriesOptions={countriesOptions}
             />
           ),
+
           loader: async () => {
             const query = {};
             if (selectedCountryHome) {
@@ -77,6 +91,8 @@ const Routes = () => {
         },
         {
           element: <ProtectedRoutes />,
+          errorElement: <ErrorProtectedBoundary />,
+          // errorElement: <NotFound />,
           children: [
             {
               path: "/blog-main",

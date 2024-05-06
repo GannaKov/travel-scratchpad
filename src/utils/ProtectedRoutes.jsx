@@ -17,10 +17,11 @@ import useAuth from "../context/useAuthHook";
 
 const ProtectedRoutes = () => {
   const { token } = useAuth();
+  console.log("t", token);
 
   // Check if the user is authenticated
   if (!token) {
-    // If not authenticated, redirect to the login page
+    console.log("No token found, redirecting to login page");
     return <Navigate to="/login" replace />;
   }
 

@@ -48,7 +48,11 @@ export const getAllOwnerTripsLoader = async (accessToken, query) => {
     return data.data;
   } catch (error) {
     if (error.response && error.response.status === 404) {
-      return [];
+      //return [];
+      throw new Response("Not Found", { status: 404 });
+    }
+    if (error.response && error.response.status === 403) {
+      throw new Response("Forbidden", { status: 403 });
     }
     throw error;
   }
