@@ -1,4 +1,5 @@
 import {
+  Navigate,
   isRouteErrorResponse,
   useNavigate,
   useRouteError,
@@ -9,12 +10,13 @@ const ErrorProtectedBoundary = () => {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
-    if (error.status === 404) {
-      return <div>This page doesn&apos;t exist!</div>;
-    }
+    // if (error.status === 404) {
+    //   return [];
+    // }
 
     if (error.status === 403) {
-      return <div>You aren&apos;t authorized. Please Log in</div>;
+      // return <div>You aren&apos;t authorized. Please Log in</div>;
+      return <Navigate to="/login" replace />;
     }
 
     if (error.status === 503) {

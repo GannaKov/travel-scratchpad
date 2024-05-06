@@ -5,12 +5,14 @@ import {
   useParams,
   Link,
 } from "react-router-dom";
+
 import SingleTripCard from "../../../components/Shared/SingleTripCard/SingleTripCard";
 import GoBack from "../../../components/GoBack/GoBack";
 import styles from "./BlogSinglePage.module.css";
 import { useEffect, useState } from "react";
 import { deleteOneTrip, getTripById } from "../../../services/requests";
 import useAuth from "../../../context/useAuthHook";
+import Carousel from "../../../components/Shared/Carousel/Carousel";
 
 const BlogSinglePage = () => {
   const { token, setToken } = useAuth();
@@ -75,6 +77,9 @@ const BlogSinglePage = () => {
       <button type="button" onClick={handleDeleteClick}>
         Delete
       </button>
+      <div className={styles.sectionBlog}>
+        <Carousel images={singleTrip.images} />
+      </div>
     </div>
   );
 };

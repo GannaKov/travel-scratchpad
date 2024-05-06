@@ -9,13 +9,17 @@ const MainList = ({ tripsArr }) => {
   //const formattedDate = moment(mongoDate).format('DD.MM.YY');
   const location = useLocation();
   return (
-    <ul>
+    <ul className={styles.mainList}>
       {tripsArr.map((trip) => (
-        <div key={trip._id}>
-          <li>
+        <div key={trip._id} className={styles.mainItemWrp}>
+          <li className={styles.mainItem}>
             <TripShortItem trip={trip} />
           </li>
-          <Link to={`${trip._id}`} state={{ from: location }}>
+          <Link
+            to={`${trip._id}`}
+            state={{ from: location }}
+            className={styles.mainItemLink}
+          >
             <button type="button">See more</button>
           </Link>
         </div>

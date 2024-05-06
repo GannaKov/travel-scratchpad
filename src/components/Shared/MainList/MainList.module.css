@@ -1,1 +1,19 @@
-
+.mainList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 2rem;
+  column-gap: 1rem;
+}
+.mainItemWrp {
+}
+.mainItem {
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.mainItemLink {
+  float: right;
+}
