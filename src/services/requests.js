@@ -168,14 +168,18 @@ export const signupUser = async (values) => {
 
 //login
 export const loginUser = async (values) => {
-  try {
-    const { data } = await instance.post("/auth/login", values);
-    // console.log("res login User", data);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  const { data } = await instance.post("/auth/login", values);
+  //console.log("res login User", data);
+  return data;
 };
+//catch (error) {
+//     console.log(error);
+//     if (error.response && error.response.status === 401) {
+//       throw new Response("Forbidden", { status: 401 });
+//     }
+//     throw error;
+//   }
+// };
 //------
 export const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;

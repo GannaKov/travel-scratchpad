@@ -35,24 +35,25 @@ const Login = () => {
     onSubmit: async (values) => {
       try {
         const res = await loginUser(values);
-        if (res.code === 200) {
-          setToken(res.data.tokens.accessToken);
-          cookies.set("jwt_authorization", res.data.tokens.accessToken);
-          cookies.set("refresh_token", res.data.tokens.refreshToken); //?????????
-        }
 
+        if (res && res.code === 200) {
+          setToken(res.data.tokens.accessToken);
+          // cookies.set("jwt_authorization", res.data.tokens.accessToken, {
+          //   maxAge: 15 * 60,
+          // });
+          cookies.set("refresh_token", res.data.tokens.refreshToken, {
+            maxAge: 30 * 24 * 60 * 60,
+          }); //?????????
+        }
         navigate("/", { replace: true });
       } catch (error) {
-        // console.log("err in LogIn", error.response.data.message);
-        console.log("err in LogIn", error);
+        if (error.response.status === 401) {
+          alert(error.response.data.error);
+        }
       }
     },
   });
 
-  //////just for test
-  // setTimeout(() => {
-  //   formik.handleSubmit();
-  // }, 10 * 1000);
   return (
     <>
       <h1>Sign in</h1>

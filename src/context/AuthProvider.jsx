@@ -1,10 +1,5 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useMemo, useState } from "react";
 import Cookies from "universal-cookie";
 import { jwtDecode } from "jwt-decode";
 import AuthContext from "./AuthContext";
@@ -25,10 +20,19 @@ const AuthProvider = ({ children }) => {
     setUser_(newUser);
   };
 
+  const maxAge = user.user.expiresAt / 1000;
+
   useEffect(() => {
     if (token) {
+      console.log("change access token", token);
       const decoded = jwtDecode(token);
       setUser({ user: decoded, isAuthenticated: true });
+
+      console.log("maxAge", maxAge, user.user.expiresAt);
+      cookies.set("jwt_authorization", token, {
+        maxAge: 15 * 60,
+        // maxAge: maxAge,
+      });
     } else {
       cookies.remove("jwt_authorization");
       cookies.remove("refresh_token");

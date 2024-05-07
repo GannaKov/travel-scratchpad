@@ -14,6 +14,10 @@ const ErrorProtectedBoundary = () => {
     //   return [];
     // }
 
+    if (error.response.status === 400) {
+      console.log("in ERROR");
+      return <Navigate to="/login" replace />;
+    }
     if (error.status === 403) {
       // return <div>You aren&apos;t authorized. Please Log in</div>;
       return <Navigate to="/login" replace />;

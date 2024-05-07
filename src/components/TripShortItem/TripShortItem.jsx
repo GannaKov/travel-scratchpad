@@ -9,7 +9,7 @@ import styles from "./TripShortItem.module.css";
 const TripShortItem = ({ trip }) => {
   // console.log("trip", trip);
   return (
-    <div>
+    <div className={styles.tripItemWrp}>
       <h2 className={styles.tripItemTitle}>{trip.title}</h2>
 
       <StarsShow
