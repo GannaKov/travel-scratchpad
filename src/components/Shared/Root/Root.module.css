@@ -1,9 +1,14 @@
 .wrapper {
   display: grid;
+  /* background-image: url("../../../assets/images/green-leaves-corner-white-background.jpg");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat; */
+  background: rgba(244, 242, 242, 0.428);
 }
 .headerWrp {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   border-bottom: 1px solid rgba(128, 128, 128, 0.236);
   box-shadow: 0px 1px 3px #6d035f1f, 0px 0px 5px rgba(114, 40, 121, 0.06),
     0px 0px 8px rgba(0, 0, 0, 0.16);

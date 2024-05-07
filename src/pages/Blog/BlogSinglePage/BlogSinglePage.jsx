@@ -24,22 +24,10 @@ const BlogSinglePage = () => {
   // const { travel_id } = useParams();
 
   const handleDeleteClick = async () => {
-    await deleteOneTrip(singleTrip._id, token); //
+    await deleteOneTrip(singleTrip._id, token);
     navigate("/blog-main");
   };
-  // const [error, setError] = useState();
-  // const [singleTrip, setSingleTrip] = useState(null);
-  // useEffect(() => {
-  //   getTripById(travel_id)
-  //     .then((res) => {
-  //       console.log("res in Ef", res);
-  //       setSingleTrip(res);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.status, error.message);
-  //       setError(error.response.status);
-  //     });
-  // }, [travel_id]);
+
   //----
   return (
     <div className={styles.pageWrpapper}>
@@ -53,16 +41,18 @@ const BlogSinglePage = () => {
           <p>single Map</p>
         </div>
       </div>
+
+      {/* ---- Card ---------- */}
       <div className={styles.sectionBlog}>
-        <div className={styles.containerBlog}></div>
-      </div>
-      <div className={styles.sectionBlog}>
-        {singleTrip && (
+        <div className={styles.exp}>
+          {" "}
           <div className={styles.containerBlog}>
-            <SingleTripCard singleTrip={singleTrip} />
+            {" "}
+            {singleTrip && <SingleTripCard singleTrip={singleTrip} />}
           </div>
-        )}
+        </div>
       </div>
+      {/* ----end Card ---------- */}
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
           <p>single Photos</p>
