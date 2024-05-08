@@ -107,45 +107,51 @@ const FormThird = ({
           onChange={formik.handleChange}
         />
       </FormControl>
-      {(formik.values.data3.type || formik.values.data3.link) && (
-        <Button
-          type="button"
-          variant="contained"
-          sx={{ mt: 2 }}
-          onClick={onAddAccommodationClick}
-        >
-          Add
-        </Button>
-      )}
+
+      <Button
+        type="button"
+        variant="contained"
+        sx={{ mt: 2, mb: 2 }}
+        onClick={onAddAccommodationClick}
+        disabled={!formik.values.data3.type && !formik.values.data3.link}
+      >
+        Add
+      </Button>
+
       {accommodationArr.length > 0 && (
         <Box mt={4}>
-          <Typography variant="h6">Added Accommodation</Typography>
-          <List>
+          <p className={styles.subTitle}>Added Accommodation</p>
+          <ul>
             {accommodationArr.map((accommodation, index) => (
-              <ListItem key={index}>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <ListItemText
-                    sx={{ display: "flex", gap: "1rem" }}
-                    primary={`${accommodation.type} :`}
-                  >
+              <li key={index} className={styles.formInfoItem}>
+                {/* <div style={{ display: "flex", flexDirection: "column" }}> */}
+                <div>
+                  <div className={styles.tripText}>
+                    {" "}
+                    <span className={styles.tripBoldText}>
+                      {accommodation.type}:&nbsp;
+                    </span>
                     <a
                       href={accommodation.link}
                       target="_blank"
                       rel="noreferrer"
+                      className={styles.tripText}
                     >
                       {truncateUrl(accommodation.link)}
                     </a>
-                  </ListItemText>
+                  </div>
+                  <div className={styles.tripText}>
+                    <StarsShow
+                      rating={accommodation.rating}
+                      isReadOnly={true}
+                    />
+                  </div>
+                  <div className={styles.tripText}>
+                    <span className={styles.tripBoldText}>Price:&nbsp;</span>
+                    <span>{accommodation.price}</span>
+                  </div>
 
-                  <StarsShow rating={accommodation.rating} isReadOnly={true} />
-                  <ListItemText
-                    sx={{ display: "flex", gap: "1rem" }}
-                    primary={`Price :  ${accommodation.price}`}
-                  />
-                  <ListItemText
-                    sx={{ display: "flex", gap: "1rem" }}
-                    primary={accommodation.review}
-                  />
+                  <p className={styles.tripText}>{accommodation.review}</p>
                 </div>
 
                 <IconButton
@@ -155,9 +161,9 @@ const FormThird = ({
                 >
                   <DeleteIcon />
                 </IconButton>
-              </ListItem>
+              </li>
             ))}
-          </List>
+          </ul>
         </Box>
       )}
       <div>

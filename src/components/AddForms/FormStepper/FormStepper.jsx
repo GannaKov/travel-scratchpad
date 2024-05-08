@@ -54,7 +54,11 @@ const FormStepper = ({ countriesOptions }) => {
   const [usefulLinks, setUsefulLinks] = useState([]); //use also for edit
   //const [allImages, setAllImages] = useState([]); ////use also for edit??????????
   //-----
-
+  //main Img for view
+  const [mainPhoto, setMainPhoto] = useState("");
+  // a lot of images for view
+  const [imagesArr, setImagesArr] = useState([]);
+  //-------
   const [imgArrForSubmit, setImgArrForSubmit] = useState([]);
   const [formData, setFormData] = useState({
     data1: {
@@ -362,6 +366,10 @@ const FormStepper = ({ countriesOptions }) => {
       saveData={saveStepData(5)}
       editMode={editMode}
       setImgArrForSubmit={setImgArrForSubmit}
+      mainPhoto={mainPhoto}
+      setMainPhoto={setMainPhoto}
+      imagesArr={imagesArr}
+      setImagesArr={setImagesArr}
     />,
   ];
 
@@ -387,8 +395,7 @@ const FormStepper = ({ countriesOptions }) => {
             <Button
               size="small"
               onClick={handleNext}
-              disabled={activeStep === steps.length}
-              // disabled={activeStep === 2} ???
+              disabled={activeStep === steps.length - 1}
             >
               Next
               <KeyboardArrowRight />

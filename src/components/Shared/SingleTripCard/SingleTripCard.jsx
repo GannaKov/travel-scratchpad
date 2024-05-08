@@ -125,6 +125,12 @@ const SingleTripCard = ({ singleTrip }) => {
           <p>{singleTrip.advice}</p>
         </div>
       </div>
+      {/* <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad sequi
+        deserunt provident, amet aliquid corporis dolor inventore veritatis
+        repellendus ullam consequatur voluptas, perferendis iure labore
+        architecto reiciendis sed, quibusdam culpa.
+      </p> */}
     </div>
   );
 };

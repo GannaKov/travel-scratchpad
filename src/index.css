@@ -105,6 +105,10 @@ img {
 .MuiMobileStepper-root .MuiMobileStepper-dotActive {
   background-color: white;
 }
-/* .MuiButtonBase-root .MuiButton-root.MuiButton-colorPrimary {
+.MuiButton-root .MuiButton-colorPrimary {
   color: white !important;
-} */
+}
+.MuiTypography-root.MuiListItemText-primary {
+  font-size: 1.1rem;
+  font-weight: 600;
+}

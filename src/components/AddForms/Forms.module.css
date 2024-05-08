@@ -21,3 +21,49 @@
 .tripBoldText {
   font-weight: 600;
 }
+.tripText {
+  margin-bottom: 0.5rem;
+}
+.subTitle {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-decoration: underline;
+}
+.formInfoItem {
+  display: flex;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid gray;
+  justify-content: space-between;
+}
+.addImageBtnWrp {
+  display: flex;
+  justify-content: center;
+}
+.imgContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.mainImg {
+  width: 300px;
+}
+
+.multyImagesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  padding: 3rem 0;
+  border: 1px solid gray;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+.singleMutltyImgWrp {
+  display: flex;
+  justify-content: center;
+}
+.singleMutltyImg {
+  width: 200px;
+}

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import CancelIcon from "@mui/icons-material/Cancel";
 import {
@@ -10,21 +10,22 @@ import {
   Button,
   TextField,
 } from "@mui/material";
+import styles from "./Forms.module.css";
 
 const FormFifth = ({
   formik,
-  saveData,
-  editMode,
-  mainImg,
+
   setImgArrForSubmit,
-  // setAllImages,
-  // allImages,
+  mainPhoto,
+  setMainPhoto,
+  imagesArr,
+  setImagesArr,
 }) => {
   //main Img for view
-  const [mainPhoto, setMainPhoto] = useState(formik.values.data5.mainImage);
-  ///////////const [img, setImg] = useState(null);
+  // const [mainPhoto, setMainPhoto] = useState(formik.values.data5.mainImage);
+
   // a lot of images for view
-  const [imagesArr, setImagesArr] = useState(formik.values.data5.images);
+  // const [imagesArr, setImagesArr] = useState(formik.values.data5.images);
 
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +36,6 @@ const FormFifth = ({
     if (file) {
       reader.readAsDataURL(file);
       reader.onloadend = function () {
-        //setImg(reader.result);
         setMainPhoto(reader.result); //view
 
         formik.setFieldValue("data5.mainImage", file); //file
@@ -45,7 +45,7 @@ const FormFifth = ({
   const handleMultiUploadClick = async (event) => {
     try {
       const files = event.target.files;
-      //console.log("files ind multy handler", files);
+
       if (files && files.length > 4) {
         alert(`Only 4 images will be upladed`);
       }
@@ -55,7 +55,6 @@ const FormFifth = ({
           reader.readAsDataURL(file);
           reader.onloadend = function () {
             setImagesArr((prev) => [...prev, reader.result]); //view
-            // setAllImages((prev) => [...prev, reader.result]);
           };
         });
         setImgArrForSubmit((prev) => [...prev, ...Array.from(files)]); //files or formik.images?
@@ -69,60 +68,31 @@ const FormFifth = ({
   return (
     <div className="App">
       <form onSubmit={formik.handleSubmit}>
-        {/* One File Show */}
-        {/* {img && (
-          <div className="shareImgContainer">
-            <img src={img} style={{ width: 300 }} alt="" className="shareImg" />
-            <CancelIcon
-              className="shareCancelImg "
-              onClick={() => {
-                setImg(null);
-                formik.setFieldValue("data5.mainImage", "");
-              }}
-            />
-          </div>
-        )} */}
-        {/* One File Show by Edit*/}
-        {/* {editMode && mainPhoto && ( */}
         {mainPhoto && (
-          <div className="shareImgContainer">
-            <img
-              // src={mainImg}
-              src={mainPhoto}
-              style={{ width: 300 }}
-              alt=""
-              className="shareImg"
-            />
+          <div className={styles.imgContainer}>
+            <img src={mainPhoto} className={styles.mainImg} alt="Cover Image" />
             <CancelIcon
-              className="shareCancelImg "
               onClick={() => {
-                //setImg(null);
                 setMainPhoto(null);
                 formik.setFieldValue("data5.mainImage", "");
               }}
             />
           </div>
         )}
-        {/* One File Input */}
-        {/* {!img && !mainPhoto && ( */}
+
         {!mainPhoto && (
           <>
-            <div>
-              {" "}
-              <label
-                htmlFor="main_file"
-                className="btn-grey"
-                style={{ cursor: "pointer" }}
-              >
-                Select main file
-              </label>
+            <div className={styles.addImageBtnWrp}>
+              <Button type="button" variant="contained" sx={{ mb: 4 }}>
+                <label htmlFor="main_file" style={{ cursor: "pointer" }}>
+                  Select Cover Image
+                </label>
+              </Button>
               <input
                 style={{ display: "none" }}
                 id="main_file"
                 type="file"
-                // onChange={handleSelectFile}
                 onChange={handleUploadClick}
-                // value={formik.values.data5.mainImage}
                 multiple={false}
                 name="main_file"
                 accept="image/png, image/jpeg, image/jpg"
@@ -131,44 +101,46 @@ const FormFifth = ({
           </>
         )}
         {/* Multi Files Show*/}
-        {imagesArr.length > 0 &&
-          imagesArr.map((image, ind) => (
-            // {allImages.length > 0 &&
-            //   allImages.map((image, ind) => (
-            <div key={ind} className="shareImgContainer">
-              <p>{ind + 1} </p>
-              <img
-                src={image}
-                style={{ width: 300 }}
-                alt=""
-                className="shareImg"
-              />
-              <CancelIcon
-                className="shareCancelImg "
-                onClick={() => {
-                  setImagesArr((prev) => prev.filter((t) => t != image));
-                  //setAllImages((prev) => prev.filter((t) => t != image));
-                  formik.setFieldValue(
-                    "data5.images",
-                    formik.values.data5.images.filter((t) => t !== image)
-                  );
-                }}
-              />{" "}
-            </div>
-          ))}
+
+        {imagesArr.length > 0 && (
+          <div className={styles.multyImagesContainer}>
+            {imagesArr.map((image, ind) => (
+              <div key={ind} className={styles.singleMutltyImgWrp}>
+                {/* <p>{ind + 1} </p> */}
+                <img src={image} alt="" className={styles.singleMutltyImg} />
+                <CancelIcon
+                  className="shareCancelImg "
+                  onClick={() => {
+                    setImagesArr((prev) => prev.filter((t) => t != image));
+                    //setAllImages((prev) => prev.filter((t) => t != image));
+                    formik.setFieldValue(
+                      "data5.images",
+                      formik.values.data5.images.filter((t) => t !== image)
+                    );
+                  }}
+                />{" "}
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* Multi Files Input */}
         {imagesArr.length <= 3 && (
           // {allImages.length <= 3 && (
           <div>
-            <div>
-              <label
+            <div className={styles.addImageBtnWrp}>
+              {/* <label
                 htmlFor="image_files"
                 className="btn-grey"
                 style={{ cursor: "pointer" }}
               >
                 {imagesArr.length === 0 ? "Select files" : "Add files"}
-                {/* {allImages.length === 0 ? "Select files" : "Add files"} */}
-              </label>
+              </label> */}
+              <Button type="button" variant="contained" sx={{ mb: 4 }}>
+                <label htmlFor="image_files" style={{ cursor: "pointer" }}>
+                  {imagesArr.length === 0 ? "Select Images" : "Add Images"}
+                </label>
+              </Button>
               <input
                 style={{ display: "none" }}
                 id="image_files"

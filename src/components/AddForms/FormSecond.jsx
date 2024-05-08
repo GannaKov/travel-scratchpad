@@ -142,7 +142,6 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
               {option}
             </Box>
           )}
-          style={{ width: 500 }}
           renderInput={(params) => (
             <TextField
               {...params}

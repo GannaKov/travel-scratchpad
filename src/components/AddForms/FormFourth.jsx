@@ -2,6 +2,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import truncateUrl from "../../services/truncateUrl";
+import styles from "./Forms.module.css";
 import {
   TextField,
   Button,
@@ -79,17 +80,20 @@ const FormFourth = ({
           variant="outlined"
           fullWidth
         />
+
         <Button
           type="button"
           variant="contained"
-          sx={{ mt: 2 }}
+          sx={{ mb: 4 }}
           onClick={onExpenseAddBtnClick}
+          disabled={!formik.values.data4.item}
         >
           Add
         </Button>
+
         {expenses.length > 0 && (
-          <Box mt={4}>
-            <Typography variant="h6">Added Expenses</Typography>
+          <Box>
+            <p className={styles.subTitle}>Added Expenses</p>
             <List>
               {expenses.map((expense, index) => (
                 <ListItem key={index}>
@@ -131,16 +135,19 @@ const FormFourth = ({
           variant="outlined"
           fullWidth
         />
+
         <Button
           type="button"
           variant="contained"
-          sx={{ mt: 2 }}
+          sx={{ mb: 4 }}
           onClick={onLinkAddBtnClick}
+          disabled={!formik.values.data4.topic}
         >
           Add
         </Button>
+
         {usefulLinks.length > 0 && (
-          <Box mt={4}>
+          <Box>
             <Typography variant="h6">Added Links</Typography>
             <List>
               {usefulLinks.map((link, index) => (
