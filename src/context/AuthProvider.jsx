@@ -34,10 +34,11 @@ const AuthProvider = ({ children }) => {
         // maxAge: maxAge,
       });
     } else {
-      cookies.remove("jwt_authorization");
+      //now in logout
+      //cookies.remove("jwt_authorization"); /////?????
       // if localStorage change back
       //cookies.remove("refresh_token");
-      localStorage.removeItem("refresh_token");
+      //localStorage.removeItem("refresh_token");
       //---------
       setUser({ user: {}, isAuthenticated: false });
     }

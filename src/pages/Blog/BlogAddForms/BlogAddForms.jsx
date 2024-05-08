@@ -1,10 +1,15 @@
+/* eslint-disable react/prop-types */
 import styles from "./BlogAddForms.module.css";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 
 import FormStepper from "../../../components/AddForms/FormStepper/FormStepper";
+import GoBack from "../../../components/GoBack/GoBack";
 
-const BlogAddForms = () => {
+const BlogAddForms = ({ countriesOptions }) => {
+  const backLinkHref = location.state?.from ?? "/blog-main";
+  // console.log("backLinkHref", backLinkHref);
+  // console.log("location.state", location.state);
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -18,7 +23,13 @@ const BlogAddForms = () => {
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <FormStepper />
+          <GoBack state={backLinkHref} />
+        </div>
+      </div>
+
+      <div className={styles.sectionBlog}>
+        <div className={styles.containerBlog}>
+          <FormStepper countriesOptions={countriesOptions} />
           {/* <MobileStepper
             variant="dots"
             steps={6}

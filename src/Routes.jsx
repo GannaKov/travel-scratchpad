@@ -126,7 +126,10 @@ const Routes = () => {
                 },
               ],
             },
-            { path: "/add-form", element: <BlogAddForms /> },
+            {
+              path: "/add-form",
+              element: <BlogAddForms countriesOptions={countriesOptions} />,
+            },
             {
               path: "/profile",
               element: <Profile />,

@@ -33,7 +33,7 @@ import { useNavigate } from "react-router-dom";
 import GoBack from "../../GoBack/GoBack";
 import useAuth from "../../../context/useAuthHook";
 
-const FormStepper = () => {
+const FormStepper = ({ countriesOptions }) => {
   const { token, setToken } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -84,7 +84,7 @@ const FormStepper = () => {
   });
 
   const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
-  const [countriesOptions, setCountriesOptions] = useState([]);
+  //const [countriesOptions, setCountriesOptions] = useState();
   // ---- Formik -----
   const formik = useFormik({
     initialValues: formData,
@@ -263,12 +263,6 @@ const FormStepper = () => {
     getAccommodationType()
       .then((res) => setAccommodTypeOptions(res))
       .catch((error) => console.log(error.status, error.message));
-    getCountriesOptions()
-      .then((result) => {
-        const countryNames = result.data.map((country) => country.name.common);
-        setCountriesOptions(countryNames);
-      })
-      .catch((error) => console.log(error.status, error.message));
   }, []);
   //------- for trip edit
 
@@ -365,58 +359,54 @@ const FormStepper = () => {
     <FormFifth
       key="step5"
       formik={formik}
-      //setFileMain={setFileMain}
-      //fileMain={fileMain}
       saveData={saveStepData(5)}
       editMode={editMode}
-      //mainImg={formik.values.data5.mainImage}
-      // setAllImages={setAllImages} // that for view I will try to change in Form 5
-      //allImages={allImages} // that for view I  will try to change in Form 5
       setImgArrForSubmit={setImgArrForSubmit}
     />,
   ];
 
-  //   const handleSubmit = () => {
-  //     // Отправить formData на бэкенд
-  //     console.log("Submitted data:", formData);
-  //   };
-
   return (
-    <div>
-      <div className={styles.containerBlog}>
+    <div className={styles.formWrp}>
+      {/* <div className={styles.containerBlog}>
         <GoBack state={backLinkHref} />
+      </div> */}
+      <div className={styles.stepperWrp}>
+        {" "}
+        <MobileStepper
+          variant="dots"
+          steps={5}
+          position="static"
+          activeStep={activeStep}
+          sx={{
+            flexGrow: 1,
+            height: "55px",
+            borderRadius: "8px",
+            backgroundColor: "orange",
+          }}
+          nextButton={
+            <Button
+              size="small"
+              onClick={handleNext}
+              disabled={activeStep === steps.length}
+              // disabled={activeStep === 2} ???
+            >
+              Next
+              <KeyboardArrowRight />
+            </Button>
+          }
+          backButton={
+            <Button
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+            >
+              <KeyboardArrowLeft />
+              Back
+            </Button>
+          }
+        />
       </div>
-      <MobileStepper
-        variant="dots"
-        steps={5}
-        position="static"
-        activeStep={activeStep}
-        sx={{ maxWidth: 400, flexGrow: 1 }}
-        nextButton={
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === steps.length}
-            // disabled={activeStep === 2} ???
-          >
-            Next
-            <KeyboardArrowRight />
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            <KeyboardArrowLeft />
-            Back
-          </Button>
-        }
-      />
-      {steps[activeStep]}
-
-      {/* {activeStep === 0 && (
-        <div>
-          <Button type="submit">Finish</Button>
-        </div>
-      )} */}
+      <div> {steps[activeStep]}</div>
     </div>
   );
 };

@@ -93,6 +93,7 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
         </InputLabel>
 
         <Select
+          sx={{ marginBottom: "1.5rem" }}
           labelId="purpose-label"
           id="data2.purpose"
           name="data2.purposes"
@@ -115,6 +116,7 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
 
         {/* ===============Country========================================== */}
         <Autocomplete
+          sx={{ marginBottom: "1.5rem" }}
           id="data2.countries"
           name="data2.countries"
           filterOptions={filterOptions}
@@ -164,6 +166,7 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
         />
         {/* ======================= Cities =============================== */}
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data2.cities"
           name="data2.cities"
           label="Cities"

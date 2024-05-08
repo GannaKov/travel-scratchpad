@@ -15,3 +15,9 @@
   background-color: white;
   /* padding: 0 0.5rem; */
 }
+.ratingWrp {
+  margin-bottom: 1.5rem;
+}
+.tripBoldText {
+  font-weight: 600;
+}

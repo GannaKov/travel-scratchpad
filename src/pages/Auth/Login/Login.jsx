@@ -37,6 +37,7 @@ const Login = () => {
         const res = await loginUser(values);
 
         if (res && res.code === 200) {
+          navigate("/", { replace: true });
           setToken(res.data.tokens.accessToken);
           // cookies.set("jwt_authorization", res.data.tokens.accessToken, {
           //   maxAge: 15 * 60,
@@ -48,7 +49,6 @@ const Login = () => {
           // });
           //-----------------------------
         }
-        navigate("/", { replace: true });
       } catch (error) {
         if (error.response.status === 401) {
           alert(error.response.data.error);

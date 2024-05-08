@@ -39,9 +39,10 @@ const FormFirst = ({ formik, saveData }) => {
     }
   };
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit} >
       <FormControl fullWidth>
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data1.title"
           name="data1.title"
           label="Title"
@@ -54,6 +55,7 @@ const FormFirst = ({ formik, saveData }) => {
           helperText={formik.touched.data1?.title && formik.errors.data1?.title}
         />
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data1.dateBeginn"
           name="data1.dateBeginn"
           label="Start Date"
@@ -71,6 +73,7 @@ const FormFirst = ({ formik, saveData }) => {
           }
         />
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data1.dateEnd"
           name="data1.dateEnd"
           label="End Date"
@@ -87,25 +90,19 @@ const FormFirst = ({ formik, saveData }) => {
           }
           placeholder="DD.MM.YYYY"
         />
-        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer components={["DatePicker"]}>
-            <DemoItem label="Mobile variant">
-              <DatePicker label="Basic date picker" />
-            </DemoItem>
-            <DemoItem label="Desktop variant">
-              <DesktopDatePicker />
-            </DemoItem>
-          </DemoContainer>
-        </LocalizationProvider> */}
-        <Rating
-          precision={0.5}
-          name="data1.ratingTrip"
-          value={formik.values.data1.ratingTrip}
-          onChange={(event, value) =>
-            formik.setFieldValue("data1.ratingTrip", value)
-          }
-        />
+        <div className={styles.ratingWrp}>
+          <Rating
+            precision={0.5}
+            name="data1.ratingTrip"
+            value={formik.values.data1.ratingTrip}
+            onChange={(event, value) =>
+              formik.setFieldValue("data1.ratingTrip", value)
+            }
+          />
+        </div>
+
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data1.totalAmount"
           name="data1.totalAmount"
           label="Total Amount"

@@ -22,7 +22,7 @@ const Root = () => {
           console.log("204");
           setToken(null);
 
-          navigate("/");
+          navigate("/login");
         } else {
           console.log("in effect1", res.accessToken);
           setToken(res.accessToken);
@@ -51,7 +51,7 @@ const Root = () => {
               console.log("204");
               setToken(null);
 
-              navigate("/");
+              navigate("/login");
             } else {
               console.log("in effect2", res.accessToken);
               setToken(res.accessToken);
@@ -62,7 +62,7 @@ const Root = () => {
           .catch((err) => {
             console.log(err);
             setToken(null);
-            navigate("/login");
+            navigate("/");
           });
       }, refreshTime);
     }
@@ -77,6 +77,8 @@ const Root = () => {
   const handleLogout = () => {
     logoutUser();
     setToken(null);
+    cookies.remove("jwt_authorization");
+    localStorage.removeItem("refresh_token");
 
     navigate("/", { replace: true });
   };
@@ -110,7 +112,7 @@ const Root = () => {
                       : `${styles.headerNavLink}`
                   }
                 >
-                  BlogMain
+                  My Trips
                 </NavLink>
               </li>
             )}
@@ -124,7 +126,7 @@ const Root = () => {
                       : `${styles.headerNavLink}`
                   }
                 >
-                  BlogAdd
+                  Add
                 </NavLink>
               </li>
             )}

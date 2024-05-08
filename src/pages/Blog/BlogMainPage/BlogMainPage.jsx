@@ -15,20 +15,19 @@ const BlogMainPage = ({
   setSelectedCountry,
 }) => {
   const allOwnTripsList = useLoaderData();
+  const navigate = useNavigate();
   const uniqueCountries = [
     ...new Set(allOwnTripsList.flatMap((item) => item.countries)),
   ];
-  console.log("uniqueCountries", uniqueCountries);
-
-  // useEffect(() => {
-  //   // После загрузки данных сбрасываем selectedCountry на null
-  //   setSelectedCountry(null);
-  // }, [allOwnTripsList, setSelectedCountry]);
 
   const handleChangeCountry = (event, value) => {
     setSelectedCountry(value);
   };
+  const handleAddBtnClick = () => {
+    const from = location.pathname;
 
+    navigate("/add-form", { state: { from } });
+  };
   return (
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
@@ -47,7 +46,14 @@ const BlogMainPage = ({
       </div>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <p>Add Travel</p>
+          <p className={styles.subTitle}>Add Your Travel</p>
+          <button
+            className={styles.addBtn}
+            type="button"
+            onClick={handleAddBtnClick}
+          >
+            Add
+          </button>
         </div>
       </div>
       <div className={styles.sectionBlog}>

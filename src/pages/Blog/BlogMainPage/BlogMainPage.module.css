@@ -10,10 +10,20 @@
 .containerBlog {
   padding-left: 1rem;
   padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 .boldText {
   font-weight: 600;
   font-size: 1.4rem;
   text-align: center;
   margin-bottom: 1rem;
+}
+.subTitle {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.addBtn {
+  margin: 0 auto;
 }

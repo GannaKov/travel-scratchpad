@@ -94,3 +94,17 @@ img {
 .slick-dots li:not(:last-child) {
   margin-right: 20px;
 }
+/* mui Country Input */
+/* .MuiAutocomplete-hasPopupIcon.css-clttge-MuiAutocomplete-root
+  .MuiOutlinedInput-root {
+  border: 1px solid red;
+  outline: 1px solid transparent;
+} */
+
+/* MobileStepper  */
+.MuiMobileStepper-root .MuiMobileStepper-dotActive {
+  background-color: white;
+}
+/* .MuiButtonBase-root .MuiButton-root.MuiButton-colorPrimary {
+  color: white !important;
+} */

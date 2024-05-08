@@ -56,6 +56,7 @@ const FormFourth = ({
     <div>
       <form onSubmit={formik.handleSubmit}>
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data4.item"
           name="data4.item"
           label="Expense Item"
@@ -65,6 +66,7 @@ const FormFourth = ({
           fullWidth
         />
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data4.amount"
           name="data4.amount"
           label="Amount"
@@ -110,6 +112,7 @@ const FormFourth = ({
 
         {/* ------ Links ------- */}
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data4.topic"
           name="data4.topic"
           label="Topic"
@@ -119,6 +122,7 @@ const FormFourth = ({
           fullWidth
         />
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data4.link"
           name="data4.link"
           label="Link"
@@ -165,6 +169,7 @@ const FormFourth = ({
         {/* ------ end Links ------- */}
         <div>
           <TextField
+            sx={{ marginBottom: "1.5rem" }}
             id="data4.advices"
             label="Advices"
             value={formik.values.data4.advices}

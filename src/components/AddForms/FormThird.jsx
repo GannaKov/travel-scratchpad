@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import StarsShow from "../Shared/Stars/StarsShow";
 import { useFormik } from "formik";
+import styles from "./Forms.module.css";
 import truncateUrl from "../../services/truncateUrl";
 import {
   FormControl,
@@ -29,44 +30,9 @@ const FormThird = ({
   setAccommodationArr,
   accommodationArr,
 }) => {
-  // const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
-  // console.log("formik.values.data3", formik.values.data3);
-
-  // useEffect(() => {
-  //   getAccommodationType()
-  //     .then((res) => setAccommodTypeOptions(res))
-  //     .catch((error) => console.log(error.status, error.message));
-  // }, []);
-
-  // useEffect(() => {
-  //   // При монтировании компонента FormThird, устанавливаем значение Select
-  //   if (!formik.values.data3.type && accommodTypeOptions.length > 0) {
-  //     // Если значение не установлено и есть доступные опции
-  //     const defaultType = accommodTypeOptions.includes("Hotel")
-  //       ? "Hotel"
-  //       : accommodTypeOptions[0];
-  //     formik.setFieldValue("data3.type", defaultType); // Устанавливаем значение по умолчанию
-  //   }
-  // }, [formik.values.data3.type, accommodTypeOptions, formik]);
-  // const initialValues = {
-  //   type: "",
-  //   link: "",
-  //   price: null,
-  //   ratingAccommodation: null,
-  //   review: "",
-  // };
-  // const formik = useFormik({
-  //   initialValues,
-  //   onSubmit: (values) => {
-  //     console.log("Submitted values:", values);
-  //   },
-  // });
-  // const handleRatingChange = (event, value) => {
-  //   formik.setFieldValue("ratingAccommodation", value);
-  // };
-
   const onAddAccommodationClick = () => {
     const { type, link, price, rating, review } = formik.values.data3;
+
     setAccommodationArr((prev) => [
       ...prev,
       { type, link, price, rating, review },
@@ -77,6 +43,7 @@ const FormThird = ({
     formik.setFieldValue("data3.rating", null);
     formik.setFieldValue("data3.review", "");
   };
+
   const handleRemove = (index) => {
     setAccommodationArr((prev) => prev.filter((_, i) => i !== index));
   };
@@ -85,6 +52,7 @@ const FormThird = ({
       <FormControl fullWidth>
         <InputLabel id="accommodation-type">Accommodation</InputLabel>
         <Select
+          sx={{ marginBottom: "1.5rem" }}
           labelId="accommodation-type"
           id="data3.type"
           name="data3.type"
@@ -101,6 +69,7 @@ const FormThird = ({
             ))}
         </Select>
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data3.link"
           value={formik.values.data3.link}
           label="Link"
@@ -108,6 +77,7 @@ const FormThird = ({
           onChange={formik.handleChange}
         />
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data3.price"
           label="Price"
           variant="outlined"
@@ -116,15 +86,19 @@ const FormThird = ({
           }
           onChange={formik.handleChange}
         />
-        <Rating
-          precision={0.5}
-          name="data3.rating"
-          value={formik.values.data3.rating}
-          onChange={(event, value) =>
-            formik.setFieldValue("data3.rating", value)
-          }
-        />
+        <div className={styles.ratingWrp}>
+          <Rating
+            precision={0.5}
+            name="data3.rating"
+            value={formik.values.data3.rating}
+            onChange={(event, value) =>
+              formik.setFieldValue("data3.rating", value)
+            }
+          />
+        </div>
+
         <TextField
+          sx={{ marginBottom: "1.5rem" }}
           id="data3.review"
           label="Review"
           value={formik.values.data3.review}
@@ -133,14 +107,16 @@ const FormThird = ({
           onChange={formik.handleChange}
         />
       </FormControl>
-      <Button
-        type="button"
-        variant="contained"
-        sx={{ mt: 2 }}
-        onClick={onAddAccommodationClick}
-      >
-        Add
-      </Button>
+      {(formik.values.data3.type || formik.values.data3.link) && (
+        <Button
+          type="button"
+          variant="contained"
+          sx={{ mt: 2 }}
+          onClick={onAddAccommodationClick}
+        >
+          Add
+        </Button>
+      )}
       {accommodationArr.length > 0 && (
         <Box mt={4}>
           <Typography variant="h6">Added Accommodation</Typography>
@@ -151,8 +127,7 @@ const FormThird = ({
                   <ListItemText
                     sx={{ display: "flex", gap: "1rem" }}
                     primary={`${accommodation.type} :`}
-                  />
-                  <span>
+                  >
                     <a
                       href={accommodation.link}
                       target="_blank"
@@ -160,7 +135,8 @@ const FormThird = ({
                     >
                       {truncateUrl(accommodation.link)}
                     </a>
-                  </span>
+                  </ListItemText>
+
                   <StarsShow rating={accommodation.rating} isReadOnly={true} />
                   <ListItemText
                     sx={{ display: "flex", gap: "1rem" }}
