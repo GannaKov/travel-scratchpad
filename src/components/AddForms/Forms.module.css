@@ -67,3 +67,9 @@
 .singleMutltyImg {
   width: 200px;
 }
+.addImageText {
+  font-size: 1.1rem;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}

@@ -46,8 +46,8 @@ const FormFifth = ({
     try {
       const files = event.target.files;
 
-      if (files && files.length > 4) {
-        alert(`Only 4 images will be upladed`);
+      if (files && files.length > 6) {
+        alert(`Only 6 images will be upladed`);
       }
       if (files) {
         Array.from(files).forEach((file) => {
@@ -68,18 +68,7 @@ const FormFifth = ({
   return (
     <div className="App">
       <form onSubmit={formik.handleSubmit}>
-        {mainPhoto && (
-          <div className={styles.imgContainer}>
-            <img src={mainPhoto} className={styles.mainImg} alt="Cover Image" />
-            <CancelIcon
-              onClick={() => {
-                setMainPhoto(null);
-                formik.setFieldValue("data5.mainImage", "");
-              }}
-            />
-          </div>
-        )}
-
+        <p className={styles.addImageText}>Add your cover image</p>
         {!mainPhoto && (
           <>
             <div className={styles.addImageBtnWrp}>
@@ -99,6 +88,17 @@ const FormFifth = ({
               />
             </div>
           </>
+        )}
+        {mainPhoto && (
+          <div className={styles.imgContainer}>
+            <img src={mainPhoto} className={styles.mainImg} alt="Cover Image" />
+            <CancelIcon
+              onClick={() => {
+                setMainPhoto(null);
+                formik.setFieldValue("data5.mainImage", "");
+              }}
+            />
+          </div>
         )}
         {/* Multi Files Show*/}
 
@@ -125,7 +125,8 @@ const FormFifth = ({
         )}
 
         {/* Multi Files Input */}
-        {imagesArr.length <= 3 && (
+        <p className={styles.addImageText}>You can add 6 images</p>
+        {imagesArr.length <= 5 && (
           // {allImages.length <= 3 && (
           <div>
             <div className={styles.addImageBtnWrp}>
@@ -155,6 +156,7 @@ const FormFifth = ({
             </div>
           </div>
         )}
+
         <Button type="submit">Finish now?</Button>
       </form>
     </div>

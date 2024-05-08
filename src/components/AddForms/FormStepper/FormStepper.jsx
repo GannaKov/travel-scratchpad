@@ -157,21 +157,11 @@ const FormStepper = ({ countriesOptions }) => {
 
       setFormData(updatedValues);
 
-      //img + backend
-      // if (formik.values.data5.mainImage || imgArrForSubmit.length > 0) {
-      //   const sliced = imgArrForSubmit.slice(0, 4);
-      //   const imagesArr = [formik.values.data5.mainImage, ...sliced];
-      //   await formik.setFieldValue(`data5.images`, imagesArr);
-      // }
-
       const data = new FormData();
       data.append("data", JSON.stringify(updatedForBackend));
 
       // for Adding! not Edit
       if (!editMode) {
-        // const sliced = imgArrForSubmit.slice(0, 4);
-        // const imagesArr = [formik.values.data5.mainImage, ...sliced];
-
         let imagesArr = [];
         if (formik.values.data5.mainImage) {
           imagesArr = [formik.values.data5.mainImage, ...imgArrForSubmit].slice(
@@ -179,13 +169,14 @@ const FormStepper = ({ countriesOptions }) => {
             5
           );
         } else {
-          imagesArr = [...imgArrForSubmit].slice(0, 5);
+          imagesArr = [...imgArrForSubmit].slice(0, 7);
         }
 
-        console.log(
-          "formik.values.data5.images before",
-          formik.values.data5.images
-        );
+        // console.log(
+        //   "formik.values.data5.images before",
+        //   formik.values.data5.images
+        // );
+
         await formik.setFieldValue(`data5.images`, imagesArr); // why?????
         for (let i = 0; i < imagesArr.length; i++) {
           data.append("image_files", imagesArr[i]);
@@ -193,12 +184,12 @@ const FormStepper = ({ countriesOptions }) => {
         }
 
         console.log("imgArrForSubmit", imgArrForSubmit);
-        console.log(
-          "formik.values.data5.images after",
-          formik.values.data5.images
-        );
+        // console.log(
+        //   "formik.values.data5.images after",
+        //   formik.values.data5.images
+        // );
 
-        console.log("imagesArr", imagesArr);
+        // console.log("imagesArr", imagesArr);
       }
       // ---- end for adding not edit
 
@@ -228,23 +219,21 @@ const FormStepper = ({ countriesOptions }) => {
         if (formik.values.data5.images.length > 0) {
           oldImages.push(...formik.values.data5.images);
         }
-        console.log("imgArrForSubmit", imgArrForSubmit);
+        // console.log("imgArrForSubmit", imgArrForSubmit);
         if (imgArrForSubmit.length > 0) {
           newImages.push(...imgArrForSubmit);
         }
-        console.log("old", oldImages);
-        console.log("new", newImages);
+        // console.log("old", oldImages);
+        // console.log("new", newImages);
         const oldImgLength = oldImages.length;
-        console.log("oldImgLength", oldImgLength);
+        // console.log("oldImgLength", oldImgLength);
         const sliceFor = 5 - oldImgLength;
         const slicedNewImages = newImages.slice(0, sliceFor);
 
         for (let i = 0; i < slicedNewImages.length; i++) {
           data.append("image_files", slicedNewImages[i]);
         }
-        // oldImages.forEach((image) => {
-        //   data.append("old_images", image);
-        // });
+
         for (let i = 0; i < oldImages.length; i++) {
           data.append("old_images", oldImages[i]);
         }
