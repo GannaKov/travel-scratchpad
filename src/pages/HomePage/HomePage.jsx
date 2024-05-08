@@ -2,13 +2,9 @@
 import MainList from "../../components/Shared/MainList/MainList";
 import Select from "../../components/Shared/Select/Select";
 import styles from "./HomePage.module.css";
-import {
-  useNavigate,
-  useLoaderData,
-  useLocation,
-  Link,
-} from "react-router-dom";
+import { useNavigate, useLoaderData, useLocation } from "react-router-dom";
 import useAuth from "../../context/useAuthHook";
+import heroImg from "../../assets/images/hand-writing-notebook-near-tourist-stuff.jpg";
 
 const HomePage = ({
   countriesOptions,
@@ -37,10 +33,9 @@ const HomePage = ({
 
   return (
     <div className={styles.pageWrpapper}>
-      <div className={styles.sectionBlog}>
-        <div className={styles.containerBlog}>
-          <p>MapHome</p>
-        </div>
+      <div className={styles.sectionHero}>
+        <div className={styles.containerHero}></div>
+        {/* <img src={heroImg} alt="Travel image" /> */}
       </div>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>

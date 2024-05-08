@@ -16,7 +16,9 @@ import Carousel from "../../../components/Shared/Carousel/Carousel";
 
 const BlogSinglePage = () => {
   const { token, setToken } = useAuth();
+  const { user, setUser } = useAuth();
   const singleTrip = useLoaderData();
+  console.log("singleTrip", singleTrip.owner, "user", user);
   const location = useLocation();
   const backLinkHref = location.state?.from ?? "/blog-main";
   const navigate = useNavigate();
@@ -41,7 +43,6 @@ const BlogSinglePage = () => {
           <p>single Map</p>
         </div>
       </div>
-
       {/* ---- Card ---------- */}
       <div className={styles.sectionBlog}>
         <div className={styles.exp}>
@@ -53,22 +54,36 @@ const BlogSinglePage = () => {
         </div>
       </div>
       {/* ----end Card ---------- */}
-      <div className={styles.sectionBlog}>
-        <div className={styles.containerBlog}>
-          <p>single Photos</p>
+      {user.user.id && user.user.id === singleTrip.owner && (
+        <div className={styles.btnWrp}>
+          {" "}
+          <Link
+            to={`/add-form?mode=true&id=${singleTrip._id}`}
+            state={`/blog-main/${singleTrip._id}`}
+          >
+            <button type="button">Edit</button>
+          </Link>
+          <button type="button" onClick={handleDeleteClick}>
+            Delete
+          </button>
         </div>
-      </div>
-      <Link
-        to={`/add-form?mode=true&id=${singleTrip._id}`}
-        state={`/blog-main/${singleTrip._id}`}
-      >
-        <button type="button">Edit</button>
-      </Link>
-      <button type="button" onClick={handleDeleteClick}>
-        Delete
-      </button>
-      <div className={styles.sectionBlog}>
-        <Carousel images={singleTrip.images} />
+      )}
+      {singleTrip.images.length > 0 && (
+        <div className={styles.sectionBlog}>
+          {singleTrip.images.length > 1 ? (
+            <Carousel images={singleTrip.images} />
+          ) : (
+            <img src={singleTrip.images[0]} style={{ width: 400 }} />
+          )}
+        </div>
+      )}
+      <div>
+        {singleTrip.images.length === 0 &&
+          user.user.id === singleTrip.owner && (
+            <div className={styles.sectionBlog}>
+              <p>Add your Photos !</p>
+            </div>
+          )}
       </div>
     </div>
   );

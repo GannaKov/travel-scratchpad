@@ -3,6 +3,32 @@
   flex-direction: column;
   align-items: center;
 }
+.sectionHero {
+  width: 100%;
+  padding: 118px 0;
+  max-width: 1600px;
+
+  /* linear-gradient(
+      rgba(58, 59, 63, 0.4),
+      rgba(174, 166, 188, 0.4)
+    ), */
+  background-image: url("../../assets/images/hand-writing-notebook-near-tourist-stuff.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 800px) {
+  .sectionHero {
+    padding: 200px 0;
+  }
+}
+.containerHero {
+  width: 300px;
+  height: 100px;
+  margin: 0 auto;
+}
+
 .sectionBlog {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -13,6 +39,22 @@
   display: flex;
   flex-direction: column;
 }
+@media screen and(min-width: 480x) {
+  .containerBlog {
+    max-width: 480px;
+  }
+}
+@media screen and(min-width: 768px) {
+  .containerBlog {
+    max-width: 768px;
+  }
+}
+@media screen and(min-width: 1200px) {
+  .containerBlog {
+    max-width: 1200px;
+  }
+}
+
 .subTitle {
   margin-bottom: 1.5rem;
 }

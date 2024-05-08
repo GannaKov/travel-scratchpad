@@ -43,7 +43,7 @@ const Login = () => {
           // });
           cookies.set("refresh_token", res.data.tokens.refreshToken, {
             maxAge: 30 * 24 * 60 * 60,
-          }); //?????????
+          });
         }
         navigate("/", { replace: true });
       } catch (error) {
