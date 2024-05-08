@@ -186,9 +186,9 @@ export const setAuthHeader = (token) => {
 };
 
 // Utility to remove JWT
-export const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = "";
-};
+// export const clearAuthHeader = () => {
+//   axios.defaults.headers.common.Authorization = "";
+// };
 //-----
 // logout
 export const logoutUser = async () => {
@@ -211,8 +211,17 @@ export const getUserById = async (id) => {
 };
 // Function to refresh tokens
 export const refreshToken = async () => {
+  // if localStorage
+  const refreshToken = localStorage.getItem("refresh_token");
+  console.log("in refr", refreshToken);
+  //-------
   const { data } = await instance.get(`/auth/refresh_token`, {
     withCredentials: true,
+    // if localStorage
+    headers: {
+      Authorization: `Bearer ${refreshToken}`,
+    },
+    //--------
   });
 
   return data;

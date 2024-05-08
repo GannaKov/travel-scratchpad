@@ -15,7 +15,10 @@ const BlogMainPage = ({
   setSelectedCountry,
 }) => {
   const allOwnTripsList = useLoaderData();
-  console.log("allOwnTripsList", allOwnTripsList);
+  const uniqueCountries = [
+    ...new Set(allOwnTripsList.flatMap((item) => item.countries)),
+  ];
+  console.log("uniqueCountries", uniqueCountries);
 
   // useEffect(() => {
   //   // После загрузки данных сбрасываем selectedCountry на null
@@ -35,6 +38,15 @@ const BlogMainPage = ({
       </div>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
+          <p className={styles.boldText}>
+            Horray! You have already visited {uniqueCountries.length}{" "}
+            countries!🌸
+          </p>
+          <p className={styles.boldText}> Do not stop!</p>
+        </div>
+      </div>
+      <div className={styles.sectionBlog}>
+        <div className={styles.containerBlog}>
           <p>Add Travel</p>
         </div>
       </div>
@@ -42,19 +54,6 @@ const BlogMainPage = ({
         <div className={styles.containerBlog} style={{ display: "flex" }}>
           {/* ===============Country========================================== */}
 
-          {/* <Autocomplete
-            id="country"
-            autoHighlight
-            value={selectedCountry}
-            onChange={handleChangeCountry}
-            disableCloseOnSelect
-            options={countriesOptions}
-            getOptionLabel={(option) => option}
-            style={{ width: 500 }}
-            renderInput={(params) => (
-              <TextField {...params} label="Choose a country" />
-            )}
-          /> */}
           <Select
             //selectedValue, handleChange, valueOptions
             selectedValue={selectedCountry}

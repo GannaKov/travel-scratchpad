@@ -35,7 +35,10 @@ const AuthProvider = ({ children }) => {
       });
     } else {
       cookies.remove("jwt_authorization");
-      cookies.remove("refresh_token");
+      // if localStorage change back
+      //cookies.remove("refresh_token");
+      localStorage.removeItem("refresh_token");
+      //---------
       setUser({ user: {}, isAuthenticated: false });
     }
   }, [token]);
