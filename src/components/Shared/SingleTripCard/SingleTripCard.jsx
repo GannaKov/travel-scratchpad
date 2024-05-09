@@ -5,22 +5,32 @@ import StarsShow from "../Stars/StarsShow";
 import truncateUrl from "../../../services/truncateUrl";
 import styles from "./SingleTripCard.module.css";
 import TravelPlaceholder from "../../../assets/images/3d-character-emerging-from-smartphone.jpg";
+import Carousel from "../Carousel/Carousel";
 
 const SingleTripCard = ({ singleTrip }) => {
   return (
     <div className={styles.tripWrp}>
+      {/* {singleTrip.images.length > 0 && (
+        <div className={styles.sectionBlog}>
+          {singleTrip.images.length > 1 ? (
+            <Carousel images={singleTrip.images} />
+          ) : (
+            <img src={singleTrip.images[0]} style={{ width: 400 }} />
+          )}
+        </div>
+      )} */}
       <h1 className={styles.tripItemTitle}>{singleTrip.title}</h1>
       <div className={styles.tripChunk}>
         <StarsShow rating={singleTrip.travel_rating} isReadOnly={true} />
       </div>
 
-      <div className={styles.tripImageWrp}>
+      {/* <div className={styles.tripImageWrp}>
         {singleTrip.main_img ? (
           <img src={singleTrip.main_img} className={styles.tripItemImg} />
         ) : (
           <img src={TravelPlaceholder} className={styles.tripItemImg} />
         )}
-      </div>
+      </div> */}
       <div className={styles.tripInfoWrp}>
         {" "}
         <p className={styles.tripItemDate}>

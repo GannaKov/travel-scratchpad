@@ -36,7 +36,7 @@ const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
 );
 const Carousel = ({ images }) => {
   console.log("images", images);
-  var settings = {
+  const settings = {
     customPaging: function (i) {
       return (
         <a>
@@ -55,7 +55,8 @@ const Carousel = ({ images }) => {
     prevArrow: <SlickArrowLeft />,
     autoplay: true,
     speed: 2000,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 4000,
+    pauseOnHover: true,
     cssEase: "linear",
   };
   return (
@@ -63,8 +64,8 @@ const Carousel = ({ images }) => {
       <Slider {...settings}>
         {/* <img src={baseUrl + "/abstract01.jpg"} /> */}
         {images.map((item) => (
-          <div key={item} className={styles.imgWrp}>
-            <img src={item} />
+          <div key={item}>
+            <img src={item} className={styles.imgWrp} />
           </div>
         ))}
       </Slider>

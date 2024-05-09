@@ -172,15 +172,13 @@ const FormStepper = ({ countriesOptions }) => {
           imagesArr = [...imgArrForSubmit].slice(0, 7);
         }
 
-        console.log("formik.values.data3.type", formik.values.data3.type);
-
         await formik.setFieldValue(`data5.images`, imagesArr); // why?????
         for (let i = 0; i < imagesArr.length; i++) {
           data.append("image_files", imagesArr[i]);
           //console.log("in append", imagesArr[i]);
         }
 
-        console.log("imgArrForSubmit", imgArrForSubmit);
+        // console.log("imgArrForSubmit", imgArrForSubmit);
         // console.log(
         //   "formik.values.data5.images after",
         //   formik.values.data5.images
@@ -193,15 +191,11 @@ const FormStepper = ({ countriesOptions }) => {
       // data.append("main_file", mainFile);
 
       if (editMode) {
-        console.log(
-          "formik.values.data5.images before",
-          formik.values.data5.images
-        );
-        console.log(
-          "formik.values.data5.mainImage",
-          typeof formik.values.data5.mainImage,
-          formik.values.data5.mainImage
-        );
+        // console.log(
+        //   "formik.values.data5.images before",
+        //   formik.values.data5.images
+        // );
+
         let oldImages = [];
         let newImages = [];
 
@@ -248,6 +242,7 @@ const FormStepper = ({ countriesOptions }) => {
   });
 
   // ---- end  Formik -----
+
   //-----
   useEffect(() => {
     getAccommodationType()
@@ -265,6 +260,9 @@ const FormStepper = ({ countriesOptions }) => {
         setExpenses(response.expenses);
         setUsefulLinks(response.useful_links);
         // setAllImages(response.images.slice(1));
+        // For show when Edit !???
+        setMainPhoto(response.main_img);
+        setImagesArr(response.images.slice(1));
         //setImgArrForSubmit(response.images); // And?????
         formik.setValues({
           data1: {

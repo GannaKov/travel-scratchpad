@@ -1,11 +1,16 @@
 .sliderContainer {
   padding: 20px;
-  width: 400px;
+  width: 800px;
+  background-color: white;
+
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px,
     rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
   border-radius: 8px;
+  margin: 0 auto;
 }
 
 /* .imgWrp {
-  width: 400px;
+  height: 600px;
+  width: 100%;
+  object-fit: cover;
 } */

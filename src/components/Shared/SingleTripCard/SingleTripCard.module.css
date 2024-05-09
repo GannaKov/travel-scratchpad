@@ -1,7 +1,9 @@
 .tripWrp {
+  width: 800px;
   border: 1px solid gray;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   padding: 3rem 2rem;
   font-size: 1.2rem;
   text-align: center;
@@ -9,7 +11,7 @@
     rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
   border-radius: 8px;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  /* background-color: #f8fafa; */
+  background-color: #ffffff;
 }
 .tripImageWrp {
   border-radius: 5px;

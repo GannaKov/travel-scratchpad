@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { deleteOneTrip, getTripById } from "../../../services/requests";
 import useAuth from "../../../context/useAuthHook";
 import Carousel from "../../../components/Shared/Carousel/Carousel";
+import TravelPlaceholder from "../../../assets/images/3d-character-emerging-from-smartphone.jpg";
 
 const BlogSinglePage = () => {
   const { token, setToken } = useAuth();
@@ -33,57 +34,62 @@ const BlogSinglePage = () => {
   //----
   return (
     <div className={styles.pageWrpapper}>
-      <div className={styles.sectionBlog}>
-        <div className={styles.containerBlog}>
-          <GoBack state={backLinkHref} />
-        </div>
-      </div>
-      <div className={styles.sectionBlog}>
+      {/* <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
           <p>single Map</p>
         </div>
+      </div> */}
+      <div className={styles.topWrapper}>
+        <div className={styles.sectionBlog}>
+          <div className={styles.containerBlog}>
+            <GoBack state={backLinkHref} />
+          </div>
+        </div>
+        <div>
+          {singleTrip.images.length === 0 &&
+            user.user.id === singleTrip.owner && (
+              <div className={styles.sectionBlog}>
+                <p>Add your Photos !</p>
+              </div>
+            )}
+        </div>
+        {/*-----  Carousel ------*/}
+        {singleTrip.images.length > 0 && (
+          <div className={styles.carouselWrp}>
+            {singleTrip.images.length > 1 ? (
+              <Carousel images={singleTrip.images} />
+            ) : (
+              <img src={singleTrip.images[0]} style={{ width: 400 }} />
+            )}
+          </div>
+        )}
       </div>
-      {/* ---- Card ---------- */}
-      <div className={styles.sectionBlog}>
-        <div className={styles.exp}>
+
+      {/*----- end  Carousel ------*/}
+      <div className={styles.sectionsInfoWrp}>
+        {/* ---- Card ---------- */}
+        <div className={styles.sectionBlog}>
           {" "}
           <div className={styles.containerBlog}>
             {" "}
             {singleTrip && <SingleTripCard singleTrip={singleTrip} />}
           </div>
         </div>
-      </div>
-      {/* ----end Card ---------- */}
-      {user.user.id && user.user.id === singleTrip.owner && (
-        <div className={styles.btnWrp}>
-          {" "}
-          <Link
-            to={`/add-form?mode=true&id=${singleTrip._id}`}
-            state={`/blog-main/${singleTrip._id}`}
-          >
-            <button type="button">Edit</button>
-          </Link>
-          <button type="button" onClick={handleDeleteClick}>
-            Delete
-          </button>
-        </div>
-      )}
-      {singleTrip.images.length > 0 && (
-        <div className={styles.sectionBlog}>
-          {singleTrip.images.length > 1 ? (
-            <Carousel images={singleTrip.images} />
-          ) : (
-            <img src={singleTrip.images[0]} style={{ width: 400 }} />
-          )}
-        </div>
-      )}
-      <div>
-        {singleTrip.images.length === 0 &&
-          user.user.id === singleTrip.owner && (
-            <div className={styles.sectionBlog}>
-              <p>Add your Photos !</p>
-            </div>
-          )}
+        {/* ----end Card ---------- */}
+        {user.user.id && user.user.id === singleTrip.owner && (
+          <div className={styles.btnWrp}>
+            {" "}
+            <Link
+              to={`/add-form?mode=true&id=${singleTrip._id}`}
+              state={`/blog-main/${singleTrip._id}`}
+            >
+              <button type="button">Edit</button>
+            </Link>
+            <button type="button" onClick={handleDeleteClick}>
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -3,18 +3,34 @@
   flex-direction: column;
   align-items: center;
   padding-bottom: 5rem;
+  background-image: url("../../../assets/images/h2-bckg-05.jpg");
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
 }
 .sectionBlog {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+
+.carouselWrp {
+  padding-top: 2rem;
+  padding-bottom: 6rem;
+}
 .containerBlog {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+.topWrapper {
+  width: 100%;
+}
+.sectionsInfoWrp {
+  width: 100%;
+}
 .btnWrp {
   display: flex;
   gap: 3rem;
+  justify-content: center;
 }
 /* .exp {
   background-image: url("../../../assets/images/notebook_flat_style.jpg");
