@@ -68,6 +68,8 @@
 
 .subTitle {
   margin-bottom: 1.5rem;
+  font-weight: 500;
+  font-size: 1.5rem;
 }
 .addBtn {
   margin: 0 auto;

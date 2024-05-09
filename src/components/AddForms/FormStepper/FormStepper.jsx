@@ -172,10 +172,7 @@ const FormStepper = ({ countriesOptions }) => {
           imagesArr = [...imgArrForSubmit].slice(0, 7);
         }
 
-        // console.log(
-        //   "formik.values.data5.images before",
-        //   formik.values.data5.images
-        // );
+        console.log("formik.values.data3.type", formik.values.data3.type);
 
         await formik.setFieldValue(`data5.images`, imagesArr); // why?????
         for (let i = 0; i < imagesArr.length; i++) {

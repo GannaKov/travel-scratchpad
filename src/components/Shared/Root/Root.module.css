@@ -68,6 +68,12 @@
   padding-bottom: 10px;
   font-size: 1.3rem;
   color: black;
+  font-family: Oswald, sans-serif;
+  font-style: normal;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 28px;
+  text-transform: uppercase;
 }
 .headerNavLink:is(:hover, :focus) {
   text-decoration: underline;
@@ -75,7 +81,8 @@
 }
 .headerNavLink.active {
   font-size: 1.3rem;
-  color: rgb(227, 87, 180);
+  /* color: rgb(227, 87, 180); */
+  color: rgb(89, 129, 91);
   text-decoration: underline;
   text-decoration-thickness: 0.1rem;
 }

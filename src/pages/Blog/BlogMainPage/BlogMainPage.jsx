@@ -46,7 +46,7 @@ const BlogMainPage = ({
       </div>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <p className={styles.subTitle}>Add Your Travel</p>
+          <h3 className={styles.subTitle}>Add Your Travel</h3>
           <button
             className={styles.addBtn}
             type="button"
