@@ -32,6 +32,11 @@
   gap: 3rem;
   justify-content: center;
 }
+.subTitle {
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
 /* .exp {
   background-image: url("../../../assets/images/notebook_flat_style.jpg");
   background-size: 150% 100%;

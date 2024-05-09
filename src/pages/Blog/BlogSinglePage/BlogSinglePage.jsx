@@ -39,58 +39,56 @@ const BlogSinglePage = () => {
           <p>single Map</p>
         </div>
       </div> */}
-      <div className={styles.topWrapper}>
-        <div className={styles.sectionBlog}>
-          <div className={styles.containerBlog}>
-            <GoBack state={backLinkHref} />
-          </div>
+
+      <div className={styles.sectionBlog}>
+        <div className={styles.containerBlog}>
+          <GoBack state={backLinkHref} />
         </div>
-        <div>
-          {singleTrip.images.length === 0 &&
-            user.user.id === singleTrip.owner && (
-              <div className={styles.sectionBlog}>
-                <p>Add your Photos !</p>
-              </div>
-            )}
-        </div>
-        {/*-----  Carousel ------*/}
-        {singleTrip.images.length > 0 && (
-          <div className={styles.carouselWrp}>
-            {singleTrip.images.length > 1 ? (
-              <Carousel images={singleTrip.images} />
-            ) : (
-              <img src={singleTrip.images[0]} style={{ width: 400 }} />
-            )}
-          </div>
-        )}
       </div>
+      <div>
+        {singleTrip.images.length === 0 &&
+          user.user.id === singleTrip.owner && (
+            <div className={styles.sectionBlog}>
+              <h3 className={styles.subTitle}>Add your Photos !</h3>
+            </div>
+          )}
+      </div>
+      {/*-----  Carousel ------*/}
+      {singleTrip.images.length > 0 && (
+        <div className={styles.carouselWrp}>
+          {singleTrip.images.length > 1 ? (
+            <Carousel images={singleTrip.images} />
+          ) : (
+            <img src={singleTrip.images[0]} style={{ width: 400 }} />
+          )}
+        </div>
+      )}
 
       {/*----- end  Carousel ------*/}
-      <div className={styles.sectionsInfoWrp}>
-        {/* ---- Card ---------- */}
-        <div className={styles.sectionBlog}>
+
+      {/* ---- Card ---------- */}
+      <div className={styles.sectionBlog}>
+        {" "}
+        <div className={styles.containerBlog}>
           {" "}
-          <div className={styles.containerBlog}>
-            {" "}
-            {singleTrip && <SingleTripCard singleTrip={singleTrip} />}
-          </div>
+          {singleTrip && <SingleTripCard singleTrip={singleTrip} />}
         </div>
-        {/* ----end Card ---------- */}
-        {user.user.id && user.user.id === singleTrip.owner && (
-          <div className={styles.btnWrp}>
-            {" "}
-            <Link
-              to={`/add-form?mode=true&id=${singleTrip._id}`}
-              state={`/blog-main/${singleTrip._id}`}
-            >
-              <button type="button">Edit</button>
-            </Link>
-            <button type="button" onClick={handleDeleteClick}>
-              Delete
-            </button>
-          </div>
-        )}
       </div>
+      {/* ----end Card ---------- */}
+      {user.user.id && user.user.id === singleTrip.owner && (
+        <div className={styles.btnWrp}>
+          {" "}
+          <Link
+            to={`/add-form?mode=true&id=${singleTrip._id}`}
+            state={`/blog-main/${singleTrip._id}`}
+          >
+            <button type="button">Edit</button>
+          </Link>
+          <button type="button" onClick={handleDeleteClick}>
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };
