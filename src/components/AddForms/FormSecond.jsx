@@ -24,6 +24,7 @@ import {
   Button,
   TextField,
 } from "@mui/material";
+import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -179,11 +180,17 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
         />
       </FormControl>
       <div>
-        <Button type="submit">Finish now?</Button>
+        <ButtonsTemplate type="submit" size="large">
+          Finish now?
+        </ButtonsTemplate>
       </div>
-      <Button type="submit" onClick={() => saveData(formik.values.data2)}>
+      <ButtonsTemplate
+        // type="submit"
+        size="large"
+        onClick={() => saveData(formik.values.data2)}
+      >
         Continue
-      </Button>
+      </ButtonsTemplate>
     </form>
   );
 };

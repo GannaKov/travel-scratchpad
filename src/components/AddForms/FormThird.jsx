@@ -21,6 +21,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getAccommodationType } from "../../services/requests";
 import Rating from "@mui/material/Rating";
+import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
 //--------------
 
 const FormThird = ({
@@ -108,7 +109,7 @@ const FormThird = ({
         />
       </FormControl>
 
-      <Button
+      {/* <Button
         type="button"
         variant="contained"
         sx={{ mt: 2, mb: 2 }}
@@ -116,8 +117,15 @@ const FormThird = ({
         disabled={!formik.values.data3.type && !formik.values.data3.link}
       >
         Add
-      </Button>
-
+      </Button> */}
+      <ButtonsTemplate
+        size="medium"
+        variant="contained"
+        disabled={!formik.values.data3.type && !formik.values.data3.link}
+        onClick={onAddAccommodationClick}
+      >
+        Add
+      </ButtonsTemplate>
       {accommodationArr.length > 0 && (
         <Box mt={4}>
           <p className={styles.subTitle}>Added Accommodation</p>
@@ -167,11 +175,17 @@ const FormThird = ({
         </Box>
       )}
       <div>
-        <Button type="submit">Finish now?</Button>
+        <ButtonsTemplate type="submit" size="large">
+          Finish now?
+        </ButtonsTemplate>
       </div>
-      <Button type="submit" onClick={() => saveData(formik.values.data3)}>
+      <ButtonsTemplate
+        // type="submit"
+        size="large"
+        onClick={() => saveData(formik.values.data3)}
+      >
         Continue
-      </Button>
+      </ButtonsTemplate>
     </form>
   );
 };

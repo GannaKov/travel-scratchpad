@@ -14,6 +14,7 @@ import { deleteOneTrip, getTripById } from "../../../services/requests";
 import useAuth from "../../../context/useAuthHook";
 import Carousel from "../../../components/Shared/Carousel/Carousel";
 import TravelPlaceholder from "../../../assets/images/3d-character-emerging-from-smartphone.jpg";
+import { ButtonsTemplate } from "../../../components/Shared/Buttons/Buttons";
 
 const BlogSinglePage = () => {
   const { token, setToken } = useAuth();
@@ -82,11 +83,24 @@ const BlogSinglePage = () => {
             to={`/add-form?mode=true&id=${singleTrip._id}`}
             state={`/blog-main/${singleTrip._id}`}
           >
-            <button type="button">Edit</button>
+            <ButtonsTemplate
+              size="medium"
+              variant="contained"
+              color="darkGreen"
+              style={{ width: "80px" }}
+            >
+              Edit
+            </ButtonsTemplate>
           </Link>
-          <button type="button" onClick={handleDeleteClick}>
+          <ButtonsTemplate
+            size="medium"
+            variant="contained"
+            color="pink"
+            onClick={handleDeleteClick}
+            style={{ width: "80px" }}
+          >
             Delete
-          </button>
+          </ButtonsTemplate>
         </div>
       )}
     </div>

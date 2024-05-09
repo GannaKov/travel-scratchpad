@@ -122,22 +122,14 @@ const FormFirst = ({ formik, saveData }) => {
       </FormControl>
 
       <div>
-        <Button type="submit" size="large">
+        <ButtonsTemplate type="submit" size="large">
           Finish now?
-        </Button>
+        </ButtonsTemplate>
       </div>
-      <Button
-        type="submit"
-        size="large"
-        onClick={() => saveData(formik.values.data1)}
-      >
-        Continue
-      </Button>
+
       <ButtonsTemplate
-        type="submit"
-        color="darkGreen"
+        // type="submit"
         size="large"
-        variant="contained"
         onClick={() => saveData(formik.values.data1)}
       >
         Continue

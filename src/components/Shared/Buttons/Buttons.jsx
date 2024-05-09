@@ -29,6 +29,12 @@ const theme = createTheme({
       dark: "#DD2C00",
       contrastText: "#FFFFFF",
     },
+    white: {
+      main: "#f0f8ff",
+      light: "#FFFFFF",
+      dark: "#FFFFFF",
+      contrastText: "#FFFFFF",
+    },
   },
 });
 export const ButtonsTemplate = ({
@@ -38,6 +44,8 @@ export const ButtonsTemplate = ({
   size,
   variant,
   type = "button",
+  disabled,
+  style,
 }) => {
   return (
     <ThemeProvider theme={theme}>
@@ -49,6 +57,8 @@ export const ButtonsTemplate = ({
         size={size}
         onClick={onClick}
         type={type}
+        disabled={disabled}
+        sx={style}
       >
         {children}
       </Button>

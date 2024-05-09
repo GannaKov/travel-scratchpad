@@ -10,6 +10,7 @@ import { Button, MobileStepper } from "@mui/material";
 
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import { ButtonsTemplate } from "../../Shared/Buttons/Buttons";
 
 import FormFirst from "../FormFirst";
 import FormSecond from "../FormSecond";
@@ -363,7 +364,6 @@ const FormStepper = ({ countriesOptions }) => {
         <GoBack state={backLinkHref} />
       </div> */}
       <div className={styles.stepperWrp}>
-        {" "}
         <MobileStepper
           variant="dots"
           steps={5}
@@ -376,24 +376,41 @@ const FormStepper = ({ countriesOptions }) => {
             backgroundColor: "orange",
           }}
           nextButton={
-            <Button
-              size="small"
-              onClick={handleNext}
+            // <Button
+            //   size="small"
+            //   onClick={handleNext}
+            //   disabled={activeStep === steps.length - 1}
+            // >
+            //   Next
+            //   <KeyboardArrowRight />
+            // </Button>
+            <ButtonsTemplate
+              color="white"
+              size="large"
               disabled={activeStep === steps.length - 1}
+              onClick={handleNext}
             >
               Next
               <KeyboardArrowRight />
-            </Button>
+            </ButtonsTemplate>
           }
           backButton={
-            <Button
-              size="small"
-              onClick={handleBack}
+            // <Button
+            //   size="small"
+            //   onClick={handleBack}
+            //   disabled={activeStep === 0}
+            // >
+            //   <KeyboardArrowLeft />
+            //   Back
+            // </Button>
+            <ButtonsTemplate
+              color="white"
+              size="large"
               disabled={activeStep === 0}
+              onClick={handleBack}
             >
-              <KeyboardArrowLeft />
-              Back
-            </Button>
+              <KeyboardArrowLeft /> Back
+            </ButtonsTemplate>
           }
         />
       </div>

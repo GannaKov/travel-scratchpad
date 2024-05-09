@@ -14,6 +14,7 @@ import {
   IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
 
 const FormFourth = ({
   formik,
@@ -81,7 +82,7 @@ const FormFourth = ({
           fullWidth
         />
 
-        <Button
+        {/* <Button
           type="button"
           variant="contained"
           sx={{ mb: 4 }}
@@ -89,7 +90,18 @@ const FormFourth = ({
           disabled={!formik.values.data4.item}
         >
           Add
-        </Button>
+        </Button> */}
+        <div className={styles.buttonsAddWrp}>
+          {" "}
+          <ButtonsTemplate
+            size="medium"
+            variant="contained"
+            onClick={onExpenseAddBtnClick}
+            disabled={!formik.values.data4.item}
+          >
+            Add
+          </ButtonsTemplate>
+        </div>
 
         {expenses.length > 0 && (
           <Box>
@@ -136,7 +148,7 @@ const FormFourth = ({
           fullWidth
         />
 
-        <Button
+        {/* <Button
           type="button"
           variant="contained"
           sx={{ mb: 4 }}
@@ -144,7 +156,17 @@ const FormFourth = ({
           disabled={!formik.values.data4.topic}
         >
           Add
-        </Button>
+        </Button> */}
+        <div className={styles.buttonsAddWrp}>
+          <ButtonsTemplate
+            size="medium"
+            variant="contained"
+            onClick={onLinkAddBtnClick}
+            disabled={!formik.values.data4.topic}
+          >
+            Add
+          </ButtonsTemplate>
+        </div>
 
         {usefulLinks.length > 0 && (
           <Box>
@@ -188,11 +210,17 @@ const FormFourth = ({
           />
         </div>
         <div>
-          <Button type="submit">Finish now?</Button>
+          <ButtonsTemplate type="submit" size="large">
+            Finish now?
+          </ButtonsTemplate>
         </div>
-        <Button type="submit" onClick={() => saveData(formik.values.data4)}>
+        <ButtonsTemplate
+          // type="submit"
+          size="large"
+          onClick={() => saveData(formik.values.data4)}
+        >
           Continue
-        </Button>
+        </ButtonsTemplate>
       </form>
     </div>
   );
