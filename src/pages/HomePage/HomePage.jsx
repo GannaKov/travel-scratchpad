@@ -37,40 +37,42 @@ const HomePage = ({
         <div className={styles.containerHero}></div>
         {/* <img src={heroImg} alt="Travel image" /> */}
       </div>
-      <div className={styles.sectionBlog}>
-        <div className={styles.containerBlog}>
-          <h3 className={styles.subTitle}>Add Your Travel</h3>
-          {/* <Link
+      <div className={styles.sectionsWrapper}>
+        <div className={styles.sectionBlog}>
+          <div className={styles.containerBlog}>
+            <h3 className={styles.subTitle}>Add Your Travel</h3>
+            {/* <Link
             to={`${trip._id}`}
             state={{ from: location }}
             className={styles.mainItemLink}
           > */}
-          <button
-            className={styles.addBtn}
-            type="button"
-            onClick={handleAddBtnClick}
-          >
-            Add
-          </button>
-          {/* </Link> */}
+            <button
+              className={styles.addBtn}
+              type="button"
+              onClick={handleAddBtnClick}
+            >
+              Add
+            </button>
+            {/* </Link> */}
+          </div>
         </div>
-      </div>
-      <div className={styles.sectionBlog}>
-        <div className={styles.containerBlog}>
-          <Select
-            selectedValue={selectedCountry}
-            handleChange={handleChangeCountry}
-            valueOptions={countriesOptions}
-          />
+        <div className={styles.sectionBlog}>
+          <div className={styles.containerBlog}>
+            <Select
+              selectedValue={selectedCountry}
+              handleChange={handleChangeCountry}
+              valueOptions={countriesOptions}
+            />
+          </div>
         </div>
-      </div>
-      <div className={styles.sectionBlog}>
-        <div className={styles.containerBlog}>
-          {allTripsList && allTripsList.length > 0 ? (
-            <MainList tripsArr={allTripsList} />
-          ) : (
-            <p>No Travels</p>
-          )}
+        <div className={styles.sectionBlog}>
+          <div className={styles.containerBlog}>
+            {allTripsList && allTripsList.length > 0 ? (
+              <MainList tripsArr={allTripsList} />
+            ) : (
+              <p>No Travels</p>
+            )}
+          </div>
         </div>
       </div>
     </div>

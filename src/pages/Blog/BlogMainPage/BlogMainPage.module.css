@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url("../../../assets/images/h2-bckg-05.jpg");
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
 }
 .sectionBlog {
   padding-top: 2rem;

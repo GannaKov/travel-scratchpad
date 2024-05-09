@@ -29,6 +29,16 @@
   margin: 0 auto;
 }
 
+/* linear-gradient(
+      rgba(245, 245, 247, 0.4),
+      rgba(216, 216, 219, 0.197)
+    ), */
+.sectionsWrapper {
+  background-image: url("../../assets/images/h2-bckg-05.jpg");
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+}
 .sectionBlog {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -38,6 +48,7 @@
   padding-right: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 @media screen and(min-width: 480x) {
   .containerBlog {
@@ -61,3 +72,9 @@
 .addBtn {
   margin: 0 auto;
 }
+/* .sectionBlog1 {
+  background-image: url("../../assets/images/");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} */
