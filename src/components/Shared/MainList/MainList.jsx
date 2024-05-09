@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import TripShortItem from "../../TripShortItem/TripShortItem";
 
 import styles from "./MainList.module.css";
+import { ButtonsTemplate } from "../Buttons/Buttons";
 
 const MainList = ({ tripsArr }) => {
   //const formattedDate = moment(mongoDate).format('DD.MM.YY');
@@ -20,7 +21,13 @@ const MainList = ({ tripsArr }) => {
             state={{ from: location }}
             className={styles.mainItemLink}
           >
-            <button type="button">See more</button>
+            <ButtonsTemplate
+              color="darkGreen"
+              size="medium"
+              variant="contained"
+            >
+              See more
+            </ButtonsTemplate>
           </Link>
         </div>
       ))}

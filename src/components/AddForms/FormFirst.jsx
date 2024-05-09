@@ -17,6 +17,7 @@ import {
   Button,
   TextField,
 } from "@mui/material";
+import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
 
 //--------------------------------------------------------------------
 const FormFirst = ({ formik, saveData }) => {
@@ -39,7 +40,7 @@ const FormFirst = ({ formik, saveData }) => {
     }
   };
   return (
-    <form onSubmit={formik.handleSubmit} >
+    <form onSubmit={formik.handleSubmit}>
       <FormControl fullWidth>
         <TextField
           sx={{ marginBottom: "1.5rem" }}
@@ -121,11 +122,26 @@ const FormFirst = ({ formik, saveData }) => {
       </FormControl>
 
       <div>
-        <Button type="submit">Finish now?</Button>
+        <Button type="submit" size="large">
+          Finish now?
+        </Button>
       </div>
-      <Button type="submit" onClick={() => saveData(formik.values.data1)}>
+      <Button
+        type="submit"
+        size="large"
+        onClick={() => saveData(formik.values.data1)}
+      >
         Continue
       </Button>
+      <ButtonsTemplate
+        type="submit"
+        color="darkGreen"
+        size="large"
+        variant="contained"
+        onClick={() => saveData(formik.values.data1)}
+      >
+        Continue
+      </ButtonsTemplate>
     </form>
   );
 };

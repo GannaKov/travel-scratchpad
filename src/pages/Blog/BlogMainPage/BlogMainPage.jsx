@@ -8,6 +8,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import Select from "../../../components/Shared/Select/Select";
+import { ButtonsTemplate } from "../../../components/Shared/Buttons/Buttons";
 
 const BlogMainPage = ({
   countriesOptions,
@@ -47,13 +48,15 @@ const BlogMainPage = ({
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
           <h3 className={styles.subTitle}>Add Your Travel</h3>
-          <button
-            className={styles.addBtn}
-            type="button"
+
+          <ButtonsTemplate
+            color="darkGreen"
+            size="small"
+            variant="contained"
             onClick={handleAddBtnClick}
           >
             Add
-          </button>
+          </ButtonsTemplate>
         </div>
       </div>
       <div className={styles.sectionBlog}>

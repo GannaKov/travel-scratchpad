@@ -5,6 +5,7 @@ import styles from "./HomePage.module.css";
 import { useNavigate, useLoaderData, useLocation } from "react-router-dom";
 import useAuth from "../../context/useAuthHook";
 import heroImg from "../../assets/images/hand-writing-notebook-near-tourist-stuff.jpg";
+import { ButtonsTemplate } from "../../components/Shared/Buttons/Buttons";
 
 const HomePage = ({
   countriesOptions,
@@ -46,13 +47,14 @@ const HomePage = ({
             state={{ from: location }}
             className={styles.mainItemLink}
           > */}
-            <button
-              className={styles.addBtn}
-              type="button"
+            <ButtonsTemplate
+              color="darkGreen"
+              size="large"
+              variant="contained"
               onClick={handleAddBtnClick}
             >
               Add
-            </button>
+            </ButtonsTemplate>
             {/* </Link> */}
           </div>
         </div>

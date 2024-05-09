@@ -7,7 +7,11 @@ import Button from "@mui/material/Button";
 import { useEffect } from "react";
 import { logoutUser, refreshToken } from "../../../services/requests";
 import useAuth from "../../../context/useAuthHook";
+//------
+import { ButtonsTemplate } from "../Buttons/Buttons";
+//-----
 
+//----------------------------
 const Root = () => {
   const { setToken } = useAuth();
   const { user } = useAuth();
@@ -130,43 +134,38 @@ const Root = () => {
                 </NavLink>
               </li>
             )}
+
             {!user.isAuthenticated ? (
-              <div>
-                <Button
-                  // color="red[500]"
-                  variant="contained"
-                  type="submit"
-                  sx={{ marginRight: "2rem", backgroundColor: "#e89701" }}
-                  size="small"
+              <div className={styles.authBtnWrp}>
+                <ButtonsTemplate
                   onClick={() => navigate("/login")}
-                  // onClick={loginUser}
+                  color="deepOrange"
+                  size="small"
+                  variant="outlined"
                 >
                   Log In
-                </Button>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  type="submit"
-                  sx={{ backgroundColor: "#e89701" }}
-                  size="small"
+                </ButtonsTemplate>
+
+                <ButtonsTemplate
                   onClick={() => navigate("/register")}
+                  color="deepOrange"
+                  size="small"
+                  variant="outlined"
                 >
                   Sign Up
-                </Button>
+                </ButtonsTemplate>
               </div>
             ) : (
-              <Button
-                // color="red[500]"
-                variant="contained"
-                type="submit"
-                sx={{ marginRight: "2rem", backgroundColor: "#e89701" }}
-                size="small"
-                //onClick={() => navigate("/logout")}
+              <ButtonsTemplate
                 onClick={handleLogout}
+                color="pink"
+                size="small"
+                variant="contained"
               >
                 Log Out
-              </Button>
+              </ButtonsTemplate>
             )}
+
             {user.isAuthenticated && (
               <span>
                 <NavLink

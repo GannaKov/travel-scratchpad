@@ -82,7 +82,7 @@
 .headerNavLink.active {
   font-size: 1.3rem;
   /* color: rgb(227, 87, 180); */
-  color: rgb(89, 129, 91);
+  color: #43a047;
   text-decoration: underline;
   text-decoration-thickness: 0.1rem;
 }
@@ -90,3 +90,8 @@
   text-decoration: underline;
   text-decoration-thickness: 0.2rem;
 }
+.authBtnWrp {
+  display: flex;
+  gap: 2rem;
+}
+/* linear-gradient(95.69deg, rgba(3, 73, 10, 0.32) 33.78%, rgba(49, 115, 56, 0) 50.69%); */

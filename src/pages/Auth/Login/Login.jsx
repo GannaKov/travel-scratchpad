@@ -7,6 +7,7 @@ import { loginUser } from "../../../services/requests";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import useAuth from "../../../context/useAuthHook";
+import { ButtonsTemplate } from "../../../components/Shared/Buttons/Buttons";
 
 const Login = () => {
   const cookies = new Cookies();
@@ -93,6 +94,14 @@ const Login = () => {
         <Button variant="contained" type="submit">
           Log in
         </Button>
+        {/* <ButtonsTemplate
+          color="darkGreen"
+          size="medium"
+          variant="contained"
+          type="submit"
+        >
+          Log in
+        </ButtonsTemplate> */}
       </form>
     </>
   );
