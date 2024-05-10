@@ -89,13 +89,11 @@ const Root = () => {
 
   // ----LogIn Modal Open
   const handleLogInClickOpen = () => {
-    console.log("In handleLogInClickOpen");
     setOpenLogIn(true);
   };
   //-----
   // --- SignUp modal Open  handleSignUpClickOpen
   const handleSignUpClickOpen = () => {
-    console.log("In handleSignUpClickOpen");
     setOpenSignUp(true);
   };
   //--------
@@ -182,6 +180,7 @@ const Root = () => {
                   openLogIn={openLogIn}
                   setOpenLogIn={setOpenLogIn}
                   handleLogInClickOpen={handleLogInClickOpen}
+                  setOpenSignUp={setOpenSignUp}
                 />
                 <SignUpModal
                   openSignUp={openSignUp}

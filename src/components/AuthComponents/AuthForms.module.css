@@ -1,0 +1,16 @@
+.authTitle {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.authBtn {
+  margin-bottom: 2rem;
+}
+.authText {
+  font-size: 1.1rem;
+}

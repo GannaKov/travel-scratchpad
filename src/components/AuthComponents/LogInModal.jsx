@@ -5,31 +5,40 @@ import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
+
 import useAuth from "../../context/useAuthHook";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { loginUser } from "../../services/requests";
+import styles from "./AuthForms.module.css";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+
+  width: 500,
   bgcolor: "background.paper",
   border: "2px solid #000",
+  borderRadius: "8px",
   boxShadow: 24,
-  p: 4,
+  pt: 8,
+  pb: 7,
+  pl: 4,
+  pr: 4,
 };
-const LogInModal = ({ openLogIn, setOpenLogIn }) => {
+const LogInModal = ({ openLogIn, setOpenLogIn, setOpenSignUp }) => {
   //   const cookies = new Cookies();
   const { setToken } = useAuth();
 
   const navigate = useNavigate();
 
   const handleCloseLogIn = () => setOpenLogIn(false);
-
+  const handleChangeToSignUp = () => {
+    setOpenLogIn(false);
+    setOpenSignUp(true);
+  };
   const validationSchema = Yup.object({
     email: Yup.string("Enter your email")
       .email("Enter a valid email")
@@ -78,8 +87,8 @@ const LogInModal = ({ openLogIn, setOpenLogIn }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <h1>Sign in</h1>
-          <form onSubmit={formik.handleSubmit}>
+          <h1 className={styles.authTitle}>Sign in</h1>
+          <form onSubmit={formik.handleSubmit} className={styles.authForm}>
             <TextField
               id="email"
               name="email"
@@ -91,7 +100,7 @@ const LogInModal = ({ openLogIn, setOpenLogIn }) => {
               helperText={formik.touched.email && formik.errors.email}
               fullWidth
               variant="outlined"
-              margin="dense"
+              sx={{ marginBottom: "2rem" }}
             />
 
             <TextField
@@ -106,12 +115,18 @@ const LogInModal = ({ openLogIn, setOpenLogIn }) => {
               helperText={formik.touched.password && formik.errors.password}
               fullWidth
               variant="outlined"
-              margin="dense"
+              sx={{ marginBottom: "3rem" }}
             />
 
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              className={styles.authBtn}
+            >
               Log in
             </Button>
+            <p className={styles.authText}>Not registered yet?</p>
+            <Button onClick={handleChangeToSignUp}>Sign Up</Button>
           </form>
         </Box>
       </Modal>

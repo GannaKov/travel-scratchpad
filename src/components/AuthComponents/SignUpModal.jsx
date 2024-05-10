@@ -6,17 +6,23 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import * as Yup from "yup";
 import { signupUser } from "../../services/requests";
+import styles from "./AuthForms.module.css";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+
+  width: 500,
   bgcolor: "background.paper",
   border: "2px solid #000",
+  borderRadius: "8px",
   boxShadow: 24,
-  p: 4,
+  pt: 8,
+  pb: 7,
+  pl: 4,
+  pr: 4,
 };
 const SignUpModal = ({ openSignUp, setOpenSignUp }) => {
   const navigate = useNavigate();
@@ -71,8 +77,8 @@ const SignUpModal = ({ openSignUp, setOpenSignUp }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <h1>Sign up</h1>
-          <form onSubmit={formik.handleSubmit}>
+          <h1 className={styles.authTitle}>Sign up</h1>
+          <form onSubmit={formik.handleSubmit} className={styles.authForm}>
             <TextField
               id="username"
               name="username"
@@ -84,7 +90,7 @@ const SignUpModal = ({ openSignUp, setOpenSignUp }) => {
               helperText={formik.touched.username && formik.errors.username}
               fullWidth
               variant="outlined"
-              margin="dense"
+              sx={{ marginBottom: "2rem" }}
             />
 
             <TextField
@@ -98,7 +104,7 @@ const SignUpModal = ({ openSignUp, setOpenSignUp }) => {
               helperText={formik.touched.email && formik.errors.email}
               fullWidth
               variant="outlined"
-              margin="dense"
+              sx={{ marginBottom: "2rem" }}
             />
 
             <TextField
@@ -113,10 +119,14 @@ const SignUpModal = ({ openSignUp, setOpenSignUp }) => {
               helperText={formik.touched.password && formik.errors.password}
               fullWidth
               variant="outlined"
-              margin="dense"
+              sx={{ marginBottom: "3rem" }}
             />
 
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              className={styles.authBtn}
+            >
               Sign up
             </Button>
           </form>
