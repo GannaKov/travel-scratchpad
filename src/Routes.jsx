@@ -63,11 +63,11 @@ const Routes = () => {
 
       children: [
         //----
-        {
-          path: "/login",
-          element: <Login />,
-        },
-        { path: "/register", element: <Signup /> },
+        // {
+        //   path: "/login",
+        //   element: <Login />,
+        // },
+        // { path: "/register", element: <Signup /> },
         {
           index: true,
           element: (

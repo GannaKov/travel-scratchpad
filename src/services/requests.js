@@ -215,16 +215,22 @@ export const refreshToken = async () => {
   const refreshToken = localStorage.getItem("refresh_token");
   console.log("in refr", refreshToken);
   //-------
-  const { data } = await instance.get(`/auth/refresh_token`, {
-    withCredentials: true,
-    // if localStorage
-    headers: {
-      Authorization: `Bearer ${refreshToken}`,
-    },
-    //--------
-  });
+  if (refreshToken) {
+    const { data } = await instance.get(`/auth/refresh_token`, {
+      withCredentials: true,
+      // if localStorage
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+      //--------
+    });
 
-  return data;
+    return data;
+  } else {
+    console.log("No refr token");
+
+    throw new Error("No refresh token");
+  }
 };
 
 // // Example of using the access token to make a request

@@ -60,7 +60,7 @@ const BlogSinglePage = () => {
           {singleTrip.images.length > 1 ? (
             <Carousel images={singleTrip.images} />
           ) : (
-            <img src={singleTrip.images[0]} style={{ width: 400 }} />
+            <img src={singleTrip.images[0]} />
           )}
         </div>
       )}

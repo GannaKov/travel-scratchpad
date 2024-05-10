@@ -4,11 +4,15 @@ import styles from "./Root.module.css";
 
 import Cookies from "universal-cookie";
 import Button from "@mui/material/Button";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { logoutUser, refreshToken } from "../../../services/requests";
 import useAuth from "../../../context/useAuthHook";
 //------
 import { ButtonsTemplate } from "../Buttons/Buttons";
+import ModalTemplate from "../../AuthComponents/ModalTemplate";
+import LogInForm from "../../AuthComponents/LogInForm";
+import LogInModal from "../../AuthComponents/LogInModal";
+import SignUpModal from "../../AuthComponents/SignUpModal";
 //-----
 
 //----------------------------
@@ -18,8 +22,13 @@ const Root = () => {
 
   const cookies = new Cookies();
   const navigate = useNavigate();
+  const [openLogIn, setOpenLogIn] = useState(false);
+  const [openSignUp, setOpenSignUp] = useState(false);
 
   useEffect(() => {
+    // // if localStorage
+    // const refreshToken = localStorage.getItem("refresh_token");
+    //  if?????
     refreshToken()
       .then((res) => {
         if (res.status === 204) {
@@ -78,6 +87,18 @@ const Root = () => {
     };
   }, [user]);
 
+  // ----LogIn Modal Open
+  const handleLogInClickOpen = () => {
+    console.log("In handleLogInClickOpen");
+    setOpenLogIn(true);
+  };
+  //-----
+  // --- SignUp modal Open  handleSignUpClickOpen
+  const handleSignUpClickOpen = () => {
+    console.log("In handleSignUpClickOpen");
+    setOpenSignUp(true);
+  };
+  //--------
   const handleLogout = () => {
     logoutUser();
     setToken(null);
@@ -138,7 +159,8 @@ const Root = () => {
             {!user.isAuthenticated ? (
               <div className={styles.authBtnWrp}>
                 <ButtonsTemplate
-                  onClick={() => navigate("/login")}
+                  // onClick={() => navigate("/login")}
+                  onClick={handleLogInClickOpen}
                   color="deepOrange"
                   size="small"
                   variant="outlined"
@@ -147,13 +169,25 @@ const Root = () => {
                 </ButtonsTemplate>
 
                 <ButtonsTemplate
-                  onClick={() => navigate("/register")}
+                  // onClick={() => navigate("/register")}
+                  onClick={handleSignUpClickOpen}
+                  handleSignUpClickOpen
                   color="deepOrange"
                   size="small"
                   variant="outlined"
                 >
                   Sign Up
                 </ButtonsTemplate>
+                <LogInModal
+                  openLogIn={openLogIn}
+                  setOpenLogIn={setOpenLogIn}
+                  handleLogInClickOpen={handleLogInClickOpen}
+                />
+                <SignUpModal
+                  openSignUp={openSignUp}
+                  setOpenSignUp={setOpenSignUp}
+                  handleSignUpClickOpen={handleSignUpClickOpen}
+                />
               </div>
             ) : (
               <ButtonsTemplate

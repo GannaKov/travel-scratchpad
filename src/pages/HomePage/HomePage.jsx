@@ -41,7 +41,7 @@ const HomePage = ({
       <div className={styles.sectionsWrapper}>
         <div className={styles.sectionBlog}>
           <div className={styles.containerBlog}>
-            <h3 className={styles.subTitle}>Add Your Travel</h3>
+            <h3 className={styles.subTitle}>Add Your Trip</h3>
             {/* <Link
             to={`${trip._id}`}
             state={{ from: location }}
@@ -58,6 +58,7 @@ const HomePage = ({
             {/* </Link> */}
           </div>
         </div>
+        <div className={styles.sectionLine}></div>
         <div className={styles.sectionBlog}>
           <div className={styles.containerBlog}>
             <Select

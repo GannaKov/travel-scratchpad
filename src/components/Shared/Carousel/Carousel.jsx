@@ -35,7 +35,7 @@ const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
   </button>
 );
 const Carousel = ({ images }) => {
-  console.log("images", images);
+  // console.log("images", images);
   const settings = {
     customPaging: function (i) {
       return (
