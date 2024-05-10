@@ -36,7 +36,7 @@ const LogInModal = ({ openLogIn, setOpenLogIn, setOpenSignUp }) => {
 
   const handleCloseLogIn = () => setOpenLogIn(false);
   const handleChangeToSignUp = () => {
-    setOpenLogIn(false);
+    handleCloseLogIn();
     setOpenSignUp(true);
   };
   const validationSchema = Yup.object({
@@ -122,6 +122,7 @@ const LogInModal = ({ openLogIn, setOpenLogIn, setOpenSignUp }) => {
               variant="contained"
               type="submit"
               className={styles.authBtn}
+              sx={{ marginBottom: "2rem" }}
             >
               Log in
             </Button>

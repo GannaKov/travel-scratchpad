@@ -27,25 +27,29 @@ const Root = () => {
 
   useEffect(() => {
     // // if localStorage
-    // const refreshToken = localStorage.getItem("refresh_token");
-    //  if?????
-    refreshToken()
-      .then((res) => {
-        if (res.status === 204) {
-          console.log("204");
-          setToken(null);
+    const refresh_token = localStorage.getItem("refresh_token");
+    if (refresh_token) {
+      refreshToken()
+        .then((res) => {
+          if (res.status === 204) {
+            console.log("204");
+            setToken(null);
 
-          navigate("/login");
-        } else {
-          console.log("in effect1", res.accessToken);
-          setToken(res.accessToken);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setToken(null);
-        navigate("/");
-      });
+            navigate("/");
+          } else {
+            console.log("in effect1 access", res.accessToken);
+            setToken(res.accessToken);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setToken(null);
+          navigate("/");
+        });
+    }
+    //else {
+    //   navigate("/");
+    // }
   }, []);
 
   useEffect(() => {
@@ -64,9 +68,9 @@ const Root = () => {
               console.log("204");
               setToken(null);
 
-              navigate("/login");
+              navigate("/");
             } else {
-              console.log("in effect2", res.accessToken);
+              // console.log("in effect2", res.accessToken);
               setToken(res.accessToken);
               cookies.set("jwt_authorization", res.accessToken);
               //cookies.set("refresh_token", res.refreshToken);
@@ -186,6 +190,7 @@ const Root = () => {
                   openSignUp={openSignUp}
                   setOpenSignUp={setOpenSignUp}
                   handleSignUpClickOpen={handleSignUpClickOpen}
+                  setOpenLogIn={setOpenLogIn}
                 />
               </div>
             ) : (

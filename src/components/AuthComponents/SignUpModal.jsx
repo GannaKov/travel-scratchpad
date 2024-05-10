@@ -24,7 +24,7 @@ const style = {
   pl: 4,
   pr: 4,
 };
-const SignUpModal = ({ openSignUp, setOpenSignUp }) => {
+const SignUpModal = ({ openSignUp, setOpenSignUp, setOpenLogIn }) => {
   const navigate = useNavigate();
 
   const handleCloseSignUp = () => setOpenSignUp(false);
@@ -60,7 +60,9 @@ const SignUpModal = ({ openSignUp, setOpenSignUp }) => {
           console.log("Hurra in Regisre");
         }
         // return <Navigate to="/login" replace />;
-        navigate("/", { replace: true }); // hier change!!!!!!
+        // navigate("/", { replace: true }); // hier change!!!!!!
+        handleCloseSignUp();
+        setOpenLogIn(true);
       } catch (error) {
         console.log("err in Register", error.response.data.message);
         alert(error.response.data.error);

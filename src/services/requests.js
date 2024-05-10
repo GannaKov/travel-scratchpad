@@ -45,9 +45,10 @@ export const getAllOwnerTripsLoader = async (accessToken, query) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-
+    console.log("data", data);
     return data.data;
   } catch (error) {
+    console.log(error);
     if (error.response && error.response.status === 404) {
       return [];
       //throw new Response("Not Found", { status: 404 });
@@ -111,6 +112,7 @@ export const postFormData = async (dataForm, accessToken) => {
     return data;
   } catch (err) {
     console.log(err);
+    throw err; // add
   }
 };
 
@@ -125,8 +127,12 @@ export const putFormData = async (tripId, dataForm, accessToken) => {
     });
     // console.log("res in put", data);
     return data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
+    if (error.response && error.response.status === 403) {
+      throw new Response("Forbidden", { status: 403 });
+    }
+    throw error; //add
   }
 };
 
@@ -149,8 +155,11 @@ export const deleteOneTrip = async (tripId, accessToken) => {
     });
     // console.log("res in put", data);
     return data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    if (error.response && error.response.status === 403) {
+      throw new Response("Forbidden", { status: 403 });
+    }
+    throw error; //add
   }
 };
 //===========================
