@@ -5,11 +5,12 @@ import { useTheme } from "@mui/material/styles";
 
 import FormStepper from "../../../components/AddForms/FormStepper/FormStepper";
 import GoBack from "../../../components/GoBack/GoBack";
+import { useLocation } from "react-router-dom";
 
 const BlogAddForms = ({ countriesOptions }) => {
+  const location = useLocation();
   const backLinkHref = location.state?.from ?? "/blog-main";
-  // console.log("backLinkHref", backLinkHref);
-  // console.log("location.state", location.state);
+
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {

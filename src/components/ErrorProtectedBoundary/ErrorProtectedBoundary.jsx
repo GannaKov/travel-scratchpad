@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Navigate,
   isRouteErrorResponse,
@@ -20,9 +21,10 @@ const ErrorProtectedBoundary = () => {
     if (error.status === 403) {
       console.log("in 403");
       // return <div>You aren&apos;t authorized. Please Log in</div>;
-      return <Navigate to="/" />; //?????
-    }
 
+      return <Navigate to="/" />;
+    }
+    //; //?????
     if (error.status === 500) {
       console.log("in 500");
       return <div>Looks like our API is down</div>;

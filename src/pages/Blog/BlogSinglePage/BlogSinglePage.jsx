@@ -24,6 +24,7 @@ const BlogSinglePage = () => {
   const location = useLocation();
   const backLinkHref = location.state?.from ?? "/blog-main";
   const navigate = useNavigate();
+
   //-----
   // const { travel_id } = useParams();
 
@@ -81,7 +82,7 @@ const BlogSinglePage = () => {
           {" "}
           <Link
             to={`/add-form?mode=true&id=${singleTrip._id}`}
-            state={`/blog-main/${singleTrip._id}`}
+            state={{ from: location.pathname }}
           >
             <ButtonsTemplate
               size="medium"
