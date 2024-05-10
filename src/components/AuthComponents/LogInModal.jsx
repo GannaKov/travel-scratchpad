@@ -64,6 +64,7 @@ const LogInModal = ({ openLogIn, setOpenLogIn, setOpenSignUp }) => {
 
         if (res && res.code === 200) {
           navigate("/", { replace: true });
+          handleCloseLogIn();
           setToken(res.data.tokens.accessToken);
 
           // if localStorage

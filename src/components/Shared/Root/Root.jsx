@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Root.module.css";
@@ -9,21 +10,20 @@ import { logoutUser, refreshToken } from "../../../services/requests";
 import useAuth from "../../../context/useAuthHook";
 //------
 import { ButtonsTemplate } from "../Buttons/Buttons";
-import ModalTemplate from "../../AuthComponents/ModalTemplate";
-import LogInForm from "../../AuthComponents/LogInForm";
+
 import LogInModal from "../../AuthComponents/LogInModal";
 import SignUpModal from "../../AuthComponents/SignUpModal";
 //-----
 
 //----------------------------
-const Root = () => {
+const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
   const { setToken } = useAuth();
   const { user } = useAuth();
 
   const cookies = new Cookies();
   const navigate = useNavigate();
-  const [openLogIn, setOpenLogIn] = useState(false);
-  const [openSignUp, setOpenSignUp] = useState(false);
+  // const [openLogIn, setOpenLogIn] = useState(false);
+  // const [openSignUp, setOpenSignUp] = useState(false);
 
   useEffect(() => {
     // // if localStorage
@@ -161,7 +161,6 @@ const Root = () => {
             {!user.isAuthenticated ? (
               <div className={styles.authBtnWrp}>
                 <ButtonsTemplate
-                  // onClick={() => navigate("/login")}
                   onClick={handleLogInClickOpen}
                   color="deepOrange"
                   size="small"
@@ -171,7 +170,6 @@ const Root = () => {
                 </ButtonsTemplate>
 
                 <ButtonsTemplate
-                  // onClick={() => navigate("/register")}
                   onClick={handleSignUpClickOpen}
                   handleSignUpClickOpen
                   color="deepOrange"

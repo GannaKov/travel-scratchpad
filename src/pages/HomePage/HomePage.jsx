@@ -11,6 +11,7 @@ const HomePage = ({
   countriesOptions,
   selectedCountry,
   setSelectedCountry,
+  setOpenLogIn,
 }) => {
   const allTripsList = useLoaderData();
   const { token } = useAuth();
@@ -28,7 +29,7 @@ const HomePage = ({
       //navigate("/add-form");
       navigate("/add-form", { state: { from } });
     } else {
-      navigate("/login");
+      setOpenLogIn(true);
     }
   };
 

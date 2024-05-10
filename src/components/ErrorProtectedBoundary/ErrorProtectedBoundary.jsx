@@ -6,7 +6,6 @@ import {
 
 const ErrorProtectedBoundary = () => {
   const error = useRouteError();
-  console.log("error", error);
 
   if (isRouteErrorResponse(error)) {
     // if (error.status === 404) {
@@ -27,6 +26,10 @@ const ErrorProtectedBoundary = () => {
     if (error.status === 500) {
       console.log("in 500");
       return <div>Looks like our API is down</div>;
+    }
+    if (error.status === 404) {
+      console.log("in 404");
+      return <div>Not found trip</div>;
     }
   }
 

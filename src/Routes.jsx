@@ -24,8 +24,7 @@ import AppBar from "./components/Shared/AppBar/AppBar";
 import Root from "./components/Shared/Root/Root";
 import Profile from "./pages/Blog/Profile/Profile";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
-import Login from "./pages/Auth/Login/Login";
-import Signup from "./pages/Auth/Signup/Signup";
+
 import { useEffect, useState } from "react";
 import useAuth from "./context/useAuthHook";
 import ErrorProtectedBoundary from "./components/ErrorProtectedBoundary/ErrorProtectedBoundary";
@@ -40,7 +39,9 @@ const Routes = () => {
   // if (selectedCountry) {
   //   query.country = selectedCountry;
   // }
-
+  const [openLogIn, setOpenLogIn] = useState(false);
+  const [openSignUp, setOpenSignUp] = useState(false);
+  console.log("openLogIn", openLogIn);
   useEffect(() => {
     getCountriesOptions()
       .then((result) => {
@@ -56,7 +57,14 @@ const Routes = () => {
       id: "root",
       path: "/",
 
-      element: <Root />,
+      element: (
+        <Root
+          openLogIn={openLogIn}
+          setOpenLogIn={setOpenLogIn}
+          openSignUp={openSignUp}
+          setOpenSignUp={setOpenSignUp}
+        />
+      ),
 
       //errorElement: <RootBoundary />,
       errorElement: <NotFound />,
@@ -75,6 +83,7 @@ const Routes = () => {
               selectedCountry={selectedCountryHome}
               setSelectedCountry={setSelectedCountryHome}
               countriesOptions={countriesOptions}
+              setOpenLogIn={setOpenLogIn}
             />
           ),
 
