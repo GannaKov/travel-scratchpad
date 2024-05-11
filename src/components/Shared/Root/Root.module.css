@@ -8,52 +8,59 @@
 }
 .headerWrp {
   position: fixed;
-  /*  top: 0; */
-  width: 100%;
-  background-color: white;
-  z-index: 10;
+  /* display: flex;*/
 
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.236);
-  box-shadow: 0px 1px 3px #6d035f1f, 0px 0px 5px rgba(114, 40, 121, 0.06),
-    0px 0px 8px rgba(0, 0, 0, 0.16);
-}
-.headerNav {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1.5fr 4fr 1.5fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0rem;
   grid-row-gap: 0px;
   align-items: center;
+  background-color: white;
+  z-index: 10;
+  padding: 2rem;
+  /* padding-top: 2rem;
+  padding-bottom: 2rem; */
+  border-bottom: 1px solid rgba(128, 128, 128, 0.236);
+  box-shadow: 0px 1px 3px #6d035f1f, 0px 0px 5px rgba(114, 40, 121, 0.06),
+    0px 0px 8px rgba(0, 0, 0, 0.16);
 }
+
+.headerNav {
+  /* display: grid; */
+  /* grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0rem;
+  grid-row-gap: 0px;
+  align-items: center; */
+  /* display: flex; */
+}
+
 @media screen and (min-width: 450px) {
   .headerNav {
-    grid-template-columns: 0.5fr 3.5fr;
+    /* grid-template-columns: 0.5fr 3.5fr;
     grid-template-rows: 0fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    align-items: center;
+    align-items: center; */
   }
 }
 .headerLogo {
-  width: 60px;
-  margin-left: 0.5rem;
+  width: 100px;
 }
 @media screen and (min-width: 600px) {
   .headerLogo {
-    width: 90px;
-    margin-left: 1rem;
   }
 }
 @media screen and (min-width: 900px) {
   .headerLogo {
-    margin-left: 3rem;
   }
 }
 
 .navList {
   display: flex;
+
   flex-direction: column;
 
   /* align-items: center; */
@@ -62,6 +69,7 @@
   .navList {
     display: flex;
     flex-direction: row;
+    gap: 4rem;
     justify-content: space-around;
   }
 }
@@ -96,9 +104,17 @@
   text-decoration: underline;
   text-decoration-thickness: 0.2rem;
 }
+.authWrp {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+}
+
 .authBtnWrp {
   display: flex;
   gap: 2rem;
+  width: 100%;
+  justify-content: center;
 }
 /* linear-gradient(95.69deg, rgba(3, 73, 10, 0.32) 33.78%, rgba(49, 115, 56, 0) 50.69%); */
 .footerWrp {

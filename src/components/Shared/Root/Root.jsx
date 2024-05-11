@@ -13,6 +13,7 @@ import { ButtonsTemplate } from "../Buttons/Buttons";
 
 import LogInModal from "../../AuthComponents/LogInModal";
 import SignUpModal from "../../AuthComponents/SignUpModal";
+import Logo from "../../../assets/images/logo2.jpeg";
 //-----
 
 //----------------------------
@@ -113,8 +114,9 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
   return (
     <div className={styles.wrapper}>
       <header className={styles.headerWrp}>
+        <img src={Logo} alt="Logo" className={styles.headerLogo} />
+
         <nav className={styles.headerNav}>
-          <p>Here logo</p>
           <ul className={styles.navList}>
             <li className={styles.navItem}>
               <NavLink
@@ -157,69 +159,78 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
                 </NavLink>
               </li>
             )}
-
-            {!user.isAuthenticated ? (
-              <div className={styles.authBtnWrp}>
-                <ButtonsTemplate
-                  onClick={handleLogInClickOpen}
-                  color="deepOrange"
-                  size="small"
-                  variant="outlined"
-                >
-                  Log In
-                </ButtonsTemplate>
-
-                <ButtonsTemplate
-                  onClick={handleSignUpClickOpen}
-                  handleSignUpClickOpen
-                  color="deepOrange"
-                  size="small"
-                  variant="outlined"
-                >
-                  Sign Up
-                </ButtonsTemplate>
-                <LogInModal
-                  openLogIn={openLogIn}
-                  setOpenLogIn={setOpenLogIn}
-                  handleLogInClickOpen={handleLogInClickOpen}
-                  setOpenSignUp={setOpenSignUp}
-                />
-                <SignUpModal
-                  openSignUp={openSignUp}
-                  setOpenSignUp={setOpenSignUp}
-                  handleSignUpClickOpen={handleSignUpClickOpen}
-                  setOpenLogIn={setOpenLogIn}
-                />
-              </div>
-            ) : (
-              <ButtonsTemplate
-                onClick={handleLogout}
-                color="pink"
-                size="small"
-                variant="contained"
-              >
-                Log Out
-              </ButtonsTemplate>
-            )}
-
-            {user.isAuthenticated && (
-              <span>
-                <NavLink
-                  to="/profile"
-                  className={({ isActive }) =>
-                    isActive
-                      ? `${styles.active} ${styles.headerNavLink}`
-                      : `${styles.headerNavLink}`
-                  }
-                >
-                  {user.isAuthenticated && user.user.username}
-                </NavLink>
-              </span>
-            )}
           </ul>
         </nav>
-      </header>
+        <div className={styles.authWrp}>
+          {!user.isAuthenticated ? (
+            <div className={styles.authBtnWrp}>
+              <ButtonsTemplate
+                onClick={handleLogInClickOpen}
+                color="deepOrange"
+                size="small"
+                variant="outlined"
+              >
+                Log In
+              </ButtonsTemplate>
 
+              <ButtonsTemplate
+                onClick={handleSignUpClickOpen}
+                handleSignUpClickOpen
+                color="deepOrange"
+                size="small"
+                variant="outlined"
+              >
+                Sign Up
+              </ButtonsTemplate>
+              {/* <LogInModal
+                openLogIn={openLogIn}
+                setOpenLogIn={setOpenLogIn}
+                handleLogInClickOpen={handleLogInClickOpen}
+                setOpenSignUp={setOpenSignUp}
+              />
+              <SignUpModal
+                openSignUp={openSignUp}
+                setOpenSignUp={setOpenSignUp}
+                handleSignUpClickOpen={handleSignUpClickOpen}
+                setOpenLogIn={setOpenLogIn}
+              /> */}
+            </div>
+          ) : (
+            <ButtonsTemplate
+              onClick={handleLogout}
+              color="pink"
+              size="small"
+              variant="outlined"
+            >
+              Log Out
+            </ButtonsTemplate>
+          )}
+          {user.isAuthenticated && (
+            <NavLink
+              to="/profile"
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.active} ${styles.headerNavLink}`
+                  : `${styles.headerNavLink}`
+              }
+            >
+              {user.isAuthenticated && user.user.username}
+            </NavLink>
+          )}
+        </div>
+      </header>
+      <LogInModal
+        openLogIn={openLogIn}
+        setOpenLogIn={setOpenLogIn}
+        handleLogInClickOpen={handleLogInClickOpen}
+        setOpenSignUp={setOpenSignUp}
+      />
+      <SignUpModal
+        openSignUp={openSignUp}
+        setOpenSignUp={setOpenSignUp}
+        handleSignUpClickOpen={handleSignUpClickOpen}
+        setOpenLogIn={setOpenLogIn}
+      />
       <Outlet />
       <footer className={styles.footerWrp}></footer>
     </div>
