@@ -14,7 +14,6 @@ const TripShortItem = ({ trip }) => {
   // console.log("trip", trip);
   const [userOwnerTrip, setUserOwnerTrip] = useState({});
   const { user: currentUser } = useAuth();
-  console.log("current", currentUser.user.id, "id", trip.owner);
 
   useEffect(() => {
     getUserById(trip.owner)

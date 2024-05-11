@@ -3,11 +3,12 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 import { TextField } from "@mui/material";
 
-const Select = ({ selectedValue, handleChange, valueOptions }) => {
+const Select = ({ selectedValue, handleChange, valueOptions, label }) => {
   //  const Select = ({ selectedCountry, handleChangeCountry, countriesOptions }) => {
+  const labelText = `Choose a ${label}`;
   return (
     <Autocomplete
-      id="country"
+      id={label}
       autoHighlight
       value={selectedValue}
       onChange={handleChange}
@@ -15,9 +16,7 @@ const Select = ({ selectedValue, handleChange, valueOptions }) => {
       options={valueOptions}
       getOptionLabel={(option) => option}
       style={{ width: 500 }}
-      renderInput={(params) => (
-        <TextField {...params} label="Choose a country" />
-      )}
+      renderInput={(params) => <TextField {...params} label={labelText} />}
     />
   );
 };

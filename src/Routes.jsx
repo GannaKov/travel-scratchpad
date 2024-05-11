@@ -17,6 +17,7 @@ import {
   getAllTripsLoader,
   getCountriesOptions,
   getTripByIdLoader,
+  getTripsPurposes,
   refreshToken,
 } from "./services/requests";
 import AppBar from "./components/Shared/AppBar/AppBar";
@@ -33,8 +34,11 @@ const Routes = () => {
   const { token } = useAuth();
 
   const [countriesOptions, setCountriesOptions] = useState();
+  const [purposeOptions, setPurposeOptions] = useState([]);
+  const [selectedPurpose, setSelectedPurpose] = useState(null);
   const [selectedCountryHome, setSelectedCountryHome] = useState(null);
   const [selectedCountryBlog, setSelectedCountryBlog] = useState(null);
+  console.log("selectedPurpose", selectedPurpose);
   // const query = {};
   // if (selectedCountry) {
   //   query.country = selectedCountry;
@@ -47,6 +51,12 @@ const Routes = () => {
       .then((result) => {
         const countryNames = result.data.map((country) => country.name.common);
         setCountriesOptions(countryNames);
+      })
+      .catch((error) => console.log(error.status, error.message));
+    getTripsPurposes()
+      .then((res) => {
+        console.log("purp", res);
+        setPurposeOptions(res);
       })
       .catch((error) => console.log(error.status, error.message));
   }, [setCountriesOptions]);
@@ -83,6 +93,9 @@ const Routes = () => {
               selectedCountry={selectedCountryHome}
               setSelectedCountry={setSelectedCountryHome}
               countriesOptions={countriesOptions}
+              purposeOptions={purposeOptions}
+              selectedPurpose={selectedPurpose}
+              setSelectedPurpose={setSelectedPurpose}
               setOpenLogIn={setOpenLogIn}
             />
           ),
@@ -91,6 +104,10 @@ const Routes = () => {
             const query = {};
             if (selectedCountryHome) {
               query.country = selectedCountryHome;
+              query.purpose = selectedPurpose;
+            }
+            if (selectedPurpose) {
+              query.purpose = selectedPurpose;
             }
             return await getAllTripsLoader(query);
           },

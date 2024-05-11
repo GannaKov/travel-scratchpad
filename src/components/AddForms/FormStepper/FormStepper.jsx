@@ -20,7 +20,6 @@ import FormFifth from "../FormFifth";
 
 import {
   getAccommodationType,
-  getCountriesOptions,
   getTripById,
   postFormData,
   putFormData,

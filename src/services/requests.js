@@ -8,12 +8,16 @@ const instance = axios.create({ baseURL: BASEURL });
 
 // get all trips
 export const getAllTripsLoader = async (query) => {
+  console.log("query", query);
   try {
     let urlBackend = "/trips";
     if (query && query.country) {
       urlBackend += `?country=${query.country}`;
     }
-
+    if (query && query.purpose) {
+      urlBackend += `?purpose=${query.purpose}`;
+    }
+    console.log("urlBackend)", urlBackend);
     const { data } = await instance.get(urlBackend);
     // console.log("data", data.data);
     return data.data;
@@ -67,7 +71,7 @@ export const getTripById = async (tripId) => {
 // get trip's Purpose
 export const getTripsPurposes = async () => {
   const { data } = await instance.get(`/trip-purpose`);
-  // console.log("data", data.data);
+  console.log("data", data.data);
   return data.data;
 };
 

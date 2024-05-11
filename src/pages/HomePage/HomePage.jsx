@@ -11,6 +11,9 @@ const HomePage = ({
   countriesOptions,
   selectedCountry,
   setSelectedCountry,
+  purposeOptions,
+  setSelectedPurpose,
+  selectedPurpose,
   setOpenLogIn,
 }) => {
   const allTripsList = useLoaderData();
@@ -20,6 +23,9 @@ const HomePage = ({
 
   const handleChangeCountry = (event, value) => {
     setSelectedCountry(value);
+  };
+  const handleChangePurpose = (event, value) => {
+    setSelectedPurpose(value);
   };
 
   const handleAddBtnClick = () => {
@@ -66,6 +72,15 @@ const HomePage = ({
               selectedValue={selectedCountry}
               handleChange={handleChangeCountry}
               valueOptions={countriesOptions}
+              label="country"
+            />
+          </div>
+          <div className={styles.containerBlog}>
+            <Select
+              selectedValue={selectedPurpose}
+              handleChange={handleChangePurpose}
+              valueOptions={purposeOptions}
+              label="purpose"
             />
           </div>
         </div>
