@@ -232,7 +232,11 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
         setOpenLogIn={setOpenLogIn}
       />
       <Outlet />
-      <footer className={styles.footerWrp}></footer>
+      <footer className={styles.footerWrp}>
+        <div>
+          <p className={styles.footerText}> © 2024 Ganna Kovchyk</p>
+        </div>
+      </footer>
     </div>
   );
 };

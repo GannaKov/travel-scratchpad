@@ -118,10 +118,22 @@
 }
 /* linear-gradient(95.69deg, rgba(3, 73, 10, 0.32) 33.78%, rgba(49, 115, 56, 0) 50.69%); */
 .footerWrp {
-  background-image: url("../../../assets/images/newslatter.jpg");
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem;
+  background-image: linear-gradient(
+      rgba(47, 48, 58, 0.583),
+      rgba(47, 48, 58, 0.583)
+    ),
+    url("../../../assets/images/full-shot-woman-taking-selfie.jpg");
   background-size: cover;
-  background-position: top;
+  background-position: center;
   background-repeat: no-repeat;
   width: 100%;
   height: 200px;
+}
+.footerText {
+  color: white;
 }
