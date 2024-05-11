@@ -15,7 +15,7 @@ const Select = ({ selectedValue, handleChange, valueOptions, label }) => {
       disableCloseOnSelect
       options={valueOptions}
       getOptionLabel={(option) => option}
-      style={{ width: 500 }}
+      style={{ width: 400 }}
       renderInput={(params) => <TextField {...params} label={labelText} />}
     />
   );

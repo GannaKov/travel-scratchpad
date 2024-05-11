@@ -15,7 +15,9 @@ export const getAllTripsLoader = async (query) => {
       urlBackend += `?country=${query.country}`;
     }
     if (query && query.purpose) {
-      urlBackend += `?purpose=${query.purpose}`;
+      urlBackend += query.country
+        ? `&purpose=${query.purpose}`
+        : `?purpose=${query.purpose}`;
     }
     console.log("urlBackend)", urlBackend);
     const { data } = await instance.get(urlBackend);

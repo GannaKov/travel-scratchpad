@@ -68,20 +68,21 @@ const HomePage = ({
         <div className={styles.sectionLine}></div>
         <div className={styles.sectionBlog}>
           <div className={styles.containerBlog}>
-            <Select
-              selectedValue={selectedCountry}
-              handleChange={handleChangeCountry}
-              valueOptions={countriesOptions}
-              label="country"
-            />
-          </div>
-          <div className={styles.containerBlog}>
-            <Select
-              selectedValue={selectedPurpose}
-              handleChange={handleChangePurpose}
-              valueOptions={purposeOptions}
-              label="purpose"
-            />
+            <div className={styles.selectWrp}>
+              {" "}
+              <Select
+                selectedValue={selectedCountry}
+                handleChange={handleChangeCountry}
+                valueOptions={countriesOptions}
+                label="country"
+              />
+              <Select
+                selectedValue={selectedPurpose}
+                handleChange={handleChangePurpose}
+                valueOptions={purposeOptions}
+                label="purpose"
+              />
+            </div>
           </div>
         </div>
         <div className={styles.sectionBlog}>
