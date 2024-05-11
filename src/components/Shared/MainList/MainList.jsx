@@ -15,20 +15,20 @@ const MainList = ({ tripsArr }) => {
         <div key={trip._id} className={styles.mainItemWrp}>
           <li className={styles.mainItem}>
             <TripShortItem trip={trip} />
-          </li>
-          <Link
-            to={`${trip._id}`}
-            state={{ from: location }}
-            className={styles.mainItemLink}
-          >
-            <ButtonsTemplate
-              color="darkGreen"
-              size="medium"
-              variant="contained"
+            <Link
+              to={`${trip._id}`}
+              state={{ from: location }}
+              className={styles.mainItemLink}
             >
-              See more
-            </ButtonsTemplate>
-          </Link>
+              <ButtonsTemplate
+                color="darkGreen"
+                size="medium"
+                variant="contained"
+              >
+                See more
+              </ButtonsTemplate>
+            </Link>
+          </li>
         </div>
       ))}
     </ul>

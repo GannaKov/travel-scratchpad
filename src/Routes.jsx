@@ -41,7 +41,7 @@ const Routes = () => {
   // }
   const [openLogIn, setOpenLogIn] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
-  console.log("openLogIn", openLogIn);
+
   useEffect(() => {
     getCountriesOptions()
       .then((result) => {

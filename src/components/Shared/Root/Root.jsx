@@ -37,7 +37,7 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
 
             navigate("/");
           } else {
-            console.log("in effect1 access", res.accessToken);
+            // console.log("in effect1 access", res.accessToken);
             setToken(res.accessToken);
           }
         })

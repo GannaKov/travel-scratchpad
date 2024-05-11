@@ -3,14 +3,7 @@ import axios from "axios";
 const BASEURL = "http://localhost:3000/api";
 
 //const BASEURL = import.meta.env.VITE_BASE_URL;
-// const token = {
-//   set(token) {
-//     instanceBacEnd.defaults.headers.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     instanceBacEnd.defaults.headers.Authorization = "";
-//   },
-// };
+
 const instance = axios.create({ baseURL: BASEURL });
 
 // get all trips
@@ -141,16 +134,6 @@ export const putFormData = async (tripId, dataForm, accessToken) => {
   }
 };
 
-// delete form
-// export const deleteOneTrip = async (tripId) => {
-//   try {
-//     const { data } = await instance.delete(`/trips/${tripId}`);
-//     console.log("res in put", data);
-//     return data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-//};
 export const deleteOneTrip = async (tripId, accessToken) => {
   try {
     const { data } = await instance.delete(`/own_trips/${tripId}`, {
@@ -198,16 +181,7 @@ export const loginUser = async (values) => {
 //   }
 // };
 //------
-export const setAuthHeader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
 
-// Utility to remove JWT
-// export const clearAuthHeader = () => {
-//   axios.defaults.headers.common.Authorization = "";
-// };
-//-----
-// logout
 export const logoutUser = async () => {
   try {
     const { data } = await instance.delete(
@@ -226,11 +200,12 @@ export const getUserById = async (id) => {
   //console.log("data in by Id", data.data);
   return data.data;
 };
+
 // Function to refresh tokens
 export const refreshToken = async () => {
   // if localStorage
   const refreshToken = localStorage.getItem("refresh_token");
-  console.log("in refr", refreshToken);
+  // console.log("in refr", refreshToken);
   //-------
   if (refreshToken) {
     const { data } = await instance.get(`/auth/refresh_token`, {

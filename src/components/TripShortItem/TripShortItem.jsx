@@ -1,23 +1,43 @@
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
+
 import moment from "moment";
 import TravelPlaceholder from "../../assets/images/3d-character-emerging-from-smartphone.jpg";
 import dayjs from "dayjs";
 import StarsShow from "../Shared/Stars/StarsShow";
 import styles from "./TripShortItem.module.css";
+import { useEffect, useState } from "react";
+import useAuth from "../../context/useAuthHook";
+import { getUserById } from "../../services/requests";
+import AvatarComponent from "../Shared/AvatarComponent/AvatarComponent";
 
 const TripShortItem = ({ trip }) => {
   // console.log("trip", trip);
+  const [userOwnerTrip, setUserOwnerTrip] = useState({});
+  const { user: currentUser } = useAuth();
+  console.log("current", currentUser.user.id, "id", trip.owner);
+
+  useEffect(() => {
+    getUserById(trip.owner)
+      .then((res) => setUserOwnerTrip(res))
+      .catch((error) => console.log(error));
+  }, [trip.owner]);
+
   return (
     <div className={styles.tripItemWrp}>
+      {/* {trip.owner === currentUser.user.id && (
+        <div className={styles.tripOwnerAvatar}>
+          <AvatarComponent userName={userOwnerTrip.username} />
+        </div>
+      )} */}
+      <div className={styles.tripOwnerAvatarWrp}>
+        <p className={styles.tripOwnerAvatarText}>{userOwnerTrip.username}</p>
+      </div>
       <h2 className={styles.tripItemTitle}>{trip.title}</h2>
-
       <StarsShow
         rating={trip.travel_rating}
         isReadOnly={true}
         className={styles.tripItemRating}
       />
-
       <p className={styles.tripItemDate}>
         {dayjs(trip.date_start).format("DD.MM.YYYY")}
         &nbsp;&nbsp;-&nbsp;&nbsp;
@@ -36,7 +56,6 @@ const TripShortItem = ({ trip }) => {
           <span key={item}>{item},&nbsp;</span>
         ))}
       </div>
-
       <div className={styles.tripChunk}>
         <span className={styles.tripBoldText}>Countries:&nbsp;</span>
         {trip.countries.map((country) => (

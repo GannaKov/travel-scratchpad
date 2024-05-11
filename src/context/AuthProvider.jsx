@@ -24,11 +24,11 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      console.log("change access token", token);
+      // console.log("change access token", token);
       const decoded = jwtDecode(token);
       setUser({ user: decoded, isAuthenticated: true });
 
-      console.log("maxAge", maxAge, user.user.expiresAt);
+      // console.log("maxAge", maxAge, user.user.expiresAt);
       cookies.set("jwt_authorization", token, {
         maxAge: 15 * 60,
         // maxAge: maxAge,

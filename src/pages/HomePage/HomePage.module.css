@@ -6,7 +6,7 @@
 .sectionHero {
   width: 100%;
   padding: 118px 0;
-  max-width: 1600px;
+  max-width: 1800px;
 
   /* linear-gradient(
       rgba(58, 59, 63, 0.4),
@@ -20,7 +20,7 @@
 
 @media screen and (min-width: 800px) {
   .sectionHero {
-    padding: 200px 0;
+    padding: 240px 0;
   }
 }
 .containerHero {
