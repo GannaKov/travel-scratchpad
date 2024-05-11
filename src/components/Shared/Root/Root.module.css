@@ -122,10 +122,10 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 8rem;
   background-image: linear-gradient(
-      rgba(47, 48, 58, 0.583),
-      rgba(47, 48, 58, 0.583)
+      rgba(47, 48, 58, 0.8),
+      rgba(47, 48, 58, 0.8)
     ),
     url("../../../assets/images/full-shot-woman-taking-selfie.jpg");
   background-size: cover;
@@ -136,4 +136,85 @@
 }
 .footerText {
   color: white;
+}
+.footerSubscrSocWrp {
+  align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.footerSocialList {
+  display: flex;
+  justify-content: center;
+}
+.footerSocialItem {
+}
+.footerSocialItem:not(:last-child) {
+  margin-right: 2rem;
+}
+
+.footerSocialLink {
+  display: flex;
+  width: 35px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: white;
+  color: black;
+}
+.footerSocialLink:is(:hover, :focus) {
+  background-color: black;
+  color: white;
+}
+.footerSocialLink {
+  fill: currentColor;
+}
+.footerSubscribeWrp {
+}
+.footerSubscribeTitle {
+  color: white;
+}
+
+@media screen and (min-width: 500px) {
+  .footerSubscribeForm {
+    width: 260px;
+    margin: 0 auto;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .footerSubscribeForm {
+    width: 360px;
+  }
+}
+.footerSubscribeLabel {
+  font-weight: 300;
+  color: white;
+}
+.footerSubscribeInput {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  outline: 1px solid transparent;
+  border: 1px solid transparent;
+  width: 100%;
+
+  -webkit-appearance: none;
+  /* border: 1px solid black; */
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  height: 40px;
+  padding-left: 5px;
+  padding-bottom: 3px;
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: rgba(255, 255, 255, 0.363);
+}
+
+.footerSubscribeInput::placeholder {
+  color: white;
+}
+.footerSubscribeInput:is(:hover, :focus) {
+  -webkit-appearance: none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.479);
 }

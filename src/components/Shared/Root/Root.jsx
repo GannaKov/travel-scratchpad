@@ -14,6 +14,9 @@ import { ButtonsTemplate } from "../Buttons/Buttons";
 import LogInModal from "../../AuthComponents/LogInModal";
 import SignUpModal from "../../AuthComponents/SignUpModal";
 import Logo from "../../../assets/images/logo2.jpeg";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import PinterestIcon from "@mui/icons-material/Pinterest";
 //-----
 
 //----------------------------
@@ -233,6 +236,49 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
       />
       <Outlet />
       <footer className={styles.footerWrp}>
+        <div className={styles.footerSubscrSocWrp}>
+          <ul className={styles.footerSocialList}>
+            <li className={styles.footerSocialItem}>
+              <a className={styles.footerSocialLink} href="#">
+                <FacebookIcon />
+              </a>
+            </li>
+            <li className={styles.footerSocialItem}>
+              <a className={styles.footerSocialLink} href="#">
+                <InstagramIcon />
+              </a>
+            </li>
+            <li className={styles.footerSocialItemt}>
+              <a className={styles.footerSocialLink} href="#">
+                <PinterestIcon />
+              </a>
+            </li>
+          </ul>
+          <div className={styles.footerSubscribeWrp}>
+            <h4 className={styles.footerSubscribeTitle}>SUBSCRIBE</h4>
+            <form className={styles.footerSubscribeForm}>
+              <label
+                className={styles.footerSubscribeLabel}
+                htmlFor="email-sbscr"
+              >
+                Enter your email&nbsp;&nbsp;&#8432;
+              </label>
+              <input
+                className={styles.footerSubscribeInput}
+                type="email"
+                placeholder="email"
+                required
+                id="email-sbscr"
+                name="email-sbscr"
+              />
+
+              <ButtonsTemplate color="white" size="small" variant="outlined">
+                Subscribe
+              </ButtonsTemplate>
+            </form>
+          </div>
+        </div>
+
         <div>
           <p className={styles.footerText}> © 2024 Ganna Kovchyk</p>
         </div>

@@ -33,6 +33,12 @@ const theme = createTheme({
       main: "#f0f8ff",
       light: "#FFFFFF",
       dark: "#FFFFFF",
+      contrastText: "#000000",
+    },
+    black: {
+      main: "#0000000",
+      light: "#FFFFFF",
+      dark: "#000000",
       contrastText: "#FFFFFF",
     },
   },
