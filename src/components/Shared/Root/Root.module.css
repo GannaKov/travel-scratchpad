@@ -7,8 +7,8 @@
   background: rgba(252, 252, 252, 0.428);
 }
 .headerWrp {
-  /* position: sticky;
-  top: 0; */
+  position: fixed;
+  /*  top: 0; */
   width: 100%;
   background-color: white;
   z-index: 10;
@@ -101,3 +101,11 @@
   gap: 2rem;
 }
 /* linear-gradient(95.69deg, rgba(3, 73, 10, 0.32) 33.78%, rgba(49, 115, 56, 0) 50.69%); */
+.footerWrp {
+  background-image: url("../../../assets/images/newslatter.jpg");
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 200px;
+}

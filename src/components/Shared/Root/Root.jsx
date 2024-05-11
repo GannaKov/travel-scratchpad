@@ -221,6 +221,7 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
       </header>
 
       <Outlet />
+      <footer className={styles.footerWrp}></footer>
     </div>
   );
 };
