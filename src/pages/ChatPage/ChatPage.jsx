@@ -1,7 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
 import styles from "./ChatPage.module.css";
-
+//-----------------
+import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import {
+  MainContainer,
+  ChatContainer,
+  MessageList,
+  Message,
+  MessageInput,
+  TypingIndicator,
+} from "@chatscope/chat-ui-kit-react";
+//------------------
 const ChatPage = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
@@ -12,16 +22,22 @@ const ChatPage = () => {
   };
   console.log("mes", messages);
 
-  const handleSendMessage = async () => {
-    const newUserText = input;
-
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      {
-        role: "user",
-        content: newUserText,
-      },
-    ]);
+  const handleSendMessage = async (message) => {
+    //const newUserText = input;
+    // setMessages((prevMessages) => [
+    //   ...prevMessages,
+    //   {
+    //     role: "user",
+    //     content: newUserText,
+    //   },
+    // ]);
+    const newMessage = {
+      message,
+      direction: "outgoing",
+      sender: "user",
+      role: "user",
+    };
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
     setIsTyping(true);
     // Make a request to the ChatGPT API with the user input
     try {
@@ -31,7 +47,7 @@ const ChatPage = () => {
         {
           messages: [
             { role: "system", content: "You are a helpful assistant." },
-            { role: "user", content: input },
+            { role: "user", content: message },
           ],
           model: "gpt-3.5-turbo",
         },
@@ -45,15 +61,25 @@ const ChatPage = () => {
 
       // Update the conversation history with the response from ChatGPT
 
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
+      //   setMessages((prevMessages) => [
+      //     ...prevMessages,
+      //     {
+      //       role: "assistant",
+      //       content: response.data.choices[0].message.content,
+      //     },
+      //   ]);
+      const content = response.data.choices[0]?.message?.content;
+      if (content) {
+        const chatGPTResponse = {
+          message: content,
+          direction: "incoming",
+          sender: "chatGPT",
           role: "assistant",
-          content: response.data.choices[0].message.content,
-        },
-      ]);
+        };
+        setMessages((prevMessages) => [...prevMessages, chatGPTResponse]);
+      }
       // Clear the input field
-      setInput("");
+      // setInput("");
     } catch (error) {
       console.error("Error processing message:", error);
     } finally {
@@ -66,8 +92,8 @@ const ChatPage = () => {
         <div className={styles.containerBlog}>
           <h2>Looking for inspiration? Ask!</h2>
           <h2>Have questions? Ask!</h2>
-          <div className={styles.chatContainer}>
-            <div>
+          {/* <div className={styles.chatContainer}>
+            <div style={{ height: "800px", width: "700px" }}>
               {messages.map((message, index) => (
                 <div
                   key={index}
@@ -92,6 +118,31 @@ const ChatPage = () => {
                 Send
               </button>
             </div>
+          </div> */}
+          <div
+            style={{ position: "relative", height: "500px", width: "700px" }}
+          >
+            <MainContainer>
+              <ChatContainer>
+                <MessageInput
+                  placeholder="Send a Message"
+                  onSend={handleSendMessage}
+                />
+                <MessageList
+                  scrollBehavior="smooth"
+                  typingIndicator={
+                    isTyping ? (
+                      <TypingIndicator content="ChatGPT is typing" />
+                    ) : null
+                  }
+                >
+                  {messages.map((message, i) => {
+                    console.log(message);
+                    return <Message key={i} model={message} />;
+                  })}
+                </MessageList>
+              </ChatContainer>
+            </MainContainer>
           </div>
         </div>
       </div>
