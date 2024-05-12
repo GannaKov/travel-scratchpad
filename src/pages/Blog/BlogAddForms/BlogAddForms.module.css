@@ -17,6 +17,16 @@
   padding-right: 1rem;
   background-color: rgba(255, 253, 253, 0.915);
 }
+@media screen and (min-width: 768px) {
+  .containerBlog {
+    max-width: 768px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .containerBlog {
+    max-width: 1200px;
+  }
+}
 .btnWrp {
   display: flex;
   justify-content: space-between;

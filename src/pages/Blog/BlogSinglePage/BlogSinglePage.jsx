@@ -12,7 +12,10 @@ import styles from "./BlogSinglePage.module.css";
 import { useEffect, useState } from "react";
 import { deleteOneTrip, getTripById } from "../../../services/requests";
 import useAuth from "../../../context/useAuthHook";
-import Carousel from "../../../components/Shared/Carousel/Carousel";
+import {
+  Carousel,
+  CarouselMobile,
+} from "../../../components/Shared/Carousel/Carousel";
 import TravelPlaceholder from "../../../assets/images/3d-character-emerging-from-smartphone.jpg";
 import { ButtonsTemplate } from "../../../components/Shared/Buttons/Buttons";
 
@@ -47,22 +50,34 @@ const BlogSinglePage = () => {
           <GoBack state={backLinkHref} />
         </div>
       </div>
-      <div>
-        {singleTrip.images.length === 0 &&
-          user.user.id === singleTrip.owner && (
+
+      {singleTrip.images.length === 0 && user.user.id === singleTrip.owner && (
+        <div className={styles.sectionBlog}>
+          <div className={styles.containerBlog}>
             <div className={styles.sectionBlog}>
               <h3 className={styles.subTitle}>Add your Photos !</h3>
             </div>
-          )}
-      </div>
+          </div>
+        </div>
+      )}
+
       {/*-----  Carousel ------*/}
       {singleTrip.images.length > 0 && (
-        <div className={styles.carouselWrp}>
-          {singleTrip.images.length > 1 ? (
-            <Carousel images={singleTrip.images} />
-          ) : (
-            <img src={singleTrip.images[0]} />
-          )}
+        <div className={styles.containerBlog}>
+          <div className={styles.carouselWrp}>
+            {singleTrip.images.length > 1 ? (
+              <Carousel images={singleTrip.images} />
+            ) : (
+              <img src={singleTrip.images[0]} />
+            )}
+          </div>
+          <div className={styles.carouselWrpMobile}>
+            {singleTrip.images.length > 1 ? (
+              <CarouselMobile images={singleTrip.images} />
+            ) : (
+              <img src={singleTrip.images[0]} />
+            )}
+          </div>
         </div>
       )}
 

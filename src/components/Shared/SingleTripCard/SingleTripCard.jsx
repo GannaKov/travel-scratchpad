@@ -5,7 +5,6 @@ import StarsShow from "../Stars/StarsShow";
 import truncateUrl from "../../../services/truncateUrl";
 import styles from "./SingleTripCard.module.css";
 import TravelPlaceholder from "../../../assets/images/3d-character-emerging-from-smartphone.jpg";
-import Carousel from "../Carousel/Carousel";
 
 const SingleTripCard = ({ singleTrip }) => {
   return (

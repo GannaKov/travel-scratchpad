@@ -1,6 +1,6 @@
 .sliderContainer {
-  padding: 20px;
-  width: 600px;
+  padding: 1rem;
+  width: 300px;
   background-color: white;
 
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px,
@@ -9,6 +9,19 @@
   margin: 0 auto;
 }
 
+@media screen and (min-width: 450px) {
+  .sliderContainer {
+    width: 400px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .sliderContainer {
+    width: 600px;
+  }
+}
+/* .imgCarousel {
+  width: 100%;
+} */
 /* .imgWrp {
   height: 600px;
   width: 100%;

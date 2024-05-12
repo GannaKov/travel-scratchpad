@@ -65,7 +65,7 @@ const Carousel = ({ images }) => {
         {/* <img src={baseUrl + "/abstract01.jpg"} /> */}
         {images.map((item) => (
           <div key={item}>
-            <img src={item} className={styles.imgWrp} />
+            <img src={item} className={styles.imgCarousel} />
           </div>
         ))}
       </Slider>
@@ -73,4 +73,39 @@ const Carousel = ({ images }) => {
   );
 };
 
-export default Carousel;
+const CarouselMobile = ({ images }) => {
+  // console.log("images", images);
+  const settings = {
+    customPaging: function (i) {
+      return (
+        <a>
+          <img src={images[i]} />
+        </a>
+      );
+    },
+
+    infinite: true,
+    //speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 4000,
+    pauseOnHover: true,
+    cssEase: "linear",
+  };
+  return (
+    <div className={styles.sliderContainer}>
+      <Slider {...settings}>
+        {/* <img src={baseUrl + "/abstract01.jpg"} /> */}
+        {images.map((item) => (
+          <div key={item}>
+            <img src={item} className={styles.imgCarousel} />
+          </div>
+        ))}
+      </Slider>
+    </div>
+  );
+};
+export { Carousel, CarouselMobile };

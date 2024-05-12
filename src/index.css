@@ -75,6 +75,7 @@ img {
   max-width: 100%;
   height: auto;
 }
+/* --- carousel ---- */
 .slick-prev {
   display: none;
 }
@@ -118,6 +119,11 @@ img {
 .slick-dots {
   bottom: -105px;
 }
+
+@media screen and (min-width: 768px) {
+  .slick-dots.slick-thumb {
+  }
+}
 .slick-dots li {
   width: 60px;
   height: 60px;
@@ -130,12 +136,6 @@ img {
 .slick-dots li:not(:last-child) {
   margin-right: 20px;
 }
-/* mui Country Input */
-/* .MuiAutocomplete-hasPopupIcon.css-clttge-MuiAutocomplete-root
-  .MuiOutlinedInput-root {
-  border: 1px solid red;
-  outline: 1px solid transparent;
-} */
 
 /* MobileStepper  */
 .MuiMobileStepper-root .MuiMobileStepper-dotActive {

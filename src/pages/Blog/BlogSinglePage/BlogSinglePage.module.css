@@ -17,15 +17,42 @@
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
-
-.carouselWrp {
-  padding-top: 2rem;
-  padding-bottom: 6rem;
-}
 .containerBlog {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+@media screen and (min-width: 768px) {
+  .containerBlog {
+    max-width: 768px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .containerBlog {
+    max-width: 1200px;
+  }
+}
+.carouselWrpMobile {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  width: 100%;
+}
+@media screen and (min-width: 1200px) {
+  .carouselWrpMobile {
+    display: none;
+  }
+}
+.carouselWrp {
+  display: none;
+}
+@media screen and (min-width: 1200px) {
+  .carouselWrp {
+    display: block;
+    padding-top: 2rem;
+    padding-bottom: 6rem;
+    width: 100%;
+  }
+}
+
 .topWrapper {
   width: 100%;
 }
