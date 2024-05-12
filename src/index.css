@@ -55,6 +55,7 @@ h5,
 h6 {
   font-family: Oswald, sans-serif;
   color: rgb(30, 30, 30);
+  letter-spacing: 1.5px;
 }
 
 ul,
@@ -124,6 +125,28 @@ img {
   color: white !important;
 }
 .MuiTypography-root.MuiListItemText-primary {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
+}
+.cs-message-list .cs-message {
+  margin-bottom: 2rem;
+}
+
+.cs-message--outgoing .cs-message__content {
+  /* background-color: rgba(205, 218, 219, 0.36); */
+  background-color: #284ca7;
+  color: white;
+}
+
+.cs-message--incoming .cs-message__content {
+  background-color: #28a745;
+  color: white;
+}
+.cs-message-input__content-editor-wrapper {
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 20px;
+}
+.cs-message-input__content-editor {
+  background-color: white;
 }

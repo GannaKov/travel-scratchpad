@@ -34,7 +34,7 @@ const ChatPage = () => {
     const newMessage = {
       message,
       direction: "outgoing",
-      sender: "user",
+      sender: "You",
       role: "user",
     };
     setMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -90,8 +90,8 @@ const ChatPage = () => {
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <h2>Looking for inspiration? Ask!</h2>
-          <h2>Have questions? Ask!</h2>
+          <p className={styles.chatTitle}>Looking for inspiration? Ask!</p>
+          <p className={styles.chatTitle}>Have questions? Ask!</p>
           {/* <div className={styles.chatContainer}>
             <div style={{ height: "800px", width: "700px" }}>
               {messages.map((message, index) => (
@@ -122,7 +122,7 @@ const ChatPage = () => {
           <div
             style={{ position: "relative", height: "500px", width: "700px" }}
           >
-            <MainContainer>
+            <MainContainer style={{ fontSize: "1.3em", lineHeight: "1.6em " }}>
               <ChatContainer>
                 <MessageInput
                   placeholder="Send a Message"
@@ -136,10 +136,11 @@ const ChatPage = () => {
                     ) : null
                   }
                 >
-                  {messages.map((message, i) => {
-                    console.log(message);
-                    return <Message key={i} model={message} />;
-                  })}
+                  {messages.map((message, i) => (
+                    // return <Message key={i} model={message} />;
+
+                    <Message key={i} model={message} />
+                  ))}
                 </MessageList>
               </ChatContainer>
             </MainContainer>
