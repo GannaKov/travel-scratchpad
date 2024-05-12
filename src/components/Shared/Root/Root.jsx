@@ -162,6 +162,18 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
                 </NavLink>
               </li>
             )}
+            <li className={styles.navItem}>
+              <NavLink
+                to="/chat-ai"
+                className={({ isActive }) =>
+                  isActive
+                    ? `${styles.active} ${styles.headerNavLink}`
+                    : `${styles.headerNavLink}`
+                }
+              >
+                Chat Ai
+              </NavLink>
+            </li>
           </ul>
         </nav>
         <div className={styles.authWrp}>

@@ -73,7 +73,7 @@ export const getTripById = async (tripId) => {
 // get trip's Purpose
 export const getTripsPurposes = async () => {
   const { data } = await instance.get(`/trip-purpose`);
-  console.log("data", data.data);
+  // console.log("data", data.data);
   return data.data;
 };
 

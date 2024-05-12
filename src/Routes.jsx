@@ -29,6 +29,7 @@ import ProtectedRoutes from "./utils/ProtectedRoutes";
 import { useEffect, useState } from "react";
 import useAuth from "./context/useAuthHook";
 import ErrorProtectedBoundary from "./components/ErrorProtectedBoundary/ErrorProtectedBoundary";
+import ChatPage from "./pages/ChatPage/ChatPage";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -38,7 +39,7 @@ const Routes = () => {
   const [selectedPurpose, setSelectedPurpose] = useState(null);
   const [selectedCountryHome, setSelectedCountryHome] = useState(null);
   const [selectedCountryBlog, setSelectedCountryBlog] = useState(null);
-  console.log("selectedPurpose", selectedPurpose);
+
   // const query = {};
   // if (selectedCountry) {
   //   query.country = selectedCountry;
@@ -55,7 +56,7 @@ const Routes = () => {
       .catch((error) => console.log(error.status, error.message));
     getTripsPurposes()
       .then((res) => {
-        console.log("purp", res);
+        // console.log("purp", res);
         setPurposeOptions(res);
       })
       .catch((error) => console.log(error.status, error.message));
@@ -117,6 +118,10 @@ const Routes = () => {
           path: "/:travel_id",
           element: <BlogSinglePage />,
           loader: getTripByIdLoader,
+        },
+        {
+          path: "/chat-ai",
+          element: <ChatPage />,
         },
         {
           element: <ProtectedRoutes />,
