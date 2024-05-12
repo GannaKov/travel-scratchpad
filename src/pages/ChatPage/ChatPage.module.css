@@ -39,18 +39,16 @@
   border-radius: 8px;
 }
 
-.messageContainer {
+.messageContainerAssistant {
   margin-bottom: 10px;
+  text-align: left;
+  color: #28a745;
+}
 
-  &.user {
-    text-align: right;
-    color: #007bff;
-  }
-
-  &.assistant {
-    text-align: left;
-    color: #28a745;
-  }
+.messageContainerUser {
+  margin-bottom: 10px;
+  text-align: right;
+  color: #007bff;
 }
 .inputChatWrp {
   display: flex;

@@ -10,38 +10,55 @@ const ChatPage = () => {
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
+  console.log("mes", messages);
 
   const handleSendMessage = async () => {
-    // Make a request to the ChatGPT API with the user input
-    const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-    const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        messages: [
-          { role: "system", content: "You are a helpful assistant." },
-          { role: "user", content: input },
-        ],
-        model: "gpt-3.5-turbo",
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
-        },
-      }
-    );
+    const newUserText = input;
 
-    // Update the conversation history with the response from ChatGPT
-    setMessages([
-      ...messages,
+    setMessages((prevMessages) => [
+      ...prevMessages,
       {
-        role: "assistant",
-        content: response.data.choices[0].message.content,
+        role: "user",
+        content: newUserText,
       },
     ]);
+    setIsTyping(true);
+    // Make a request to the ChatGPT API with the user input
+    try {
+      const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+      const response = await axios.post(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          messages: [
+            { role: "system", content: "You are a helpful assistant." },
+            { role: "user", content: input },
+          ],
+          model: "gpt-3.5-turbo",
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${API_KEY}`,
+          },
+        }
+      );
 
-    // Clear the input field
-    setInput("");
+      // Update the conversation history with the response from ChatGPT
+
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          role: "assistant",
+          content: response.data.choices[0].message.content,
+        },
+      ]);
+      // Clear the input field
+      setInput("");
+    } catch (error) {
+      console.error("Error processing message:", error);
+    } finally {
+      setIsTyping(false);
+    }
   };
   return (
     <div className={styles.pageWrpapper}>
@@ -50,10 +67,16 @@ const ChatPage = () => {
           <h2>Looking for inspiration? Ask!</h2>
           <h2>Have questions? Ask!</h2>
           <div className={styles.chatContainer}>
-            {" "}
             <div>
               {messages.map((message, index) => (
-                <div key={index} className={message.role}>
+                <div
+                  key={index}
+                  className={
+                    message.role === "user"
+                      ? styles.messageContainerUser
+                      : styles.messageContainerAssistant
+                  }
+                >
                   {message.content}
                 </div>
               ))}
