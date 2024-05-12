@@ -128,6 +128,15 @@ img {
   font-size: 1.2rem;
   font-weight: 600;
 }
+/* --- chat GPT ------------- */
+
+.cs-main-container {
+  border-radius: 8px;
+}
+.cs-message-list {
+  background-color: rgba(255, 255, 255, 0.395);
+  padding-top: 1rem;
+}
 .cs-message-list .cs-message {
   margin-bottom: 2rem;
 }

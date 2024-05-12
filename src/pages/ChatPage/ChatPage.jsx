@@ -14,7 +14,13 @@ import {
 //------------------
 const ChatPage = () => {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    {
+      message: "Hello, I'm ChatGPT! Ask me anything!",
+      sentTime: "just now",
+      sender: "ChatGPT",
+    },
+  ]);
   const [isTyping, setIsTyping] = useState(false); //
 
   const handleInputChange = (e) => {
@@ -120,7 +126,7 @@ const ChatPage = () => {
             </div>
           </div> */}
           <div
-            style={{ position: "relative", height: "500px", width: "700px" }}
+            style={{ position: "relative", height: "700px", width: "700px" }}
           >
             <MainContainer style={{ fontSize: "1.3em", lineHeight: "1.6em " }}>
               <ChatContainer>
