@@ -76,14 +76,34 @@ img {
   height: auto;
 }
 .slick-prev {
-  left: -55px;
+  display: none;
 }
+
 .slick-next {
-  right: -55px;
+  /* right: -55px; */
+  /* width: 25px;
+  height: 60px; */
+  display: none;
 }
 .slick-arrow {
-  color: rgba(61, 59, 59, 0.995);
+  display: none;
 }
+@media screen and (min-width: 768px) {
+  .slick-arrow {
+    color: rgba(61, 59, 59, 0.995);
+  }
+  .slick-next {
+    right: -55px;
+    width: 25px;
+    height: 60px;
+  }
+  .slick-prev {
+    left: -55px;
+    width: 25px;
+    height: 60px;
+  }
+}
+
 .slick-prev:hover,
 .slick-prev:focus,
 .slick-next:hover,
@@ -132,9 +152,10 @@ img {
 
 .cs-main-container {
   border-radius: 8px;
+  background-color: transparent;
 }
 .cs-message-list {
-  background-color: rgba(255, 255, 255, 0.395);
+  background-color: rgba(255, 255, 255, 0.6);
   padding-top: 1rem;
 }
 .cs-message-list .cs-message {
