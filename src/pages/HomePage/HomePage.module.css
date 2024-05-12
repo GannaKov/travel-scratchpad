@@ -82,5 +82,13 @@
 
 .selectWrp {
   display: flex;
+  flex-direction: column;
   gap: 2rem;
+}
+@media screen and (min-width: 768px) {
+  .selectWrp {
+    display: flex;
+    gap: 2rem;
+    flex-direction: row;
+  }
 }

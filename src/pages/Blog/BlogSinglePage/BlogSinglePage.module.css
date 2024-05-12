@@ -7,7 +7,11 @@
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
-  padding-top: 120px;
+}
+@media screen and (min-width: 768px) {
+  .pageWrpapper {
+    padding-top: 120px;
+  }
 }
 .sectionBlog {
   padding-top: 2rem;

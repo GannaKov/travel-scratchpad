@@ -7,12 +7,11 @@
   background: rgba(252, 252, 252, 0.428);
 }
 .headerWrp {
-  position: fixed;
-  /* display: flex;*/
+  /* position: fixed; */
 
   width: 100%;
   display: grid;
-  grid-template-columns: 1.5fr 4fr 1.5fr;
+  grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0rem;
   grid-row-gap: 0px;
@@ -25,6 +24,12 @@
   border-bottom: 1px solid rgba(128, 128, 128, 0.236);
   box-shadow: 0px 1px 3px #6d035f1f, 0px 0px 5px rgba(114, 40, 121, 0.06),
     0px 0px 8px rgba(0, 0, 0, 0.16);
+}
+@media screen and (min-width: 768px) {
+  .headerWrp {
+    position: fixed;
+    grid-template-columns: 1.5fr 4fr 1.5fr;
+  }
 }
 
 .headerNav {
@@ -62,6 +67,7 @@
   display: flex;
 
   flex-direction: column;
+  align-items: center;
 
   /* align-items: center; */
 }
@@ -110,6 +116,13 @@
   display: flex;
   gap: 3rem;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+@media screen and (min-width: 768px) {
+  .authWrp {
+    flex-direction: row;
+  }
 }
 
 .authBtnWrp {
@@ -117,14 +130,21 @@
   gap: 2rem;
   width: 100%;
   justify-content: center;
+  flex-direction: column;
 }
 /* linear-gradient(95.69deg, rgba(3, 73, 10, 0.32) 33.78%, rgba(49, 115, 56, 0) 50.69%); */
+
+@media screen and (min-width: 768px) {
+  .authBtnWrp {
+    flex-direction: row;
+  }
+}
 .footerWrp {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding: 3rem 5rem 1rem;
+  padding: 3rem 3rem 1rem;
   background-image: linear-gradient(
       rgba(47, 48, 58, 0.8),
       rgba(47, 48, 58, 0.8)
@@ -136,6 +156,11 @@
   width: 100%;
   /* height: 200px; */
 }
+@media screen and (min-width: 768px) {
+  .footerWrp {
+    padding: 3rem 5rem 1rem;
+  }
+}
 .footerText {
   color: white;
   font-size: 0.8rem;
@@ -144,7 +169,16 @@
   align-items: center;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 2rem;
+}
+@media screen and (min-width: 768px) {
+  .footerSubscrSocWrp {
+    align-items: center;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 .footerSocialList {
   display: flex;
@@ -178,8 +212,10 @@
 .footerSubscribeTitle {
   color: white;
 }
-
-@media screen and (min-width: 500px) {
+.footerSubscribeForm {
+  margin-bottom: 2rem;
+}
+@media screen and (min-width: 768px) {
   .footerSubscribeForm {
     width: 260px;
     margin: 0 auto;
