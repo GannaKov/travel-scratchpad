@@ -8,11 +8,7 @@
   padding: 118px 0;
   max-width: 1800px;
 
-  /* linear-gradient(
-      rgba(58, 59, 63, 0.4),
-      rgba(174, 166, 188, 0.4)
-    ), */
-  background-image: url("../../assets/images/hand-writing-notebook-near-tourist-stuff.jpg");
+  background-image: url("../../assets/images/hero.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -29,10 +25,6 @@
   margin: 0 auto;
 }
 
-/* linear-gradient(
-      rgba(245, 245, 247, 0.4),
-      rgba(216, 216, 219, 0.197)
-    ), */
 .sectionsWrapper {
   background-image: url("../../assets/images/h2-bckg-05.jpg");
   background-size: cover;
@@ -71,24 +63,23 @@
   font-weight: 500;
   font-size: 1.5rem;
 }
+.subText {
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  font-size: 1.3rem;
+}
 .addBtn {
   margin: 0 auto;
 }
-/* .sectionBlog1 {
-  background-image: url("../../assets/images/");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-} */
+
 .sectionLine {
   height: 1px;
   width: 800px;
   background-color: #90a4ae;
-  /* box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.52); */
+
   margin: 2rem auto;
 }
-/* rgba(0, 0, 0, 0.2) 0px 3px 3px -2px,
-    rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, */
+
 .selectWrp {
   display: flex;
   gap: 2rem;

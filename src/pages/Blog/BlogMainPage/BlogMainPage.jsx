@@ -3,10 +3,6 @@ import styles from "./BlogMainPage.module.css";
 import { useNavigate, useLoaderData } from "react-router-dom";
 import MainList from "../../../components/Shared/MainList/MainList";
 
-import Autocomplete from "@mui/material/Autocomplete";
-
-import { Button, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
 import Select from "../../../components/Shared/Select/Select";
 import { ButtonsTemplate } from "../../../components/Shared/Buttons/Buttons";
 
@@ -66,14 +62,11 @@ const BlogMainPage = ({
           {/* ===============Country========================================== */}
 
           <Select
-            //selectedValue, handleChange, valueOptions
             selectedValue={selectedCountry}
             handleChange={handleChangeCountry}
             valueOptions={countriesOptions}
+            label="country"
           />
-          {/* <Button variant="contained" color="primary">
-            Search
-          </Button> */}
         </div>
       </div>
       <div className={styles.sectionBlog}>

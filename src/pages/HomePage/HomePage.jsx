@@ -4,7 +4,7 @@ import Select from "../../components/Shared/Select/Select";
 import styles from "./HomePage.module.css";
 import { useNavigate, useLoaderData, useLocation } from "react-router-dom";
 import useAuth from "../../context/useAuthHook";
-import heroImg from "../../assets/images/hand-writing-notebook-near-tourist-stuff.jpg";
+// import heroImg from "../../assets/images/hand-writing-notebook-near-tourist-stuff.jpg";
 import { ButtonsTemplate } from "../../components/Shared/Buttons/Buttons";
 
 const HomePage = ({
@@ -43,17 +43,12 @@ const HomePage = ({
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionHero}>
         <div className={styles.containerHero}></div>
-        {/* <img src={heroImg} alt="Travel image" /> */}
       </div>
       <div className={styles.sectionsWrapper}>
         <div className={styles.sectionBlog}>
           <div className={styles.containerBlog}>
             <h3 className={styles.subTitle}>Add Your Trip</h3>
-            {/* <Link
-            to={`${trip._id}`}
-            state={{ from: location }}
-            className={styles.mainItemLink}
-          > */}
+
             <ButtonsTemplate
               color="darkGreen"
               size="large"
@@ -62,14 +57,12 @@ const HomePage = ({
             >
               Add
             </ButtonsTemplate>
-            {/* </Link> */}
           </div>
         </div>
         <div className={styles.sectionLine}></div>
         <div className={styles.sectionBlog}>
           <div className={styles.containerBlog}>
             <div className={styles.selectWrp}>
-              {" "}
               <Select
                 selectedValue={selectedCountry}
                 handleChange={handleChangeCountry}
@@ -90,7 +83,12 @@ const HomePage = ({
             {allTripsList && allTripsList.length > 0 ? (
               <MainList tripsArr={allTripsList} />
             ) : (
-              <p>No Travels</p>
+              <>
+                <p className={styles.subText}>There are no such trips yet.</p>
+                <p className={styles.subText}>
+                  Be first and share your experience ! 🌸
+                </p>
+              </>
             )}
           </div>
         </div>

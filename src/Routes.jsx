@@ -40,10 +40,6 @@ const Routes = () => {
   const [selectedCountryHome, setSelectedCountryHome] = useState(null);
   const [selectedCountryBlog, setSelectedCountryBlog] = useState(null);
 
-  // const query = {};
-  // if (selectedCountry) {
-  //   query.country = selectedCountry;
-  // }
   const [openLogIn, setOpenLogIn] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
 
@@ -81,12 +77,6 @@ const Routes = () => {
       errorElement: <NotFound />,
 
       children: [
-        //----
-        // {
-        //   path: "/login",
-        //   element: <Login />,
-        // },
-        // { path: "/register", element: <Signup /> },
         {
           index: true,
           element: (
@@ -112,7 +102,6 @@ const Routes = () => {
             }
             return await getAllTripsLoader(query);
           },
-          // loader: () => getAllTripsLoader(query),
         },
         {
           path: "/:travel_id",
@@ -141,7 +130,7 @@ const Routes = () => {
                       countriesOptions={countriesOptions}
                     />
                   ),
-                  //loader: () => getAllOwnerTripsLoader(token, query),
+
                   loader: async () => {
                     const query = {};
                     if (selectedCountryBlog) {

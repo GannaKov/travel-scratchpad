@@ -26,6 +26,7 @@
 .tripItemTitle {
   margin-bottom: 0.5rem;
   text-align: center;
+  font-size: 1.7rem;
 }
 .tripInfoWrp {
   margin: 0 auto;
@@ -45,9 +46,22 @@
   font-weight: 700;
 }
 .tripBoldSubTitle {
+  font-weight: 600;
+
+  margin-bottom: 1rem;
+}
+.tripBoldSubTitleUnderline {
   font-weight: 700;
   margin-bottom: 1rem;
+  text-decoration: underline;
 }
 .tripText {
   margin-bottom: 1rem;
+}
+.tripLink {
+  color: rgb(138, 43, 226);
+}
+
+.tripLink:is(:hover, :focus) {
+  color: rgb(90, 2, 172);
 }

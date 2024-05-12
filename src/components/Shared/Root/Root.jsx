@@ -26,8 +26,6 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
 
   const cookies = new Cookies();
   const navigate = useNavigate();
-  // const [openLogIn, setOpenLogIn] = useState(false);
-  // const [openSignUp, setOpenSignUp] = useState(false);
 
   useEffect(() => {
     // // if localStorage
@@ -51,9 +49,6 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
           navigate("/");
         });
     }
-    //else {
-    //   navigate("/");
-    // }
   }, []);
 
   useEffect(() => {

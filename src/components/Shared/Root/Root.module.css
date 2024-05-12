@@ -80,14 +80,14 @@
 .headerNavLink {
   padding-top: 10px;
   padding-bottom: 10px;
-  font-size: 1.3rem;
-  letter-spacing: 1.5px;
+  font-size: 1.1rem;
+  letter-spacing: 1.2px;
   color: black;
   font-family: Oswald, sans-serif;
   font-style: normal;
-  font-size: 1.3rem;
+
   font-weight: 500;
-  line-height: 28px;
+  /* line-height: 28px; */
   text-transform: uppercase;
 }
 .headerNavLink:is(:hover, :focus) {
@@ -95,7 +95,7 @@
   text-decoration-thickness: 0.2rem;
 }
 .headerNavLink.active {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 
   /* color: rgb(227, 87, 180); */
   color: #43a047;
@@ -124,20 +124,21 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding: 1rem 8rem;
+  padding: 3rem 5rem 1rem;
   background-image: linear-gradient(
       rgba(47, 48, 58, 0.8),
       rgba(47, 48, 58, 0.8)
     ),
-    url("../../../assets/images/full-shot-woman-taking-selfie.jpg");
+    url("../../../assets/images/footer.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: 200px;
+  /* height: 200px; */
 }
 .footerText {
   color: white;
+  font-size: 0.8rem;
 }
 .footerSubscrSocWrp {
   align-items: center;
@@ -162,11 +163,11 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.596);
   color: black;
 }
 .footerSocialLink:is(:hover, :focus) {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.679);
   color: white;
 }
 .footerSocialLink {

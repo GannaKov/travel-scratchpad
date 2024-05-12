@@ -73,15 +73,15 @@ const SingleTripCard = ({ singleTrip }) => {
           )}
         </div>
         <div className={styles.tripChunk}>
-          <p className={styles.tripBoldSubTitle}>Accomodation:&nbsp;</p>
+          <p className={styles.tripBoldSubTitleUnderline}>
+            Accomodation:&nbsp;
+          </p>
           {singleTrip.accommodation.map((accomodation) => (
             <div key={accomodation._id}>
               <div className={styles.tripText}>
-                {" "}
                 <StarsShow rating={accomodation.rating} isReadOnly={true} />
               </div>
               <div className={styles.tripText}>
-                {" "}
                 <span className={styles.tripBoldText}>
                   {accomodation.type}:&nbsp;
                 </span>
@@ -89,7 +89,7 @@ const SingleTripCard = ({ singleTrip }) => {
                   href={accomodation.link}
                   target="_blank"
                   rel="noreferrer"
-                  className={styles.tripText}
+                  className={styles.tripLink}
                 >
                   {truncateUrl(accomodation.link)}
                 </a>
@@ -101,7 +101,7 @@ const SingleTripCard = ({ singleTrip }) => {
         </div>
         <div className={styles.tripChunk}>
           {" "}
-          <p className={styles.tripBoldSubTitle}>Expenses:&nbsp;</p>
+          <p className={styles.tripBoldSubTitleUnderline}>Expenses:&nbsp;</p>
           <ul>
             {" "}
             {singleTrip.expenses.map((exp) => (
@@ -117,12 +117,19 @@ const SingleTripCard = ({ singleTrip }) => {
         </div>
         <div className={styles.tripChunk}>
           {" "}
-          <p className={styles.tripBoldSubTitle}>Useful links:&nbsp;</p>
+          <p className={styles.tripBoldSubTitleUnderline}>
+            Useful links:&nbsp;
+          </p>
           <ul>
             {singleTrip.useful_links.map((item) => (
               <li key={item._id}>
                 <span>{item.topic}:&nbsp;</span>
-                <a href={item.link} target="_blank" rel="noreferrer">
+                <a
+                  className={styles.tripLink}
+                  href={item.link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {truncateUrl(item.link)}
                 </a>
               </li>
