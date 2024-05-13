@@ -79,7 +79,7 @@ const ChatPage = () => {
             className={styles.chatContainer}
             // style={{ position: "relative", height: "700px", width: "700px" }}
           >
-            <MainContainer style={{ fontSize: "1.3em", lineHeight: "1.6em " }}>
+            <MainContainer style={{ fontSize: "1.1em", lineHeight: "1.4em " }}>
               <ChatContainer>
                 <MessageInput
                   placeholder="Send a Message"

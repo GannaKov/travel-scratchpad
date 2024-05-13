@@ -11,14 +11,14 @@
 
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 2fr 3fr 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0rem;
   grid-row-gap: 0px;
   align-items: center;
   background-color: white;
   z-index: 10;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   /* padding-top: 2rem;
   padding-bottom: 2rem; */
   border-bottom: 1px solid rgba(128, 128, 128, 0.236);
@@ -28,7 +28,13 @@
 @media screen and (min-width: 768px) {
   .headerWrp {
     position: fixed;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .headerWrp {
+    position: fixed;
     grid-template-columns: 1.5fr 4fr 1.5fr;
+    padding: 1rem 2rem;
   }
 }
 
@@ -36,39 +42,38 @@
   display: none;
 }
 
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 1200px) {
   .headerNav {
     display: block;
   }
 }
 .headerLogo {
-  width: 100px;
+  width: 70px;
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .headerLogo {
+    width: 100px;
   }
 }
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1200px) {
   .headerLogo {
   }
 }
 
 .navList {
   display: flex;
-
-  flex-direction: column;
-  align-items: center;
-
-  /* align-items: center; */
+  flex-direction: row;
+  gap: 4rem;
+  justify-content: space-around;
 }
-@media screen and (min-width: 450px) {
+/* @media screen and (min-width: 450px) {
   .navList {
     display: flex;
     flex-direction: row;
     gap: 4rem;
     justify-content: space-around;
   }
-}
+} */
 .navItem {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -76,23 +81,26 @@
 .headerNavLink {
   padding-top: 10px;
   padding-bottom: 10px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   letter-spacing: 1.2px;
   color: black;
   font-family: Oswald, sans-serif;
   font-style: normal;
 
   font-weight: 500;
-  /* line-height: 28px; */
+
   text-transform: uppercase;
+}
+@media screen and (min-width: 768px) {
+  .headerNavLink {
+    font-size: 1.1rem;
+  }
 }
 .headerNavLink:is(:hover, :focus) {
   text-decoration: underline;
   text-decoration-thickness: 0.2rem;
 }
 .headerNavLink.active {
-  font-size: 1.1rem;
-
   /* color: rgb(227, 87, 180); */
   color: #43a047;
   text-decoration: underline;
@@ -104,7 +112,7 @@
 }
 .authWrp {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   justify-content: center;
   /* flex-direction: column; */
   align-items: center;
@@ -131,8 +139,10 @@
   }
 }
 .mobileBtnMenu {
+  /* align-self: center; */
+  justify-self: end;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
   .mobileBtnMenu {
     display: none;
   }

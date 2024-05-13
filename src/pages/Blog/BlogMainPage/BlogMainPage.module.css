@@ -48,10 +48,21 @@
 }
 .sectionLine {
   height: 1px;
-  width: 800px;
+  width: 220px;
   background-color: #90a4ae;
 
   margin: 2rem auto;
+}
+
+@media screen and (min-width: 768px) {
+  .sectionLine {
+    width: 400px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .sectionLine {
+    width: 800px;
+  }
 }
 .noTripsText {
 }
