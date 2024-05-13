@@ -31,7 +31,7 @@ const FormFourth = ({
     }
   };
   const onLinkAddBtnClick = () => {
-    console.log(formik.values);
+    
     const { topic, link } = formik.values.data4;
     if (topic.trim() !== "" && link.trim() !== "") {
       setUsefulLinks((prevLinks) => [...prevLinks, { topic, link }]);

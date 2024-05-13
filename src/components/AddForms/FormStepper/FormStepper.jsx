@@ -143,7 +143,7 @@ const FormStepper = ({ countriesOptions }) => {
         advice: formik.values.data4.advices,
       };
 
-      console.log("updatedForBackend", updatedForBackend);
+      
       await formik.setFieldValue(`data2.cities`, newCitiesArr);
       await formik.setValues(updatedValues);
 
