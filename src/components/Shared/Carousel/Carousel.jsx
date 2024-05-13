@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

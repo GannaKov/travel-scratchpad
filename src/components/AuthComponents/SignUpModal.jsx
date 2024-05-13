@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useNavigate } from "react-router-dom";
+
 import { useFormik } from "formik";
 import { TextField, Button } from "@mui/material";
 import Modal from "@mui/material/Modal";
@@ -25,8 +25,6 @@ const style = {
   pr: 4,
 };
 const SignUpModal = ({ openSignUp, setOpenSignUp, setOpenLogIn }) => {
-
-
   const handleCloseSignUp = () => setOpenSignUp(false);
 
   const validationSchema = Yup.object({
@@ -59,11 +57,10 @@ const SignUpModal = ({ openSignUp, setOpenSignUp, setOpenLogIn }) => {
         if (res.code === 201) {
           console.log("Hurra in Regisre");
         }
-       
+
         handleCloseSignUp();
         setOpenLogIn(true);
       } catch (error) {
-        
         alert(error.response.data.error);
       }
     },
