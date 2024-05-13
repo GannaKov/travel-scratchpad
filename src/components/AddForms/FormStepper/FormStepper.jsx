@@ -217,9 +217,12 @@ const FormStepper = ({ countriesOptions }) => {
         await putFormData(tripId, data, token);
         navigate(`/blog-main/${tripId}`);
       } else {
-        await postFormData(data, token);
-        console.log("data", data);
-        navigate("/blog-main");
+        await postFormData(data, token)
+          .then((res) => {
+            console.log("data", res);
+            navigate("/blog-main");
+          })
+          .catch((error) => console.log(error));
       }
     },
   });
