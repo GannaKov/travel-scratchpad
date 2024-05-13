@@ -23,7 +23,7 @@ const BlogSinglePage = () => {
   const { token, setToken } = useAuth();
   const { user, setUser } = useAuth();
   const singleTrip = useLoaderData();
-  console.log("singleTrip", singleTrip.owner, "user", user);
+
   const location = useLocation();
   const backLinkHref = location.state?.from ?? "/blog-main";
   const navigate = useNavigate();

@@ -4,7 +4,7 @@ import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Root.module.css";
 
 import Cookies from "universal-cookie";
-import Button from "@mui/material/Button";
+
 import { useEffect, useState } from "react";
 import { logoutUser, refreshToken } from "../../../services/requests";
 import useAuth from "../../../context/useAuthHook";
@@ -17,6 +17,9 @@ import Logo from "../../../assets/images/logo2.jpeg";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PinterestIcon from "@mui/icons-material/Pinterest";
+import { IconButton } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import MobileMenu from "../MobileMenu/MobileMenu";
 //-----
 
 //----------------------------
@@ -24,6 +27,24 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
   const { setToken } = useAuth();
   const { user } = useAuth();
 
+  //---- mob menu
+  const [openMobileMenu, setOpenMobileMenu] = useState({
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    console.log("in toggle menu", openMobileMenu);
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      console.log("in if");
+      return;
+    }
+
+    setOpenMobileMenu({ ...openMobileMenu, [anchor]: open });
+  };
+  // --- end mobile menu
   const cookies = new Cookies();
   const navigate = useNavigate();
 
@@ -228,6 +249,17 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
             </NavLink>
           )}
         </div>
+        <div className={styles.mobileBtnMenu}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={toggleDrawer("right", true)}
+            edge="start"
+            // sx={{ mr: 2, ...(open && { display: "none" }) }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </div>
       </header>
       <LogInModal
         openLogIn={openLogIn}
@@ -240,6 +272,11 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
         setOpenSignUp={setOpenSignUp}
         handleSignUpClickOpen={handleSignUpClickOpen}
         setOpenLogIn={setOpenLogIn}
+      />
+      <MobileMenu
+        toggleDrawer={toggleDrawer}
+        openMobileMenu={openMobileMenu}
+        user={user}
       />
       <Outlet />
       <footer className={styles.footerWrp}>
