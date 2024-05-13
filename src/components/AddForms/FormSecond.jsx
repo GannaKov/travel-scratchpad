@@ -18,8 +18,8 @@ import {
   MenuItem,
   Checkbox,
   ListItemText,
- 
   TextField,
+  Typography,
 } from "@mui/material";
 import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -39,8 +39,6 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
       .catch((error) => console.log(error.status, error.message))
       .finally(() => setLoading(false));
   }, []);
-
-  
 
   const filterOptions = createFilterOptions({
     matchFrom: "start",
@@ -76,7 +74,7 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
           style={{ padding: "0 0.5rem" }}
           className={styles.inputlabelForm}
         >
-          Select Purposes
+          Select Purposes*
         </InputLabel>
 
         <Select
@@ -88,6 +86,11 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
           value={formik.values.data2.purposes}
           onChange={formik.handleChange}
           renderValue={(selected) => selected.join(", ")}
+          error={
+            formik.touched.data2?.purposes &&
+            formik.errors.data2?.purposes &&
+            Boolean(formik.errors.data2?.purposes)
+          }
         >
           {purposeOptions.map((purpose) => (
             <MenuItem key={purpose} value={purpose}>
@@ -114,6 +117,11 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
           value={formik.values.data2.countries}
           options={countriesOptions}
           getOptionLabel={(option) => option}
+          error={
+            formik.touched.data2?.countries &&
+            formik.errors.data2?.countries &&
+            Boolean(formik.errors.data2?.countries)
+          }
           //loading={loading}
           renderOption={(props, option, { selected }) => (
             <Box component="li" {...props}>
@@ -127,24 +135,33 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
             </Box>
           )}
           renderInput={(params) => (
-            <TextField
-              {...params}
-              id="data2.countries"
-              name="data2.countries"
-              label="Choose a country"
-              placeholder="Countries"
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
-            />
+            <div>
+              {" "}
+              <TextField
+                {...params}
+                id="data2.countries"
+                name="data2.countries"
+                label="Choose a country*"
+                placeholder="Countries"
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <>
+                      {loading ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                }}
+              />
+              {formik.touched.data2?.countries &&
+                formik.errors.data2?.countries && (
+                  <Typography variant="body2" color="error">
+                    {formik.errors.data2?.countries}
+                  </Typography>
+                )}
+            </div>
           )}
         />
         {/* ======================= Cities =============================== */}

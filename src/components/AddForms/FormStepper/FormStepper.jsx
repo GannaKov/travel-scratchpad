@@ -98,6 +98,14 @@ const FormStepper = ({ countriesOptions }) => {
           .min(0, "Min rating is 0")
           .max(5, "Max rating is 5"),
       }),
+      data2: Yup.object({
+        countries: Yup.array()
+          .of(Yup.string().required("Required"))
+          .min(1, "At least one country is required"),
+        purposes: Yup.array()
+          .of(Yup.string().required("Required"))
+          .min(1, "At least one purpose is required"),
+      }),
     }),
     onSubmit: async (values) => {
       const newCitiesArr = formik.values.data2.cities
@@ -143,7 +151,6 @@ const FormStepper = ({ countriesOptions }) => {
         advice: formik.values.data4.advices,
       };
 
-      
       await formik.setFieldValue(`data2.cities`, newCitiesArr);
       await formik.setValues(updatedValues);
 

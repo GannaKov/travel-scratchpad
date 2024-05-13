@@ -34,7 +34,7 @@ const FormFirst = ({ formik, saveData }) => {
           sx={{ marginBottom: "1.5rem" }}
           id="data1.title"
           name="data1.title"
-          label="Title"
+          label="Title*"
           variant="outlined"
           value={formik.values.data1.title}
           onChange={formik.handleChange}
@@ -47,7 +47,7 @@ const FormFirst = ({ formik, saveData }) => {
           sx={{ marginBottom: "1.5rem" }}
           id="data1.dateBeginn"
           name="data1.dateBeginn"
-          label="Start Date"
+          label="Start Date*"
           variant="outlined"
           value={formik.values.data1.dateBeginn}
           onChange={handleDateChange}
@@ -64,7 +64,7 @@ const FormFirst = ({ formik, saveData }) => {
           sx={{ marginBottom: "1.5rem" }}
           id="data1.dateEnd"
           name="data1.dateEnd"
-          label="End Date"
+          label="End Date*"
           variant="outlined"
           value={formik.values.data1.dateEnd}
           onChange={handleDateChange}

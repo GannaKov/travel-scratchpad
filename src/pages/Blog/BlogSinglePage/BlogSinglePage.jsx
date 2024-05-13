@@ -46,14 +46,12 @@ const BlogSinglePage = () => {
       {singleTrip.images.length === 0 && user.user.id === singleTrip.owner && (
         <div className={styles.sectionBlog}>
           <div className={styles.containerBlog}>
-            <div className={styles.sectionBlog}>
-              <h3 className={styles.subTitle}>Add your Photos !</h3>
-            </div>
+            <p className={styles.subTitle}>Add your Images !</p>
           </div>
         </div>
       )}
 
-      {/*-----  Carousel ------*/}
+      {/*-----  Carousel and images------*/}
       {singleTrip.images.length > 0 && (
         <div className={styles.containerBlog}>
           <div className={styles.carouselWrp}>
