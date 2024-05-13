@@ -2,5 +2,10 @@
   margin-bottom: 3rem;
 }
 .formWrp {
-  width: 650px;
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .formWrp {
+    width: 650px;
+  }
 }

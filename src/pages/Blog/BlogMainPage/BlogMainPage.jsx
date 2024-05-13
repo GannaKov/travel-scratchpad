@@ -61,12 +61,14 @@ const BlogMainPage = ({
         <div className={styles.containerBlog} style={{ display: "flex" }}>
           {/* ===============Country========================================== */}
 
-          <Select
-            selectedValue={selectedCountry}
-            handleChange={handleChangeCountry}
-            valueOptions={countriesOptions}
-            label="country"
-          />
+          {countriesOptions && countriesOptions.length > 0 && (
+            <Select
+              selectedValue={selectedCountry}
+              handleChange={handleChangeCountry}
+              valueOptions={countriesOptions}
+              label="country"
+            />
+          )}
         </div>
       </div>
       <div className={styles.sectionBlog}>

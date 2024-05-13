@@ -62,18 +62,22 @@ const HomePage = ({
         <div className={styles.sectionBlog}>
           <div className={styles.containerBlog}>
             <div className={styles.selectWrp}>
-              <Select
-                selectedValue={selectedCountry}
-                handleChange={handleChangeCountry}
-                valueOptions={countriesOptions}
-                label="country"
-              />
-              <Select
-                selectedValue={selectedPurpose}
-                handleChange={handleChangePurpose}
-                valueOptions={purposeOptions}
-                label="purpose"
-              />
+              {countriesOptions && countriesOptions.length > 0 && (
+                <Select
+                  selectedValue={selectedCountry}
+                  handleChange={handleChangeCountry}
+                  valueOptions={countriesOptions}
+                  label="country"
+                />
+              )}
+              {purposeOptions && purposeOptions.length > 0 && (
+                <Select
+                  selectedValue={selectedPurpose}
+                  handleChange={handleChangePurpose}
+                  valueOptions={purposeOptions}
+                  label="purpose"
+                />
+              )}
             </div>
           </div>
         </div>

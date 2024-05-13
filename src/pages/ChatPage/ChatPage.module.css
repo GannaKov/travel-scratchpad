@@ -39,18 +39,16 @@
   }
 }
 .chatContainer {
- 
   position: "relative";
   height: 400px;
   width: 100%;
 }
 @media screen and (min-width: 768px) {
   .chatContainer {
-    height: 700px;
+    height: 500px;
     width: 700px;
   }
 }
-
 
 /* ----------- */
 .chatTitle {
@@ -64,5 +62,3 @@
 .chatTitle:last-of-type {
   margin-bottom: 3rem;
 }
-
-

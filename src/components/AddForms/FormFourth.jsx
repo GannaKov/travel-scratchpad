@@ -106,13 +106,15 @@ const FormFourth = ({
         {expenses.length > 0 && (
           <Box>
             <p className={styles.subTitle}>Added Expenses</p>
-            <List>
+            <ul>
               {expenses.map((expense, index) => (
-                <ListItem key={index}>
-                  <ListItemText
-                    sx={{ display: "flex", gap: "1rem" }}
-                    primary={`${expense.item} :  ${expense.amount}`}
-                  />
+                <li key={index} className={styles.formInfoItem}>
+                  <div className={styles.tripText}>
+                    <span className={styles.tripBoldText}>
+                      {expense.item}:&nbsp;
+                    </span>
+                    <span>{expense.amount}</span>
+                  </div>
                   <IconButton
                     edge="end"
                     aria-label="delete"
@@ -120,9 +122,13 @@ const FormFourth = ({
                   >
                     <DeleteIcon />
                   </IconButton>
-                </ListItem>
+                </li>
+                // <ListItemText
+                //   sx={{ display: "flex", gap: "1rem" }}
+                //   primary={`${expense.item} :  ${expense.amount}`}
+                // />
               ))}
-            </List>
+            </ul>
           </Box>
         )}
 
@@ -170,11 +176,26 @@ const FormFourth = ({
 
         {usefulLinks.length > 0 && (
           <Box>
-            <Typography variant="h6">Added Links</Typography>
-            <List>
+            <p className={styles.subTitle}>Added Links</p>
+            <ul>
               {usefulLinks.map((link, index) => (
-                <ListItem key={index}>
-                  <ListItemText
+                <li key={index} className={styles.formInfoItem}>
+                  <div>
+                    <div className={styles.tripText}>
+                      <span className={styles.tripBoldText}>
+                        {link.topic}&nbsp;
+                      </span>
+                      <a
+                        href={link.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={styles.tripText}
+                      >
+                        {truncateUrl(link.link)}
+                      </a>
+                    </div>
+                  </div>
+                  {/* <ListItemText
                     sx={{ display: "flex", gap: "1rem" }}
                     primary={`${link.topic} :`}
                   />
@@ -182,7 +203,7 @@ const FormFourth = ({
                     <a href={link.link} target="_blank" rel="noreferrer">
                       {truncateUrl(link.link)}
                     </a>
-                  </span>
+                  </span> */}
                   <IconButton
                     edge="end"
                     aria-label="delete"
@@ -190,9 +211,9 @@ const FormFourth = ({
                   >
                     <DeleteIcon />
                   </IconButton>
-                </ListItem>
+                </li>
               ))}
-            </List>
+            </ul>
           </Box>
         )}
         {/* ------ end Links ------- */}

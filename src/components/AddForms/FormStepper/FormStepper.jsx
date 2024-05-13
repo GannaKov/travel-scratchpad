@@ -1,12 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import dayjs from "dayjs";
 import styles from "./FormStepper.module.css";
 
-import { Button, MobileStepper } from "@mui/material";
+import { MobileStepper } from "@mui/material";
 
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
@@ -30,29 +31,25 @@ import {
   handleSeasons,
 } from "../../../services/handleDate";
 import { useNavigate } from "react-router-dom";
-import GoBack from "../../GoBack/GoBack";
+
 import useAuth from "../../../context/useAuthHook";
 
 const FormStepper = ({ countriesOptions }) => {
-  const { token, setToken } = useAuth();
+  const { token } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-  //const backLinkHref = location.state ?? "/blog-main";
-  const backLinkHref = location.state?.from ?? "/blog-main";
-  // console.log("backLinkHref", backLinkHref);
-  // console.log("location.state", location.state);
-  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [searchParams] = useSearchParams();
 
   const initialMode = searchParams.get("mode") === "true";
   const tripId = searchParams.get("id");
-  const [editMode, setEditMode] = useState(initialMode);
+  const [editMode] = useState(initialMode);
   //------
   const [activeStep, setActiveStep] = useState(0);
   //-----
   const [accommodationArr, setAccommodationArr] = useState([]); //use also for edit
   const [expenses, setExpenses] = useState([]); //use also for edit
   const [usefulLinks, setUsefulLinks] = useState([]); //use also for edit
-  //const [allImages, setAllImages] = useState([]); ////use also for edit??????????
+
   //-----
   //main Img for view
   const [mainPhoto, setMainPhoto] = useState("");
@@ -88,12 +85,11 @@ const FormStepper = ({ countriesOptions }) => {
   });
 
   const [accommodTypeOptions, setAccommodTypeOptions] = useState([]);
-  //const [countriesOptions, setCountriesOptions] = useState();
+
   // ---- Formik -----
   const formik = useFormik({
     initialValues: formData,
     validationSchema: Yup.object({
-      // Здесь можно добавить валидацию по необходимости
       data1: Yup.object({
         title: Yup.string().required("Required"),
         dateBeginn: Yup.string().required("Required"),
@@ -102,7 +98,6 @@ const FormStepper = ({ countriesOptions }) => {
           .min(0, "Min rating is 0")
           .max(5, "Max rating is 5"),
       }),
-      // Добавить валидацию для остальных полей по аналогии
     }),
     onSubmit: async (values) => {
       const newCitiesArr = formik.values.data2.cities
@@ -129,10 +124,7 @@ const FormStepper = ({ countriesOptions }) => {
       //---- seasons
 
       const seasonsArr = handleSeasons(monthArr);
-      // const startDate = new Date(formik.values.data1.dateBeginn);
-      // const endDate = new Date(formik.values.data1.dateEnd);
 
-      //---- new Date(formik.values.data1.dateBeginn)
       const updatedForBackend = {
         years: yearsArr,
         seasons: seasonsArr,
@@ -172,30 +164,14 @@ const FormStepper = ({ countriesOptions }) => {
           imagesArr = [...imgArrForSubmit].slice(0, 7);
         }
 
-        await formik.setFieldValue(`data5.images`, imagesArr); // why?????
+        await formik.setFieldValue(`data5.images`, imagesArr);
         for (let i = 0; i < imagesArr.length; i++) {
           data.append("image_files", imagesArr[i]);
-          //console.log("in append", imagesArr[i]);
         }
-
-        // console.log("imgArrForSubmit", imgArrForSubmit);
-        // console.log(
-        //   "formik.values.data5.images after",
-        //   formik.values.data5.images
-        // );
-
-        // console.log("imagesArr", imagesArr);
       }
       // ---- end for adding not edit
 
-      // data.append("main_file", mainFile);
-
       if (editMode) {
-        // console.log(
-        //   "formik.values.data5.images before",
-        //   formik.values.data5.images
-        // );
-
         let oldImages = [];
         let newImages = [];
 
@@ -210,14 +186,13 @@ const FormStepper = ({ countriesOptions }) => {
         if (formik.values.data5.images.length > 0) {
           oldImages.push(...formik.values.data5.images);
         }
-        // console.log("imgArrForSubmit", imgArrForSubmit);
+
         if (imgArrForSubmit.length > 0) {
           newImages.push(...imgArrForSubmit);
         }
-        // console.log("old", oldImages);
-        // console.log("new", newImages);
+
         const oldImgLength = oldImages.length;
-        // console.log("oldImgLength", oldImgLength);
+
         const sliceFor = 5 - oldImgLength;
         const slicedNewImages = newImages.slice(0, sliceFor);
 
@@ -259,11 +234,11 @@ const FormStepper = ({ countriesOptions }) => {
         setAccommodationArr(response.accommodation);
         setExpenses(response.expenses);
         setUsefulLinks(response.useful_links);
-        // setAllImages(response.images.slice(1));
+
         // For show when Edit !???
         setMainPhoto(response.main_img);
         setImagesArr(response.images.slice(1));
-        //setImgArrForSubmit(response.images); // And?????
+
         formik.setValues({
           data1: {
             title: response.title,
@@ -359,9 +334,6 @@ const FormStepper = ({ countriesOptions }) => {
 
   return (
     <div className={styles.formWrp}>
-      {/* <div className={styles.containerBlog}>
-        <GoBack state={backLinkHref} />
-      </div> */}
       <div className={styles.stepperWrp}>
         <MobileStepper
           variant="dots"
@@ -375,14 +347,6 @@ const FormStepper = ({ countriesOptions }) => {
             backgroundColor: "orange",
           }}
           nextButton={
-            // <Button
-            //   size="small"
-            //   onClick={handleNext}
-            //   disabled={activeStep === steps.length - 1}
-            // >
-            //   Next
-            //   <KeyboardArrowRight />
-            // </Button>
             <ButtonsTemplate
               color="white"
               size="large"
@@ -394,14 +358,6 @@ const FormStepper = ({ countriesOptions }) => {
             </ButtonsTemplate>
           }
           backButton={
-            // <Button
-            //   size="small"
-            //   onClick={handleBack}
-            //   disabled={activeStep === 0}
-            // >
-            //   <KeyboardArrowLeft />
-            //   Back
-            // </Button>
             <ButtonsTemplate
               color="white"
               size="large"

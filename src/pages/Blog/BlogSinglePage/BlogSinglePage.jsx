@@ -60,14 +60,18 @@ const BlogSinglePage = () => {
             {singleTrip.images.length > 1 ? (
               <Carousel images={singleTrip.images} />
             ) : (
-              <img src={singleTrip.images[0]} />
+              <div className={styles.sliderContainer}>
+                <img src={singleTrip.images[0]} />
+              </div>
             )}
           </div>
           <div className={styles.carouselWrpMobile}>
             {singleTrip.images.length > 1 ? (
               <CarouselMobile images={singleTrip.images} />
             ) : (
-              <img src={singleTrip.images[0]} />
+              <div className={styles.sliderContainer}>
+                <img src={singleTrip.images[0]} />
+              </div>
             )}
           </div>
         </div>
