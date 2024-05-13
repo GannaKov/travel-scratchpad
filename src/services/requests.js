@@ -67,6 +67,9 @@ export const getTripByIdLoader = async ({ params }) => {
     if (error.response && error.response.status === 500) {
       throw new Response("Internal Server Error", { status: 500 });
     }
+    if (error.response && error.response.status === 413) {
+      throw new Response("Too large data", { status: 413 });
+    }
 
     throw error;
   }
