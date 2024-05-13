@@ -1,15 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
+
 import CancelIcon from "@mui/icons-material/Cancel";
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  TextField,
-} from "@mui/material";
+import { Button } from "@mui/material";
 import styles from "./Forms.module.css";
 import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
 
@@ -22,12 +15,7 @@ const FormFifth = ({
   imagesArr,
   setImagesArr,
 }) => {
-  //main Img for view
-  // const [mainPhoto, setMainPhoto] = useState(formik.values.data5.mainImage);
-
-  // a lot of images for view
-  // const [imagesArr, setImagesArr] = useState(formik.values.data5.images);
-
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
 
   const handleUploadClick = (event) => {
@@ -107,13 +95,12 @@ const FormFifth = ({
           <div className={styles.multyImagesContainer}>
             {imagesArr.map((image, ind) => (
               <div key={ind} className={styles.singleMutltyImgWrp}>
-                {/* <p>{ind + 1} </p> */}
                 <img src={image} alt="" className={styles.singleMutltyImg} />
                 <CancelIcon
                   className="shareCancelImg "
                   onClick={() => {
                     setImagesArr((prev) => prev.filter((t) => t != image));
-                    //setAllImages((prev) => prev.filter((t) => t != image));
+
                     formik.setFieldValue(
                       "data5.images",
                       formik.values.data5.images.filter((t) => t !== image)
@@ -128,16 +115,8 @@ const FormFifth = ({
         {/* Multi Files Input */}
         <p className={styles.addImageText}>You can add 6 images</p>
         {imagesArr.length <= 5 && (
-          // {allImages.length <= 3 && (
           <div>
             <div className={styles.addImageBtnWrp}>
-              {/* <label
-                htmlFor="image_files"
-                className="btn-grey"
-                style={{ cursor: "pointer" }}
-              >
-                {imagesArr.length === 0 ? "Select files" : "Add files"}
-              </label> */}
               <Button type="button" variant="contained" sx={{ mb: 4 }}>
                 <label htmlFor="image_files" style={{ cursor: "pointer" }}>
                   {imagesArr.length === 0 ? "Select Images" : "Add Images"}
@@ -147,9 +126,7 @@ const FormFifth = ({
                 style={{ display: "none" }}
                 id="image_files"
                 type="file"
-                // onChange={handleSelectFile}
                 onChange={handleMultiUploadClick}
-                // value={formik.values.data5.mainImage}
                 multiple
                 name="image_files"
                 accept="image/png, image/jpeg, image/jpg"

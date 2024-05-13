@@ -1,22 +1,10 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-import styles from "./Forms.module.css";
-import * as Yup from "yup";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { useId } from "react";
-import Box from "@mui/material/Box";
-import Rating from "@mui/material/Rating";
-// import StarsShow from "../Stars/StarsShow";
 
-import { useFormik } from "formik";
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  TextField,
-} from "@mui/material";
+import styles from "./Forms.module.css";
+
+import Rating from "@mui/material/Rating";
+
+import { FormControl, TextField } from "@mui/material";
 import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
 
 //--------------------------------------------------------------------
@@ -24,14 +12,14 @@ const FormFirst = ({ formik, saveData }) => {
   const handleDateChange = (event) => {
     let targetId = event.target.id;
 
-    let value = event.target.value.replace(/\D/g, ""); // Удалить все не-цифры
+    let value = event.target.value.replace(/\D/g, ""); // delete all not numbers
     if (value.length > 2) {
       value = `${value.slice(0, 2)}.${value.slice(2)}`;
     }
     if (value.length > 5) {
       value = `${value.slice(0, 5)}.${value.slice(5, 9)}`;
     }
-    //console.log("value", value);
+
     if (targetId === "data1.dateEnd") {
       formik.setFieldValue("data1.dateEnd", value);
     }
@@ -62,7 +50,6 @@ const FormFirst = ({ formik, saveData }) => {
           label="Start Date"
           variant="outlined"
           value={formik.values.data1.dateBeginn}
-          //onChange={formik.handleChange}
           onChange={handleDateChange}
           placeholder="DD.MM.YYYY"
           error={
@@ -80,7 +67,6 @@ const FormFirst = ({ formik, saveData }) => {
           label="End Date"
           variant="outlined"
           value={formik.values.data1.dateEnd}
-          // onChange={formik.handleChange}
           onChange={handleDateChange}
           error={
             formik.touched.data1?.dateEnd &&
@@ -128,7 +114,6 @@ const FormFirst = ({ formik, saveData }) => {
       </div>
 
       <ButtonsTemplate
-        // type="submit"
         size="large"
         onClick={() => saveData(formik.values.data1)}
       >

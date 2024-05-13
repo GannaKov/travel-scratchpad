@@ -1,16 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useFormik } from "formik";
-import { useState } from "react";
+
 import truncateUrl from "../../services/truncateUrl";
 import styles from "./Forms.module.css";
 import {
   TextField,
-  Button,
-  Typography,
+ 
   Box,
-  List,
-  ListItem,
-  ListItemText,
+
   IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -82,17 +78,8 @@ const FormFourth = ({
           fullWidth
         />
 
-        {/* <Button
-          type="button"
-          variant="contained"
-          sx={{ mb: 4 }}
-          onClick={onExpenseAddBtnClick}
-          disabled={!formik.values.data4.item}
-        >
-          Add
-        </Button> */}
         <div className={styles.buttonsAddWrp}>
-          {" "}
+         
           <ButtonsTemplate
             size="medium"
             variant="contained"
@@ -123,10 +110,7 @@ const FormFourth = ({
                     <DeleteIcon />
                   </IconButton>
                 </li>
-                // <ListItemText
-                //   sx={{ display: "flex", gap: "1rem" }}
-                //   primary={`${expense.item} :  ${expense.amount}`}
-                // />
+               
               ))}
             </ul>
           </Box>
@@ -154,15 +138,6 @@ const FormFourth = ({
           fullWidth
         />
 
-        {/* <Button
-          type="button"
-          variant="contained"
-          sx={{ mb: 4 }}
-          onClick={onLinkAddBtnClick}
-          disabled={!formik.values.data4.topic}
-        >
-          Add
-        </Button> */}
         <div className={styles.buttonsAddWrp}>
           <ButtonsTemplate
             size="medium"
@@ -195,15 +170,7 @@ const FormFourth = ({
                       </a>
                     </div>
                   </div>
-                  {/* <ListItemText
-                    sx={{ display: "flex", gap: "1rem" }}
-                    primary={`${link.topic} :`}
-                  />
-                  <span>
-                    <a href={link.link} target="_blank" rel="noreferrer">
-                      {truncateUrl(link.link)}
-                    </a>
-                  </span> */}
+                 
                   <IconButton
                     edge="end"
                     aria-label="delete"

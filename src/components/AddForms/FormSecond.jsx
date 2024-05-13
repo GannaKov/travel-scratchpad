@@ -1,12 +1,9 @@
 /* eslint-disable react/prop-types */
 import styles from "./Forms.module.css";
-//import * as Yup from "yup";
-//import { Formik, Field, Form, ErrorMessage } from "formik";
-import { useFormik } from "formik";
+
 import { useEffect, useState } from "react";
 import { getTripsPurposes } from "../../services/requests";
-import { getCountriesOptions } from "../../services/requests";
-import axios from "axios";
+
 import CircularProgress from "@mui/material/CircularProgress";
 import Autocomplete from "@mui/material/Autocomplete";
 import { createFilterOptions } from "@mui/material/Autocomplete";
@@ -21,7 +18,7 @@ import {
   MenuItem,
   Checkbox,
   ListItemText,
-  Button,
+ 
   TextField,
 } from "@mui/material";
 import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
@@ -43,18 +40,7 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
       .finally(() => setLoading(false));
   }, []);
 
-  // const initialValues = {
-  //   purposes: [],
-  //   countries: [],
-  //   cities: [],
-  // };
-  // const formik = useFormik({
-  //   initialValues,
-  //   onSubmit: (values) => {
-  //     console.log("Submitted values:", values);
-  //     //city.trim().charAt(0).toUpperCase() + city.slice(1);
-  //   },
-  // });
+  
 
   const filterOptions = createFilterOptions({
     matchFrom: "start",
@@ -63,9 +49,9 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
   });
 
   //----- Purposes
-  const handlePurposeChange = (event) => {
-    formik.setFieldValue("purposes", event.target.value);
-  };
+  // const handlePurposeChange = (event) => {
+  //   formik.setFieldValue("purposes", event.target.value);
+  // };
   //----- Country
   const handleCountriesAutocompleteChange = (event, value) => {
     formik.setFieldValue("data2.countries", value);
@@ -126,15 +112,12 @@ const FormSecond = ({ formik, saveData, countriesOptions }) => {
           disableCloseOnSelect
           onChange={handleCountriesAutocompleteChange}
           value={formik.values.data2.countries}
-          // onChange={formik.handleChange}
           options={countriesOptions}
           getOptionLabel={(option) => option}
           //loading={loading}
           renderOption={(props, option, { selected }) => (
             <Box component="li" {...props}>
               <Checkbox
-                // id="data2.countries"
-                //  name="data2.countries"
                 icon={icon}
                 checkedIcon={checkedIcon}
                 style={{ marginRight: 8 }}

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+
 import StarsShow from "../Shared/Stars/StarsShow";
-import { useFormik } from "formik";
+
 import styles from "./Forms.module.css";
 import truncateUrl from "../../services/truncateUrl";
 import {
@@ -9,17 +9,12 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Button,
   TextField,
-  Typography,
   Box,
-  List,
-  ListItem,
-  ListItemText,
   IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { getAccommodationType } from "../../services/requests";
+
 import Rating from "@mui/material/Rating";
 import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
 //--------------
@@ -109,15 +104,6 @@ const FormThird = ({
         />
       </FormControl>
 
-      {/* <Button
-        type="button"
-        variant="contained"
-        sx={{ mt: 2, mb: 2 }}
-        onClick={onAddAccommodationClick}
-        disabled={!formik.values.data3.type && !formik.values.data3.link}
-      >
-        Add
-      </Button> */}
       <ButtonsTemplate
         size="medium"
         variant="contained"
@@ -132,7 +118,6 @@ const FormThird = ({
           <ul>
             {accommodationArr.map((accommodation, index) => (
               <li key={index} className={styles.formInfoItem}>
-                {/* <div style={{ display: "flex", flexDirection: "column" }}> */}
                 <div>
                   <div className={styles.tripText}>
                     {" "}
