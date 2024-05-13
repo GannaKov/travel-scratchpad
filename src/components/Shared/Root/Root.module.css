@@ -1,13 +1,10 @@
 .wrapper {
   display: grid;
-  /* background-image: url("../../../assets/images/green-leaves-corner-white-background.jpg");
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat; */
+ 
   background: rgba(252, 252, 252, 0.428);
 }
 .headerWrp {
-  /* position: fixed; */
+
 
   width: 100%;
   display: grid;
@@ -19,8 +16,7 @@
   background-color: white;
   z-index: 10;
   padding: 1rem 1rem;
-  /* padding-top: 2rem;
-  padding-bottom: 2rem; */
+  
   border-bottom: 1px solid rgba(128, 128, 128, 0.236);
   box-shadow: 0px 1px 3px #6d035f1f, 0px 0px 5px rgba(114, 40, 121, 0.06),
     0px 0px 8px rgba(0, 0, 0, 0.16);
@@ -65,14 +61,7 @@
   gap: 4rem;
   justify-content: space-around;
 }
-/* @media screen and (min-width: 450px) {
-  .navList {
-    display: flex;
-    flex-direction: row;
-    gap: 4rem;
-    justify-content: space-around;
-  }
-} */
+
 .navItem {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -105,7 +94,7 @@
   text-decoration-thickness: 0.2rem;
 }
 .headerNavLink.active {
-  /* color: rgb(227, 87, 180); */
+
   color: #43a047;
   text-decoration: underline;
   text-decoration-thickness: 0.1rem;
@@ -118,7 +107,7 @@
   display: flex;
   gap: 2rem;
   justify-content: center;
-  /* flex-direction: column; */
+
   align-items: center;
 }
 @media screen and (min-width: 768px) {

@@ -1,31 +1,12 @@
 /* eslint-disable react/prop-types */
 
-// const StarsShow = ({ rating }) => {
-//   return (
-//     <>
-//       {[1, 2, 3, 4, 5].map((star) => (
-//         <span
-//           key={star}
-//           className="start"
-//           style={{
-//             cursor: "pointer",
-//             color: rating >= star ? "gold" : "gray",
-//             fontSize: `35px`,
-//           }}
-//         >
-//           ★
-//         </span>
-//       ))}
-//     </>
-//   );
-// };
 
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 
-import { useState, useEffect } from "react";
+import { useState} from "react";
 const StarsShow = ({ rating, isReadOnly, handleRatingChange }) => {
-  const [value, setValue] = useState(rating);
+  const [value] = useState(rating);
 
   return (
     <Box
@@ -33,14 +14,7 @@ const StarsShow = ({ rating, isReadOnly, handleRatingChange }) => {
         "& > legend": { mt: 2 },
       }}
     >
-      {/* <Typography component="legend">Controlled</Typography>
-      <Rating
-        name="simple-controlled"
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      /> */}
+      
       {isReadOnly ? (
         <Rating precision={0.5} value={value} readOnly />
       ) : (
@@ -49,15 +23,13 @@ const StarsShow = ({ rating, isReadOnly, handleRatingChange }) => {
           value={null}
           precision={0.5}
           onChange={(event, newValue) => {
-            console.log("newValue", newValue);
-            //setValue(newValue);
+           
+          
             handleRatingChange(newValue);
           }}
         />
       )}
 
-      {/* <Typography component="legend">No rating given</Typography>
-      <Rating name="no-value" value={null} /> */}
     </Box>
   );
 };

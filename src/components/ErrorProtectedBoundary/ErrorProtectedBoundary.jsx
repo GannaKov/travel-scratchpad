@@ -9,28 +9,17 @@ const ErrorProtectedBoundary = () => {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
-    // if (error.status === 404) {
-    //   return [];
-    // }
-
     if (error.status === 401) {
-      console.log("in 401");
-
       return <Navigate to="/" />;
     }
     if (error.status === 403) {
-      console.log("in 403");
-      // return <div>You aren&apos;t authorized. Please Log in</div>;
-
       return <Navigate to="/" />;
     }
-    //; //?????
+
     if (error.status === 500) {
-      console.log("in 500");
       return <div>Looks like our API is down</div>;
     }
     if (error.status === 404) {
-      console.log("in 404");
       return <div>Not found trip</div>;
     }
   }

@@ -4,7 +4,7 @@ import Select from "../../components/Shared/Select/Select";
 import styles from "./HomePage.module.css";
 import { useNavigate, useLoaderData, useLocation } from "react-router-dom";
 import useAuth from "../../context/useAuthHook";
-// import heroImg from "../../assets/images/hand-writing-notebook-near-tourist-stuff.jpg";
+
 import { ButtonsTemplate } from "../../components/Shared/Buttons/Buttons";
 
 const HomePage = ({
@@ -32,7 +32,6 @@ const HomePage = ({
     const from = location.pathname;
 
     if (token) {
-      //navigate("/add-form");
       navigate("/add-form", { state: { from } });
     } else {
       setOpenLogIn(true);

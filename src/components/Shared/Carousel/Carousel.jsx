@@ -30,12 +30,10 @@ const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
     aria-disabled={currentSlide === slideCount - 1 ? true : false}
     type="button"
   >
-    {" "}
     <ArrowForwardIosIcon fontSize="large" />,
   </button>
 );
 const Carousel = ({ images }) => {
-  // console.log("images", images);
   const settings = {
     customPaging: function (i) {
       return (
@@ -74,7 +72,6 @@ const Carousel = ({ images }) => {
 };
 
 const CarouselMobile = ({ images }) => {
-  // console.log("images", images);
   const settings = {
     customPaging: function (i) {
       return (
@@ -85,7 +82,7 @@ const CarouselMobile = ({ images }) => {
     },
 
     infinite: true,
-    //speed: 500,
+
     slidesToShow: 1,
     slidesToScroll: 1,
 
@@ -98,7 +95,6 @@ const CarouselMobile = ({ images }) => {
   return (
     <div className={styles.sliderContainer}>
       <Slider {...settings}>
-        {/* <img src={baseUrl + "/abstract01.jpg"} /> */}
         {images.map((item) => (
           <div key={item}>
             <img src={item} className={styles.imgCarousel} />

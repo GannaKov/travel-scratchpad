@@ -33,12 +33,12 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
-    console.log("in toggle menu", openMobileMenu);
+  
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
-      console.log("in if");
+
       return;
     }
 
@@ -55,12 +55,12 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
       refreshToken()
         .then((res) => {
           if (res.status === 204) {
-            console.log("204");
+           
             setToken(null);
 
             navigate("/");
           } else {
-            // console.log("in effect1 access", res.accessToken);
+           
             setToken(res.accessToken);
           }
         })
@@ -74,26 +74,26 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
 
   useEffect(() => {
     let refreshAccessTokenTimerId;
-    console.log("in effect2");
+   
     if (user.isAuthenticated) {
       const tokenExpirationTime = Date.now() + user.user.expiresAt;
       const refreshTime = tokenExpirationTime - Date.now() - 10 * 1000;
 
-      console.log("refreshTime", refreshTime);
+    
 
       refreshAccessTokenTimerId = setTimeout(() => {
         refreshToken()
           .then((res) => {
             if (res.status === 204) {
-              console.log("204");
+            
               setToken(null);
 
               navigate("/");
             } else {
-              // console.log("in effect2", res.accessToken);
+           
               setToken(res.accessToken);
               cookies.set("jwt_authorization", res.accessToken);
-              //cookies.set("refresh_token", res.refreshToken);
+             
             }
           })
           .catch((err) => {
@@ -213,18 +213,7 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
               >
                 Sign Up
               </ButtonsTemplate>
-              {/* <LogInModal
-                openLogIn={openLogIn}
-                setOpenLogIn={setOpenLogIn}
-                handleLogInClickOpen={handleLogInClickOpen}
-                setOpenSignUp={setOpenSignUp}
-              />
-              <SignUpModal
-                openSignUp={openSignUp}
-                setOpenSignUp={setOpenSignUp}
-                handleSignUpClickOpen={handleSignUpClickOpen}
-                setOpenLogIn={setOpenLogIn}
-              /> */}
+             
             </div>
           ) : (
             <ButtonsTemplate
@@ -255,7 +244,7 @@ const Root = ({ openLogIn, setOpenLogIn, openSignUp, setOpenSignUp }) => {
             aria-label="open drawer"
             onClick={toggleDrawer("right", true)}
             edge="start"
-            // sx={{ mr: 2, ...(open && { display: "none" }) }}
+            
           >
             <MenuIcon />
           </IconButton>

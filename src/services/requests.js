@@ -8,7 +8,6 @@ const instance = axios.create({ baseURL: BASEURL });
 
 // get all trips
 export const getAllTripsLoader = async (query) => {
-  console.log("query", query);
   try {
     let urlBackend = "/trips";
     if (query && query.country) {
@@ -19,9 +18,9 @@ export const getAllTripsLoader = async (query) => {
         ? `&purpose=${query.purpose}`
         : `?purpose=${query.purpose}`;
     }
-    console.log("urlBackend)", urlBackend);
+
     const { data } = await instance.get(urlBackend);
-    // console.log("data", data.data);
+
     return data.data;
   } catch (error) {
     if (error.response && error.response.status === 404) {
@@ -38,7 +37,7 @@ export const getAllOwnerTripsLoader = async (accessToken, query) => {
     if (query && query.country) {
       urlBackend += `?country=${query.country}`;
     }
-    //const { data } = await instance.get(urlBackend, {
+
     const { data } = await instance.get(urlBackend, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -49,7 +48,6 @@ export const getAllOwnerTripsLoader = async (accessToken, query) => {
   } catch (error) {
     if (error.response && error.response.status === 404) {
       return [];
-      //throw new Response("Not Found", { status: 404 });
     }
     if (error.response && error.response.status === 403) {
       throw new Response("Forbidden", { status: 403 });
@@ -61,26 +59,26 @@ export const getAllOwnerTripsLoader = async (accessToken, query) => {
 // get trip by Id
 export const getTripByIdLoader = async ({ params }) => {
   const { data } = await instance.get(`/trips/${params.travel_id}`);
-  // console.log("data in get by Id", data.data);
+
   return data.data;
 };
 export const getTripById = async (tripId) => {
   const { data } = await instance.get(`/trips/${tripId}`);
-  // console.log("data in by Id", data.data);
+
   return data.data;
 };
 
 // get trip's Purpose
 export const getTripsPurposes = async () => {
   const { data } = await instance.get(`/trip-purpose`);
-  // console.log("data", data.data);
+
   return data.data;
 };
 
 // get accommodation's type
 export const getAccommodationType = async () => {
   const { data } = await instance.get(`/accommodation`);
-  //console.log("data", data.data);
+
   return data.data;
 };
 
@@ -103,17 +101,14 @@ export const postFormData = async (dataForm, accessToken) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    // console.log("res", data);
-    //       headers: {
-    //         Authorization: `Bearer ${accessToken}`,
-    //       }
+
     return data;
   } catch (error) {
     console.log(error);
     if (error.response && error.response.status === 404) {
       throw new Response("Not found trip", { status: 404 });
     }
-    throw error; // add
+    throw error;
   }
 };
 
@@ -126,17 +121,16 @@ export const putFormData = async (tripId, dataForm, accessToken) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    // console.log("res in put", data);
+
     return data;
   } catch (error) {
-    console.log(error);
     if (error.response && error.response.status === 403) {
       throw new Response("Forbidden", { status: 403 });
     }
     if (error.response && error.response.status === 404) {
       throw new Response("Not found trip", { status: 404 });
     }
-    throw error; //add
+    throw error;
   }
 };
 
@@ -147,7 +141,7 @@ export const deleteOneTrip = async (tripId, accessToken) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    // console.log("res in put", data);
+
     return data;
   } catch (error) {
     if (error.response && error.response.status === 403) {
@@ -156,7 +150,7 @@ export const deleteOneTrip = async (tripId, accessToken) => {
     if (error.response && error.response.status === 404) {
       throw new Response("Not found trip", { status: 404 });
     }
-    throw error; //add
+    throw error;
   }
 };
 //===========================
@@ -165,7 +159,7 @@ export const deleteOneTrip = async (tripId, accessToken) => {
 export const signupUser = async (values) => {
   try {
     const { data } = await instance.post(`/auth/register`, values);
-    console.log("res Register User", data);
+
     return data;
   } catch (err) {
     console.log(err);
@@ -175,17 +169,10 @@ export const signupUser = async (values) => {
 //login
 export const loginUser = async (values) => {
   const { data } = await instance.post("/auth/login", values);
-  //console.log("res login User", data);
+
   return data;
 };
-//catch (error) {
-//     console.log(error);
-//     if (error.response && error.response.status === 401) {
-//       throw new Response("Forbidden", { status: 401 });
-//     }
-//     throw error;
-//   }
-// };
+
 //------
 
 export const logoutUser = async () => {
@@ -203,7 +190,7 @@ export const logoutUser = async () => {
 //=======
 export const getUserById = async (id) => {
   const { data } = await instance.get(`/users/${id}`);
-  //console.log("data in by Id", data.data);
+
   return data.data;
 };
 
@@ -211,7 +198,7 @@ export const getUserById = async (id) => {
 export const refreshToken = async () => {
   // if localStorage
   const refreshToken = localStorage.getItem("refresh_token");
-  // console.log("in refr", refreshToken);
+
   //-------
   if (refreshToken) {
     const { data } = await instance.get(`/auth/refresh_token`, {
@@ -225,8 +212,6 @@ export const refreshToken = async () => {
 
     return data;
   } else {
-    console.log("No refr token");
-
     throw new Error("No refresh token");
   }
 };

@@ -1,19 +1,16 @@
 /* eslint-disable react/prop-types */
 
-import moment from "moment";
 import TravelPlaceholder from "../../assets/images/3d-character-emerging-from-smartphone.jpg";
 import dayjs from "dayjs";
 import StarsShow from "../Shared/Stars/StarsShow";
 import styles from "./TripShortItem.module.css";
 import { useEffect, useState } from "react";
-import useAuth from "../../context/useAuthHook";
+
 import { getUserById } from "../../services/requests";
-import AvatarComponent from "../Shared/AvatarComponent/AvatarComponent";
 
 const TripShortItem = ({ trip }) => {
-  // console.log("trip", trip);
   const [userOwnerTrip, setUserOwnerTrip] = useState({});
-  const { user: currentUser } = useAuth();
+  //const { user: currentUser } = useAuth();
 
   useEffect(() => {
     getUserById(trip.owner)
@@ -23,11 +20,6 @@ const TripShortItem = ({ trip }) => {
 
   return (
     <div className={styles.tripItemWrp}>
-      {/* {trip.owner === currentUser.user.id && (
-        <div className={styles.tripOwnerAvatar}>
-          <AvatarComponent userName={userOwnerTrip.username} />
-        </div>
-      )} */}
       <div className={styles.tripOwnerAvatarWrp}>
         <p className={styles.tripOwnerAvatarText}>{userOwnerTrip.username}</p>
       </div>

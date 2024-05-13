@@ -4,7 +4,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { TextField } from "@mui/material";
 
 const Select = ({ selectedValue, handleChange, valueOptions, label }) => {
-  //  const Select = ({ selectedCountry, handleChangeCountry, countriesOptions }) => {
+ 
   const labelText = `Choose a ${label}`;
   return (
     <Autocomplete

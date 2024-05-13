@@ -7,9 +7,6 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 const GoBack = ({ state }) => {
   return (
     <Link className={styles.goBackLink} to={state}>
-      {/* <button type="button" className={styles.goBackBtn}>
-        &larr;&nbsp;Go Back
-      </button> */}
       <ButtonsTemplate size="large" variant="outlined" color="darkGreen">
         <KeyboardArrowLeft />
         Go Back

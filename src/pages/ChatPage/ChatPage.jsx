@@ -13,7 +13,7 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 //------------------
 const ChatPage = () => {
-  //   const [input, setInput] = useState("");
+  
   const [messages, setMessages] = useState([
     {
       message: "Hello, I'm ChatGPT! Ask me anything!",
@@ -77,7 +77,7 @@ const ChatPage = () => {
 
           <div
             className={styles.chatContainer}
-            // style={{ position: "relative", height: "700px", width: "700px" }}
+            
           >
             <MainContainer style={{ fontSize: "1.1em", lineHeight: "1.4em " }}>
               <ChatContainer>
@@ -94,7 +94,7 @@ const ChatPage = () => {
                   }
                 >
                   {messages.map((message, i) => (
-                    // return <Message key={i} model={message} />;
+                   
 
                     <Message key={i} model={message} />
                   ))}

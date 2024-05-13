@@ -1,37 +1,23 @@
 /* eslint-disable react/prop-types */
-import moment from "moment";
+
 import dayjs from "dayjs";
 import StarsShow from "../Stars/StarsShow";
 import truncateUrl from "../../../services/truncateUrl";
 import styles from "./SingleTripCard.module.css";
-import TravelPlaceholder from "../../../assets/images/3d-character-emerging-from-smartphone.jpg";
+
 
 const SingleTripCard = ({ singleTrip }) => {
   return (
     <div className={styles.tripWrp}>
-      {/* {singleTrip.images.length > 0 && (
-        <div className={styles.sectionBlog}>
-          {singleTrip.images.length > 1 ? (
-            <Carousel images={singleTrip.images} />
-          ) : (
-            <img src={singleTrip.images[0]} style={{ width: 400 }} />
-          )}
-        </div>
-      )} */}
+    
       <h1 className={styles.tripItemTitle}>{singleTrip.title}</h1>
       <div className={styles.tripChunk}>
         <StarsShow rating={singleTrip.travel_rating} isReadOnly={true} />
       </div>
 
-      {/* <div className={styles.tripImageWrp}>
-        {singleTrip.main_img ? (
-          <img src={singleTrip.main_img} className={styles.tripItemImg} />
-        ) : (
-          <img src={TravelPlaceholder} className={styles.tripItemImg} />
-        )}
-      </div> */}
+     
       <div className={styles.tripInfoWrp}>
-        {" "}
+      
         <p className={styles.tripItemDate}>
           {dayjs(singleTrip.date_start).format("DD.MM.YYYY")}
           &nbsp;&nbsp;-&nbsp;&nbsp;
@@ -99,13 +85,13 @@ const SingleTripCard = ({ singleTrip }) => {
           ))}
         </div>
         <div className={styles.tripChunk}>
-          {" "}
+          
           <p className={styles.tripBoldSubTitleUnderline}>Expenses:&nbsp;</p>
           <ul>
-            {" "}
+            
             {singleTrip.expenses.map((exp) => (
               <li key={exp._id}>
-                {" "}
+              
                 <p>
                   <span>{exp.item}:&nbsp;</span>
                   <span>{exp.amount}</span>
@@ -115,7 +101,7 @@ const SingleTripCard = ({ singleTrip }) => {
           </ul>
         </div>
         <div className={styles.tripChunk}>
-          {" "}
+         
           <p className={styles.tripBoldSubTitleUnderline}>
             Useful links:&nbsp;
           </p>
@@ -136,17 +122,12 @@ const SingleTripCard = ({ singleTrip }) => {
           </ul>
         </div>
         <div className={styles.tripChunk}>
-          {" "}
+          
           <p className={styles.tripBoldSubTitle}>Advice:&nbsp;</p>
           <p>{singleTrip.advice}</p>
         </div>
       </div>
-      {/* <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad sequi
-        deserunt provident, amet aliquid corporis dolor inventore veritatis
-        repellendus ullam consequatur voluptas, perferendis iure labore
-        architecto reiciendis sed, quibusdam culpa.
-      </p> */}
+     
     </div>
   );
 };

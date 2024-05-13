@@ -7,7 +7,7 @@ import styles from "./MainList.module.css";
 import { ButtonsTemplate } from "../Buttons/Buttons";
 
 const MainList = ({ tripsArr }) => {
-  //const formattedDate = moment(mongoDate).format('DD.MM.YY');
+
   const location = useLocation();
   return (
     <ul className={styles.mainList}>

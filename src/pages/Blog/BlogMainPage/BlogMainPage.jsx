@@ -74,7 +74,7 @@ const BlogMainPage = ({
           {allOwnTripsList && allOwnTripsList.length > 0 ? (
             <MainList tripsArr={allOwnTripsList} />
           ) : (
-            <p className={styles.subTitle}>Add your first trip !</p>
+            <p className={styles.subTitle}>Add your trip !</p>
           )}
         </div>
       </div>

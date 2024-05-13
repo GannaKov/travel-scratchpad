@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-import * as React from "react";
+
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
+
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
+
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -15,23 +15,10 @@ import ChatIcon from "@mui/icons-material/Chat";
 import CropOriginalIcon from "@mui/icons-material/CropOriginal";
 import styles from "./MobileMenu.module.css";
 import { NavLink } from "react-router-dom";
-import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
+
 
 const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
-  //   const [openMobileMenu, setOpenMobileMenu] = React.useState({
-  //     right: false,
-  //   });
-
-  //   const toggleDrawer = (anchor, open) => (event) => {
-  //     if (
-  //       event.type === "keydown" &&
-  //       (event.key === "Tab" || event.key === "Shift")
-  //     ) {
-  //       return;
-  //     }
-
-  //     setOpenMobileMenu, { ...openMobileMenu, [anchor]: open };
-  //   };
+  
 
   const list = (anchor) => (
     <Box
@@ -47,7 +34,7 @@ const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
-              {/* <ListItemText primary={text} /> */}
+           
               <NavLink to="/">Home</NavLink>
             </ListItemButton>
           </ListItem>
@@ -58,7 +45,7 @@ const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
                 <ListItemIcon>
                   <ModeOfTravelIcon />
                 </ListItemIcon>
-                {/* <ListItemText primary={text} /> */}
+             
                 <NavLink end to="/blog-main">
                   My Trips
                 </NavLink>
@@ -71,7 +58,7 @@ const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
                 <ListItemIcon>
                   <CropOriginalIcon />
                 </ListItemIcon>
-                {/* <ListItemText primary={text} /> */}
+             
                 <NavLink to="/add-form">Add Trip</NavLink>
               </ListItemButton>
             </ListItem>
@@ -81,7 +68,7 @@ const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
               <ListItemIcon>
                 <ChatIcon />
               </ListItemIcon>
-              {/* <ListItemText primary={text} /> */}
+            
               <NavLink to="/chat-ai">Chat Ai</NavLink>
             </ListItemButton>
           </ListItem>
@@ -92,15 +79,7 @@ const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
 
   return (
     <div>
-      {/* <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={toggleDrawer("right", true)}
-        edge="start"
-        sx={{ mr: 2, ...(open && { display: "none" }) }}
-      >
-        <MenuIcon />
-      </IconButton> */}
+    
       <Drawer
         anchor="right"
         open={openMobileMenu["right"]}

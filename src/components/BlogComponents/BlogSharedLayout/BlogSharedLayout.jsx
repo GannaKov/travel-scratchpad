@@ -50,7 +50,6 @@ const BlogSharedLayout = () => {
           </ul>
         </nav>
         <Button
-          // color="red[500]"
           variant="contained"
           type="submit"
           sx={{ marginRight: "2rem", backgroundColor: "#e89701" }}
