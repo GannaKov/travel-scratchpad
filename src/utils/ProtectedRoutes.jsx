@@ -20,8 +20,7 @@ const ProtectedRoutes = () => {
 
   // Check if the user is authenticated
   if (!token) {
-    console.log("No token found, redirecting to login page");
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   // If authenticated, render the child routes

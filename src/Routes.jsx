@@ -20,7 +20,6 @@ import {
   getTripsPurposes,
   refreshToken,
 } from "./services/requests";
-import AppBar from "./components/Shared/AppBar/AppBar";
 
 import Root from "./components/Shared/Root/Root";
 import Profile from "./pages/Blog/Profile/Profile";
@@ -55,7 +54,7 @@ const Routes = () => {
         // console.log("purp", res);
         setPurposeOptions(res);
       })
-      .catch((error) => console.log(error.status, error.message));
+      .catch((error) => console.log(error));
   }, [setCountriesOptions]);
 
   //Route configurations go here
