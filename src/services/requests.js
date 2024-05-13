@@ -23,6 +23,7 @@ export const getAllTripsLoader = async (query) => {
 
     return data.data;
   } catch (error) {
+    console.log(error);
     if (error.response && error.response.status === 404) {
       return [];
     }
@@ -58,9 +59,17 @@ export const getAllOwnerTripsLoader = async (accessToken, query) => {
 
 // get trip by Id
 export const getTripByIdLoader = async ({ params }) => {
-  const { data } = await instance.get(`/trips/${params.travel_id}`);
+  try {
+    const { data } = await instance.get(`/trips/${params.travel_id}`);
 
-  return data.data;
+    return data.data;
+  } catch (error) {
+    if (error.response && error.response.status === 500) {
+      throw new Response("Internal Server Error", { status: 500 });
+    }
+
+    throw error;
+  }
 };
 export const getTripById = async (tripId) => {
   const { data } = await instance.get(`/trips/${tripId}`);
@@ -108,6 +117,9 @@ export const postFormData = async (dataForm, accessToken) => {
     if (error.response && error.response.status === 404) {
       throw new Response("Not found trip", { status: 404 });
     }
+    if (error.response && error.response.status === 413) {
+      throw new Response("Too large data", { status: 413 });
+    }
     throw error;
   }
 };
@@ -129,6 +141,9 @@ export const putFormData = async (tripId, dataForm, accessToken) => {
     }
     if (error.response && error.response.status === 404) {
       throw new Response("Not found trip", { status: 404 });
+    }
+    if (error.response && error.response.status === 413) {
+      throw new Response("Too large data", { status: 413 });
     }
     throw error;
   }

@@ -1,12 +1,5 @@
-import {
-  RouterProvider,
-  createBrowserRouter,
-  isRouteErrorResponse,
-  useNavigate,
-  useRouteError,
-} from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import BlogSharedLayout from "./components/BlogComponents/BlogSharedLayout/BlogSharedLayout";
 import BlogAddForms from "./pages/Blog/BlogAddForms/BlogAddForms";
 import HomePage from "./pages/HomePage/HomePage";
 import BlogMainPage from "./pages/Blog/BlogMainPage/BlogMainPage";
@@ -106,6 +99,7 @@ const Routes = () => {
           path: "/:travel_id",
           element: <BlogSinglePage />,
           loader: getTripByIdLoader,
+          errorElement: <NotFound />,
         },
         {
           path: "/chat-ai",

@@ -168,7 +168,7 @@ const FormStepper = ({ countriesOptions }) => {
             5
           );
         } else {
-          imagesArr = [...imgArrForSubmit].slice(0, 7);
+          imagesArr = [...imgArrForSubmit].slice(0, 6);
         }
 
         await formik.setFieldValue(`data5.images`, imagesArr);
@@ -218,6 +218,7 @@ const FormStepper = ({ countriesOptions }) => {
         navigate(`/blog-main/${tripId}`);
       } else {
         await postFormData(data, token);
+        console.log("data", data);
         navigate("/blog-main");
       }
     },
