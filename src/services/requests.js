@@ -116,7 +116,7 @@ export const postFormData = async (dataForm, accessToken) => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.log("in request", error);
     if (error.response && error.response.status === 404) {
       throw new Response("Not found trip", { status: 404 });
     }

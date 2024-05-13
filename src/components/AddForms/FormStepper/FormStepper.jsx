@@ -223,7 +223,7 @@ const FormStepper = ({ countriesOptions }) => {
             navigate("/blog-main");
           })
           .catch((error) => {
-            console.log(error);
+            console.log("in submit", error);
             alert("Oooops! Images must be together no more than 4.5 MB");
           });
       }
