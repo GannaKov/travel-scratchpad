@@ -69,7 +69,8 @@ const LogInModal = ({ openLogIn, setOpenLogIn, setOpenSignUp }) => {
 
           // if localStorage
           localStorage.setItem("refresh_token", res.data.tokens.refreshToken);
-
+          formik.values.email = "";
+          formik.values.password = "";
           //-----------------------------
         }
       } catch (error) {

@@ -156,7 +156,7 @@ img {
 }
 .MuiPaper-root.MuiDrawer-paper {
   background-image: url("./assets/images/palm.png");
-  background-size: 150px;
-  background-position: center bottom 10px;
+  background-size: 200px;
+  background-position: center bottom 20px;
   background-repeat: no-repeat;
 }
