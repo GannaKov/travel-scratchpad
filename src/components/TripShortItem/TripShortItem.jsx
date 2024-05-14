@@ -44,7 +44,7 @@ const TripShortItem = ({ trip }) => {
       <div className={styles.tripChunk}>
         <span className={styles.tripBoldText}>Purpose:&nbsp;</span>
         {trip.purpose.map((item) => (
-          <span key={item}>{item},&nbsp;</span>
+          <span key={item}>{item},</span>
         ))}
       </div>
       <div className={styles.tripChunk}>
