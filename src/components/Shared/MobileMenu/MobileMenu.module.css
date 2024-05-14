@@ -1,0 +1,13 @@
+.headerNavLink {
+  font-size: 1rem;
+  letter-spacing: 1.2px;
+  color: black;
+  font-family: Oswald, sans-serif;
+  font-style: normal;
+
+  font-weight: 500;
+}
+
+.headerNavLink.active {
+  color: #43a047;
+}

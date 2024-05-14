@@ -16,10 +16,7 @@ import CropOriginalIcon from "@mui/icons-material/CropOriginal";
 import styles from "./MobileMenu.module.css";
 import { NavLink } from "react-router-dom";
 
-
 const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
-  
-
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
@@ -34,8 +31,17 @@ const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
-           
-              <NavLink to="/">Home</NavLink>
+
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? `${styles.active} ${styles.headerNavLink}`
+                    : `${styles.headerNavLink}`
+                }
+                to="/"
+              >
+                Home
+              </NavLink>
             </ListItemButton>
           </ListItem>
 
@@ -45,8 +51,16 @@ const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
                 <ListItemIcon>
                   <ModeOfTravelIcon />
                 </ListItemIcon>
-             
-                <NavLink end to="/blog-main">
+
+                <NavLink
+                  end
+                  to="/blog-main"
+                  className={({ isActive }) =>
+                    isActive
+                      ? `${styles.active} ${styles.headerNavLink}`
+                      : `${styles.headerNavLink}`
+                  }
+                >
                   My Trips
                 </NavLink>
               </ListItemButton>
@@ -58,8 +72,17 @@ const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
                 <ListItemIcon>
                   <CropOriginalIcon />
                 </ListItemIcon>
-             
-                <NavLink to="/add-form">Add Trip</NavLink>
+
+                <NavLink
+                  to="/add-form"
+                  className={({ isActive }) =>
+                    isActive
+                      ? `${styles.active} ${styles.headerNavLink}`
+                      : `${styles.headerNavLink}`
+                  }
+                >
+                  Add Trip
+                </NavLink>
               </ListItemButton>
             </ListItem>
           )}
@@ -68,8 +91,17 @@ const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
               <ListItemIcon>
                 <ChatIcon />
               </ListItemIcon>
-            
-              <NavLink to="/chat-ai">Chat Ai</NavLink>
+
+              <NavLink
+                to="/chat-ai"
+                className={({ isActive }) =>
+                  isActive
+                    ? `${styles.active} ${styles.headerNavLink}`
+                    : `${styles.headerNavLink}`
+                }
+              >
+                Chat Ai
+              </NavLink>
             </ListItemButton>
           </ListItem>
         </List>
@@ -79,7 +111,6 @@ const MobileMenu = ({ toggleDrawer, openMobileMenu, user }) => {
 
   return (
     <div>
-    
       <Drawer
         anchor="right"
         open={openMobileMenu["right"]}

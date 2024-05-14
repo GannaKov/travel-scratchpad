@@ -149,3 +149,14 @@ img {
   padding-bottom: 64px;
   width: 100%;
 }
+@media screen and (min-width: 768px) {
+  .MuiBox-root.css-14m4a6i {
+    width: 500px;
+  }
+}
+.MuiPaper-root.MuiDrawer-paper {
+  background-image: url("./assets/images/palm.png");
+  background-size: 150px;
+  background-position: center bottom 10px;
+  background-repeat: no-repeat;
+}
