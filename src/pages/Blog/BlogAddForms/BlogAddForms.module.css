@@ -3,8 +3,8 @@
   flex-direction: column;
   align-items: center;
   background-image: url("../../../assets/images/freepik-export-20240509135416RBcc.jpeg");
-  background-size: cover;
-  background-position: bottom;
+  /* background-size: cover; */
+  background-position: top;
   background-repeat: no-repeat;
 }
 @media screen and (min-width: 768px) {

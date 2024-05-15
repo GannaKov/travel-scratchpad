@@ -63,8 +63,21 @@
 }
 .tripLink {
   color: rgb(138, 43, 226);
+  display: none;
 }
-
+@media screen and (min-width: 768px) {
+  .tripLink {
+    display: block;
+  }
+}
+.tripLinkMobile {
+  color: rgb(138, 43, 226);
+}
+@media screen and (min-width: 768px) {
+  .tripLinkMobile {
+    display: none;
+  }
+}
 .tripLink:is(:hover, :focus) {
   color: rgb(90, 2, 172);
 }

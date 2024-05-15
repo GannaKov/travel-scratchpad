@@ -50,13 +50,13 @@ const TripShortItem = ({ trip }) => {
       <div className={styles.tripChunk}>
         <span className={styles.tripBoldText}>Countries:&nbsp;</span>
         {trip.countries.map((country) => (
-          <span key={country}>{country}</span>
+          <span key={country}>{country},&nbsp;</span>
         ))}
       </div>
       <div className={styles.tripChunk}>
         <span className={styles.tripBoldText}>Destination:&nbsp;</span>
         {trip.destination.length > 0 ? (
-          trip.destination.map((city) => <span key={city}>{city}</span>)
+          trip.destination.map((city) => <span key={city}>{city},&nbsp;</span>)
         ) : (
           <span>&#x1F937;</span>
         )}

@@ -2,7 +2,7 @@
 
 import dayjs from "dayjs";
 import StarsShow from "../Stars/StarsShow";
-import truncateUrl from "../../../services/truncateUrl";
+import { truncateUrl, truncateUrlMobile } from "../../../services/truncateUrl";
 import styles from "./SingleTripCard.module.css";
 
 const SingleTripCard = ({ singleTrip }) => {
@@ -20,7 +20,7 @@ const SingleTripCard = ({ singleTrip }) => {
           {dayjs(singleTrip.date_end).format("DD.MM.YYYY")}
         </p>
         <div className={styles.tripChunk}>
-          <span className={styles.tripBoldText}>Purpose:&nbsp;</span>
+          <p className={styles.tripBoldText}>Purpose:&nbsp;</p>
           {singleTrip.purpose.map((item) => (
             <span key={item}>{item},&nbsp;</span>
           ))}
@@ -28,13 +28,15 @@ const SingleTripCard = ({ singleTrip }) => {
         <div className={styles.tripChunk}>
           <span className={styles.tripBoldText}>Countries:&nbsp;</span>
           {singleTrip.countries.map((country) => (
-            <span key={country}>{country}</span>
+            <span key={country}>{country},&nbsp;</span>
           ))}
         </div>
         <div className={styles.tripChunk}>
           <span className={styles.tripBoldText}>Destination:&nbsp;</span>
           {singleTrip.destination.length > 0 ? (
-            singleTrip.destination.map((city) => <span key={city}>{city}</span>)
+            singleTrip.destination.map((city) => (
+              <span key={city}>{city},&nbsp;</span>
+            ))
           ) : (
             <span>&#x1F937;</span>
           )}
@@ -65,7 +67,7 @@ const SingleTripCard = ({ singleTrip }) => {
               <div className={styles.tripText}>
                 <p className={styles.tripBoldText}>
                   {accomodation.type}:&nbsp;
-                </p>
+                </p>{" "}
                 <a
                   href={accomodation.link}
                   target="_blank"
@@ -73,6 +75,14 @@ const SingleTripCard = ({ singleTrip }) => {
                   className={styles.tripLink}
                 >
                   {truncateUrl(accomodation.link)}
+                </a>
+                <a
+                  href={accomodation.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.tripLinkMobile}
+                >
+                  {truncateUrlMobile(accomodation.link)}
                 </a>
               </div>
               <p className={styles.tripBoldText}>Price: {accomodation.price}</p>
@@ -100,7 +110,7 @@ const SingleTripCard = ({ singleTrip }) => {
           <ul>
             {singleTrip.useful_links.map((item) => (
               <li key={item._id}>
-                <span>{item.topic}:&nbsp;</span>
+                <p>{item.topic}:&nbsp;</p>
                 <a
                   className={styles.tripLink}
                   href={item.link}
@@ -108,6 +118,14 @@ const SingleTripCard = ({ singleTrip }) => {
                   rel="noreferrer"
                 >
                   {truncateUrl(item.link)}
+                </a>
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.tripLinkMobile}
+                >
+                  {truncateUrlMobile(item.link)}
                 </a>
               </li>
             ))}

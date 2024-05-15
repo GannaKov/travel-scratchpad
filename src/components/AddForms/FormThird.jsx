@@ -3,7 +3,7 @@
 import StarsShow from "../Shared/Stars/StarsShow";
 
 import styles from "./Forms.module.css";
-import truncateUrl from "../../services/truncateUrl";
+import { truncateUrl, truncateUrlMobile } from "../../services/truncateUrl";
 import {
   FormControl,
   InputLabel,
@@ -128,9 +128,17 @@ const FormThird = ({
                       href={accommodation.link}
                       target="_blank"
                       rel="noreferrer"
-                      className={styles.tripText}
+                      className={styles.tripLink}
                     >
                       {truncateUrl(accommodation.link)}
+                    </a>
+                    <a
+                      href={accommodation.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={styles.tripLinkMobile}
+                    >
+                      {truncateUrlMobile(accommodation.link)}
                     </a>
                   </div>
                   <div className={styles.tripText}>

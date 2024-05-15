@@ -79,3 +79,21 @@
 .buttonsAddWrp {
   margin-bottom: 3rem;
 }
+
+.tripLink {
+  color: rgb(138, 43, 226);
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .tripLink {
+    display: block;
+  }
+}
+.tripLinkMobile {
+  color: rgb(138, 43, 226);
+}
+@media screen and (min-width: 768px) {
+  .tripLinkMobile {
+    display: none;
+  }
+}

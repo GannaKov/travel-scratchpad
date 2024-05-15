@@ -1,14 +1,8 @@
 /* eslint-disable react/prop-types */
 
-import truncateUrl from "../../services/truncateUrl";
+import { truncateUrl, truncateUrlMobile } from "../../services/truncateUrl";
 import styles from "./Forms.module.css";
-import {
-  TextField,
- 
-  Box,
-
-  IconButton,
-} from "@mui/material";
+import { TextField, Box, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
 
@@ -31,7 +25,6 @@ const FormFourth = ({
     }
   };
   const onLinkAddBtnClick = () => {
-    
     const { topic, link } = formik.values.data4;
     if (topic.trim() !== "" && link.trim() !== "") {
       setUsefulLinks((prevLinks) => [...prevLinks, { topic, link }]);
@@ -79,7 +72,6 @@ const FormFourth = ({
         />
 
         <div className={styles.buttonsAddWrp}>
-         
           <ButtonsTemplate
             size="medium"
             variant="contained"
@@ -110,7 +102,6 @@ const FormFourth = ({
                     <DeleteIcon />
                   </IconButton>
                 </li>
-               
               ))}
             </ul>
           </Box>
@@ -164,13 +155,21 @@ const FormFourth = ({
                         href={link.link}
                         target="_blank"
                         rel="noreferrer"
-                        className={styles.tripText}
+                        className={styles.tripLink}
                       >
                         {truncateUrl(link.link)}
                       </a>
+                      <a
+                        href={link.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={styles.tripLinkMobile}
+                      >
+                        {truncateUrlMobile(link.link)}
+                      </a>
                     </div>
                   </div>
-                 
+
                   <IconButton
                     edge="end"
                     aria-label="delete"
