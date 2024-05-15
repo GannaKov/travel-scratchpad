@@ -6,6 +6,9 @@ import MainList from "../../../components/Shared/MainList/MainList";
 import Select from "../../../components/Shared/Select/Select";
 import { ButtonsTemplate } from "../../../components/Shared/Buttons/Buttons";
 
+import CustomMap from "../../../components/CustomMap/CustomMap";
+import { APIProvider } from "@vis.gl/react-google-maps";
+
 const BlogMainPage = ({
   countriesOptions,
   selectedCountry,
@@ -29,7 +32,9 @@ const BlogMainPage = ({
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <p>FotoMain</p>
+          <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+            <CustomMap />
+          </APIProvider>
         </div>
       </div>
       <div className={styles.sectionBlog}>
