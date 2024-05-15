@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Map, Marker } from "@vis.gl/react-google-maps";
 import { InfoWindow } from "@vis.gl/react-google-maps";
-//import { AdvancedMarker } from "./advanced-marker";
+
 import styles from "./CustomMap.module.css";
 import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
 import LocationList from "./LocationList";
 import useAuth from "../../context/useAuthHook";
-import { putUserLocations } from "../../services/requests";
+import { getUserLocations, putUserLocations } from "../../services/requests";
 
 const CustomMap = () => {
   const { user } = useAuth();
@@ -16,8 +16,6 @@ const CustomMap = () => {
   const [showDialog, setShowDialog] = useState(false);
   // store dialog location
   const [dialogLocation, setDialogLocation] = useState("");
-  // shows marker on London by default
-  // store list of all locations selected
 
   const [markerLocations, setMarkerLocations] = useState([]);
   const [markerLocation, setMarkerLocation] = useState({
@@ -29,18 +27,27 @@ const CustomMap = () => {
   const [hasCenter, setHasCenter] = useState(false);
   //const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
 
-  // useEffect(() => {
-  //   console.log("listOfLocations", listOfLocations);
-  //   console.log("userId", user.user.id);
-  //   putUserLocations(listOfLocations).then((res)=>)
-  // }, [listOfLocations, user]);
+  useEffect(() => {
+    const userLocations = async (userId) => {
+      try {
+        const res = await getUserLocations(userId);
+        setListOfLocations(res.data.listOfLocations);
+
+        const coordinatesArray = res.data.listOfLocations.map(
+          (item) => item.location
+        );
+        setMarkerLocations(coordinatesArray);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    userLocations(user.user.id);
+  }, [user.user.id]);
 
   // handle click on map
   const handleMapClick = (mapProps) => {
-    // console.log("mapProps", mapProps.detail);
     // checks if location clicked is valid
     if (mapProps.detail) {
-      // console.log("mapProps", mapProps.detail);
       //mapProps.detail.placeId
       const lat = mapProps.detail.latLng.lat;
       const lng = mapProps.detail.latLng.lng;
@@ -48,16 +55,13 @@ const CustomMap = () => {
       setShowDialog(true);
       setDialogLocation({ lat, lng });
       setSelectedLocation({ lat, lng });
-      // console.log("Clicked location:", { lat, lng });
     } else {
       // show alert message
       alert("Please select the specific location");
     }
   };
-  // console.log("showDialog", showDialog, "dialogLocation", dialogLocation);
-  // alert("add to map?");
-  // add location to show in a list
 
+  // add location to show in a list
   const onAddLocation = async () => {
     // Create a Google Maps Geocoder instance
     const geocoder = new window.google.maps.Geocoder();
@@ -77,7 +81,6 @@ const CustomMap = () => {
           setMarkerLocations((prev) => [...prev, selectedLocation]);
           setShowDialog(false);
           try {
-            console.log("new", newArr);
             putUserLocations(newArr, user.user.id);
           } catch (error) {
             console.log(error);
@@ -91,9 +94,6 @@ const CustomMap = () => {
       }
     });
   };
-  // console.log("list", listOfLocations);
-  // console.log(" markerLocations", markerLocations);
-  // console.log(" markerLocation", markerLocation);
 
   // displays marker on the map for the selected location
   const onViewLocation = (loc) => {
@@ -108,11 +108,19 @@ const CustomMap = () => {
     );
 
     setListOfLocations(updatedList);
-    // setMarkerLocations();
-    console.log("markers", markerLocations);
+
+    const updatedMarkerLocations = markerLocations.filter(
+      (location) => location.lat !== loc.lat || location.lng !== loc.lng
+    );
+    setMarkerLocations(updatedMarkerLocations);
+    try {
+      putUserLocations(updatedList, user.user.id);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const notCentered = () => {
-    setHasCenter(false); // Переключаем наличие свойства center
+    setHasCenter(false);
   };
 
   return (
@@ -131,9 +139,6 @@ const CustomMap = () => {
         >
           {showDialog && dialogLocation && (
             <InfoWindow position={dialogLocation}>
-              {/* <button className={styles.mapBtn} onClick={onAddLocation}>
-                Add this location
-              </button> */}
               <ButtonsTemplate
                 type="button"
                 color="black"
@@ -150,7 +155,6 @@ const CustomMap = () => {
             markerLocations.map((loc, i) => (
               <Marker key={i + loc.lat + loc.lng} position={loc} />
             ))}
-          {/* <Marker position={center} /> */}
         </Map>
       </div>
       <div className={styles.componentAfterMapWrp}>
@@ -186,46 +190,7 @@ const CustomMap = () => {
             {isListOfLocations ? "Close" : "Open"}
           </ButtonsTemplate>
         </div>
-        {/* <div className={styles.componentChunkList}>
-          {isListOfLocations &&
-            listOfLocations.length > 0 &&
-            listOfLocations.map((loc) => (
-              <div
-                key={loc.location.lat + loc.location.lng}
-                className={styles.componentChunkListItem}
-              >
-                <p className={styles.componentChunkTitle}>{loc.name}</p>
-                <div className={styles.componentChunkBtnWrp}>
-                  <ButtonsTemplate
-                    color="darkGreen"
-                    size="small"
-                    variant="outlined"
-                    onClick={() => onViewLocation(loc.location)}
-                  >
-                    View
-                  </ButtonsTemplate>
 
-                  <ButtonsTemplate
-                    color="pink"
-                    size="small"
-                    variant="outlined"
-                    onClick={() => onDeleteLocation(loc.location)}
-                  >
-                    Delete
-                  </ButtonsTemplate>
-                </div>
-              </div>
-            ))}
-
-          {isListOfLocations && listOfLocations.length === 0 && (
-            <div>
-              <p className="list-heading">
-                Your List is still empty. Select a location from map to show in
-                a list
-              </p>
-            </div>
-          )}
-        </div> */}
         <LocationList
           isListOfLocations={isListOfLocations}
           listOfLocations={listOfLocations}

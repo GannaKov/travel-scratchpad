@@ -1,4 +1,8 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 
 import BlogAddForms from "./pages/Blog/BlogAddForms/BlogAddForms";
 import HomePage from "./pages/HomePage/HomePage";
@@ -44,7 +48,6 @@ const Routes = () => {
       .catch((error) => console.log(error.status, error.message));
     getTripsPurposes()
       .then((res) => {
-        // console.log("purp", res);
         setPurposeOptions(res);
       })
       .catch((error) => console.log(error));
@@ -125,6 +128,9 @@ const Routes = () => {
                   ),
 
                   loader: async () => {
+                    if (!token) {
+                      return <Navigate to="/" />;
+                    }
                     const query = {};
                     if (selectedCountryBlog) {
                       query.country = selectedCountryBlog;

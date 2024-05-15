@@ -134,6 +134,9 @@ const FormFifth = ({
             </div>
           </div>
         )}
+        <p className={styles.tripTextCenter}>
+          Note! All images together must not exceed 4.5MB.
+        </p>
         <div className={styles.addImageBtnWrp}>
           <ButtonsTemplate type="submit" size="large" variant="outlined">
             Finish

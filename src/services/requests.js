@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const BASEURL = "http://localhost:3000/api";
+//const BASEURL = "http://localhost:3000/api";
 
-//const BASEURL = import.meta.env.VITE_BASE_URL;
+const BASEURL = import.meta.env.VITE_BASE_URL;
 
 const instance = axios.create({ baseURL: BASEURL });
 
@@ -233,6 +233,17 @@ export const refreshToken = async () => {
     throw new Error("No refresh token");
   }
 };
+
+// get user's location
+export const getUserLocations = async (userId) => {
+  try {
+    const { data } = await instance.get(`/user-locations/${userId}`);
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 // put user's location
 export const putUserLocations = async (listOfLocations, userId) => {
   try {
@@ -240,7 +251,7 @@ export const putUserLocations = async (listOfLocations, userId) => {
       `/user-locations/${userId}`,
       listOfLocations
     );
-    console.log("data", data);
+
     return data;
   } catch (err) {
     console.log(err);

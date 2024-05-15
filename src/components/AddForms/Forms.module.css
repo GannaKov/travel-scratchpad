@@ -23,6 +23,10 @@
 .tripText {
   margin-bottom: 0.5rem;
 }
+.tripTextCenter {
+  margin-bottom: 1rem;
+  text-align: center;
+}
 .subTitle {
   margin-bottom: 1rem;
   font-size: 1.3rem;
