@@ -55,10 +55,8 @@ export const ButtonsTemplate = ({
 }) => {
   return (
     <ThemeProvider theme={theme}>
-     
       <Button
         variant={variant}
-       
         color={color}
         size={size}
         onClick={onClick}

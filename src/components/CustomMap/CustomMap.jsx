@@ -17,10 +17,11 @@ const CustomMap = () => {
 
   const [markerLocations, setMarkerLocations] = useState([]);
   const [markerLocation, setMarkerLocation] = useState({
-    lat: 51.509865,
-    lng: -0.118092,
+    lat: 52.52,
+    lng: 13.405,
   });
   const [listOfLocations, setListOfLocations] = useState([]);
+  const [isListOfLocations, setIsListOfLocations] = useState(false);
   const [hasCenter, setHasCenter] = useState(false);
   //const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
 
@@ -88,6 +89,7 @@ const CustomMap = () => {
   const notCentered = () => {
     setHasCenter(false); // Переключаем наличие свойства center
   };
+
   return (
     <div>
       <div className={styles.mapContainer}>
@@ -117,52 +119,79 @@ const CustomMap = () => {
           {/* <Marker position={center} /> */}
         </Map>
       </div>
-      <div>
-        <p>Would you like to add place?</p>
-        <button onClick={notCentered}>Toggle Center</button>
-        {/* <button onClick={() => setCenter({ lat: 51.509865, lng: -0.118092 })}>
-          Click Here
-        </button> */}
-      </div>
-      <div className="list-container">
-        {listOfLocations.length > 0 ? (
-          <div>
-            <p className="list-heading">List of Selected Locations</p>
-            {listOfLocations.map((loc) => (
+      <div className={styles.componentAfterMapWrp}>
+        <div className={styles.componentChunk}>
+          <p className={styles.componentChunkTitle}>
+            Select a place on the map and add it to your list
+          </p>
+        </div>
+
+        <div className={styles.componentChunk}>
+          <p>Would you like to enable scrolling?</p>
+          <ButtonsTemplate
+            type="button"
+            color="black"
+            size="small"
+            variant="outlined"
+            onClick={notCentered}
+          >
+            Enable Scrolling
+          </ButtonsTemplate>
+        </div>
+        <div className={styles.componentChunk}>
+          <p className={styles.componentChunkTitleList}>
+            Your list of locations
+          </p>
+          <ButtonsTemplate
+            type="button"
+            color="darkGreen"
+            size="small"
+            variant="outlined"
+            onClick={() => setIsListOfLocations((prev) => !prev)}
+          >
+            {isListOfLocations ? "Close" : "Open"}
+          </ButtonsTemplate>
+        </div>
+        <div className={styles.componentChunkList}>
+          {isListOfLocations &&
+            listOfLocations.length > 0 &&
+            listOfLocations.map((loc) => (
               <div
                 key={loc.location.lat + loc.location.lng}
-                className="list-item"
+                className={styles.componentChunkListItem}
               >
-                <p className="latLng-text">{loc.name}</p>
-                <div style={{ display: "flex" }}>
+                <p className={styles.componentChunkTitle}>{loc.name}</p>
+                <div className={styles.componentChunkBtnWrp}>
                   <ButtonsTemplate
                     color="darkGreen"
                     size="small"
-                    variant="contained"
+                    variant="outlined"
                     onClick={() => onViewLocation(loc.location)}
                   >
                     View
                   </ButtonsTemplate>
 
                   <ButtonsTemplate
-                    color="darkGreen"
+                    color="pink"
                     size="small"
-                    variant="contained"
+                    variant="outlined"
                     onClick={() => onDeleteLocation(loc.location)}
                   >
-                    Delet
+                    Delete
                   </ButtonsTemplate>
                 </div>
               </div>
             ))}
-          </div>
-        ) : (
-          <div>
-            <p className="list-heading">
-              Select a location from map to show in a list
-            </p>
-          </div>
-        )}
+
+          {isListOfLocations && listOfLocations.length === 0 && (
+            <div>
+              <p className="list-heading">
+                Your List is still empty. Select a location from map to show in
+                a list
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

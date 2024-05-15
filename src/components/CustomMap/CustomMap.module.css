@@ -1,11 +1,61 @@
 .mapContainer {
-  height: 500px;
-  width: 700px;
+  height: 300px;
+  width: 100%;
   border: 2px solid black;
   border-radius: 20px;
   overflow: hidden;
 }
+@media screen and (min-width: 768px) {
+  .mapContainer {
+    height: 500px;
+    width: 700px;
+  }
+}
 .mapBtn {
   width: 80px;
   height: 40px;
+}
+.componentChunk {
+  margin: 0 auto 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .componentChunk {
+    flex-direction: row;
+  }
+}
+.componentAfterMapWrp {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.componentChunkTitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+}
+.componentChunkTitleList {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-decoration: underline;
+}
+.componentChunkBtnWrp {
+  display: flex;
+  gap: 2rem;
+}
+.componentChunkList {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  gap: 1rem;
+}
+.componentChunkListItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
