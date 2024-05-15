@@ -151,7 +151,7 @@ export const putFormData = async (tripId, dataForm, accessToken) => {
     throw error;
   }
 };
-
+// delete  trip
 export const deleteOneTrip = async (tripId, accessToken) => {
   try {
     const { data } = await instance.delete(`/own_trips/${tripId}`, {
@@ -231,6 +231,19 @@ export const refreshToken = async () => {
     return data;
   } else {
     throw new Error("No refresh token");
+  }
+};
+// put user's location
+export const putUserLocations = async (listOfLocations, userId) => {
+  try {
+    const { data } = await instance.put(
+      `/user-locations/${userId}`,
+      listOfLocations
+    );
+    console.log("data", data);
+    return data;
+  } catch (err) {
+    console.log(err);
   }
 };
 

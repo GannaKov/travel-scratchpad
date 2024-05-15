@@ -4,8 +4,12 @@ import { InfoWindow } from "@vis.gl/react-google-maps";
 //import { AdvancedMarker } from "./advanced-marker";
 import styles from "./CustomMap.module.css";
 import { ButtonsTemplate } from "../Shared/Buttons/Buttons";
+import LocationList from "./LocationList";
+import useAuth from "../../context/useAuthHook";
+import { putUserLocations } from "../../services/requests";
 
 const CustomMap = () => {
+  const { user } = useAuth();
   // store clicked location
   const [selectedLocation, setSelectedLocation] = useState({});
   // store show dialog state to add location
@@ -24,6 +28,12 @@ const CustomMap = () => {
   const [isListOfLocations, setIsListOfLocations] = useState(false);
   const [hasCenter, setHasCenter] = useState(false);
   //const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+
+  // useEffect(() => {
+  //   console.log("listOfLocations", listOfLocations);
+  //   console.log("userId", user.user.id);
+  //   putUserLocations(listOfLocations).then((res)=>)
+  // }, [listOfLocations, user]);
 
   // handle click on map
   const handleMapClick = (mapProps) => {
@@ -48,22 +58,34 @@ const CustomMap = () => {
   // alert("add to map?");
   // add location to show in a list
 
-  const onAddLocation = () => {
+  const onAddLocation = async () => {
     // Create a Google Maps Geocoder instance
     const geocoder = new window.google.maps.Geocoder();
 
     // Reverse geocode the coordinates to get the place name
     geocoder.geocode({ location: selectedLocation }, (results, status) => {
       if (status === "OK") {
-        console.log("res 0", results[0]);
         if (results[0]) {
+          const newArr = [
+            ...listOfLocations,
+            { name: results[0].formatted_address, location: selectedLocation },
+          ];
           setListOfLocations([
             ...listOfLocations,
             { name: results[0].formatted_address, location: selectedLocation },
           ]);
           setMarkerLocations((prev) => [...prev, selectedLocation]);
           setShowDialog(false);
+          try {
+            console.log("new", newArr);
+            putUserLocations(newArr, user.user.id);
+          } catch (error) {
+            console.log(error);
+          }
         }
+        //
+
+        //
       } else {
         console.error("Geocoder failed due to: " + status);
       }
@@ -84,7 +106,10 @@ const CustomMap = () => {
     let updatedList = listOfLocations.filter(
       (l) => loc.lat !== l.location.lat && loc.lng !== l.location.lng
     );
+
     setListOfLocations(updatedList);
+    // setMarkerLocations();
+    console.log("markers", markerLocations);
   };
   const notCentered = () => {
     setHasCenter(false); // Переключаем наличие свойства center
@@ -106,9 +131,18 @@ const CustomMap = () => {
         >
           {showDialog && dialogLocation && (
             <InfoWindow position={dialogLocation}>
-              <button className={styles.mapBtn} onClick={onAddLocation}>
+              {/* <button className={styles.mapBtn} onClick={onAddLocation}>
                 Add this location
-              </button>
+              </button> */}
+              <ButtonsTemplate
+                type="button"
+                color="black"
+                size="small"
+                variant="outlined"
+                onClick={onAddLocation}
+              >
+                Add this location
+              </ButtonsTemplate>
             </InfoWindow>
           )}
           {/* <AdvancedMarker position={markerLocation} /> */}
@@ -152,7 +186,7 @@ const CustomMap = () => {
             {isListOfLocations ? "Close" : "Open"}
           </ButtonsTemplate>
         </div>
-        <div className={styles.componentChunkList}>
+        {/* <div className={styles.componentChunkList}>
           {isListOfLocations &&
             listOfLocations.length > 0 &&
             listOfLocations.map((loc) => (
@@ -191,7 +225,13 @@ const CustomMap = () => {
               </p>
             </div>
           )}
-        </div>
+        </div> */}
+        <LocationList
+          isListOfLocations={isListOfLocations}
+          listOfLocations={listOfLocations}
+          onViewLocation={onViewLocation}
+          onDeleteLocation={onDeleteLocation}
+        />
       </div>
     </div>
   );
