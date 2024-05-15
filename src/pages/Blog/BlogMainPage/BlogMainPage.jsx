@@ -32,7 +32,7 @@ const BlogMainPage = ({
     <div className={styles.pageWrpapper}>
       <div className={styles.sectionBlog}>
         <div className={styles.containerBlog}>
-          <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+          <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API}>
             <CustomMap />
           </APIProvider>
         </div>
