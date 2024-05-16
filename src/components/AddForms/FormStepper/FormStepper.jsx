@@ -33,9 +33,8 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import useAuth from "../../../context/useAuthHook";
-import Loader from "../../Shared/Loader/Loader";
 
-const FormStepper = ({ countriesOptions }) => {
+const FormStepper = ({ countriesOptions, setIsLoader }) => {
   const { token } = useAuth();
   const navigate = useNavigate();
 
@@ -57,8 +56,7 @@ const FormStepper = ({ countriesOptions }) => {
   // a lot of images for view
   const [imagesArr, setImagesArr] = useState([]);
   //-------
-  const [isLoader, setIsLoader] = useState(false);
-  console.log("isLoader", isLoader);
+
   //-------
   const [imgArrForSubmit, setImgArrForSubmit] = useState([]);
   const [formData, setFormData] = useState({
@@ -363,47 +361,42 @@ const FormStepper = ({ countriesOptions }) => {
 
   return (
     <div className={styles.formWrp}>
-      {isLoader && <Loader />}
-      {!isLoader && (
-        <>
-          <div className={styles.stepperWrp}>
-            <MobileStepper
-              variant="dots"
-              steps={5}
-              position="static"
-              activeStep={activeStep}
-              sx={{
-                flexGrow: 1,
-                height: "55px",
-                borderRadius: "8px",
-                backgroundColor: "orange",
-              }}
-              nextButton={
-                <ButtonsTemplate
-                  color="white"
-                  size="large"
-                  disabled={activeStep === steps.length - 1}
-                  onClick={handleNext}
-                >
-                  Next
-                  <KeyboardArrowRight />
-                </ButtonsTemplate>
-              }
-              backButton={
-                <ButtonsTemplate
-                  color="white"
-                  size="large"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                >
-                  <KeyboardArrowLeft /> Back
-                </ButtonsTemplate>
-              }
-            />
-          </div>
-          <div> {steps[activeStep]}</div>
-        </>
-      )}
+      <div className={styles.stepperWrp}>
+        <MobileStepper
+          variant="dots"
+          steps={5}
+          position="static"
+          activeStep={activeStep}
+          sx={{
+            flexGrow: 1,
+            height: "55px",
+            borderRadius: "8px",
+            backgroundColor: "orange",
+          }}
+          nextButton={
+            <ButtonsTemplate
+              color="white"
+              size="large"
+              disabled={activeStep === steps.length - 1}
+              onClick={handleNext}
+            >
+              Next
+              <KeyboardArrowRight />
+            </ButtonsTemplate>
+          }
+          backButton={
+            <ButtonsTemplate
+              color="white"
+              size="large"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+            >
+              <KeyboardArrowLeft /> Back
+            </ButtonsTemplate>
+          }
+        />
+      </div>
+      <div> {steps[activeStep]}</div>
     </div>
   );
 };

@@ -17,6 +17,9 @@
   padding-bottom: 2rem;
   /* width: 100%; */
 }
+.loaderWrp {
+  width: 100%;
+}
 .containerBlog {
   display: flex;
   flex-direction: column;
