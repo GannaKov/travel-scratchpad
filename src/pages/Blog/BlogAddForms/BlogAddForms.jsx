@@ -13,28 +13,31 @@ const BlogAddForms = ({ countriesOptions }) => {
   const backLinkHref = location.state?.from ?? "/blog-main";
 
   return (
-    <div className={styles.pageWrpapper}>
-      <div className={styles.sectionBlog}>
-        <div className={styles.containerBlog}>
-          <GoBack state={backLinkHref} />
-        </div>
-      </div>
-      <div className={styles.loaderWrp}>{isLoader && <Loader />}</div>
-
-      <div className={styles.sectionBlog}>
-        {!isLoader && (
-          <div className={styles.containerBlog}>
-            <p className={styles.formText}>
-              You can add or change data at any time
-            </p>
-            <FormStepper
-              countriesOptions={countriesOptions}
-              setIsLoader={setIsLoader}
-            />
+    <>
+      {isLoader ? (
+        <Loader />
+      ) : (
+        <div className={styles.pageWrpapper}>
+          <div className={styles.sectionBlog}>
+            <div className={styles.containerBlog}>
+              <GoBack state={backLinkHref} />
+            </div>
           </div>
-        )}
-      </div>
-    </div>
+
+          <div className={styles.sectionBlog}>
+            <div className={styles.containerBlog}>
+              <p className={styles.formText}>
+                You can add or change data at any time
+              </p>
+              <FormStepper
+                countriesOptions={countriesOptions}
+                setIsLoader={setIsLoader}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
