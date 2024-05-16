@@ -33,6 +33,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import useAuth from "../../../context/useAuthHook";
+import Loader from "../../Shared/Loader/Loader";
 
 const FormStepper = ({ countriesOptions }) => {
   const { token } = useAuth();
@@ -55,6 +56,9 @@ const FormStepper = ({ countriesOptions }) => {
   const [mainPhoto, setMainPhoto] = useState("");
   // a lot of images for view
   const [imagesArr, setImagesArr] = useState([]);
+  //-------
+  const [isLoader, setIsLoader] = useState(false);
+  console.log("isLoader", isLoader);
   //-------
   const [imgArrForSubmit, setImgArrForSubmit] = useState([]);
   const [formData, setFormData] = useState({
@@ -108,6 +112,7 @@ const FormStepper = ({ countriesOptions }) => {
       }),
     }),
     onSubmit: async (values) => {
+      setIsLoader(true);
       const newCitiesArr = formik.values.data2.cities
         .filter((city) => city.length > 0)
         .map((city) => city.charAt(0).toUpperCase() + city.slice(1));
@@ -214,18 +219,28 @@ const FormStepper = ({ countriesOptions }) => {
       }
 
       if (editMode) {
-        await putFormData(tripId, data, token);
-        navigate(`/blog-main/${tripId}`);
-      } else {
-        await postFormData(data, token)
-          .then((res) => {
-            console.log("data", res);
-            navigate("/blog-main");
+        await putFormData(tripId, data, token)
+          .then(() => {
+            navigate(`/blog-main/${tripId}`);
           })
           .catch((error) => {
             console.log("in submit", error);
             alert("Oooops! Images must be together no more than 4.5 MB");
-          });
+          })
+          .finally(() => setIsLoader(false));
+      } else {
+        await postFormData(data, token)
+          .then(() => {
+            // console.log("data", res);
+
+            navigate("/blog-main");
+            //setIsLoader(false);
+          })
+          .catch((error) => {
+            console.log("in submit", error);
+            alert("Oooops! Images must be together no more than 4.5 MB");
+          })
+          .finally(() => setIsLoader(false));
       }
     },
   });
@@ -348,42 +363,47 @@ const FormStepper = ({ countriesOptions }) => {
 
   return (
     <div className={styles.formWrp}>
-      <div className={styles.stepperWrp}>
-        <MobileStepper
-          variant="dots"
-          steps={5}
-          position="static"
-          activeStep={activeStep}
-          sx={{
-            flexGrow: 1,
-            height: "55px",
-            borderRadius: "8px",
-            backgroundColor: "orange",
-          }}
-          nextButton={
-            <ButtonsTemplate
-              color="white"
-              size="large"
-              disabled={activeStep === steps.length - 1}
-              onClick={handleNext}
-            >
-              Next
-              <KeyboardArrowRight />
-            </ButtonsTemplate>
-          }
-          backButton={
-            <ButtonsTemplate
-              color="white"
-              size="large"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-            >
-              <KeyboardArrowLeft /> Back
-            </ButtonsTemplate>
-          }
-        />
-      </div>
-      <div> {steps[activeStep]}</div>
+      {isLoader && <Loader />}
+      {!isLoader && (
+        <>
+          <div className={styles.stepperWrp}>
+            <MobileStepper
+              variant="dots"
+              steps={5}
+              position="static"
+              activeStep={activeStep}
+              sx={{
+                flexGrow: 1,
+                height: "55px",
+                borderRadius: "8px",
+                backgroundColor: "orange",
+              }}
+              nextButton={
+                <ButtonsTemplate
+                  color="white"
+                  size="large"
+                  disabled={activeStep === steps.length - 1}
+                  onClick={handleNext}
+                >
+                  Next
+                  <KeyboardArrowRight />
+                </ButtonsTemplate>
+              }
+              backButton={
+                <ButtonsTemplate
+                  color="white"
+                  size="large"
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                >
+                  <KeyboardArrowLeft /> Back
+                </ButtonsTemplate>
+              }
+            />
+          </div>
+          <div> {steps[activeStep]}</div>
+        </>
+      )}
     </div>
   );
 };
