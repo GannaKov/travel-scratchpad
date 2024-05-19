@@ -1,12 +1,16 @@
 /* eslint-disable react/prop-types */
 
 import { useFormik } from "formik";
-import { TextField, Button } from "@mui/material";
+
+import { IconButton, InputAdornment, TextField, Button } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import * as Yup from "yup";
 import { signupUser } from "../../services/requests";
 import styles from "./AuthForms.module.css";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useState } from "react";
 
 const style = {
   position: "absolute",
@@ -25,6 +29,7 @@ const style = {
   pr: 4,
 };
 const SignUpModal = ({ openSignUp, setOpenSignUp, setOpenLogIn }) => {
+  const [isPasswordShow, setIsPasswordShow] = useState(false);
   const handleCloseSignUp = () => setOpenSignUp(false);
 
   const validationSchema = Yup.object({
@@ -65,6 +70,12 @@ const SignUpModal = ({ openSignUp, setOpenSignUp, setOpenLogIn }) => {
       }
     },
   });
+
+  const handleClickShowPassword = () => setIsPasswordShow((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <div>
@@ -109,7 +120,7 @@ const SignUpModal = ({ openSignUp, setOpenSignUp, setOpenLogIn }) => {
               id="password"
               name="password"
               label="Password"
-              type="password"
+              type={isPasswordShow ? "text" : "password"}
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -118,6 +129,24 @@ const SignUpModal = ({ openSignUp, setOpenSignUp, setOpenLogIn }) => {
               fullWidth
               variant="outlined"
               sx={{ marginBottom: "3rem" }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {isPasswordShow ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
 
             <Button

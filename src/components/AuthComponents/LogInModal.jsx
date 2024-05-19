@@ -2,7 +2,7 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
-import { TextField } from "@mui/material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { loginUser } from "../../services/requests";
 import styles from "./AuthForms.module.css";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useState } from "react";
 
 const style = {
   position: "absolute",
@@ -29,6 +32,7 @@ const style = {
   pr: 4,
 };
 const LogInModal = ({ openLogIn, setOpenLogIn, setOpenSignUp }) => {
+  const [isPasswordShow, setIsPasswordShow] = useState(false);
   //   const cookies = new Cookies();
   const { setToken } = useAuth();
 
@@ -80,6 +84,11 @@ const LogInModal = ({ openLogIn, setOpenLogIn, setOpenSignUp }) => {
       }
     },
   });
+  const handleClickShowPassword = () => setIsPasswordShow((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   return (
     <div>
       <Modal
@@ -109,7 +118,8 @@ const LogInModal = ({ openLogIn, setOpenLogIn, setOpenSignUp }) => {
               id="password"
               name="password"
               label="Password"
-              type="password"
+              //type="password"
+              type={isPasswordShow ? "text" : "password"}
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -117,7 +127,25 @@ const LogInModal = ({ openLogIn, setOpenLogIn, setOpenSignUp }) => {
               helperText={formik.touched.password && formik.errors.password}
               fullWidth
               variant="outlined"
-              sx={{ marginBottom: "3rem" }}
+              sx={{ marginBottom: "3rem", position: "relative" }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {isPasswordShow ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
 
             <Button
