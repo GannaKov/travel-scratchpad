@@ -191,7 +191,7 @@ export const loginUser = async (values) => {
   return data;
 };
 
-//------
+//------ log out
 
 export const logoutUser = async () => {
   try {
@@ -204,12 +204,6 @@ export const logoutUser = async () => {
   } catch (error) {
     console.log(error);
   }
-};
-//=======
-export const getUserById = async (id) => {
-  const { data } = await instance.get(`/users/${id}`);
-
-  return data.data;
 };
 
 // Function to refresh tokens
@@ -257,7 +251,41 @@ export const putUserLocations = async (listOfLocations, userId) => {
     console.log(err);
   }
 };
+// get all users
+export const getAllUsers = async () => {
+  try {
+    const { data } = await instance.get("/users");
 
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    if (error.response && error.response.status === 404) {
+      throw new Response("Not found users", { status: 404 });
+    }
+    throw error;
+  }
+};
+//======= user by id
+export const getUserById = async (id) => {
+  const { data } = await instance.get(`/users/${id}`);
+
+  return data.data;
+};
+// change user (avatar)
+export const changeUser = async (userId, values, accessToken) => {
+  try {
+    const { data } = await instance.put(`/users/${userId}`, values, {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 // // Example of using the access token to make a request
 // async function fetchData() {
 //   const accessToken = localStorage.getItem("accessToken");

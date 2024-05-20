@@ -7,6 +7,7 @@ import styles from "./TripShortItem.module.css";
 import { useEffect, useState } from "react";
 
 import { getUserById } from "../../services/requests";
+import FallbackAvatars from "../Shared/AvatarComponent/AvatarComponent";
 
 const TripShortItem = ({ trip }) => {
   const [userOwnerTrip, setUserOwnerTrip] = useState({});
@@ -21,9 +22,11 @@ const TripShortItem = ({ trip }) => {
   return (
     <div className={styles.tripItemWrp}>
       <div className={styles.topCardWrp}>
-        {" "}
-        <div className={styles.tripOwnerAvatarWrp}>
+        {/* <div className={styles.tripOwnerAvatarWrp}>
           <p className={styles.tripOwnerAvatarText}>{userOwnerTrip.username}</p>
+        </div> */}
+        <div className={styles.tripOwnerAvatarWrp}>
+          <FallbackAvatars userOwnerTrip={userOwnerTrip} size="52px" />
         </div>
         <h2 className={styles.tripItemTitle}>{trip.title}</h2>
         <StarsShow

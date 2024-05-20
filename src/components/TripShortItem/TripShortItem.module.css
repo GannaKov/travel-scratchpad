@@ -73,12 +73,12 @@
 .tripOwnerAvatarWrp {
   position: absolute;
   top: 0;
-  right: 10px;
+  right: 24px;
 
-  padding: 0.5rem 1.5rem;
-  border-radius: 5px;
+  /* padding: 0.5rem 1.5rem; */
+  /* border-radius: 5px; */
   transform: translateY(-50%);
-  background-color: #e84b80;
+  /* background-color: #e84b80; */
 
   color: white;
 }

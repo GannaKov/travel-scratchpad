@@ -4,10 +4,24 @@ import dayjs from "dayjs";
 import StarsShow from "../Stars/StarsShow";
 import { truncateUrl, truncateUrlMobile } from "../../../services/truncateUrl";
 import styles from "./SingleTripCard.module.css";
+import FallbackAvatars from "../AvatarComponent/AvatarComponent";
+import { useEffect, useState } from "react";
+import { getUserById } from "../../../services/requests";
 
 const SingleTripCard = ({ singleTrip }) => {
+  const [userOwnerTrip, setUserOwnerTrip] = useState({});
+
+  useEffect(() => {
+    getUserById(singleTrip.owner)
+      .then((res) => setUserOwnerTrip(res))
+      .catch((error) => console.log(error));
+  }, [singleTrip.owner]);
+
   return (
     <div className={styles.tripWrp}>
+      <div className={styles.tripOwnerAvatarWrp}>
+        <FallbackAvatars userOwnerTrip={userOwnerTrip} size="56px" />
+      </div>
       <h1 className={styles.tripItemTitle}>{singleTrip.title}</h1>
       <div className={styles.tripChunk}>
         <StarsShow rating={singleTrip.travel_rating} isReadOnly={true} />

@@ -1,0 +1,77 @@
+.pageWrpapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 5rem;
+  background-image: url("../../../assets/images/h2-bckg-05.jpg");
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+@media screen and (min-width: 768px) {
+  .pageWrpapper {
+    padding-top: 120px;
+  }
+}
+.sectionBlog {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  /* width: 100%; */
+}
+.containerBlog {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .containerBlog {
+    max-width: 768px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .containerBlog {
+    max-width: 1200px;
+  }
+}
+.profileTitle {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.profileText {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.profileAccentText {
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.avatarSectionWrp {
+  margin-bottom: 2rem;
+}
+.avatarForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.profileAvatarImgWrp {
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.67);
+}
+.profileAvatarImg {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+.profileLabel {
+}
+.avatarInputWrp {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
