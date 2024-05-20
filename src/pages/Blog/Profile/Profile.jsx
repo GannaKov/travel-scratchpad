@@ -16,6 +16,8 @@ const Profile = () => {
 
   const handleUpload = (e) => {
     e.preventDefault();
+
+    //upload to cloudinary
     const CLOUD_Name = import.meta.env.VITE_CLOUD_NAME;
     const formData = new FormData();
     formData.append("file", uploadFile);
