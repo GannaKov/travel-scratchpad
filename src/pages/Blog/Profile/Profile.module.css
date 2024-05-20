@@ -67,8 +67,7 @@
   height: 300px;
   object-fit: cover;
 }
-.profileLabel {
-}
+
 .avatarInputWrp {
   display: flex;
   align-items: center;

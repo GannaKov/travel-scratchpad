@@ -27,6 +27,13 @@
 
   /* color: white; */
 }
+@media screen and (min-width: 768px) {
+  .tripOwnerAvatarWrp {
+    top: 0;
+    left: 16px;
+    transform: translateY(-50%);
+  }
+}
 .tripImageWrp {
   border-radius: 5px;
   overflow: hidden;
