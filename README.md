@@ -1,6 +1,6 @@
 ## Important Information
 
-All key information about this project can be found at the following link: [Travel Scratchpad](https://baza-everything-can-move.vercel.app/).
+All key information about this project can be found at the following link: [Travel Scratchpad](https://ganna-kovchyk.gitbook.io/travel-scratchpad).
 
 To access the full functionality of the project, please use the following credentials:
 
